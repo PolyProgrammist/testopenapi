@@ -1,0 +1,8 @@
+[package]
+name = "testutoipa"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+schemars = "0.8.22"
+utoipa = "5.3.1"

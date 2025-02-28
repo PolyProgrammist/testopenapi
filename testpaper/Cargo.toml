@@ -1,0 +1,17 @@
+[package]
+name = "testpaper"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# actix-web 2.0 is supported through "actix2" and "actix2-nightly" features
+# actix-web 3.0 is supported through "actix3" and "actix3-nightly" features
+actix-web = "4.0"
+# The "actix4-nightly" feature can be specified if you're using nightly compiler. Even though
+# this plugin works smoothly with the nightly compiler, it also works in stable
+# channel (replace "actix4-nightly" feature with "actix4" in that case). There maybe compilation errors,
+# but those can be fixed.
+# Add the "v3" option if you want to expose an OpenAPI v3 document
+paperclip = { version = "0.8", features = ["actix4", "v3"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0.139"

@@ -1,0 +1,56 @@
+{
+    "swagger": "2.0",
+    "definitions": {
+        "Pet": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "name": {
+                    "description": "Name of the pet",
+                    "type": "string"
+                },
+                "x": {
+                    "type": "string",
+                    "enum": [
+                        "Aentry"
+                    ]
+                }
+            },
+            "required": [
+                "name",
+                "x"
+            ]
+        }
+    },
+    "paths": {
+        "/pets": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Pet"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Pet"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "info": {
+        "version": "",
+        "title": ""
+    }
+}
