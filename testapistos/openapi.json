@@ -1,0 +1,104 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "An API",
+        "version": "1.0.0"
+    },
+    "servers": [],
+    "paths": {
+        "/test": {
+            "post": {
+                "tags": [
+                    "pet"
+                ],
+                "summary": "Add a new pet to the store",
+                "description": "Add a new pet to the store\\\n    Plop",
+                "operationId": "post_test-4539330648b80f94ef3bf911f6d77ac9",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Test"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Test"
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "deprecated": false
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Test": {
+                "title": "Test",
+                "type": "object",
+                "required": [
+                    "test",
+                    "x"
+                ],
+                "properties": {
+                    "test": {
+                        "type": "string"
+                    },
+                    "x": {
+                        "$ref": "#/components/schemas/Xenum"
+                    }
+                }
+            },
+            "Xenum": {
+                "oneOf": [
+                    {
+                        "title": "Axenum",
+                        "type": "string",
+                        "enum": [
+                            "Axenum"
+                        ]
+                    },
+                    {
+                        "title": "Bxenum",
+                        "type": "object",
+                        "required": [
+                            "Bxenum"
+                        ],
+                        "properties": {
+                            "Bxenum": {
+                                "type": "object",
+                                "required": [
+                                    "age",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "age": {
+                                        "type": "integer",
+                                        "format": "uint64",
+                                        "minimum": 0.0
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ]
+            }
+        }
+    }
+}

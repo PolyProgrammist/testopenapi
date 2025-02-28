@@ -1,0 +1,11 @@
+[package]
+name = "testapistos"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+schemars = { package = "apistos-schemars", version = "0.8" }
+apistos = "0.4"
+serde = "1.0.218"
+actix-web = "4.9.0"
+apistos-models = "0.4.2"
