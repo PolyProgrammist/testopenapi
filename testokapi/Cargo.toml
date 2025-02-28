@@ -1,0 +1,9 @@
+[package]
+name = "testokapi"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rocket = { version = "0.5.1", default-features = false, features = ["json"] }
+rocket_okapi = { version = "0.9.0", features = ["swagger", "rapidoc"] }
+serde = "1.0"

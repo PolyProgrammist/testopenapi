@@ -7,7 +7,7 @@ use yerpc::axum::handle_ws_rpc;
 
 struct Api;
 
-#[rpc(all_positional, ts_outdir = "typescript/generated", openrpc_outdir = "./")]
+#[rpc(all_positional, openrpc_outdir = "./")]
 impl Api {
     async fn shout(&self, msg: String) -> String {
         msg.to_uppercase()
