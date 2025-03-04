@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  title: My API
+  version: 1.0.0
+paths: {}
+components:
+  schemas:
+    StorageError:
+      description: Errors which may occur during working with trie storages, storing trie values (trie nodes and state values) by their hashes.
+      oneOf:
+      - description: Key-value db internal failure
+        type: string
+        enum:
+        - StorageInternalError
+      - description: Requested trie value by its hash which is missing in storage.
+        type: object
+        required:
+        - MissingTrieValue
+        properties:
+          MissingTrieValue:
+            type: array
+            items:
+              type: string
+            maxItems: 2
+            minItems: 2
+        additionalProperties: false
+      - description: 'Found trie node which shouldn''t be part of state. Raised during validation of state sync parts where incorrect node was passed. TODO (#8997): consider including hash of trie node.'
+        type: string
+        enum:
+        - UnexpectedTrieValue
+      - description: Either invalid state or key-value db is corrupted. For PartialStorage it cannot be corrupted. Error message is unreliable and for debugging purposes only. It's also probably ok to panic in every place that produces this error. We can check if db is corrupted by verifying everything in the state trie.
+        type: object
+        required:
+        - StorageInconsistentState
+        properties:
+          StorageInconsistentState:
+            type: string
+        additionalProperties: false
+      - description: Flat storage error, meaning that it doesn't support some block anymore. We guarantee that such block cannot become final, thus block processing must resume normally.
+        type: object
+        required:
+        - FlatStorageBlockNotSupported
+        properties:
+          FlatStorageBlockNotSupported:
+            type: string
+        additionalProperties: false
+      - description: In-memory trie could not be loaded for some reason.
+        type: object
+        required:
+        - MemTrieLoadingError
+        properties:
+          MemTrieLoadingError:
+            type: string
+        additionalProperties: false
+      - description: Indicates that a resharding operation on flat storage is already in progress, when it wasn't expected to be so.
+        type: string
+        enum:
+        - FlatStorageReshardingAlreadyInProgress
