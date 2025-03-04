@@ -38,10 +38,10 @@ export type StorageError = StorageErrorOneOf | StorageErrorOneOf1 | StorageError
 export interface StorageErrorOneOf {
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<StorageErrorOneOfMissingTrieValueInner>}
      * @memberof StorageErrorOneOf
      */
-    'MissingTrieValue': Array<string>;
+    'MissingTrieValue': Array<StorageErrorOneOfMissingTrieValueInner>;
 }
 /**
  * Either invalid state or key-value db is corrupted. For PartialStorage it cannot be corrupted. Error message is unreliable and for debugging purposes only. It\'s also probably ok to panic in every place that produces this error. We can check if db is corrupted by verifying everything in the state trie.
@@ -82,4 +82,10 @@ export interface StorageErrorOneOf3 {
      */
     'MemTrieLoadingError': string;
 }
+/**
+ * @type StorageErrorOneOfMissingTrieValueInner
+ * @export
+ */
+export type StorageErrorOneOfMissingTrieValueInner = string;
+
 

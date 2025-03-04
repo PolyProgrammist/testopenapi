@@ -18,7 +18,9 @@ use schemars::schema::RootSchema;
 
 fn main() {
     // Generate schema
-    let root_schema = schemars::gen::SchemaGenerator::default().into_root_schema_for::<RpcTransactionResponse>();
+    let settings = schemars::gen::SchemaSettings::openapi3();
+    let generator = schemars::gen::SchemaGenerator::new(settings);
+    let root_schema = generator.into_root_schema_for::<RpcTransactionResponse>();
 
     // Create OpenAPI spec
     let openapi = OpenApi {
