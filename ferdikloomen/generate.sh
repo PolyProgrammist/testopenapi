@@ -1,0 +1,1 @@
+npx openapi -i ./kek.yaml -o gen   

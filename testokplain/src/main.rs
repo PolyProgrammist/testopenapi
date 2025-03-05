@@ -21,6 +21,7 @@ fn main() {
     let settings = schemars::gen::SchemaSettings::openapi3();
     let generator = schemars::gen::SchemaGenerator::new(settings);
     let root_schema = generator.into_root_schema_for::<RpcTransactionResponse>();
+    println!("{}", root_schema);
 
     // Create OpenAPI spec
     let openapi = OpenApi {
@@ -38,5 +39,5 @@ fn main() {
     };
 
     let spec_yaml = serde_yaml::to_string(&openapi).unwrap();
-    println!("{}", spec_yaml);
+    // println!("{}", spec_yaml);
 }
