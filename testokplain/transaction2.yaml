@@ -2363,18 +2363,8 @@ components:
           $ref: '#/components/schemas/CryptoHash'
         receiver_id:
           $ref: '#/components/schemas/AccountId'
-    RpcTransactionResponse:
-      type: object
-      anyOf:
-      - $ref: '#/components/schemas/FinalExecutionOutcomeWithReceiptView'
-      - $ref: '#/components/schemas/FinalExecutionOutcomeView'
-      required:
-      - final_execution_status
-      properties:
-        final_execution_status:
-          $ref: '#/components/schemas/TxExecutionStatus'
     Signature:
-      type: stringtatus
+      type: string
     SignedDelegateAction:
       type: object
       required:
@@ -2448,7 +2438,8 @@ components:
           MissingTrieValue:
             type: array
             items:
-              type: string
+            - $ref: '#/components/schemas/MissingTrieValueContext'
+            - $ref: '#/components/schemas/CryptoHash'
             maxItems: 2
             minItems: 2
         additionalProperties: false

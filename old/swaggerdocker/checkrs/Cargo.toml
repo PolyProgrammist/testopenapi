@@ -1,0 +1,7 @@
+[package]
+name = "checkrs"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+swagger = { path = "../out/rst" }

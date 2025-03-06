@@ -24,6 +24,3444 @@ import type { RequestArgs } from './base';
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base';
 
 /**
+ * Access key provides limited access to an account. Each access key belongs to some account and is identified by a unique (within the account) public key. One account may have large number of access keys. Access keys allow to act on behalf of the account by restricting transactions that can be issued. `account_id,public_key` is a key in the state
+ * @export
+ * @interface AccessKey
+ */
+export interface AccessKey {
+    /**
+     * Nonce for this access key, used for tx nonce generation. When access key is created, nonce is set to `(block_height - 1) * 1e6` to avoid tx hash collision on access key re-creation. See <https://github.com/near/nearcore/issues/3779> for more details.
+     * @type {number}
+     * @memberof AccessKey
+     */
+    'nonce': number;
+    /**
+     * Defines permissions for this access key.
+     * @type {AccessKeyPermission}
+     * @memberof AccessKey
+     */
+    'permission': AccessKeyPermission;
+}
+/**
+ * @type AccessKeyPermission
+ * Defines permissions for AccessKey
+ * @export
+ */
+export type AccessKeyPermission = AccessKeyPermissionOneOf | string;
+
+/**
+ * 
+ * @export
+ * @interface AccessKeyPermissionOneOf
+ */
+export interface AccessKeyPermissionOneOf {
+    /**
+     * 
+     * @type {FunctionCallPermission}
+     * @memberof AccessKeyPermissionOneOf
+     */
+    'FunctionCall': FunctionCallPermission;
+}
+/**
+ * @type AccessKeyPermissionView
+ * @export
+ */
+export type AccessKeyPermissionView = AccessKeyPermissionViewOneOf | string;
+
+/**
+ * 
+ * @export
+ * @interface AccessKeyPermissionViewOneOf
+ */
+export interface AccessKeyPermissionViewOneOf {
+    /**
+     * 
+     * @type {AccessKeyPermissionViewOneOfFunctionCall}
+     * @memberof AccessKeyPermissionViewOneOf
+     */
+    'FunctionCall': AccessKeyPermissionViewOneOfFunctionCall;
+}
+/**
+ * 
+ * @export
+ * @interface AccessKeyPermissionViewOneOfFunctionCall
+ */
+export interface AccessKeyPermissionViewOneOfFunctionCall {
+    /**
+     * 
+     * @type {string}
+     * @memberof AccessKeyPermissionViewOneOfFunctionCall
+     */
+    'allowance': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof AccessKeyPermissionViewOneOfFunctionCall
+     */
+    'method_names': Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof AccessKeyPermissionViewOneOfFunctionCall
+     */
+    'receiver_id': string;
+}
+/**
+ * 
+ * @export
+ * @interface AccessKeyView
+ */
+export interface AccessKeyView {
+    /**
+     * 
+     * @type {number}
+     * @memberof AccessKeyView
+     */
+    'nonce': number;
+    /**
+     * 
+     * @type {AccessKeyPermissionView}
+     * @memberof AccessKeyView
+     */
+    'permission': AccessKeyPermissionView;
+}
+/**
+ * @type Action
+ * @export
+ */
+export type Action = ActionOneOf | ActionOneOf1 | ActionOneOf10 | ActionOneOf2 | ActionOneOf3 | ActionOneOf4 | ActionOneOf5 | ActionOneOf6 | ActionOneOf7 | ActionOneOf8 | ActionOneOf9;
+
+/**
+ * An error happened during Action execution
+ * @export
+ * @interface ActionError
+ */
+export interface ActionError {
+    /**
+     * Index of the failed action in the transaction. Action index is not defined if ActionError.kind is `ActionErrorKind::LackBalanceForState`
+     * @type {number}
+     * @memberof ActionError
+     */
+    'index'?: number | null;
+    /**
+     * The kind of ActionError happened
+     * @type {ActionErrorKind}
+     * @memberof ActionError
+     */
+    'kind': ActionErrorKind;
+}
+/**
+ * @type ActionErrorKind
+ * @export
+ */
+export type ActionErrorKind = ActionErrorKindOneOf | ActionErrorKindOneOf1 | ActionErrorKindOneOf10 | ActionErrorKindOneOf11 | ActionErrorKindOneOf12 | ActionErrorKindOneOf13 | ActionErrorKindOneOf14 | ActionErrorKindOneOf15 | ActionErrorKindOneOf16 | ActionErrorKindOneOf17 | ActionErrorKindOneOf18 | ActionErrorKindOneOf19 | ActionErrorKindOneOf2 | ActionErrorKindOneOf20 | ActionErrorKindOneOf3 | ActionErrorKindOneOf4 | ActionErrorKindOneOf5 | ActionErrorKindOneOf6 | ActionErrorKindOneOf7 | ActionErrorKindOneOf8 | ActionErrorKindOneOf9 | string;
+
+/**
+ * Happens when CreateAccount action tries to create an account with account_id which is already exists in the storage
+ * @export
+ * @interface ActionErrorKindOneOf
+ */
+export interface ActionErrorKindOneOf {
+    /**
+     * 
+     * @type {ActionErrorKindOneOfAccountAlreadyExists}
+     * @memberof ActionErrorKindOneOf
+     */
+    'AccountAlreadyExists': ActionErrorKindOneOfAccountAlreadyExists;
+}
+/**
+ * Happens when TX receiver_id doesn\'t exist (but action is not Action::CreateAccount)
+ * @export
+ * @interface ActionErrorKindOneOf1
+ */
+export interface ActionErrorKindOneOf1 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOfAccountAlreadyExists}
+     * @memberof ActionErrorKindOneOf1
+     */
+    'AccountDoesNotExist': ActionErrorKindOneOfAccountAlreadyExists;
+}
+/**
+ * The account doesn\'t have enough balance to increase the stake.
+ * @export
+ * @interface ActionErrorKindOneOf10
+ */
+export interface ActionErrorKindOneOf10 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOf10TriesToStake}
+     * @memberof ActionErrorKindOneOf10
+     */
+    'TriesToStake': ActionErrorKindOneOf10TriesToStake;
+}
+/**
+ * 
+ * @export
+ * @interface ActionErrorKindOneOf10TriesToStake
+ */
+export interface ActionErrorKindOneOf10TriesToStake {
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof ActionErrorKindOneOf10TriesToStake
+     */
+    'account_id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionErrorKindOneOf10TriesToStake
+     */
+    'balance': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionErrorKindOneOf10TriesToStake
+     */
+    'locked': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionErrorKindOneOf10TriesToStake
+     */
+    'stake': string;
+}
+/**
+ * 
+ * @export
+ * @interface ActionErrorKindOneOf11
+ */
+export interface ActionErrorKindOneOf11 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOf11InsufficientStake}
+     * @memberof ActionErrorKindOneOf11
+     */
+    'InsufficientStake': ActionErrorKindOneOf11InsufficientStake;
+}
+/**
+ * 
+ * @export
+ * @interface ActionErrorKindOneOf11InsufficientStake
+ */
+export interface ActionErrorKindOneOf11InsufficientStake {
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof ActionErrorKindOneOf11InsufficientStake
+     */
+    'account_id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionErrorKindOneOf11InsufficientStake
+     */
+    'minimum_stake': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionErrorKindOneOf11InsufficientStake
+     */
+    'stake': string;
+}
+/**
+ * An error occurred during a `FunctionCall` Action, parameter is debug message.
+ * @export
+ * @interface ActionErrorKindOneOf12
+ */
+export interface ActionErrorKindOneOf12 {
+    /**
+     * 
+     * @type {FunctionCallError}
+     * @memberof ActionErrorKindOneOf12
+     */
+    'FunctionCallError': FunctionCallError;
+}
+/**
+ * Error occurs when a new `ActionReceipt` created by the `FunctionCall` action fails receipt validation.
+ * @export
+ * @interface ActionErrorKindOneOf13
+ */
+export interface ActionErrorKindOneOf13 {
+    /**
+     * 
+     * @type {ReceiptValidationError}
+     * @memberof ActionErrorKindOneOf13
+     */
+    'NewReceiptValidationError': ReceiptValidationError;
+}
+/**
+ * Error occurs when a `CreateAccount` action is called on a NEAR-implicit or ETH-implicit account. See NEAR-implicit account creation NEP: <https://github.com/nearprotocol/NEPs/pull/71>. Also, see ETH-implicit account creation NEP: <https://github.com/near/NEPs/issues/518>.  TODO(#8598): This error is named very poorly. A better name would be `OnlyNamedAccountCreationAllowed`.
+ * @export
+ * @interface ActionErrorKindOneOf14
+ */
+export interface ActionErrorKindOneOf14 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOfAccountAlreadyExists}
+     * @memberof ActionErrorKindOneOf14
+     */
+    'OnlyImplicitAccountCreationAllowed': ActionErrorKindOneOfAccountAlreadyExists;
+}
+/**
+ * Delete account whose state is large is temporarily banned.
+ * @export
+ * @interface ActionErrorKindOneOf15
+ */
+export interface ActionErrorKindOneOf15 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOfAccountAlreadyExists}
+     * @memberof ActionErrorKindOneOf15
+     */
+    'DeleteAccountWithLargeState': ActionErrorKindOneOfAccountAlreadyExists;
+}
+/**
+ * Receiver of the transaction doesn\'t match Sender of the delegate action
+ * @export
+ * @interface ActionErrorKindOneOf16
+ */
+export interface ActionErrorKindOneOf16 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOf16DelegateActionSenderDoesNotMatchTxReceiver}
+     * @memberof ActionErrorKindOneOf16
+     */
+    'DelegateActionSenderDoesNotMatchTxReceiver': ActionErrorKindOneOf16DelegateActionSenderDoesNotMatchTxReceiver;
+}
+/**
+ * 
+ * @export
+ * @interface ActionErrorKindOneOf16DelegateActionSenderDoesNotMatchTxReceiver
+ */
+export interface ActionErrorKindOneOf16DelegateActionSenderDoesNotMatchTxReceiver {
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof ActionErrorKindOneOf16DelegateActionSenderDoesNotMatchTxReceiver
+     */
+    'receiver_id': string;
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof ActionErrorKindOneOf16DelegateActionSenderDoesNotMatchTxReceiver
+     */
+    'sender_id': string;
+}
+/**
+ * The given public key doesn\'t exist for Sender account
+ * @export
+ * @interface ActionErrorKindOneOf17
+ */
+export interface ActionErrorKindOneOf17 {
+    /**
+     * 
+     * @type {InvalidAccessKeyError}
+     * @memberof ActionErrorKindOneOf17
+     */
+    'DelegateActionAccessKeyError': InvalidAccessKeyError;
+}
+/**
+ * DelegateAction nonce must be greater sender[public_key].nonce
+ * @export
+ * @interface ActionErrorKindOneOf18
+ */
+export interface ActionErrorKindOneOf18 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOf18DelegateActionInvalidNonce}
+     * @memberof ActionErrorKindOneOf18
+     */
+    'DelegateActionInvalidNonce': ActionErrorKindOneOf18DelegateActionInvalidNonce;
+}
+/**
+ * 
+ * @export
+ * @interface ActionErrorKindOneOf18DelegateActionInvalidNonce
+ */
+export interface ActionErrorKindOneOf18DelegateActionInvalidNonce {
+    /**
+     * 
+     * @type {number}
+     * @memberof ActionErrorKindOneOf18DelegateActionInvalidNonce
+     */
+    'ak_nonce': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ActionErrorKindOneOf18DelegateActionInvalidNonce
+     */
+    'delegate_nonce': number;
+}
+/**
+ * DelegateAction nonce is larger than the upper bound given by the block height
+ * @export
+ * @interface ActionErrorKindOneOf19
+ */
+export interface ActionErrorKindOneOf19 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOf19DelegateActionNonceTooLarge}
+     * @memberof ActionErrorKindOneOf19
+     */
+    'DelegateActionNonceTooLarge': ActionErrorKindOneOf19DelegateActionNonceTooLarge;
+}
+/**
+ * 
+ * @export
+ * @interface ActionErrorKindOneOf19DelegateActionNonceTooLarge
+ */
+export interface ActionErrorKindOneOf19DelegateActionNonceTooLarge {
+    /**
+     * 
+     * @type {number}
+     * @memberof ActionErrorKindOneOf19DelegateActionNonceTooLarge
+     */
+    'delegate_nonce': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ActionErrorKindOneOf19DelegateActionNonceTooLarge
+     */
+    'upper_bound': number;
+}
+/**
+ * A top-level account ID can only be created by registrar.
+ * @export
+ * @interface ActionErrorKindOneOf2
+ */
+export interface ActionErrorKindOneOf2 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOf2CreateAccountOnlyByRegistrar}
+     * @memberof ActionErrorKindOneOf2
+     */
+    'CreateAccountOnlyByRegistrar': ActionErrorKindOneOf2CreateAccountOnlyByRegistrar;
+}
+/**
+ * 
+ * @export
+ * @interface ActionErrorKindOneOf20
+ */
+export interface ActionErrorKindOneOf20 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOf20GlobalContractDoesNotExist}
+     * @memberof ActionErrorKindOneOf20
+     */
+    'GlobalContractDoesNotExist': ActionErrorKindOneOf20GlobalContractDoesNotExist;
+}
+/**
+ * 
+ * @export
+ * @interface ActionErrorKindOneOf20GlobalContractDoesNotExist
+ */
+export interface ActionErrorKindOneOf20GlobalContractDoesNotExist {
+    /**
+     * 
+     * @type {GlobalContractIdentifier}
+     * @memberof ActionErrorKindOneOf20GlobalContractDoesNotExist
+     */
+    'identifier': GlobalContractIdentifier;
+}
+/**
+ * 
+ * @export
+ * @interface ActionErrorKindOneOf2CreateAccountOnlyByRegistrar
+ */
+export interface ActionErrorKindOneOf2CreateAccountOnlyByRegistrar {
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof ActionErrorKindOneOf2CreateAccountOnlyByRegistrar
+     */
+    'account_id': string;
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof ActionErrorKindOneOf2CreateAccountOnlyByRegistrar
+     */
+    'predecessor_id': string;
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof ActionErrorKindOneOf2CreateAccountOnlyByRegistrar
+     */
+    'registrar_account_id': string;
+}
+/**
+ * A newly created account must be under a namespace of the creator account
+ * @export
+ * @interface ActionErrorKindOneOf3
+ */
+export interface ActionErrorKindOneOf3 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOf3CreateAccountNotAllowed}
+     * @memberof ActionErrorKindOneOf3
+     */
+    'CreateAccountNotAllowed': ActionErrorKindOneOf3CreateAccountNotAllowed;
+}
+/**
+ * 
+ * @export
+ * @interface ActionErrorKindOneOf3CreateAccountNotAllowed
+ */
+export interface ActionErrorKindOneOf3CreateAccountNotAllowed {
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof ActionErrorKindOneOf3CreateAccountNotAllowed
+     */
+    'account_id': string;
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof ActionErrorKindOneOf3CreateAccountNotAllowed
+     */
+    'predecessor_id': string;
+}
+/**
+ * Administrative actions like `DeployContract`, `Stake`, `AddKey`, `DeleteKey`. can be proceed only if sender=receiver or the first TX action is a `CreateAccount` action
+ * @export
+ * @interface ActionErrorKindOneOf4
+ */
+export interface ActionErrorKindOneOf4 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOf4ActorNoPermission}
+     * @memberof ActionErrorKindOneOf4
+     */
+    'ActorNoPermission': ActionErrorKindOneOf4ActorNoPermission;
+}
+/**
+ * 
+ * @export
+ * @interface ActionErrorKindOneOf4ActorNoPermission
+ */
+export interface ActionErrorKindOneOf4ActorNoPermission {
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof ActionErrorKindOneOf4ActorNoPermission
+     */
+    'account_id': string;
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof ActionErrorKindOneOf4ActorNoPermission
+     */
+    'actor_id': string;
+}
+/**
+ * Account tries to remove an access key that doesn\'t exist
+ * @export
+ * @interface ActionErrorKindOneOf5
+ */
+export interface ActionErrorKindOneOf5 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOf5DeleteKeyDoesNotExist}
+     * @memberof ActionErrorKindOneOf5
+     */
+    'DeleteKeyDoesNotExist': ActionErrorKindOneOf5DeleteKeyDoesNotExist;
+}
+/**
+ * 
+ * @export
+ * @interface ActionErrorKindOneOf5DeleteKeyDoesNotExist
+ */
+export interface ActionErrorKindOneOf5DeleteKeyDoesNotExist {
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof ActionErrorKindOneOf5DeleteKeyDoesNotExist
+     */
+    'account_id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionErrorKindOneOf5DeleteKeyDoesNotExist
+     */
+    'public_key': string;
+}
+/**
+ * The public key is already used for an existing access key
+ * @export
+ * @interface ActionErrorKindOneOf6
+ */
+export interface ActionErrorKindOneOf6 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOf5DeleteKeyDoesNotExist}
+     * @memberof ActionErrorKindOneOf6
+     */
+    'AddKeyAlreadyExists': ActionErrorKindOneOf5DeleteKeyDoesNotExist;
+}
+/**
+ * Account is staking and can not be deleted
+ * @export
+ * @interface ActionErrorKindOneOf7
+ */
+export interface ActionErrorKindOneOf7 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOfAccountAlreadyExists}
+     * @memberof ActionErrorKindOneOf7
+     */
+    'DeleteAccountStaking': ActionErrorKindOneOfAccountAlreadyExists;
+}
+/**
+ * ActionReceipt can\'t be completed, because the remaining balance will not be enough to cover storage.
+ * @export
+ * @interface ActionErrorKindOneOf8
+ */
+export interface ActionErrorKindOneOf8 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOf8LackBalanceForState}
+     * @memberof ActionErrorKindOneOf8
+     */
+    'LackBalanceForState': ActionErrorKindOneOf8LackBalanceForState;
+}
+/**
+ * 
+ * @export
+ * @interface ActionErrorKindOneOf8LackBalanceForState
+ */
+export interface ActionErrorKindOneOf8LackBalanceForState {
+    /**
+     * An account which needs balance
+     * @type {string}
+     * @memberof ActionErrorKindOneOf8LackBalanceForState
+     */
+    'account_id': string;
+    /**
+     * Balance required to complete an action.
+     * @type {string}
+     * @memberof ActionErrorKindOneOf8LackBalanceForState
+     */
+    'amount': string;
+}
+/**
+ * Account is not yet staked, but tries to unstake
+ * @export
+ * @interface ActionErrorKindOneOf9
+ */
+export interface ActionErrorKindOneOf9 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOfAccountAlreadyExists}
+     * @memberof ActionErrorKindOneOf9
+     */
+    'TriesToUnstake': ActionErrorKindOneOfAccountAlreadyExists;
+}
+/**
+ * 
+ * @export
+ * @interface ActionErrorKindOneOfAccountAlreadyExists
+ */
+export interface ActionErrorKindOneOfAccountAlreadyExists {
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof ActionErrorKindOneOfAccountAlreadyExists
+     */
+    'account_id': string;
+}
+/**
+ * Create an (sub)account using a transaction `receiver_id` as an ID for a new account ID must pass validation rules described here <http://nomicon.io/Primitives/Account.html>.
+ * @export
+ * @interface ActionOneOf
+ */
+export interface ActionOneOf {
+    /**
+     * Create account action
+     * @type {object}
+     * @memberof ActionOneOf
+     */
+    'CreateAccount': object;
+}
+/**
+ * Sets a Wasm code to a receiver_id
+ * @export
+ * @interface ActionOneOf1
+ */
+export interface ActionOneOf1 {
+    /**
+     * 
+     * @type {DeployContractAction}
+     * @memberof ActionOneOf1
+     */
+    'DeployContract': DeployContractAction;
+}
+/**
+ * 
+ * @export
+ * @interface ActionOneOf10
+ */
+export interface ActionOneOf10 {
+    /**
+     * 
+     * @type {UseGlobalContractAction}
+     * @memberof ActionOneOf10
+     */
+    'UseGlobalContract': UseGlobalContractAction;
+}
+/**
+ * 
+ * @export
+ * @interface ActionOneOf2
+ */
+export interface ActionOneOf2 {
+    /**
+     * 
+     * @type {FunctionCallAction}
+     * @memberof ActionOneOf2
+     */
+    'FunctionCall': FunctionCallAction;
+}
+/**
+ * 
+ * @export
+ * @interface ActionOneOf3
+ */
+export interface ActionOneOf3 {
+    /**
+     * 
+     * @type {TransferAction}
+     * @memberof ActionOneOf3
+     */
+    'Transfer': TransferAction;
+}
+/**
+ * 
+ * @export
+ * @interface ActionOneOf4
+ */
+export interface ActionOneOf4 {
+    /**
+     * 
+     * @type {StakeAction}
+     * @memberof ActionOneOf4
+     */
+    'Stake': StakeAction;
+}
+/**
+ * 
+ * @export
+ * @interface ActionOneOf5
+ */
+export interface ActionOneOf5 {
+    /**
+     * 
+     * @type {AddKeyAction}
+     * @memberof ActionOneOf5
+     */
+    'AddKey': AddKeyAction;
+}
+/**
+ * 
+ * @export
+ * @interface ActionOneOf6
+ */
+export interface ActionOneOf6 {
+    /**
+     * 
+     * @type {DeleteKeyAction}
+     * @memberof ActionOneOf6
+     */
+    'DeleteKey': DeleteKeyAction;
+}
+/**
+ * 
+ * @export
+ * @interface ActionOneOf7
+ */
+export interface ActionOneOf7 {
+    /**
+     * 
+     * @type {DeleteAccountAction}
+     * @memberof ActionOneOf7
+     */
+    'DeleteAccount': DeleteAccountAction;
+}
+/**
+ * 
+ * @export
+ * @interface ActionOneOf8
+ */
+export interface ActionOneOf8 {
+    /**
+     * 
+     * @type {SignedDelegateAction}
+     * @memberof ActionOneOf8
+     */
+    'Delegate': SignedDelegateAction;
+}
+/**
+ * 
+ * @export
+ * @interface ActionOneOf9
+ */
+export interface ActionOneOf9 {
+    /**
+     * 
+     * @type {DeployGlobalContractAction}
+     * @memberof ActionOneOf9
+     */
+    'DeployGlobalContract': DeployGlobalContractAction;
+}
+/**
+ * @type ActionView
+ * @export
+ */
+export type ActionView = ActionViewOneOf | ActionViewOneOf1 | ActionViewOneOf10 | ActionViewOneOf11 | ActionViewOneOf2 | ActionViewOneOf3 | ActionViewOneOf4 | ActionViewOneOf5 | ActionViewOneOf6 | ActionViewOneOf7 | ActionViewOneOf8 | ActionViewOneOf9 | string;
+
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf
+ */
+export interface ActionViewOneOf {
+    /**
+     * 
+     * @type {ActionViewOneOfDeployContract}
+     * @memberof ActionViewOneOf
+     */
+    'DeployContract': ActionViewOneOfDeployContract;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf1
+ */
+export interface ActionViewOneOf1 {
+    /**
+     * 
+     * @type {ActionViewOneOf1FunctionCall}
+     * @memberof ActionViewOneOf1
+     */
+    'FunctionCall': ActionViewOneOf1FunctionCall;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf10
+ */
+export interface ActionViewOneOf10 {
+    /**
+     * 
+     * @type {ActionViewOneOf10UseGlobalContract}
+     * @memberof ActionViewOneOf10
+     */
+    'UseGlobalContract': ActionViewOneOf10UseGlobalContract;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf10UseGlobalContract
+ */
+export interface ActionViewOneOf10UseGlobalContract {
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionViewOneOf10UseGlobalContract
+     */
+    'code_hash': string;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf11
+ */
+export interface ActionViewOneOf11 {
+    /**
+     * 
+     * @type {ActionErrorKindOneOfAccountAlreadyExists}
+     * @memberof ActionViewOneOf11
+     */
+    'UseGlobalContractByAccountId': ActionErrorKindOneOfAccountAlreadyExists;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf1FunctionCall
+ */
+export interface ActionViewOneOf1FunctionCall {
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionViewOneOf1FunctionCall
+     */
+    'args': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionViewOneOf1FunctionCall
+     */
+    'deposit': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ActionViewOneOf1FunctionCall
+     */
+    'gas': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionViewOneOf1FunctionCall
+     */
+    'method_name': string;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf2
+ */
+export interface ActionViewOneOf2 {
+    /**
+     * 
+     * @type {ActionViewOneOf2Transfer}
+     * @memberof ActionViewOneOf2
+     */
+    'Transfer': ActionViewOneOf2Transfer;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf2Transfer
+ */
+export interface ActionViewOneOf2Transfer {
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionViewOneOf2Transfer
+     */
+    'deposit': string;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf3
+ */
+export interface ActionViewOneOf3 {
+    /**
+     * 
+     * @type {ActionViewOneOf3Stake}
+     * @memberof ActionViewOneOf3
+     */
+    'Stake': ActionViewOneOf3Stake;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf3Stake
+ */
+export interface ActionViewOneOf3Stake {
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionViewOneOf3Stake
+     */
+    'public_key': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionViewOneOf3Stake
+     */
+    'stake': string;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf4
+ */
+export interface ActionViewOneOf4 {
+    /**
+     * 
+     * @type {ActionViewOneOf4AddKey}
+     * @memberof ActionViewOneOf4
+     */
+    'AddKey': ActionViewOneOf4AddKey;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf4AddKey
+ */
+export interface ActionViewOneOf4AddKey {
+    /**
+     * 
+     * @type {AccessKeyView}
+     * @memberof ActionViewOneOf4AddKey
+     */
+    'access_key': AccessKeyView;
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionViewOneOf4AddKey
+     */
+    'public_key': string;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf5
+ */
+export interface ActionViewOneOf5 {
+    /**
+     * 
+     * @type {ActionViewOneOf5DeleteKey}
+     * @memberof ActionViewOneOf5
+     */
+    'DeleteKey': ActionViewOneOf5DeleteKey;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf5DeleteKey
+ */
+export interface ActionViewOneOf5DeleteKey {
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionViewOneOf5DeleteKey
+     */
+    'public_key': string;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf6
+ */
+export interface ActionViewOneOf6 {
+    /**
+     * 
+     * @type {ActionViewOneOf6DeleteAccount}
+     * @memberof ActionViewOneOf6
+     */
+    'DeleteAccount': ActionViewOneOf6DeleteAccount;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf6DeleteAccount
+ */
+export interface ActionViewOneOf6DeleteAccount {
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof ActionViewOneOf6DeleteAccount
+     */
+    'beneficiary_id': string;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf7
+ */
+export interface ActionViewOneOf7 {
+    /**
+     * 
+     * @type {ActionViewOneOf7Delegate}
+     * @memberof ActionViewOneOf7
+     */
+    'Delegate': ActionViewOneOf7Delegate;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf7Delegate
+ */
+export interface ActionViewOneOf7Delegate {
+    /**
+     * 
+     * @type {DelegateAction}
+     * @memberof ActionViewOneOf7Delegate
+     */
+    'delegate_action': DelegateAction;
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionViewOneOf7Delegate
+     */
+    'signature': string;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf8
+ */
+export interface ActionViewOneOf8 {
+    /**
+     * 
+     * @type {ActionViewOneOfDeployContract}
+     * @memberof ActionViewOneOf8
+     */
+    'DeployGlobalContract': ActionViewOneOfDeployContract;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOf9
+ */
+export interface ActionViewOneOf9 {
+    /**
+     * 
+     * @type {ActionViewOneOfDeployContract}
+     * @memberof ActionViewOneOf9
+     */
+    'DeployGlobalContractByAccountId': ActionViewOneOfDeployContract;
+}
+/**
+ * 
+ * @export
+ * @interface ActionViewOneOfDeployContract
+ */
+export interface ActionViewOneOfDeployContract {
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionViewOneOfDeployContract
+     */
+    'code': string;
+}
+/**
+ * @type ActionsValidationError
+ * Describes the error for validating a list of actions.
+ * @export
+ */
+export type ActionsValidationError = ActionsValidationErrorOneOf | ActionsValidationErrorOneOf1 | ActionsValidationErrorOneOf2 | ActionsValidationErrorOneOf3 | ActionsValidationErrorOneOf4 | ActionsValidationErrorOneOf5 | ActionsValidationErrorOneOf6 | ActionsValidationErrorOneOf7 | ActionsValidationErrorOneOf8 | ActionsValidationErrorOneOf9 | string;
+
+/**
+ * The total prepaid gas (for all given actions) exceeded the limit.
+ * @export
+ * @interface ActionsValidationErrorOneOf
+ */
+export interface ActionsValidationErrorOneOf {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOfTotalPrepaidGasExceeded}
+     * @memberof ActionsValidationErrorOneOf
+     */
+    'TotalPrepaidGasExceeded': ActionsValidationErrorOneOfTotalPrepaidGasExceeded;
+}
+/**
+ * The number of actions exceeded the given limit.
+ * @export
+ * @interface ActionsValidationErrorOneOf1
+ */
+export interface ActionsValidationErrorOneOf1 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf1TotalNumberOfActionsExceeded}
+     * @memberof ActionsValidationErrorOneOf1
+     */
+    'TotalNumberOfActionsExceeded': ActionsValidationErrorOneOf1TotalNumberOfActionsExceeded;
+}
+/**
+ * 
+ * @export
+ * @interface ActionsValidationErrorOneOf1TotalNumberOfActionsExceeded
+ */
+export interface ActionsValidationErrorOneOf1TotalNumberOfActionsExceeded {
+    /**
+     * 
+     * @type {number}
+     * @memberof ActionsValidationErrorOneOf1TotalNumberOfActionsExceeded
+     */
+    'limit': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ActionsValidationErrorOneOf1TotalNumberOfActionsExceeded
+     */
+    'total_number_of_actions': number;
+}
+/**
+ * The total number of bytes of the method names exceeded the limit in a Add Key action.
+ * @export
+ * @interface ActionsValidationErrorOneOf2
+ */
+export interface ActionsValidationErrorOneOf2 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf2AddKeyMethodNamesNumberOfBytesExceeded}
+     * @memberof ActionsValidationErrorOneOf2
+     */
+    'AddKeyMethodNamesNumberOfBytesExceeded': ActionsValidationErrorOneOf2AddKeyMethodNamesNumberOfBytesExceeded;
+}
+/**
+ * 
+ * @export
+ * @interface ActionsValidationErrorOneOf2AddKeyMethodNamesNumberOfBytesExceeded
+ */
+export interface ActionsValidationErrorOneOf2AddKeyMethodNamesNumberOfBytesExceeded {
+    /**
+     * 
+     * @type {number}
+     * @memberof ActionsValidationErrorOneOf2AddKeyMethodNamesNumberOfBytesExceeded
+     */
+    'limit': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ActionsValidationErrorOneOf2AddKeyMethodNamesNumberOfBytesExceeded
+     */
+    'total_number_of_bytes': number;
+}
+/**
+ * The length of some method name exceeded the limit in a Add Key action.
+ * @export
+ * @interface ActionsValidationErrorOneOf3
+ */
+export interface ActionsValidationErrorOneOf3 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded}
+     * @memberof ActionsValidationErrorOneOf3
+     */
+    'AddKeyMethodNameLengthExceeded': ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded;
+}
+/**
+ * 
+ * @export
+ * @interface ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded
+ */
+export interface ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded {
+    /**
+     * 
+     * @type {number}
+     * @memberof ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded
+     */
+    'length': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded
+     */
+    'limit': number;
+}
+/**
+ * Invalid account ID.
+ * @export
+ * @interface ActionsValidationErrorOneOf4
+ */
+export interface ActionsValidationErrorOneOf4 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf4InvalidAccountId}
+     * @memberof ActionsValidationErrorOneOf4
+     */
+    'InvalidAccountId': ActionsValidationErrorOneOf4InvalidAccountId;
+}
+/**
+ * 
+ * @export
+ * @interface ActionsValidationErrorOneOf4InvalidAccountId
+ */
+export interface ActionsValidationErrorOneOf4InvalidAccountId {
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionsValidationErrorOneOf4InvalidAccountId
+     */
+    'account_id': string;
+}
+/**
+ * The size of the contract code exceeded the limit in a DeployContract action.
+ * @export
+ * @interface ActionsValidationErrorOneOf5
+ */
+export interface ActionsValidationErrorOneOf5 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf5ContractSizeExceeded}
+     * @memberof ActionsValidationErrorOneOf5
+     */
+    'ContractSizeExceeded': ActionsValidationErrorOneOf5ContractSizeExceeded;
+}
+/**
+ * 
+ * @export
+ * @interface ActionsValidationErrorOneOf5ContractSizeExceeded
+ */
+export interface ActionsValidationErrorOneOf5ContractSizeExceeded {
+    /**
+     * 
+     * @type {number}
+     * @memberof ActionsValidationErrorOneOf5ContractSizeExceeded
+     */
+    'limit': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ActionsValidationErrorOneOf5ContractSizeExceeded
+     */
+    'size': number;
+}
+/**
+ * The length of the method name exceeded the limit in a Function Call action.
+ * @export
+ * @interface ActionsValidationErrorOneOf6
+ */
+export interface ActionsValidationErrorOneOf6 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded}
+     * @memberof ActionsValidationErrorOneOf6
+     */
+    'FunctionCallMethodNameLengthExceeded': ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded;
+}
+/**
+ * The length of the arguments exceeded the limit in a Function Call action.
+ * @export
+ * @interface ActionsValidationErrorOneOf7
+ */
+export interface ActionsValidationErrorOneOf7 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded}
+     * @memberof ActionsValidationErrorOneOf7
+     */
+    'FunctionCallArgumentsLengthExceeded': ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded;
+}
+/**
+ * An attempt to stake with a public key that is not convertible to ristretto.
+ * @export
+ * @interface ActionsValidationErrorOneOf8
+ */
+export interface ActionsValidationErrorOneOf8 {
+    /**
+     * 
+     * @type {ActionViewOneOf5DeleteKey}
+     * @memberof ActionsValidationErrorOneOf8
+     */
+    'UnsuitableStakingKey': ActionViewOneOf5DeleteKey;
+}
+/**
+ * The transaction includes a feature that the current protocol version does not support.  Note: we stringify the protocol feature name instead of using `ProtocolFeature` here because we don\'t want to leak the internals of that type into observable borsh serialization.
+ * @export
+ * @interface ActionsValidationErrorOneOf9
+ */
+export interface ActionsValidationErrorOneOf9 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf9UnsupportedProtocolFeature}
+     * @memberof ActionsValidationErrorOneOf9
+     */
+    'UnsupportedProtocolFeature': ActionsValidationErrorOneOf9UnsupportedProtocolFeature;
+}
+/**
+ * 
+ * @export
+ * @interface ActionsValidationErrorOneOf9UnsupportedProtocolFeature
+ */
+export interface ActionsValidationErrorOneOf9UnsupportedProtocolFeature {
+    /**
+     * 
+     * @type {string}
+     * @memberof ActionsValidationErrorOneOf9UnsupportedProtocolFeature
+     */
+    'protocol_feature': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ActionsValidationErrorOneOf9UnsupportedProtocolFeature
+     */
+    'version': number;
+}
+/**
+ * 
+ * @export
+ * @interface ActionsValidationErrorOneOfTotalPrepaidGasExceeded
+ */
+export interface ActionsValidationErrorOneOfTotalPrepaidGasExceeded {
+    /**
+     * 
+     * @type {number}
+     * @memberof ActionsValidationErrorOneOfTotalPrepaidGasExceeded
+     */
+    'limit': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ActionsValidationErrorOneOfTotalPrepaidGasExceeded
+     */
+    'total_prepaid_gas': number;
+}
+/**
+ * 
+ * @export
+ * @interface AddKeyAction
+ */
+export interface AddKeyAction {
+    /**
+     * An access key with the permission
+     * @type {AccessKey}
+     * @memberof AddKeyAction
+     */
+    'access_key': AccessKey;
+    /**
+     * A public key which will be associated with an access_key
+     * @type {string}
+     * @memberof AddKeyAction
+     */
+    'public_key': string;
+}
+/**
+ * @type CompilationError
+ * @export
+ */
+export type CompilationError = CompilationErrorOneOf | CompilationErrorOneOf1 | CompilationErrorOneOf2;
+
+/**
+ * 
+ * @export
+ * @interface CompilationErrorOneOf
+ */
+export interface CompilationErrorOneOf {
+    /**
+     * 
+     * @type {ActionErrorKindOneOfAccountAlreadyExists}
+     * @memberof CompilationErrorOneOf
+     */
+    'CodeDoesNotExist': ActionErrorKindOneOfAccountAlreadyExists;
+}
+/**
+ * 
+ * @export
+ * @interface CompilationErrorOneOf1
+ */
+export interface CompilationErrorOneOf1 {
+    /**
+     * 
+     * @type {PrepareError}
+     * @memberof CompilationErrorOneOf1
+     */
+    'PrepareError': PrepareError;
+}
+/**
+ * This is for defense in depth. We expect our runtime-independent preparation code to fully catch all invalid wasms, but, if it ever misses something we’ll emit this error
+ * @export
+ * @interface CompilationErrorOneOf2
+ */
+export interface CompilationErrorOneOf2 {
+    /**
+     * 
+     * @type {CompilationErrorOneOf2WasmerCompileError}
+     * @memberof CompilationErrorOneOf2
+     */
+    'WasmerCompileError': CompilationErrorOneOf2WasmerCompileError;
+}
+/**
+ * 
+ * @export
+ * @interface CompilationErrorOneOf2WasmerCompileError
+ */
+export interface CompilationErrorOneOf2WasmerCompileError {
+    /**
+     * 
+     * @type {string}
+     * @memberof CompilationErrorOneOf2WasmerCompileError
+     */
+    'msg': string;
+}
+/**
+ * 
+ * @export
+ * @interface CostGasUsed
+ */
+export interface CostGasUsed {
+    /**
+     * 
+     * @type {string}
+     * @memberof CostGasUsed
+     */
+    'cost': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CostGasUsed
+     */
+    'cost_category': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CostGasUsed
+     */
+    'gas_used': string;
+}
+/**
+ * 
+ * @export
+ * @interface DataReceiverView
+ */
+export interface DataReceiverView {
+    /**
+     * 
+     * @type {string}
+     * @memberof DataReceiverView
+     */
+    'data_id': string;
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof DataReceiverView
+     */
+    'receiver_id': string;
+}
+/**
+ * This action allows to execute the inner actions behalf of the defined sender.
+ * @export
+ * @interface DelegateAction
+ */
+export interface DelegateAction {
+    /**
+     * List of actions to be executed.  With the meta transactions MVP defined in NEP-366, nested DelegateActions are not allowed. A separate type is used to enforce it.
+     * @type {Array<NonDelegateAction>}
+     * @memberof DelegateAction
+     */
+    'actions': Array<NonDelegateAction>;
+    /**
+     * The maximal height of the block in the blockchain below which the given DelegateAction is valid.
+     * @type {number}
+     * @memberof DelegateAction
+     */
+    'max_block_height': number;
+    /**
+     * Nonce to ensure that the same delegate action is not sent twice by a relayer and should match for given account\'s `public_key`. After this action is processed it will increment.
+     * @type {number}
+     * @memberof DelegateAction
+     */
+    'nonce': number;
+    /**
+     * Public key used to sign this delegated action.
+     * @type {string}
+     * @memberof DelegateAction
+     */
+    'public_key': string;
+    /**
+     * Receiver of the delegated actions.
+     * @type {string}
+     * @memberof DelegateAction
+     */
+    'receiver_id': string;
+    /**
+     * Signer of the delegated actions
+     * @type {string}
+     * @memberof DelegateAction
+     */
+    'sender_id': string;
+}
+/**
+ * 
+ * @export
+ * @interface DeleteAccountAction
+ */
+export interface DeleteAccountAction {
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof DeleteAccountAction
+     */
+    'beneficiary_id': string;
+}
+/**
+ * 
+ * @export
+ * @interface DeleteKeyAction
+ */
+export interface DeleteKeyAction {
+    /**
+     * A public key associated with the access_key to be deleted.
+     * @type {string}
+     * @memberof DeleteKeyAction
+     */
+    'public_key': string;
+}
+/**
+ * Deploy contract action
+ * @export
+ * @interface DeployContractAction
+ */
+export interface DeployContractAction {
+    /**
+     * WebAssembly binary
+     * @type {string}
+     * @memberof DeployContractAction
+     */
+    'code': string;
+}
+/**
+ * Deploy global contract action
+ * @export
+ * @interface DeployGlobalContractAction
+ */
+export interface DeployGlobalContractAction {
+    /**
+     * WebAssembly binary
+     * @type {string}
+     * @memberof DeployGlobalContractAction
+     */
+    'code': string;
+    /**
+     * 
+     * @type {GlobalContractDeployMode}
+     * @memberof DeployGlobalContractAction
+     */
+    'deploy_mode': GlobalContractDeployMode;
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const Direction = {
+    Left: 'Left',
+    Right: 'Right'
+} as const;
+
+export type Direction = typeof Direction[keyof typeof Direction];
+
+
+/**
+ * 
+ * @export
+ * @interface ExecutionMetadataView
+ */
+export interface ExecutionMetadataView {
+    /**
+     * 
+     * @type {Array<CostGasUsed>}
+     * @memberof ExecutionMetadataView
+     */
+    'gas_profile'?: Array<CostGasUsed> | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ExecutionMetadataView
+     */
+    'version': number;
+}
+/**
+ * 
+ * @export
+ * @interface ExecutionOutcomeView
+ */
+export interface ExecutionOutcomeView {
+    /**
+     * The id of the account on which the execution happens. For transaction this is signer_id, for receipt this is receiver_id.
+     * @type {string}
+     * @memberof ExecutionOutcomeView
+     */
+    'executor_id': string;
+    /**
+     * The amount of the gas burnt by the given transaction or receipt.
+     * @type {number}
+     * @memberof ExecutionOutcomeView
+     */
+    'gas_burnt': number;
+    /**
+     * Logs from this transaction or receipt.
+     * @type {Array<string>}
+     * @memberof ExecutionOutcomeView
+     */
+    'logs': Array<string>;
+    /**
+     * Execution metadata, versioned
+     * @type {ExecutionMetadataView}
+     * @memberof ExecutionOutcomeView
+     */
+    'metadata'?: ExecutionMetadataView;
+    /**
+     * Receipt IDs generated by this transaction or receipt.
+     * @type {Array<string>}
+     * @memberof ExecutionOutcomeView
+     */
+    'receipt_ids': Array<string>;
+    /**
+     * Execution status. Contains the result in case of successful execution.
+     * @type {ExecutionStatusView}
+     * @memberof ExecutionOutcomeView
+     */
+    'status': ExecutionStatusView;
+    /**
+     * The amount of tokens burnt corresponding to the burnt gas amount. This value doesn\'t always equal to the `gas_burnt` multiplied by the gas price, because the prepaid gas price might be lower than the actual gas price and it creates a deficit.
+     * @type {string}
+     * @memberof ExecutionOutcomeView
+     */
+    'tokens_burnt': string;
+}
+/**
+ * 
+ * @export
+ * @interface ExecutionOutcomeWithIdView
+ */
+export interface ExecutionOutcomeWithIdView {
+    /**
+     * 
+     * @type {string}
+     * @memberof ExecutionOutcomeWithIdView
+     */
+    'block_hash': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ExecutionOutcomeWithIdView
+     */
+    'id': string;
+    /**
+     * 
+     * @type {ExecutionOutcomeView}
+     * @memberof ExecutionOutcomeWithIdView
+     */
+    'outcome': ExecutionOutcomeView;
+    /**
+     * 
+     * @type {Array<MerklePathItem>}
+     * @memberof ExecutionOutcomeWithIdView
+     */
+    'proof': Array<MerklePathItem>;
+}
+/**
+ * @type ExecutionStatusView
+ * @export
+ */
+export type ExecutionStatusView = ExecutionStatusViewOneOf | ExecutionStatusViewOneOf1 | ExecutionStatusViewOneOf2 | string;
+
+/**
+ * The execution has failed.
+ * @export
+ * @interface ExecutionStatusViewOneOf
+ */
+export interface ExecutionStatusViewOneOf {
+    /**
+     * 
+     * @type {TxExecutionError}
+     * @memberof ExecutionStatusViewOneOf
+     */
+    'Failure': TxExecutionError;
+}
+/**
+ * The final action succeeded and returned some value or an empty vec encoded in base64.
+ * @export
+ * @interface ExecutionStatusViewOneOf1
+ */
+export interface ExecutionStatusViewOneOf1 {
+    /**
+     * 
+     * @type {string}
+     * @memberof ExecutionStatusViewOneOf1
+     */
+    'SuccessValue': string;
+}
+/**
+ * The final action of the receipt returned a promise or the signed transaction was converted to a receipt. Contains the receipt_id of the generated receipt.
+ * @export
+ * @interface ExecutionStatusViewOneOf2
+ */
+export interface ExecutionStatusViewOneOf2 {
+    /**
+     * 
+     * @type {string}
+     * @memberof ExecutionStatusViewOneOf2
+     */
+    'SuccessReceiptId': string;
+}
+/**
+ * Execution outcome of the transaction and all the subsequent receipts. Could be not finalized yet
+ * @export
+ * @interface FinalExecutionOutcomeView
+ */
+export interface FinalExecutionOutcomeView {
+    /**
+     * The execution outcome of receipts.
+     * @type {Array<ExecutionOutcomeWithIdView>}
+     * @memberof FinalExecutionOutcomeView
+     */
+    'receipts_outcome': Array<ExecutionOutcomeWithIdView>;
+    /**
+     * Execution status defined by chain.rs:get_final_transaction_result FinalExecutionStatus::NotStarted - the tx is not converted to the receipt yet FinalExecutionStatus::Started - we have at least 1 receipt, but the first leaf receipt_id (using dfs) hasn\'t finished the execution FinalExecutionStatus::Failure - the result of the first leaf receipt_id FinalExecutionStatus::SuccessValue - the result of the first leaf receipt_id
+     * @type {FinalExecutionStatus}
+     * @memberof FinalExecutionOutcomeView
+     */
+    'status': FinalExecutionStatus;
+    /**
+     * Signed Transaction
+     * @type {SignedTransactionView}
+     * @memberof FinalExecutionOutcomeView
+     */
+    'transaction': SignedTransactionView;
+    /**
+     * The execution outcome of the signed transaction.
+     * @type {ExecutionOutcomeWithIdView}
+     * @memberof FinalExecutionOutcomeView
+     */
+    'transaction_outcome': ExecutionOutcomeWithIdView;
+}
+/**
+ * Final execution outcome of the transaction and all of subsequent the receipts. Also includes the generated receipt.
+ * @export
+ * @interface FinalExecutionOutcomeWithReceiptView
+ */
+export interface FinalExecutionOutcomeWithReceiptView {
+    /**
+     * Receipts generated from the transaction
+     * @type {Array<ReceiptView>}
+     * @memberof FinalExecutionOutcomeWithReceiptView
+     */
+    'receipts': Array<ReceiptView>;
+    /**
+     * The execution outcome of receipts.
+     * @type {Array<ExecutionOutcomeWithIdView>}
+     * @memberof FinalExecutionOutcomeWithReceiptView
+     */
+    'receipts_outcome': Array<ExecutionOutcomeWithIdView>;
+    /**
+     * Execution status defined by chain.rs:get_final_transaction_result FinalExecutionStatus::NotStarted - the tx is not converted to the receipt yet FinalExecutionStatus::Started - we have at least 1 receipt, but the first leaf receipt_id (using dfs) hasn\'t finished the execution FinalExecutionStatus::Failure - the result of the first leaf receipt_id FinalExecutionStatus::SuccessValue - the result of the first leaf receipt_id
+     * @type {FinalExecutionStatus}
+     * @memberof FinalExecutionOutcomeWithReceiptView
+     */
+    'status': FinalExecutionStatus;
+    /**
+     * Signed Transaction
+     * @type {SignedTransactionView}
+     * @memberof FinalExecutionOutcomeWithReceiptView
+     */
+    'transaction': SignedTransactionView;
+    /**
+     * The execution outcome of the signed transaction.
+     * @type {ExecutionOutcomeWithIdView}
+     * @memberof FinalExecutionOutcomeWithReceiptView
+     */
+    'transaction_outcome': ExecutionOutcomeWithIdView;
+}
+/**
+ * @type FinalExecutionStatus
+ * @export
+ */
+export type FinalExecutionStatus = FinalExecutionStatusOneOf | FinalExecutionStatusOneOf1 | string;
+
+/**
+ * The execution has failed with the given error.
+ * @export
+ * @interface FinalExecutionStatusOneOf
+ */
+export interface FinalExecutionStatusOneOf {
+    /**
+     * 
+     * @type {TxExecutionError}
+     * @memberof FinalExecutionStatusOneOf
+     */
+    'Failure': TxExecutionError;
+}
+/**
+ * The execution has succeeded and returned some value or an empty vec encoded in base64.
+ * @export
+ * @interface FinalExecutionStatusOneOf1
+ */
+export interface FinalExecutionStatusOneOf1 {
+    /**
+     * 
+     * @type {string}
+     * @memberof FinalExecutionStatusOneOf1
+     */
+    'SuccessValue': string;
+}
+/**
+ * 
+ * @export
+ * @interface FunctionCallAction
+ */
+export interface FunctionCallAction {
+    /**
+     * 
+     * @type {string}
+     * @memberof FunctionCallAction
+     */
+    'args': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FunctionCallAction
+     */
+    'deposit': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof FunctionCallAction
+     */
+    'gas': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof FunctionCallAction
+     */
+    'method_name': string;
+}
+/**
+ * @type FunctionCallError
+ * Serializable version of `near-vm-runner::FunctionCallError`.  Must never reorder/remove elements, can only add new variants at the end (but do that very carefully). It describes stable serialization format, and only used by serialization logic.
+ * @export
+ */
+export type FunctionCallError = FunctionCallErrorOneOf | FunctionCallErrorOneOf1 | FunctionCallErrorOneOf2 | FunctionCallErrorOneOf3 | FunctionCallErrorOneOf4 | FunctionCallErrorOneOf5 | string;
+
+/**
+ * Wasm compilation error
+ * @export
+ * @interface FunctionCallErrorOneOf
+ */
+export interface FunctionCallErrorOneOf {
+    /**
+     * 
+     * @type {CompilationError}
+     * @memberof FunctionCallErrorOneOf
+     */
+    'CompilationError': CompilationError;
+}
+/**
+ * Wasm binary env link error  Note: this is only to deserialize old data, use execution error for new data
+ * @export
+ * @interface FunctionCallErrorOneOf1
+ */
+export interface FunctionCallErrorOneOf1 {
+    /**
+     * 
+     * @type {CompilationErrorOneOf2WasmerCompileError}
+     * @memberof FunctionCallErrorOneOf1
+     */
+    'LinkError': CompilationErrorOneOf2WasmerCompileError;
+}
+/**
+ * Import/export resolve error
+ * @export
+ * @interface FunctionCallErrorOneOf2
+ */
+export interface FunctionCallErrorOneOf2 {
+    /**
+     * 
+     * @type {MethodResolveError}
+     * @memberof FunctionCallErrorOneOf2
+     */
+    'MethodResolveError': MethodResolveError;
+}
+
+
+/**
+ * A trap happened during execution of a binary  Note: this is only to deserialize old data, use execution error for new data
+ * @export
+ * @interface FunctionCallErrorOneOf3
+ */
+export interface FunctionCallErrorOneOf3 {
+    /**
+     * 
+     * @type {WasmTrap}
+     * @memberof FunctionCallErrorOneOf3
+     */
+    'WasmTrap': WasmTrap;
+}
+/**
+ * Note: this is only to deserialize old data, use execution error for new data
+ * @export
+ * @interface FunctionCallErrorOneOf4
+ */
+export interface FunctionCallErrorOneOf4 {
+    /**
+     * 
+     * @type {HostError}
+     * @memberof FunctionCallErrorOneOf4
+     */
+    'HostError': HostError;
+}
+/**
+ * 
+ * @export
+ * @interface FunctionCallErrorOneOf5
+ */
+export interface FunctionCallErrorOneOf5 {
+    /**
+     * 
+     * @type {string}
+     * @memberof FunctionCallErrorOneOf5
+     */
+    'ExecutionError': string;
+}
+/**
+ * Grants limited permission to make transactions with FunctionCallActions The permission can limit the allowed balance to be spent on the prepaid gas. It also restrict the account ID of the receiver for this function call. It also can restrict the method name for the allowed function calls.
+ * @export
+ * @interface FunctionCallPermission
+ */
+export interface FunctionCallPermission {
+    /**
+     * Allowance is a balance limit to use by this access key to pay for function call gas and transaction fees. When this access key is used, both account balance and the allowance is decreased by the same value. `None` means unlimited allowance. NOTE: To change or increase the allowance, the old access key needs to be deleted and a new access key should be created.
+     * @type {string}
+     * @memberof FunctionCallPermission
+     */
+    'allowance': string;
+    /**
+     * A list of method names that can be used. The access key only allows transactions with the function call of one of the given method names. Empty list means any method name can be used.
+     * @type {Array<string>}
+     * @memberof FunctionCallPermission
+     */
+    'method_names': Array<string>;
+    /**
+     * The access key only allows transactions with the given receiver\'s account id.
+     * @type {string}
+     * @memberof FunctionCallPermission
+     */
+    'receiver_id': string;
+}
+/**
+ * 
+ * @export
+ * @interface GlobalContractData
+ */
+export interface GlobalContractData {
+    /**
+     * 
+     * @type {string}
+     * @memberof GlobalContractData
+     */
+    'code': string;
+    /**
+     * 
+     * @type {GlobalContractIdentifier}
+     * @memberof GlobalContractData
+     */
+    'id': GlobalContractIdentifier;
+}
+/**
+ * @type GlobalContractDeployMode
+ * @export
+ */
+export type GlobalContractDeployMode = string;
+
+/**
+ * @type GlobalContractIdentifier
+ * @export
+ */
+export type GlobalContractIdentifier = GlobalContractIdentifierOneOf | GlobalContractIdentifierOneOf1;
+
+/**
+ * 
+ * @export
+ * @interface GlobalContractIdentifierOneOf
+ */
+export interface GlobalContractIdentifierOneOf {
+    /**
+     * 
+     * @type {string}
+     * @memberof GlobalContractIdentifierOneOf
+     */
+    'CodeHash': string;
+}
+/**
+ * 
+ * @export
+ * @interface GlobalContractIdentifierOneOf1
+ */
+export interface GlobalContractIdentifierOneOf1 {
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof GlobalContractIdentifierOneOf1
+     */
+    'AccountId': string;
+}
+/**
+ * @type HostError
+ * @export
+ */
+export type HostError = HostErrorOneOf | HostErrorOneOf1 | HostErrorOneOf10 | HostErrorOneOf11 | HostErrorOneOf12 | HostErrorOneOf13 | HostErrorOneOf14 | HostErrorOneOf15 | HostErrorOneOf16 | HostErrorOneOf17 | HostErrorOneOf18 | HostErrorOneOf19 | HostErrorOneOf2 | HostErrorOneOf3 | HostErrorOneOf4 | HostErrorOneOf5 | HostErrorOneOf6 | HostErrorOneOf7 | HostErrorOneOf8 | HostErrorOneOf9 | string;
+
+/**
+ * Smart contract panicked
+ * @export
+ * @interface HostErrorOneOf
+ */
+export interface HostErrorOneOf {
+    /**
+     * 
+     * @type {HostErrorOneOfGuestPanic}
+     * @memberof HostErrorOneOf
+     */
+    'GuestPanic': HostErrorOneOfGuestPanic;
+}
+/**
+ * `promise_idx` does not correspond to existing promises
+ * @export
+ * @interface HostErrorOneOf1
+ */
+export interface HostErrorOneOf1 {
+    /**
+     * 
+     * @type {HostErrorOneOf1InvalidPromiseIndex}
+     * @memberof HostErrorOneOf1
+     */
+    'InvalidPromiseIndex': HostErrorOneOf1InvalidPromiseIndex;
+}
+/**
+ * The storage value length exceeded the limit.
+ * @export
+ * @interface HostErrorOneOf10
+ */
+export interface HostErrorOneOf10 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded}
+     * @memberof HostErrorOneOf10
+     */
+    'ValueLengthExceeded': ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded;
+}
+/**
+ * The total log length exceeded the limit.
+ * @export
+ * @interface HostErrorOneOf11
+ */
+export interface HostErrorOneOf11 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded}
+     * @memberof HostErrorOneOf11
+     */
+    'TotalLogLengthExceeded': ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded;
+}
+/**
+ * The maximum number of promises within a FunctionCall exceeded the limit.
+ * @export
+ * @interface HostErrorOneOf12
+ */
+export interface HostErrorOneOf12 {
+    /**
+     * 
+     * @type {HostErrorOneOf12NumberPromisesExceeded}
+     * @memberof HostErrorOneOf12
+     */
+    'NumberPromisesExceeded': HostErrorOneOf12NumberPromisesExceeded;
+}
+/**
+ * 
+ * @export
+ * @interface HostErrorOneOf12NumberPromisesExceeded
+ */
+export interface HostErrorOneOf12NumberPromisesExceeded {
+    /**
+     * 
+     * @type {number}
+     * @memberof HostErrorOneOf12NumberPromisesExceeded
+     */
+    'limit': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof HostErrorOneOf12NumberPromisesExceeded
+     */
+    'number_of_promises': number;
+}
+/**
+ * The maximum number of input data dependencies exceeded the limit.
+ * @export
+ * @interface HostErrorOneOf13
+ */
+export interface HostErrorOneOf13 {
+    /**
+     * 
+     * @type {HostErrorOneOf13NumberInputDataDependenciesExceeded}
+     * @memberof HostErrorOneOf13
+     */
+    'NumberInputDataDependenciesExceeded': HostErrorOneOf13NumberInputDataDependenciesExceeded;
+}
+/**
+ * 
+ * @export
+ * @interface HostErrorOneOf13NumberInputDataDependenciesExceeded
+ */
+export interface HostErrorOneOf13NumberInputDataDependenciesExceeded {
+    /**
+     * 
+     * @type {number}
+     * @memberof HostErrorOneOf13NumberInputDataDependenciesExceeded
+     */
+    'limit': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof HostErrorOneOf13NumberInputDataDependenciesExceeded
+     */
+    'number_of_input_data_dependencies': number;
+}
+/**
+ * The returned value length exceeded the limit.
+ * @export
+ * @interface HostErrorOneOf14
+ */
+export interface HostErrorOneOf14 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded}
+     * @memberof HostErrorOneOf14
+     */
+    'ReturnedValueLengthExceeded': ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded;
+}
+/**
+ * The contract size for DeployContract action exceeded the limit.
+ * @export
+ * @interface HostErrorOneOf15
+ */
+export interface HostErrorOneOf15 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf5ContractSizeExceeded}
+     * @memberof HostErrorOneOf15
+     */
+    'ContractSizeExceeded': ActionsValidationErrorOneOf5ContractSizeExceeded;
+}
+/**
+ * The host function was deprecated.
+ * @export
+ * @interface HostErrorOneOf16
+ */
+export interface HostErrorOneOf16 {
+    /**
+     * 
+     * @type {HostErrorOneOf7ProhibitedInView}
+     * @memberof HostErrorOneOf16
+     */
+    'Deprecated': HostErrorOneOf7ProhibitedInView;
+}
+/**
+ * General errors for ECDSA recover.
+ * @export
+ * @interface HostErrorOneOf17
+ */
+export interface HostErrorOneOf17 {
+    /**
+     * 
+     * @type {CompilationErrorOneOf2WasmerCompileError}
+     * @memberof HostErrorOneOf17
+     */
+    'ECRecoverError': CompilationErrorOneOf2WasmerCompileError;
+}
+/**
+ * Invalid input to alt_bn128 family of functions (e.g., point which isn\'t on the curve).
+ * @export
+ * @interface HostErrorOneOf18
+ */
+export interface HostErrorOneOf18 {
+    /**
+     * 
+     * @type {CompilationErrorOneOf2WasmerCompileError}
+     * @memberof HostErrorOneOf18
+     */
+    'AltBn128InvalidInput': CompilationErrorOneOf2WasmerCompileError;
+}
+/**
+ * Invalid input to ed25519 signature verification function (e.g. signature cannot be derived from bytes).
+ * @export
+ * @interface HostErrorOneOf19
+ */
+export interface HostErrorOneOf19 {
+    /**
+     * 
+     * @type {CompilationErrorOneOf2WasmerCompileError}
+     * @memberof HostErrorOneOf19
+     */
+    'Ed25519VerifyInvalidInput': CompilationErrorOneOf2WasmerCompileError;
+}
+/**
+ * 
+ * @export
+ * @interface HostErrorOneOf1InvalidPromiseIndex
+ */
+export interface HostErrorOneOf1InvalidPromiseIndex {
+    /**
+     * 
+     * @type {number}
+     * @memberof HostErrorOneOf1InvalidPromiseIndex
+     */
+    'promise_idx': number;
+}
+/**
+ * Accessed invalid promise result index
+ * @export
+ * @interface HostErrorOneOf2
+ */
+export interface HostErrorOneOf2 {
+    /**
+     * 
+     * @type {HostErrorOneOf2InvalidPromiseResultIndex}
+     * @memberof HostErrorOneOf2
+     */
+    'InvalidPromiseResultIndex': HostErrorOneOf2InvalidPromiseResultIndex;
+}
+/**
+ * 
+ * @export
+ * @interface HostErrorOneOf2InvalidPromiseResultIndex
+ */
+export interface HostErrorOneOf2InvalidPromiseResultIndex {
+    /**
+     * 
+     * @type {number}
+     * @memberof HostErrorOneOf2InvalidPromiseResultIndex
+     */
+    'result_idx': number;
+}
+/**
+ * Accessed invalid register id
+ * @export
+ * @interface HostErrorOneOf3
+ */
+export interface HostErrorOneOf3 {
+    /**
+     * 
+     * @type {HostErrorOneOf3InvalidRegisterId}
+     * @memberof HostErrorOneOf3
+     */
+    'InvalidRegisterId': HostErrorOneOf3InvalidRegisterId;
+}
+/**
+ * 
+ * @export
+ * @interface HostErrorOneOf3InvalidRegisterId
+ */
+export interface HostErrorOneOf3InvalidRegisterId {
+    /**
+     * 
+     * @type {number}
+     * @memberof HostErrorOneOf3InvalidRegisterId
+     */
+    'register_id': number;
+}
+/**
+ * Iterator `iterator_index` was invalidated after its creation by performing a mutable operation on trie
+ * @export
+ * @interface HostErrorOneOf4
+ */
+export interface HostErrorOneOf4 {
+    /**
+     * 
+     * @type {HostErrorOneOf4IteratorWasInvalidated}
+     * @memberof HostErrorOneOf4
+     */
+    'IteratorWasInvalidated': HostErrorOneOf4IteratorWasInvalidated;
+}
+/**
+ * 
+ * @export
+ * @interface HostErrorOneOf4IteratorWasInvalidated
+ */
+export interface HostErrorOneOf4IteratorWasInvalidated {
+    /**
+     * 
+     * @type {number}
+     * @memberof HostErrorOneOf4IteratorWasInvalidated
+     */
+    'iterator_index': number;
+}
+/**
+ * VM Logic returned an invalid receipt index
+ * @export
+ * @interface HostErrorOneOf5
+ */
+export interface HostErrorOneOf5 {
+    /**
+     * 
+     * @type {HostErrorOneOf5InvalidReceiptIndex}
+     * @memberof HostErrorOneOf5
+     */
+    'InvalidReceiptIndex': HostErrorOneOf5InvalidReceiptIndex;
+}
+/**
+ * 
+ * @export
+ * @interface HostErrorOneOf5InvalidReceiptIndex
+ */
+export interface HostErrorOneOf5InvalidReceiptIndex {
+    /**
+     * 
+     * @type {number}
+     * @memberof HostErrorOneOf5InvalidReceiptIndex
+     */
+    'receipt_index': number;
+}
+/**
+ * Iterator index `iterator_index` does not exist
+ * @export
+ * @interface HostErrorOneOf6
+ */
+export interface HostErrorOneOf6 {
+    /**
+     * 
+     * @type {HostErrorOneOf4IteratorWasInvalidated}
+     * @memberof HostErrorOneOf6
+     */
+    'InvalidIteratorIndex': HostErrorOneOf4IteratorWasInvalidated;
+}
+/**
+ * `method_name` is not allowed in view calls
+ * @export
+ * @interface HostErrorOneOf7
+ */
+export interface HostErrorOneOf7 {
+    /**
+     * 
+     * @type {HostErrorOneOf7ProhibitedInView}
+     * @memberof HostErrorOneOf7
+     */
+    'ProhibitedInView': HostErrorOneOf7ProhibitedInView;
+}
+/**
+ * 
+ * @export
+ * @interface HostErrorOneOf7ProhibitedInView
+ */
+export interface HostErrorOneOf7ProhibitedInView {
+    /**
+     * 
+     * @type {string}
+     * @memberof HostErrorOneOf7ProhibitedInView
+     */
+    'method_name': string;
+}
+/**
+ * The total number of logs will exceed the limit.
+ * @export
+ * @interface HostErrorOneOf8
+ */
+export interface HostErrorOneOf8 {
+    /**
+     * 
+     * @type {HostErrorOneOf8NumberOfLogsExceeded}
+     * @memberof HostErrorOneOf8
+     */
+    'NumberOfLogsExceeded': HostErrorOneOf8NumberOfLogsExceeded;
+}
+/**
+ * 
+ * @export
+ * @interface HostErrorOneOf8NumberOfLogsExceeded
+ */
+export interface HostErrorOneOf8NumberOfLogsExceeded {
+    /**
+     * 
+     * @type {number}
+     * @memberof HostErrorOneOf8NumberOfLogsExceeded
+     */
+    'limit': number;
+}
+/**
+ * The storage key length exceeded the limit.
+ * @export
+ * @interface HostErrorOneOf9
+ */
+export interface HostErrorOneOf9 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded}
+     * @memberof HostErrorOneOf9
+     */
+    'KeyLengthExceeded': ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded;
+}
+/**
+ * 
+ * @export
+ * @interface HostErrorOneOfGuestPanic
+ */
+export interface HostErrorOneOfGuestPanic {
+    /**
+     * 
+     * @type {string}
+     * @memberof HostErrorOneOfGuestPanic
+     */
+    'panic_msg': string;
+}
+/**
+ * @type InvalidAccessKeyError
+ * @export
+ */
+export type InvalidAccessKeyError = InvalidAccessKeyErrorOneOf | InvalidAccessKeyErrorOneOf1 | InvalidAccessKeyErrorOneOf2 | InvalidAccessKeyErrorOneOf3 | string;
+
+/**
+ * The access key identified by the `public_key` doesn\'t exist for the account
+ * @export
+ * @interface InvalidAccessKeyErrorOneOf
+ */
+export interface InvalidAccessKeyErrorOneOf {
+    /**
+     * 
+     * @type {ActionErrorKindOneOf5DeleteKeyDoesNotExist}
+     * @memberof InvalidAccessKeyErrorOneOf
+     */
+    'AccessKeyNotFound': ActionErrorKindOneOf5DeleteKeyDoesNotExist;
+}
+/**
+ * Transaction `receiver_id` doesn\'t match the access key receiver_id
+ * @export
+ * @interface InvalidAccessKeyErrorOneOf1
+ */
+export interface InvalidAccessKeyErrorOneOf1 {
+    /**
+     * 
+     * @type {InvalidAccessKeyErrorOneOf1ReceiverMismatch}
+     * @memberof InvalidAccessKeyErrorOneOf1
+     */
+    'ReceiverMismatch': InvalidAccessKeyErrorOneOf1ReceiverMismatch;
+}
+/**
+ * 
+ * @export
+ * @interface InvalidAccessKeyErrorOneOf1ReceiverMismatch
+ */
+export interface InvalidAccessKeyErrorOneOf1ReceiverMismatch {
+    /**
+     * 
+     * @type {string}
+     * @memberof InvalidAccessKeyErrorOneOf1ReceiverMismatch
+     */
+    'ak_receiver': string;
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof InvalidAccessKeyErrorOneOf1ReceiverMismatch
+     */
+    'tx_receiver': string;
+}
+/**
+ * Transaction method name isn\'t allowed by the access key
+ * @export
+ * @interface InvalidAccessKeyErrorOneOf2
+ */
+export interface InvalidAccessKeyErrorOneOf2 {
+    /**
+     * 
+     * @type {HostErrorOneOf7ProhibitedInView}
+     * @memberof InvalidAccessKeyErrorOneOf2
+     */
+    'MethodNameMismatch': HostErrorOneOf7ProhibitedInView;
+}
+/**
+ * Access Key does not have enough allowance to cover transaction cost
+ * @export
+ * @interface InvalidAccessKeyErrorOneOf3
+ */
+export interface InvalidAccessKeyErrorOneOf3 {
+    /**
+     * 
+     * @type {InvalidAccessKeyErrorOneOf3NotEnoughAllowance}
+     * @memberof InvalidAccessKeyErrorOneOf3
+     */
+    'NotEnoughAllowance': InvalidAccessKeyErrorOneOf3NotEnoughAllowance;
+}
+/**
+ * 
+ * @export
+ * @interface InvalidAccessKeyErrorOneOf3NotEnoughAllowance
+ */
+export interface InvalidAccessKeyErrorOneOf3NotEnoughAllowance {
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof InvalidAccessKeyErrorOneOf3NotEnoughAllowance
+     */
+    'account_id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InvalidAccessKeyErrorOneOf3NotEnoughAllowance
+     */
+    'allowance': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InvalidAccessKeyErrorOneOf3NotEnoughAllowance
+     */
+    'cost': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InvalidAccessKeyErrorOneOf3NotEnoughAllowance
+     */
+    'public_key': string;
+}
+/**
+ * @type InvalidTxError
+ * An error happened during TX execution
+ * @export
+ */
+export type InvalidTxError = InvalidTxErrorOneOf | InvalidTxErrorOneOf1 | InvalidTxErrorOneOf10 | InvalidTxErrorOneOf11 | InvalidTxErrorOneOf12 | InvalidTxErrorOneOf2 | InvalidTxErrorOneOf3 | InvalidTxErrorOneOf4 | InvalidTxErrorOneOf5 | InvalidTxErrorOneOf6 | InvalidTxErrorOneOf7 | InvalidTxErrorOneOf8 | InvalidTxErrorOneOf9 | string;
+
+/**
+ * Happens if a wrong AccessKey used or AccessKey has not enough permissions
+ * @export
+ * @interface InvalidTxErrorOneOf
+ */
+export interface InvalidTxErrorOneOf {
+    /**
+     * 
+     * @type {InvalidAccessKeyError}
+     * @memberof InvalidTxErrorOneOf
+     */
+    'InvalidAccessKeyError': InvalidAccessKeyError;
+}
+/**
+ * TX signer_id is not a valid [`AccountId`]
+ * @export
+ * @interface InvalidTxErrorOneOf1
+ */
+export interface InvalidTxErrorOneOf1 {
+    /**
+     * 
+     * @type {InvalidTxErrorOneOf1InvalidSignerId}
+     * @memberof InvalidTxErrorOneOf1
+     */
+    'InvalidSignerId': InvalidTxErrorOneOf1InvalidSignerId;
+}
+/**
+ * 
+ * @export
+ * @interface InvalidTxErrorOneOf10
+ */
+export interface InvalidTxErrorOneOf10 {
+    /**
+     * 
+     * @type {StorageError}
+     * @memberof InvalidTxErrorOneOf10
+     */
+    'StorageError': StorageError;
+}
+/**
+ * The receiver shard of the transaction is too congested to accept new transactions at the moment.
+ * @export
+ * @interface InvalidTxErrorOneOf11
+ */
+export interface InvalidTxErrorOneOf11 {
+    /**
+     * 
+     * @type {InvalidTxErrorOneOf11ShardCongested}
+     * @memberof InvalidTxErrorOneOf11
+     */
+    'ShardCongested': InvalidTxErrorOneOf11ShardCongested;
+}
+/**
+ * 
+ * @export
+ * @interface InvalidTxErrorOneOf11ShardCongested
+ */
+export interface InvalidTxErrorOneOf11ShardCongested {
+    /**
+     * A value between 0 (no congestion) and 1 (max congestion).
+     * @type {number}
+     * @memberof InvalidTxErrorOneOf11ShardCongested
+     */
+    'congestion_level': number;
+    /**
+     * The congested shard.
+     * @type {number}
+     * @memberof InvalidTxErrorOneOf11ShardCongested
+     */
+    'shard_id': number;
+}
+/**
+ * The receiver shard of the transaction missed several chunks and rejects new transaction until it can make progress again.
+ * @export
+ * @interface InvalidTxErrorOneOf12
+ */
+export interface InvalidTxErrorOneOf12 {
+    /**
+     * 
+     * @type {InvalidTxErrorOneOf12ShardStuck}
+     * @memberof InvalidTxErrorOneOf12
+     */
+    'ShardStuck': InvalidTxErrorOneOf12ShardStuck;
+}
+/**
+ * 
+ * @export
+ * @interface InvalidTxErrorOneOf12ShardStuck
+ */
+export interface InvalidTxErrorOneOf12ShardStuck {
+    /**
+     * The number of blocks since the last included chunk of the shard.
+     * @type {number}
+     * @memberof InvalidTxErrorOneOf12ShardStuck
+     */
+    'missed_chunks': number;
+    /**
+     * The shard that fails making progress.
+     * @type {number}
+     * @memberof InvalidTxErrorOneOf12ShardStuck
+     */
+    'shard_id': number;
+}
+/**
+ * 
+ * @export
+ * @interface InvalidTxErrorOneOf1InvalidSignerId
+ */
+export interface InvalidTxErrorOneOf1InvalidSignerId {
+    /**
+     * 
+     * @type {string}
+     * @memberof InvalidTxErrorOneOf1InvalidSignerId
+     */
+    'signer_id': string;
+}
+/**
+ * TX signer_id is not found in a storage
+ * @export
+ * @interface InvalidTxErrorOneOf2
+ */
+export interface InvalidTxErrorOneOf2 {
+    /**
+     * 
+     * @type {InvalidTxErrorOneOf2SignerDoesNotExist}
+     * @memberof InvalidTxErrorOneOf2
+     */
+    'SignerDoesNotExist': InvalidTxErrorOneOf2SignerDoesNotExist;
+}
+/**
+ * 
+ * @export
+ * @interface InvalidTxErrorOneOf2SignerDoesNotExist
+ */
+export interface InvalidTxErrorOneOf2SignerDoesNotExist {
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof InvalidTxErrorOneOf2SignerDoesNotExist
+     */
+    'signer_id': string;
+}
+/**
+ * Transaction nonce must be `account[access_key].nonce + 1`.
+ * @export
+ * @interface InvalidTxErrorOneOf3
+ */
+export interface InvalidTxErrorOneOf3 {
+    /**
+     * 
+     * @type {InvalidTxErrorOneOf3InvalidNonce}
+     * @memberof InvalidTxErrorOneOf3
+     */
+    'InvalidNonce': InvalidTxErrorOneOf3InvalidNonce;
+}
+/**
+ * 
+ * @export
+ * @interface InvalidTxErrorOneOf3InvalidNonce
+ */
+export interface InvalidTxErrorOneOf3InvalidNonce {
+    /**
+     * 
+     * @type {number}
+     * @memberof InvalidTxErrorOneOf3InvalidNonce
+     */
+    'ak_nonce': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof InvalidTxErrorOneOf3InvalidNonce
+     */
+    'tx_nonce': number;
+}
+/**
+ * Transaction nonce is larger than the upper bound given by the block height
+ * @export
+ * @interface InvalidTxErrorOneOf4
+ */
+export interface InvalidTxErrorOneOf4 {
+    /**
+     * 
+     * @type {InvalidTxErrorOneOf4NonceTooLarge}
+     * @memberof InvalidTxErrorOneOf4
+     */
+    'NonceTooLarge': InvalidTxErrorOneOf4NonceTooLarge;
+}
+/**
+ * 
+ * @export
+ * @interface InvalidTxErrorOneOf4NonceTooLarge
+ */
+export interface InvalidTxErrorOneOf4NonceTooLarge {
+    /**
+     * 
+     * @type {number}
+     * @memberof InvalidTxErrorOneOf4NonceTooLarge
+     */
+    'tx_nonce': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof InvalidTxErrorOneOf4NonceTooLarge
+     */
+    'upper_bound': number;
+}
+/**
+ * TX receiver_id is not a valid AccountId
+ * @export
+ * @interface InvalidTxErrorOneOf5
+ */
+export interface InvalidTxErrorOneOf5 {
+    /**
+     * 
+     * @type {InvalidTxErrorOneOf5InvalidReceiverId}
+     * @memberof InvalidTxErrorOneOf5
+     */
+    'InvalidReceiverId': InvalidTxErrorOneOf5InvalidReceiverId;
+}
+/**
+ * 
+ * @export
+ * @interface InvalidTxErrorOneOf5InvalidReceiverId
+ */
+export interface InvalidTxErrorOneOf5InvalidReceiverId {
+    /**
+     * 
+     * @type {string}
+     * @memberof InvalidTxErrorOneOf5InvalidReceiverId
+     */
+    'receiver_id': string;
+}
+/**
+ * Account does not have enough balance to cover TX cost
+ * @export
+ * @interface InvalidTxErrorOneOf6
+ */
+export interface InvalidTxErrorOneOf6 {
+    /**
+     * 
+     * @type {InvalidTxErrorOneOf6NotEnoughBalance}
+     * @memberof InvalidTxErrorOneOf6
+     */
+    'NotEnoughBalance': InvalidTxErrorOneOf6NotEnoughBalance;
+}
+/**
+ * 
+ * @export
+ * @interface InvalidTxErrorOneOf6NotEnoughBalance
+ */
+export interface InvalidTxErrorOneOf6NotEnoughBalance {
+    /**
+     * 
+     * @type {string}
+     * @memberof InvalidTxErrorOneOf6NotEnoughBalance
+     */
+    'balance': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InvalidTxErrorOneOf6NotEnoughBalance
+     */
+    'cost': string;
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof InvalidTxErrorOneOf6NotEnoughBalance
+     */
+    'signer_id': string;
+}
+/**
+ * Signer account doesn\'t have enough balance after transaction.
+ * @export
+ * @interface InvalidTxErrorOneOf7
+ */
+export interface InvalidTxErrorOneOf7 {
+    /**
+     * 
+     * @type {InvalidTxErrorOneOf7LackBalanceForState}
+     * @memberof InvalidTxErrorOneOf7
+     */
+    'LackBalanceForState': InvalidTxErrorOneOf7LackBalanceForState;
+}
+/**
+ * 
+ * @export
+ * @interface InvalidTxErrorOneOf7LackBalanceForState
+ */
+export interface InvalidTxErrorOneOf7LackBalanceForState {
+    /**
+     * Required balance to cover the state.
+     * @type {string}
+     * @memberof InvalidTxErrorOneOf7LackBalanceForState
+     */
+    'amount': string;
+    /**
+     * An account which doesn\'t have enough balance to cover storage.
+     * @type {string}
+     * @memberof InvalidTxErrorOneOf7LackBalanceForState
+     */
+    'signer_id': string;
+}
+/**
+ * An error occurred while validating actions of a Transaction.
+ * @export
+ * @interface InvalidTxErrorOneOf8
+ */
+export interface InvalidTxErrorOneOf8 {
+    /**
+     * 
+     * @type {ActionsValidationError}
+     * @memberof InvalidTxErrorOneOf8
+     */
+    'ActionsValidation': ActionsValidationError;
+}
+/**
+ * The size of serialized transaction exceeded the limit.
+ * @export
+ * @interface InvalidTxErrorOneOf9
+ */
+export interface InvalidTxErrorOneOf9 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf5ContractSizeExceeded}
+     * @memberof InvalidTxErrorOneOf9
+     */
+    'TransactionSizeExceeded': ActionsValidationErrorOneOf5ContractSizeExceeded;
+}
+/**
+ * 
+ * @export
+ * @interface MerklePathItem
+ */
+export interface MerklePathItem {
+    /**
+     * 
+     * @type {Direction}
+     * @memberof MerklePathItem
+     */
+    'direction': Direction;
+    /**
+     * 
+     * @type {string}
+     * @memberof MerklePathItem
+     */
+    'hash': string;
+}
+
+
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const MethodResolveError = {
+    MethodEmptyName: 'MethodEmptyName',
+    MethodNotFound: 'MethodNotFound',
+    MethodInvalidSignature: 'MethodInvalidSignature'
+} as const;
+
+export type MethodResolveError = typeof MethodResolveError[keyof typeof MethodResolveError];
+
+
+/**
+ * @type MissingTrieValueContext
+ * Contexts in which `StorageError::MissingTrieValue` error might occur.
+ * @export
+ */
+export type MissingTrieValueContext = string;
+
+/**
+ * This is Action which mustn\'t contain DelegateAction.  This struct is needed to avoid the recursion when Action/DelegateAction is deserialized.  Important: Don\'t make the inner Action public, this must only be constructed through the correct interface that ensures the inner Action is actually not a delegate action. That would break an assumption of this type, which we use in several places. For example, borsh de-/serialization relies on it. If the invariant is broken, we may end up with a `Transaction` or `Receipt` that we can serialize but deserializing it back causes a parsing error.
+ * @export
+ * @interface NonDelegateAction
+ */
+export interface NonDelegateAction {
+    /**
+     * Create account action
+     * @type {object}
+     * @memberof NonDelegateAction
+     */
+    'CreateAccount': object;
+    /**
+     * 
+     * @type {DeployContractAction}
+     * @memberof NonDelegateAction
+     */
+    'DeployContract': DeployContractAction;
+    /**
+     * 
+     * @type {FunctionCallAction}
+     * @memberof NonDelegateAction
+     */
+    'FunctionCall': FunctionCallAction;
+    /**
+     * 
+     * @type {TransferAction}
+     * @memberof NonDelegateAction
+     */
+    'Transfer': TransferAction;
+    /**
+     * 
+     * @type {StakeAction}
+     * @memberof NonDelegateAction
+     */
+    'Stake': StakeAction;
+    /**
+     * 
+     * @type {AddKeyAction}
+     * @memberof NonDelegateAction
+     */
+    'AddKey': AddKeyAction;
+    /**
+     * 
+     * @type {DeleteKeyAction}
+     * @memberof NonDelegateAction
+     */
+    'DeleteKey': DeleteKeyAction;
+    /**
+     * 
+     * @type {DeleteAccountAction}
+     * @memberof NonDelegateAction
+     */
+    'DeleteAccount': DeleteAccountAction;
+    /**
+     * 
+     * @type {SignedDelegateAction}
+     * @memberof NonDelegateAction
+     */
+    'Delegate': SignedDelegateAction;
+    /**
+     * 
+     * @type {DeployGlobalContractAction}
+     * @memberof NonDelegateAction
+     */
+    'DeployGlobalContract': DeployGlobalContractAction;
+    /**
+     * 
+     * @type {UseGlobalContractAction}
+     * @memberof NonDelegateAction
+     */
+    'UseGlobalContract': UseGlobalContractAction;
+}
+/**
+ * @type PrepareError
+ * Error that can occur while preparing or executing Wasm smart-contract.
+ * @export
+ */
+export type PrepareError = string;
+
+/**
+ * @type ReceiptEnumView
+ * @export
+ */
+export type ReceiptEnumView = ReceiptEnumViewOneOf | ReceiptEnumViewOneOf1 | ReceiptEnumViewOneOf2;
+
+/**
+ * 
+ * @export
+ * @interface ReceiptEnumViewOneOf
+ */
+export interface ReceiptEnumViewOneOf {
+    /**
+     * 
+     * @type {ReceiptEnumViewOneOfAction}
+     * @memberof ReceiptEnumViewOneOf
+     */
+    'Action': ReceiptEnumViewOneOfAction;
+}
+/**
+ * 
+ * @export
+ * @interface ReceiptEnumViewOneOf1
+ */
+export interface ReceiptEnumViewOneOf1 {
+    /**
+     * 
+     * @type {ReceiptEnumViewOneOf1Data}
+     * @memberof ReceiptEnumViewOneOf1
+     */
+    'Data': ReceiptEnumViewOneOf1Data;
+}
+/**
+ * 
+ * @export
+ * @interface ReceiptEnumViewOneOf1Data
+ */
+export interface ReceiptEnumViewOneOf1Data {
+    /**
+     * 
+     * @type {string}
+     * @memberof ReceiptEnumViewOneOf1Data
+     */
+    'data'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ReceiptEnumViewOneOf1Data
+     */
+    'data_id': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ReceiptEnumViewOneOf1Data
+     */
+    'is_promise_resume'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface ReceiptEnumViewOneOf2
+ */
+export interface ReceiptEnumViewOneOf2 {
+    /**
+     * 
+     * @type {ReceiptEnumViewOneOf2GlobalContractDistribution}
+     * @memberof ReceiptEnumViewOneOf2
+     */
+    'GlobalContractDistribution': ReceiptEnumViewOneOf2GlobalContractDistribution;
+}
+/**
+ * 
+ * @export
+ * @interface ReceiptEnumViewOneOf2GlobalContractDistribution
+ */
+export interface ReceiptEnumViewOneOf2GlobalContractDistribution {
+    /**
+     * 
+     * @type {GlobalContractData}
+     * @memberof ReceiptEnumViewOneOf2GlobalContractDistribution
+     */
+    'data': GlobalContractData;
+}
+/**
+ * 
+ * @export
+ * @interface ReceiptEnumViewOneOfAction
+ */
+export interface ReceiptEnumViewOneOfAction {
+    /**
+     * 
+     * @type {Array<ActionView>}
+     * @memberof ReceiptEnumViewOneOfAction
+     */
+    'actions': Array<ActionView>;
+    /**
+     * 
+     * @type {string}
+     * @memberof ReceiptEnumViewOneOfAction
+     */
+    'gas_price': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ReceiptEnumViewOneOfAction
+     */
+    'input_data_ids': Array<string>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ReceiptEnumViewOneOfAction
+     */
+    'is_promise_yield'?: boolean;
+    /**
+     * 
+     * @type {Array<DataReceiverView>}
+     * @memberof ReceiptEnumViewOneOfAction
+     */
+    'output_data_receivers': Array<DataReceiverView>;
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof ReceiptEnumViewOneOfAction
+     */
+    'signer_id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ReceiptEnumViewOneOfAction
+     */
+    'signer_public_key': string;
+}
+/**
+ * @type ReceiptValidationError
+ * Describes the error for validating a receipt.
+ * @export
+ */
+export type ReceiptValidationError = ReceiptValidationErrorOneOf | ReceiptValidationErrorOneOf1 | ReceiptValidationErrorOneOf2 | ReceiptValidationErrorOneOf3 | ReceiptValidationErrorOneOf4 | ReceiptValidationErrorOneOf5 | ReceiptValidationErrorOneOf6 | ReceiptValidationErrorOneOf7;
+
+/**
+ * The `predecessor_id` of a Receipt is not valid.
+ * @export
+ * @interface ReceiptValidationErrorOneOf
+ */
+export interface ReceiptValidationErrorOneOf {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf4InvalidAccountId}
+     * @memberof ReceiptValidationErrorOneOf
+     */
+    'InvalidPredecessorId': ActionsValidationErrorOneOf4InvalidAccountId;
+}
+/**
+ * The `receiver_id` of a Receipt is not valid.
+ * @export
+ * @interface ReceiptValidationErrorOneOf1
+ */
+export interface ReceiptValidationErrorOneOf1 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf4InvalidAccountId}
+     * @memberof ReceiptValidationErrorOneOf1
+     */
+    'InvalidReceiverId': ActionsValidationErrorOneOf4InvalidAccountId;
+}
+/**
+ * The `signer_id` of an ActionReceipt is not valid.
+ * @export
+ * @interface ReceiptValidationErrorOneOf2
+ */
+export interface ReceiptValidationErrorOneOf2 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf4InvalidAccountId}
+     * @memberof ReceiptValidationErrorOneOf2
+     */
+    'InvalidSignerId': ActionsValidationErrorOneOf4InvalidAccountId;
+}
+/**
+ * The `receiver_id` of a DataReceiver within an ActionReceipt is not valid.
+ * @export
+ * @interface ReceiptValidationErrorOneOf3
+ */
+export interface ReceiptValidationErrorOneOf3 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf4InvalidAccountId}
+     * @memberof ReceiptValidationErrorOneOf3
+     */
+    'InvalidDataReceiverId': ActionsValidationErrorOneOf4InvalidAccountId;
+}
+/**
+ * The length of the returned data exceeded the limit in a DataReceipt.
+ * @export
+ * @interface ReceiptValidationErrorOneOf4
+ */
+export interface ReceiptValidationErrorOneOf4 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded}
+     * @memberof ReceiptValidationErrorOneOf4
+     */
+    'ReturnedValueLengthExceeded': ActionsValidationErrorOneOf3AddKeyMethodNameLengthExceeded;
+}
+/**
+ * The number of input data dependencies exceeds the limit in an ActionReceipt.
+ * @export
+ * @interface ReceiptValidationErrorOneOf5
+ */
+export interface ReceiptValidationErrorOneOf5 {
+    /**
+     * 
+     * @type {HostErrorOneOf13NumberInputDataDependenciesExceeded}
+     * @memberof ReceiptValidationErrorOneOf5
+     */
+    'NumberInputDataDependenciesExceeded': HostErrorOneOf13NumberInputDataDependenciesExceeded;
+}
+/**
+ * An error occurred while validating actions of an ActionReceipt.
+ * @export
+ * @interface ReceiptValidationErrorOneOf6
+ */
+export interface ReceiptValidationErrorOneOf6 {
+    /**
+     * 
+     * @type {ActionsValidationError}
+     * @memberof ReceiptValidationErrorOneOf6
+     */
+    'ActionsValidation': ActionsValidationError;
+}
+/**
+ * Receipt is bigger than the limit.
+ * @export
+ * @interface ReceiptValidationErrorOneOf7
+ */
+export interface ReceiptValidationErrorOneOf7 {
+    /**
+     * 
+     * @type {ActionsValidationErrorOneOf5ContractSizeExceeded}
+     * @memberof ReceiptValidationErrorOneOf7
+     */
+    'ReceiptSizeExceeded': ActionsValidationErrorOneOf5ContractSizeExceeded;
+}
+/**
+ * 
+ * @export
+ * @interface ReceiptView
+ */
+export interface ReceiptView {
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof ReceiptView
+     */
+    'predecessor_id': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ReceiptView
+     */
+    'priority'?: number;
+    /**
+     * 
+     * @type {ReceiptEnumView}
+     * @memberof ReceiptView
+     */
+    'receipt': ReceiptEnumView;
+    /**
+     * 
+     * @type {string}
+     * @memberof ReceiptView
+     */
+    'receipt_id': string;
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof ReceiptView
+     */
+    'receiver_id': string;
+}
+/**
+ * 
+ * @export
+ * @interface RpcTransactionResponse
+ */
+export interface RpcTransactionResponse {
+    /**
+     * 
+     * @type {TxExecutionStatus}
+     * @memberof RpcTransactionResponse
+     */
+    'final_execution_status': TxExecutionStatus;
+    /**
+     * Receipts generated from the transaction
+     * @type {Array<ReceiptView>}
+     * @memberof RpcTransactionResponse
+     */
+    'receipts': Array<ReceiptView>;
+    /**
+     * The execution outcome of receipts.
+     * @type {Array<ExecutionOutcomeWithIdView>}
+     * @memberof RpcTransactionResponse
+     */
+    'receipts_outcome': Array<ExecutionOutcomeWithIdView>;
+    /**
+     * Execution status defined by chain.rs:get_final_transaction_result FinalExecutionStatus::NotStarted - the tx is not converted to the receipt yet FinalExecutionStatus::Started - we have at least 1 receipt, but the first leaf receipt_id (using dfs) hasn\'t finished the execution FinalExecutionStatus::Failure - the result of the first leaf receipt_id FinalExecutionStatus::SuccessValue - the result of the first leaf receipt_id
+     * @type {FinalExecutionStatus}
+     * @memberof RpcTransactionResponse
+     */
+    'status': FinalExecutionStatus;
+    /**
+     * Signed Transaction
+     * @type {SignedTransactionView}
+     * @memberof RpcTransactionResponse
+     */
+    'transaction': SignedTransactionView;
+    /**
+     * The execution outcome of the signed transaction.
+     * @type {ExecutionOutcomeWithIdView}
+     * @memberof RpcTransactionResponse
+     */
+    'transaction_outcome': ExecutionOutcomeWithIdView;
+}
+/**
+ * 
+ * @export
+ * @interface SignedDelegateAction
+ */
+export interface SignedDelegateAction {
+    /**
+     * 
+     * @type {DelegateAction}
+     * @memberof SignedDelegateAction
+     */
+    'delegate_action': DelegateAction;
+    /**
+     * 
+     * @type {string}
+     * @memberof SignedDelegateAction
+     */
+    'signature': string;
+}
+/**
+ * 
+ * @export
+ * @interface SignedTransactionView
+ */
+export interface SignedTransactionView {
+    /**
+     * 
+     * @type {Array<ActionView>}
+     * @memberof SignedTransactionView
+     */
+    'actions': Array<ActionView>;
+    /**
+     * 
+     * @type {string}
+     * @memberof SignedTransactionView
+     */
+    'hash': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof SignedTransactionView
+     */
+    'nonce': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SignedTransactionView
+     */
+    'priority_fee'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof SignedTransactionView
+     */
+    'public_key': string;
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof SignedTransactionView
+     */
+    'receiver_id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SignedTransactionView
+     */
+    'signature': string;
+    /**
+     * NEAR Account Identifier.  This is a unique, syntactically valid, human-readable account identifier on the NEAR network.  [See the crate-level docs for information about validation.](index.html#account-id-rules)  Also see [Error kind precedence](AccountId#error-kind-precedence).  ## Examples  ``` use near_account_id::AccountId;  let alice: AccountId = \"alice.near\".parse().unwrap();  assert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```
+     * @type {string}
+     * @memberof SignedTransactionView
+     */
+    'signer_id': string;
+}
+/**
+ * An action which stakes signer_id tokens and setup\'s validator public key
+ * @export
+ * @interface StakeAction
+ */
+export interface StakeAction {
+    /**
+     * Validator key which will be used to sign transactions on behalf of signer_id
+     * @type {string}
+     * @memberof StakeAction
+     */
+    'public_key': string;
+    /**
+     * Amount of tokens to stake.
+     * @type {string}
+     * @memberof StakeAction
+     */
+    'stake': string;
+}
+/**
  * @type StorageError
  * Errors which may occur during working with trie storages, storing trie values (trie nodes and state values) by their hashes.
  * @export
@@ -38,10 +3476,10 @@ export type StorageError = StorageErrorOneOf | StorageErrorOneOf1 | StorageError
 export interface StorageErrorOneOf {
     /**
      * 
-     * @type {Array<StorageErrorOneOfMissingTrieValueInner>}
+     * @type {Array<string>}
      * @memberof StorageErrorOneOf
      */
-    'MissingTrieValue': Array<StorageErrorOneOfMissingTrieValueInner>;
+    'MissingTrieValue': Array<string>;
 }
 /**
  * Either invalid state or key-value db is corrupted. For PartialStorage it cannot be corrupted. Error message is unreliable and for debugging purposes only. It\'s also probably ok to panic in every place that produces this error. We can check if db is corrupted by verifying everything in the state trie.
@@ -83,9 +3521,75 @@ export interface StorageErrorOneOf3 {
     'MemTrieLoadingError': string;
 }
 /**
- * @type StorageErrorOneOfMissingTrieValueInner
+ * 
+ * @export
+ * @interface TransferAction
+ */
+export interface TransferAction {
+    /**
+     * 
+     * @type {string}
+     * @memberof TransferAction
+     */
+    'deposit': string;
+}
+/**
+ * @type TxExecutionError
+ * Error returned in the ExecutionOutcome in case of failure
  * @export
  */
-export type StorageErrorOneOfMissingTrieValueInner = string;
+export type TxExecutionError = TxExecutionErrorOneOf | TxExecutionErrorOneOf1;
+
+/**
+ * An error happened during Action execution
+ * @export
+ * @interface TxExecutionErrorOneOf
+ */
+export interface TxExecutionErrorOneOf {
+    /**
+     * 
+     * @type {ActionError}
+     * @memberof TxExecutionErrorOneOf
+     */
+    'ActionError': ActionError;
+}
+/**
+ * An error happened during Transaction execution
+ * @export
+ * @interface TxExecutionErrorOneOf1
+ */
+export interface TxExecutionErrorOneOf1 {
+    /**
+     * 
+     * @type {InvalidTxError}
+     * @memberof TxExecutionErrorOneOf1
+     */
+    'InvalidTxError': InvalidTxError;
+}
+/**
+ * @type TxExecutionStatus
+ * @export
+ */
+export type TxExecutionStatus = string;
+
+/**
+ * Use global contract action
+ * @export
+ * @interface UseGlobalContractAction
+ */
+export interface UseGlobalContractAction {
+    /**
+     * 
+     * @type {GlobalContractIdentifier}
+     * @memberof UseGlobalContractAction
+     */
+    'contract_identifier': GlobalContractIdentifier;
+}
+/**
+ * @type WasmTrap
+ * A kind of a trap happened during execution of a binary
+ * @export
+ */
+export type WasmTrap = string;
 
 

@@ -16,12 +16,21 @@ use okapi::openapi3::{OpenApi, SchemaObject};
 use schemars::gen::SchemaGenerator;
 use schemars::schema::RootSchema;
 
+#[derive(JsonSchema)]
+struct JsonRpcResponse {
+    jsonrpc: String,
+    result: RpcTransactionResponse,
+    id: String,
+}
+
 fn main() {
     // Generate schema
     let settings = schemars::gen::SchemaSettings::openapi3();
-    let generator = schemars::gen::SchemaGenerator::new(settings);
-    let root_schema = generator.into_root_schema_for::<RpcTransactionResponse>();
-    println!("{}", root_schema);
+    let mut generator = schemars::gen::SchemaGenerator::new(settings);
+    // generator.take_definitions();
+
+    let root_schema = generator.into_root_schema_for::<JsonRpcResponse>();
+    // println!("{:#?}", root_schema);
 
     // Create OpenAPI spec
     let openapi = OpenApi {
@@ -38,6 +47,9 @@ fn main() {
         ..Default::default()
     };
 
+    // let spec_json = serde_json::to_string_pretty(&openapi).unwrap();
+    // println!("{}", spec_json);
+
     let spec_yaml = serde_yaml::to_string(&openapi).unwrap();
-    // println!("{}", spec_yaml);
+    println!("{}", spec_yaml);
 }

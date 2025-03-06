@@ -1,0 +1,12 @@
+[package]
+name = "okapirocket"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+near-jsonrpc-primitives = { path = "../../nearcore/chain/jsonrpc-primitives", features = ["full"] }
+near-primitives = { path = "../../nearcore/core/primitives" }
+serde = "1.0.218"
+rocket = "0.5.1"
+rocket_okapi = { version = "0.9.0", features = ["swagger", "rapidoc"] }
+near-time = { path = "../../nearcore/core/time", features = ["clock"] }

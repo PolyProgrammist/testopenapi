@@ -2,7 +2,7 @@ const NEAR_RPC_URL: string = "https://archival-rpc.mainnet.near.org";
 const transactionHash: string = "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1TczCrhZEcG8U"; // Replace with your TX hash
 const senderAccountId: string = "miraclx.near"; // Replace with sender's account
 
-import { ActionError } from "./gen";
+import { RpcTransactionResponse } from "./gen";
 
 interface JsonRpcResponse {
     result?: any;
@@ -29,7 +29,10 @@ async function fetchTransaction(): Promise<void> {
         const data: JsonRpcResponse = await response.json();
         
         if (data.result) {
-            console.log("Transaction result:", data.result);
+            // console.log("Transaction result:", data.result);
+            console.log("receipts outcome: ", data.result.receipts_outcome)
+            let response: RpcTransactionResponse = data.result.receipts_outcome;
+            console.log("response: ", response);
         } else {
             console.error("Error fetching transaction:", data.error);
         }

@@ -1,5 +1,4 @@
 /target/
 **/*.rs.bk
 Cargo.lock
-/docs/
-/src
+/out/rst/docs
