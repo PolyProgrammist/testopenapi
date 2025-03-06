@@ -1,0 +1,189 @@
+JsonRpcResponse {
+    jsonrpc: "2.0",
+    result: Variant1 {
+        final_execution_status: Final,
+        receipts_outcome: [
+            ExecutionOutcomeWithIdView {
+                block_hash: CryptoHash(
+                    "9BKUhzXGUxwakPMniTcwtVao9TzEejq8ezvMkgP4XGKP",
+                ),
+                id: CryptoHash(
+                    "9vf2ceiCmSZ379ZW4dGzCnmQ2prtdo88VFfXvLqmFCZo",
+                ),
+                outcome: ExecutionOutcomeView {
+                    executor_id: AccountId(
+                        "itranscend.near",
+                    ),
+                    gas_burnt: 223182562500,
+                    logs: [],
+                    metadata: ExecutionMetadataView {
+                        gas_profile: None,
+                        version: 1,
+                    },
+                    receipt_ids: [
+                        CryptoHash(
+                            "4g6WCeRxwyHAWHBFgcdzf3h56EgvJ2ipQ7GYhwwnbGiU",
+                        ),
+                    ],
+                    status: SuccessValue(
+                        "",
+                    ),
+                    tokens_burnt: "22318256250000000000",
+                },
+                proof: [
+                    MerklePathItem {
+                        direction: Right,
+                        hash: CryptoHash(
+                            "9nA8gyWL1Q1zSEmQo1mP2f8dh7aPks1f58zg3MJHmCxH",
+                        ),
+                    },
+                    MerklePathItem {
+                        direction: Left,
+                        hash: CryptoHash(
+                            "FYnyAEt5xC6iG5E7EwjpCPzEtrqH83VL6FdMfPdexHrw",
+                        ),
+                    },
+                    MerklePathItem {
+                        direction: Right,
+                        hash: CryptoHash(
+                            "HsHnu9CfiTQuwAygXRvzdTbS8DnUxb3DBXmYGxFD3Kvh",
+                        ),
+                    },
+                    MerklePathItem {
+                        direction: Left,
+                        hash: CryptoHash(
+                            "DqAp8HPWW7NeCzuDZSptFzEZfLWVunvzhHigFLco4nNB",
+                        ),
+                    },
+                ],
+            },
+            ExecutionOutcomeWithIdView {
+                block_hash: CryptoHash(
+                    "4UcUR7gUZfXUraV7ksQDPTVkxvPuR57tiRpLLt1zhafx",
+                ),
+                id: CryptoHash(
+                    "4g6WCeRxwyHAWHBFgcdzf3h56EgvJ2ipQ7GYhwwnbGiU",
+                ),
+                outcome: ExecutionOutcomeView {
+                    executor_id: AccountId(
+                        "miraclx.near",
+                    ),
+                    gas_burnt: 223182562500,
+                    logs: [],
+                    metadata: ExecutionMetadataView {
+                        gas_profile: None,
+                        version: 1,
+                    },
+                    receipt_ids: [],
+                    status: SuccessValue(
+                        "",
+                    ),
+                    tokens_burnt: "0",
+                },
+                proof: [
+                    MerklePathItem {
+                        direction: Left,
+                        hash: CryptoHash(
+                            "C27G9kpwi8DVB3sWdBYYpo98z2DTjiEcWsLMhT1VZwgp",
+                        ),
+                    },
+                    MerklePathItem {
+                        direction: Left,
+                        hash: CryptoHash(
+                            "GELQqVUtxW1dkYU6y973VT7m3t2qQvniDVcQLdZxcckR",
+                        ),
+                    },
+                    MerklePathItem {
+                        direction: Left,
+                        hash: CryptoHash(
+                            "7Q57mfV9dPD2NH4scXe9eNu4pEmaDrZLhqmv1uqwMP7m",
+                        ),
+                    },
+                ],
+            },
+        ],
+        status: SuccessValue(
+            "",
+        ),
+        transaction: SignedTransactionView {
+            actions: [
+                Transfer {
+                    deposit: "34000000000000000000000000",
+                },
+            ],
+            hash: CryptoHash(
+                "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1TczCrhZEcG8U",
+            ),
+            nonce: 11,
+            priority_fee: 0,
+            public_key: PublicKey(
+                "ed25519:AYo1VygMsQUG85Myf5C8VB6XgSXhzHZxvKyWP9K7ZUfs",
+            ),
+            receiver_id: AccountId(
+                "itranscend.near",
+            ),
+            signature: Signature(
+                "ed25519:4viPVgAxULhzsf1yXiaw8Z85ptzNP9tZAJ1JnHSCzPYicF4tEAzUKBv9gpAUYTt8c9NeEF2Rt9UuRDavxN99dkYV",
+            ),
+            signer_id: AccountId(
+                "miraclx.near",
+            ),
+        },
+        transaction_outcome: ExecutionOutcomeWithIdView {
+            block_hash: CryptoHash(
+                "8jvfhbzGnCcYjkCrnqnzDr8bXBbFLUXaoVt6jsRNB1pU",
+            ),
+            id: CryptoHash(
+                "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1TczCrhZEcG8U",
+            ),
+            outcome: ExecutionOutcomeView {
+                executor_id: AccountId(
+                    "miraclx.near",
+                ),
+                gas_burnt: 223182562500,
+                logs: [],
+                metadata: ExecutionMetadataView {
+                    gas_profile: None,
+                    version: 1,
+                },
+                receipt_ids: [
+                    CryptoHash(
+                        "9vf2ceiCmSZ379ZW4dGzCnmQ2prtdo88VFfXvLqmFCZo",
+                    ),
+                ],
+                status: SuccessReceiptId(
+                    CryptoHash(
+                        "9vf2ceiCmSZ379ZW4dGzCnmQ2prtdo88VFfXvLqmFCZo",
+                    ),
+                ),
+                tokens_burnt: "22318256250000000000",
+            },
+            proof: [
+                MerklePathItem {
+                    direction: Right,
+                    hash: CryptoHash(
+                        "4k2u6bAUJy5Y9aRHHfkkdQ1eyP4h5riKpg2VojH26Bi8",
+                    ),
+                },
+                MerklePathItem {
+                    direction: Left,
+                    hash: CryptoHash(
+                        "8ReCWag8nHzPW3uaaieo71FB1jpVkEzz495vvKQzjXja",
+                    ),
+                },
+                MerklePathItem {
+                    direction: Right,
+                    hash: CryptoHash(
+                        "EZAi6Lx2DkyjX2zwZ2jD2jLuaUfssM67KZ92Qyyzu9Gs",
+                    ),
+                },
+                MerklePathItem {
+                    direction: Right,
+                    hash: CryptoHash(
+                        "CVAaUBU6EftUV9a7dmmBNhiv25YQFn3PhPSxosCM2DLx",
+                    ),
+                },
+            ],
+        },
+    },
+}

@@ -5017,7 +5017,7 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct JsonRpcResponse {
-        pub id: ::std::string::String,
+        // pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub result: RpcTransactionResponse,
     }
