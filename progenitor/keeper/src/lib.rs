@@ -4995,6 +4995,7 @@ pub mod types {
     ///
     /// ```json
     ///{
+    ///  "title": "JsonRpcResponse_for_RpcTransactionResponse",
     ///  "type": "object",
     ///  "required": [
     ///    "id",
@@ -5017,7 +5018,7 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct JsonRpcResponse {
-        // pub id: ::std::string::String,
+        pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub result: RpcTransactionResponse,
     }
@@ -6324,10 +6325,21 @@ pub mod types {
     ///    {
     ///      "description": "Requested trie value by its hash which is missing
     /// in storage.",
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "TMPERRORMYSTORAGEERROR"
-    ///      ]
+    ///      "type": "object",
+    ///      "required": [
+    ///        "MissingTrieValue"
+    ///      ],
+    ///      "properties": {
+    ///        "MissingTrieValue": {
+    ///          "type": "array",
+    ///          "items": {
+    ///            "type": "string"
+    ///          },
+    ///          "maxItems": 2,
+    ///          "minItems": 2
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
     ///    },
     ///    {
     ///      "description": "Found trie node which shouldn't be part of state.
@@ -6401,8 +6413,7 @@ pub mod types {
         ///Key-value db internal failure
         StorageInternalError,
         ///Requested trie value by its hash which is missing in storage.
-        #[serde(rename = "TMPERRORMYSTORAGEERROR")]
-        Tmperrormystorageerror,
+        MissingTrieValue([::std::string::String; 2usize]),
         ///Found trie node which shouldn't be part of state. Raised during
         /// validation of state sync parts where incorrect node was passed. TODO
         /// (#8997): consider including hash of trie node.
@@ -6427,6 +6438,12 @@ pub mod types {
     impl ::std::convert::From<&Self> for StorageError {
         fn from(value: &StorageError) -> Self {
             value.clone()
+        }
+    }
+
+    impl ::std::convert::From<[::std::string::String; 2usize]> for StorageError {
+        fn from(value: [::std::string::String; 2usize]) -> Self {
+            Self::MissingTrieValue(value)
         }
     }
 
@@ -6898,9 +6915,9 @@ pub mod types {
 }
 
 #[derive(Clone, Debug)]
-///Client for okapirocket
+///Client for My API
 ///
-///Version: 0.1.0
+///Version: 1.0.0
 pub struct Client {
     pub(crate) baseurl: String,
     pub(crate) client: reqwest::Client,
@@ -6953,36 +6970,13 @@ impl Client {
     /// This string is pulled directly from the source OpenAPI
     /// document and may be in any format the API selects.
     pub fn api_version(&self) -> &'static str {
-        "0.1.0"
+        "1.0.0"
     }
 }
 
 #[allow(clippy::all)]
 #[allow(elided_named_lifetimes)]
-impl Client {
-    ///Sends a `GET` request to `/user`
-    pub async fn get_all_users<'a>(
-        &'a self,
-    ) -> Result<ResponseValue<types::JsonRpcResponse>, Error<()>> {
-        let url = format!("{}/user", self.baseurl,);
-        #[allow(unused_mut)]
-        let mut request = self
-            .client
-            .get(url)
-            .header(
-                reqwest::header::ACCEPT,
-                reqwest::header::HeaderValue::from_static("application/json"),
-            )
-            .build()?;
-        let result = self.client.execute(request).await;
-        let response = result?;
-        match response.status().as_u16() {
-            200u16 => ResponseValue::from_response(response).await,
-            _ => Err(Error::UnexpectedResponse(response)),
-        }
-    }
-}
-
+impl Client {}
 /// Items consumers will typically use such as the Client.
 pub mod prelude {
     #[allow(unused_imports)]

@@ -9,7 +9,7 @@ struct MyResponse {
 }
 
 use near_jsonrpc_primitives::types::transactions::{
-    RpcSendTransactionRequest, RpcTransactionResponse
+    RpcSendTransactionRequest, RpcTransactionResponse, RpcTransactionError
 };
 
 use okapi::openapi3::{OpenApi, SchemaObject};
@@ -17,23 +17,23 @@ use schemars::gen::SchemaGenerator;
 use schemars::schema::RootSchema;
 
 #[derive(JsonSchema)]
-struct JsonRpcResponse {
+struct JsonRpcResponse<T> {
     jsonrpc: String,
-    result: RpcTransactionResponse,
+    result: T,
     id: String,
-}
+} 
 
-fn main() {
-    // Generate schema
+fn generate_schema<T: JsonSchema>() -> OpenApi {
     let settings = schemars::gen::SchemaSettings::openapi3();
     let mut generator = schemars::gen::SchemaGenerator::new(settings);
-    // generator.take_definitions();
 
-    let root_schema = generator.into_root_schema_for::<JsonRpcResponse>();
-    // println!("{:#?}", root_schema);
+    let root_schema = generator.into_root_schema_for::<JsonRpcResponse<T>>();
 
-    // Create OpenAPI spec
-    let openapi = OpenApi {
+    let mut theMap: okapi::Map<String, okapi::openapi3::SchemaObject> = root_schema.definitions.into_iter().map(|(k, v)| (k, v.into())).collect();
+    theMap.insert("JsonRpcResponse".to_string(), root_schema.schema);
+
+
+    OpenApi {
         openapi: "3.0.0".to_string(),
         info: okapi::openapi3::Info {
             title: "My API".to_string(),
@@ -41,12 +41,16 @@ fn main() {
             ..Default::default()
         },
         components: Some(okapi::openapi3::Components {
-            schemas: root_schema.definitions.into_iter().map(|(k, v)| (k, v.into())).collect(),
+            schemas: theMap,
             ..Default::default()
         }),
         ..Default::default()
-    };
+    }
+}
 
+fn main() {
+    let openapi = generate_schema::<RpcTransactionResponse>();
+    
     // let spec_json = serde_json::to_string_pretty(&openapi).unwrap();
     // println!("{}", spec_json);
 

@@ -2056,6 +2056,20 @@ components:
                 format: uint32
                 minimum: 0.0
         additionalProperties: false
+    JsonRpcResponse:
+      title: JsonRpcResponse_for_RpcTransactionResponse
+      type: object
+      required:
+      - id
+      - jsonrpc
+      - result
+      properties:
+        id:
+          type: string
+        jsonrpc:
+          type: string
+        result:
+          $ref: '#/components/schemas/RpcTransactionResponse'
     MerklePathItem:
       type: object
       required:
@@ -2374,7 +2388,7 @@ components:
         final_execution_status:
           $ref: '#/components/schemas/TxExecutionStatus'
     Signature:
-      type: stringtatus
+      type: string
     SignedDelegateAction:
       type: object
       required:
