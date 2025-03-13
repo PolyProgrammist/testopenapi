@@ -5,7 +5,7 @@ use std::error::Error;
 const NEAR_RPC_URL: &str = "https://archival-rpc.mainnet.near.org";
 
 async fn print_transaction() -> Result<(), Box<dyn Error>> {
-    let transaction_hash = "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1TczCrhZEcG8U"; // Replace with your TX hash
+    let transaction_hash = "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1rhZEcG8U"; // Replace with your TX hash
     let sender_account_id = "miraclx.near"; // Replace with sender's account
 
     let client = Client::new();
@@ -24,9 +24,12 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         .json::<serde_json::Value>()
         .await?;
 
-    // let res = response.clone().get("result").unwrap().clone();
+    let res = response.clone().get("error").unwrap().clone();
 
-    let x: keeper::types::JsonRpcResponse = serde_json::from_value(response)?;
+    println!("{:#?}", response);
+
+
+    let x: keeper::types::RpcTransactionError = serde_json::from_value(response)?;
 
     // let x: types_transaction::RpcTransactionResponse = serde_json::from_value(res)?;
 

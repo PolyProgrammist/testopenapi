@@ -1,5 +1,5 @@
 use schemars::JsonSchema;
-use serde::{Deserialize, Serialize};
+use serde::{self, Deserialize, Serialize};
 use near_time;
 
 #[derive(Serialize, Deserialize, JsonSchema)]
@@ -16,12 +16,29 @@ use okapi::openapi3::{OpenApi, SchemaObject};
 use schemars::gen::SchemaGenerator;
 use schemars::schema::RootSchema;
 
+// #[derive(Serialize, Deserialize, JsonSchema)]
+// enum ResponseEither<T, E> {
+//     #[serde(rename = "result")]
+//     Result(T),
+//     #[serde(rename = "error")]
+//     Error(E)
+// }
+
 #[derive(JsonSchema)]
-struct JsonRpcResponse<T> {
+#[serde(untagged)]
+pub enum ResponseEither<T, E> {
+    Success { result: T },
+    Error { error: E },
+}
+
+
+#[derive(JsonSchema)]
+struct JsonRpcResponse<T, E> {
     jsonrpc: String,
-    result: T,
     id: String,
-} 
+    #[serde(flatten)]
+    reserr: ResponseEither<T, E>,
+}
 
 
 #[derive(Serialize, Deserialize, JsonSchema)]
@@ -81,10 +98,10 @@ fn generate_schema<T: JsonSchema>() -> OpenApi {
 }
 
 fn main() {
-    let response_schema = generate_schema::<JsonRpcResponse<RpcTransactionResponse>>();
+    let response_schema = generate_schema::<JsonRpcResponse<RpcTransactionResponse, RpcTransactionError>>();
     let request_schema = generate_schema::<JsonRpcRequest<RpcParams>>();
     
-    let spec_json = serde_json::to_string_pretty(&request_schema).unwrap();
+    let spec_json = serde_json::to_string_pretty(&response_schema).unwrap();
     println!("{}", spec_json);
 
     let spec_yaml = serde_yaml::to_string(&response_schema).unwrap();
