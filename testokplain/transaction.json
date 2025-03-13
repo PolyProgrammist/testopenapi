@@ -14,8 +14,8 @@
       "CryptoHash": {
         "type": "string"
       },
-      "JsonRpcRequest_for_RpcParams_and_Tx_enum": {
-        "title": "JsonRpcRequest_for_RpcParams_and_Tx_enum",
+      "JsonRpcRequest_for_RpcParams": {
+        "title": "JsonRpcRequest_for_RpcParams",
         "type": "object",
         "required": [
           "id",

@@ -24,20 +24,36 @@ struct JsonRpcResponse<T> {
 } 
 
 
+#[derive(Serialize, Deserialize, JsonSchema)]
+pub enum Tx_enum {
+    #[serde(rename = "tx")]
+    VALUE
+}
+
 #[derive(JsonSchema)]
 struct RpcParams {
     request_data: near_jsonrpc_primitives::types::transactions::RpcTransactionStatusRequest,
     fetch_receipt: bool,
 }
 
+trait HasS {
+    type S: JsonSchema;
+}
+
+impl HasS for RpcParams {
+    type S = Tx_enum;
+}
+
 
 #[derive(JsonSchema)]
-struct JsonRpcRequest<T> {
+struct JsonRpcRequest<T: HasS> {
     jsonrpc: String,
     id: String,
     params: T,
-    const tmp: String = "hello",
+    method: T::S
 }
+
+
 
 fn generate_schema<T: JsonSchema>() -> OpenApi {
     let settings = schemars::gen::SchemaSettings::openapi3();
@@ -47,7 +63,7 @@ fn generate_schema<T: JsonSchema>() -> OpenApi {
 
     let mut theMap: okapi::Map<String, okapi::openapi3::SchemaObject> = root_schema.definitions.into_iter().map(|(k, v)| (k, v.into())).collect();
     theMap.insert(T::schema_name(), root_schema.schema);
-    println!("{:?}", T::schema_name());
+    // println!("{:?}", T::schema_name());
 
     OpenApi {
         openapi: "3.0.0".to_string(),
@@ -68,8 +84,8 @@ fn main() {
     let response_schema = generate_schema::<JsonRpcResponse<RpcTransactionResponse>>();
     let request_schema = generate_schema::<JsonRpcRequest<RpcParams>>();
     
-    // let spec_json = serde_json::to_string_pretty(&openapi).unwrap();
-    // println!("{}", spec_json);
+    let spec_json = serde_json::to_string_pretty(&request_schema).unwrap();
+    println!("{}", spec_json);
 
     let spec_yaml = serde_yaml::to_string(&response_schema).unwrap();
     // println!("{}", spec_yaml);
