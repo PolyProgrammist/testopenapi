@@ -5,7 +5,12 @@ use std::error::Error;
 const NEAR_RPC_URL: &str = "https://archival-rpc.mainnet.near.org";
 
 async fn print_transaction() -> Result<(), Box<dyn Error>> {
-    let transaction_hash = "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1rhZEcG8U"; // Replace with your TX hash
+    // 
+    // let transaction_hash = "7LGhv7GUTUX3th4Dm2AmEHCWV3Z9C2G1SDJUZXGwkJPv"; // Replace with your TX hash
+
+    let transaction_hash = "6zpAGJMsPAcTRm7vuD4V6tgevx7suVwXTQ56DRgfZ5ft";
+
+    // let transaction_hash = "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1TczCrhZEcG8U"; // Replace with your TX hash
     let sender_account_id = "miraclx.near"; // Replace with sender's account
 
     let client = Client::new();
@@ -29,11 +34,10 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     println!("{:#?}", response);
 
 
-    let x: keeper::types::RpcTransactionError = serde_json::from_value(response)?;
+    let x: keeper::types::RpcError = serde_json::from_value(res)?;
 
-    // let x: types_transaction::RpcTransactionResponse = serde_json::from_value(res)?;
+    // let x: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcTransactionError = serde_json::from_value(response)?;
 
-    println!("{:#?}", x);
 
     Ok(())
 }
@@ -41,12 +45,15 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
     
-    if let Ok(x) = print_transaction().await {
-        println!("hooray")
-    } else {
-        println!("error")
+    let txprinted = print_transaction().await;
+    match txprinted {
+        Ok(..) => {
+            println!("hooray")
+        }
+        Err(err) => {
+            println!("error {:#?}", err);
+        }
     }
-    // println!("{}", serde_json::to_string_pretty(&response.clone())?);
 
     Ok(())
 }

@@ -11,24 +11,41 @@ struct MyResponse {
 use near_jsonrpc_primitives::types::transactions::{
     RpcSendTransactionRequest, RpcTransactionResponse, RpcTransactionError
 };
-
 use okapi::openapi3::{OpenApi, SchemaObject};
 use schemars::gen::SchemaGenerator;
 use schemars::schema::RootSchema;
 
-// #[derive(Serialize, Deserialize, JsonSchema)]
-// enum ResponseEither<T, E> {
-//     #[serde(rename = "result")]
-//     Result(T),
-//     #[serde(rename = "error")]
-//     Error(E)
-// }
+
+// use near_jsonrpc_primitives::errors::RpcError;
+
+#[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
+// #[serde(tag = "name", content = "cause", rename_all = "SCREAMING_SNAKE_CASE")]
+pub enum RpcErrorKind {
+    RequestValidationError(serde_json::Value),
+    HandlerError(serde_json::Value),
+    InternalError(serde_json::Value),
+}
+
+#[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
+#[serde(deny_unknown_fields)]
+pub struct RpcError {
+    #[serde(flatten)]
+    pub error_struct: Option<RpcErrorKind>,
+    /// Deprecated please use the `error_struct` instead
+    pub code: i64,
+    /// Deprecated please use the `error_struct` instead
+    pub message: String,
+    // Deprecated please use the `error_struct` instead
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub data: Option<serde_json::Value>,
+}
 
 #[derive(JsonSchema)]
 #[serde(untagged)]
 pub enum ResponseEither<T, E> {
     Success { result: T },
-    Error { error: E },
+    Error { tmp: E },
+    RpcError { error: RpcError }
 }
 
 

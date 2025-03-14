@@ -5013,11 +5013,22 @@ pub mod types {
     ///    {
     ///      "type": "object",
     ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcTransactionError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
     ///        "error"
     ///      ],
     ///      "properties": {
     ///        "error": {
-    ///          "$ref": "#/components/schemas/RpcTransactionError"
+    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    }
@@ -5046,7 +5057,12 @@ pub mod types {
             result: RpcTransactionResponse,
         },
         Variant1 {
-            error: RpcTransactionError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcTransactionError,
+        },
+        Variant2 {
+            error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
         },
@@ -6041,6 +6057,85 @@ pub mod types {
 
     impl ::std::convert::From<&ReceiptView> for ReceiptView {
         fn from(value: &ReceiptView) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "oneOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "RequestValidationError"
+    ///      ],
+    ///      "properties": {
+    ///        "RequestValidationError": {}
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "HandlerError"
+    ///      ],
+    ///      "properties": {
+    ///        "HandlerError": {}
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "InternalError"
+    ///      ],
+    ///      "properties": {
+    ///        "InternalError": {}
+    ///      },
+    ///      "additionalProperties": false
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "code",
+    ///    "message"
+    ///  ],
+    ///  "properties": {
+    ///    "code": {
+    ///      "description": "Deprecated please use the `error_struct` instead",
+    ///      "type": "integer",
+    ///      "format": "int64"
+    ///    },
+    ///    "data": {},
+    ///    "message": {
+    ///      "description": "Deprecated please use the `error_struct` instead",
+    ///      "type": "string"
+    ///    }
+    ///  },
+    ///  "additionalProperties": false
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    #[serde(deny_unknown_fields)]
+    pub enum RpcError {}
+    impl ::std::convert::From<&Self> for RpcError {
+        fn from(value: &RpcError) -> Self {
             value.clone()
         }
     }
