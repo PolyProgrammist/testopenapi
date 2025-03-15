@@ -7535,7 +7535,38 @@ impl Client {
 
 #[allow(clippy::all)]
 #[allow(elided_named_lifetimes)]
-impl Client {}
+impl Client {
+    ///Create a new user
+    ///
+    ///Sends a `POST` request to `/users`
+    ///
+    ///Arguments:
+    /// - `body`: User registration data
+    pub async fn create_user<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForRpcTransactionStatusRequest,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
+    {
+        let url = format!("{}/users", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            201u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+}
+
 /// Items consumers will typically use such as the Client.
 pub mod prelude {
     #[allow(unused_imports)]

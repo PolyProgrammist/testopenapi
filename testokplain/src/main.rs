@@ -107,7 +107,7 @@ fn schema_map<T: JsonSchema>() -> okapi::Map<String, okapi::openapi3::SchemaObje
     theMap
 }
 
-fn get_paths() -> okapi::Map::<String, okapi::openapi3::PathItem> {
+fn get_paths(request_schema_name: String, response_schema_name: String) -> okapi::Map::<String, okapi::openapi3::PathItem> {
     let request_body = okapi::openapi3::RequestBody {
         description: Some("User registration data".to_string()),
         required: true,
@@ -116,7 +116,7 @@ fn get_paths() -> okapi::Map::<String, okapi::openapi3::PathItem> {
             map.insert(
                 "application/json".to_string(),
                 okapi::openapi3::MediaType {
-                    schema: Some(SchemaObject{reference: Some("#/components/schemas/UserRequest".to_string()), ..Default::default()}),
+                    schema: Some(SchemaObject{reference: Some("#/components/schemas/JsonRpcRequest_for_RpcTransactionStatusRequest".to_string()), ..Default::default()}),
                     ..Default::default()
                 },
             );
@@ -136,7 +136,7 @@ fn get_paths() -> okapi::Map::<String, okapi::openapi3::PathItem> {
                 map.insert(
                     "application/json".to_string(),
                     okapi::openapi3::MediaType {
-                        schema: Some(SchemaObject{reference: Some("#/components/schemas/UserRequest".to_string()), ..Default::default()}),
+                        schema: Some(SchemaObject{reference: Some("#/components/schemas/JsonRpcResponse_for_RpcTransactionResponse_and_RpcError".to_string()), ..Default::default()}),
                         ..Default::default()
                     },
                 );
@@ -175,7 +175,7 @@ fn generate_path_schema<RequestType: JsonSchema, ResponseType: JsonSchema>() -> 
     let mut allMap = requestMap;
     allMap.extend(responseMap);
 
-    let paths = get_paths();
+    let paths = get_paths("".to_string(), "".to_string());
 
     OpenApi {
         openapi: "3.0.0".to_string(),

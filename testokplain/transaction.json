@@ -14,7 +14,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/UserRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcTransactionStatusRequest"
                             }
                         }
                     },
@@ -26,7 +26,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/UserRequest"
+                                    "$ref": "#/components/schemas/JsonRpcResponse_for_RpcTransactionResponse_and_RpcError"
                                 }
                             }
                         }
