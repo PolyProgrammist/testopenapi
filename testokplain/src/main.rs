@@ -19,7 +19,7 @@ use schemars::schema::RootSchema;
 // use near_jsonrpc_primitives::errors::RpcError;
 
 #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
-// #[serde(tag = "name", content = "cause", rename_all = "SCREAMING_SNAKE_CASE")]
+#[serde(tag = "name", content = "cause", rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum RpcErrorKind {
     RequestValidationError(serde_json::Value),
     HandlerError(serde_json::Value),
@@ -27,9 +27,20 @@ pub enum RpcErrorKind {
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
+pub enum TmpEnum {
+    A(TmpStruct),
+    B(TmpStruct),
+}
+
+#[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
+pub struct TmpStruct {
+    t: u64,
+}
+
+#[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
 #[serde(deny_unknown_fields)]
 pub struct RpcError {
-    #[serde(flatten)]
+    // #[serde(flatten)]
     pub error_struct: Option<RpcErrorKind>,
     /// Deprecated please use the `error_struct` instead
     pub code: i64,
@@ -38,6 +49,10 @@ pub struct RpcError {
     // Deprecated please use the `error_struct` instead
     #[serde(skip_serializing_if = "Option::is_none")]
     pub data: Option<serde_json::Value>,
+    #[serde(flatten)]
+    pub x: TmpEnum,
+    #[serde(flatten)]
+    pub y: TmpStruct,
 }
 
 #[derive(JsonSchema)]
@@ -87,6 +102,12 @@ struct JsonRpcRequest<T: HasS> {
     method: T::S
 }
 
+#[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
+#[serde(deny_unknown_fields)]
+pub struct TmpResponse {
+    #[serde(flatten)]
+    pub x: TmpEnum,
+}
 
 
 fn generate_schema<T: JsonSchema>() -> OpenApi {
@@ -117,8 +138,9 @@ fn generate_schema<T: JsonSchema>() -> OpenApi {
 fn main() {
     let response_schema = generate_schema::<JsonRpcResponse<RpcTransactionResponse, RpcTransactionError>>();
     let request_schema = generate_schema::<JsonRpcRequest<RpcParams>>();
+    let tmp_schema = generate_schema::<TmpResponse>();
     
-    let spec_json = serde_json::to_string_pretty(&response_schema).unwrap();
+    let spec_json = serde_json::to_string_pretty(&tmp_schema).unwrap();
     println!("{}", spec_json);
 
     let spec_yaml = serde_yaml::to_string(&response_schema).unwrap();
