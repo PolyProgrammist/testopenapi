@@ -107,27 +107,75 @@ fn schema_map<T: JsonSchema>() -> okapi::Map<String, okapi::openapi3::SchemaObje
     theMap
 }
 
+fn get_paths() -> okapi::Map::<String, okapi::openapi3::PathItem> {
+    let request_body = okapi::openapi3::RequestBody {
+        description: Some("User registration data".to_string()),
+        required: true,
+        content: {
+            let mut map = okapi::Map::new();
+            map.insert(
+                "application/json".to_string(),
+                okapi::openapi3::MediaType {
+                    schema: Some(SchemaObject{reference: Some("#/components/schemas/UserRequest".to_string()), ..Default::default()}),
+                    ..Default::default()
+                },
+            );
+            map
+        },
+        ..Default::default()
+    };
+
+    // Define response
+    let mut responses = okapi::openapi3::Responses::default();
+    responses.responses.insert(
+        "201".to_string(),
+        okapi::openapi3::Response {
+            description: "User created successfully".to_string(),
+            content: {
+                let mut map = okapi::Map::new();
+                map.insert(
+                    "application/json".to_string(),
+                    okapi::openapi3::MediaType {
+                        schema: Some(SchemaObject{reference: Some("#/components/schemas/UserRequest".to_string()), ..Default::default()}),
+                        ..Default::default()
+                    },
+                );
+                map
+            },
+            ..Default::default()
+        }.into(),
+    );
+
+    // Define operation
+    let operation = okapi::openapi3::Operation {
+        summary: Some("Create a new user".to_string()),
+        operation_id: Some("createUser".to_string()),
+        request_body: Some(request_body.into()),
+        responses,
+        ..Default::default()
+    };
+
+    // Define paths
+    let mut paths = okapi::Map::<String, okapi::openapi3::PathItem>::new();
+    paths.insert(
+        "/users".to_string(),
+        okapi::openapi3::PathItem {
+            post: Some(operation),
+            ..Default::default()
+        },
+    );
+
+    paths
+}
+
 fn generate_path_schema<RequestType: JsonSchema, ResponseType: JsonSchema>() -> OpenApi {
     let mut requestMap = schema_map::<RequestType>();
     let responseMap = schema_map::<ResponseType>();
-    
-    // println!("len req {}", requestMap.len());
-    // for (key, value) in requestMap.clone().into_iter() {
-    //     println!("{}", key);
-    // }
-    // println!("len resp {}", responseMap.len());
-    // for (key, value) in responseMap.clone().into_iter() {
-    //     println!("{}", key);
-    // }
-    let mut allMap = requestMap;
 
+    let mut allMap = requestMap;
     allMap.extend(responseMap);
 
-    // println!("len all {}", allMap.len());
-    // for (key, value) in allMap.clone().into_iter() {
-    //     println!("{}", key);
-    // }
-
+    let paths = get_paths();
 
     OpenApi {
         openapi: "3.0.0".to_string(),
@@ -136,6 +184,7 @@ fn generate_path_schema<RequestType: JsonSchema, ResponseType: JsonSchema>() -> 
             version: "1.0.0".to_string(),
             ..Default::default()
         },
+        paths: paths,
         components: Some(okapi::openapi3::Components {
             schemas: allMap,
             ..Default::default()
