@@ -11,48 +11,48 @@ struct MyResponse {
 use near_jsonrpc_primitives::types::transactions::{
     RpcSendTransactionRequest, RpcTransactionResponse, RpcTransactionError
 };
+use near_jsonrpc_primitives::errors::{RpcRequestValidationErrorKind};
 use okapi::openapi3::{OpenApi, SchemaObject};
 use schemars::gen::SchemaGenerator;
 use schemars::schema::RootSchema;
 
-
-// use near_jsonrpc_primitives::errors::RpcError;
-
 #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
 #[serde(tag = "name", content = "cause", rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum RpcErrorKind {
-    RequestValidationError(serde_json::Value),
+    RequestValidationError(RpcRequestValidationErrorKind),
     HandlerError(serde_json::Value),
     InternalError(serde_json::Value),
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
-pub enum TmpEnum {
-    A(TmpStruct),
-    B(TmpStruct),
+#[serde(untagged)]
+pub enum CauseRpcErrorKind {
+    A(RpcRequestValidationErrorKind),
+    B(serde_json::Value),
+    C(serde_json::Value),
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
-pub struct TmpStruct {
-    t: u64,
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
+pub enum NameRpcErrorKind {
+    RequestValidationError,
+    HandlerError,
+    InternalError,
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
-#[serde(deny_unknown_fields)]
 pub struct RpcError {
     // #[serde(flatten)]
-    pub error_struct: Option<RpcErrorKind>,
+    // pub error_struct: Option<RpcErrorKind>,
     /// Deprecated please use the `error_struct` instead
     pub code: i64,
     /// Deprecated please use the `error_struct` instead
     pub message: String,
-    // Deprecated please use the `error_struct` instead
+    /// Deprecated please use the `error_struct` instead
     #[serde(skip_serializing_if = "Option::is_none")]
     pub data: Option<serde_json::Value>,
-    #[serde(flatten)]
-    pub x: TmpEnum,
-    #[serde(flatten)]
-    pub y: TmpStruct,
+    pub name: Option<NameRpcErrorKind>,
+    pub cause: Option<CauseRpcErrorKind>,
 }
 
 #[derive(JsonSchema)]
@@ -102,13 +102,6 @@ struct JsonRpcRequest<T: HasS> {
     method: T::S
 }
 
-#[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
-#[serde(deny_unknown_fields)]
-pub struct TmpResponse {
-    #[serde(flatten)]
-    pub x: TmpEnum,
-}
-
 
 fn generate_schema<T: JsonSchema>() -> OpenApi {
     let settings = schemars::gen::SchemaSettings::openapi3();
@@ -136,11 +129,10 @@ fn generate_schema<T: JsonSchema>() -> OpenApi {
 }
 
 fn main() {
-    let response_schema = generate_schema::<JsonRpcResponse<RpcTransactionResponse, RpcTransactionError>>();
+    let response_schema = generate_schema::<JsonRpcResponse<RpcTransactionResponse, RpcError>>();
     let request_schema = generate_schema::<JsonRpcRequest<RpcParams>>();
-    let tmp_schema = generate_schema::<TmpResponse>();
     
-    let spec_json = serde_json::to_string_pretty(&tmp_schema).unwrap();
+    let spec_json = serde_json::to_string_pretty(&response_schema).unwrap();
     println!("{}", spec_json);
 
     let spec_yaml = serde_yaml::to_string(&response_schema).unwrap();
