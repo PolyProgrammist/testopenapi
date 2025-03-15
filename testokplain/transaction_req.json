@@ -1,0 +1,144 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "My API",
+    "version": "1.0.0"
+  },
+  "paths": {},
+  "components": {
+    "schemas": {
+      "AccountId": {
+        "description": "NEAR Account Identifier.\n\nThis is a unique, syntactically valid, human-readable account identifier on the NEAR network.\n\n[See the crate-level docs for information about validation.](index.html#account-id-rules)\n\nAlso see [Error kind precedence](AccountId#error-kind-precedence).\n\n## Examples\n\n``` use near_account_id::AccountId;\n\nlet alice: AccountId = \"alice.near\".parse().unwrap();\n\nassert!(\"ƒelicia.near\".parse::<AccountId>().is_err()); // (ƒ is not f) ```",
+        "type": "string"
+      },
+      "CryptoHash": {
+        "type": "string"
+      },
+      "JsonRpcRequest_for_RpcTransactionStatusRequest": {
+        "title": "JsonRpcRequest_for_RpcTransactionStatusRequest",
+        "type": "object",
+        "required": [
+          "id",
+          "jsonrpc",
+          "method",
+          "params"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "jsonrpc": {
+            "type": "string"
+          },
+          "method": {
+            "$ref": "#/components/schemas/Tx_enum"
+          },
+          "params": {
+            "$ref": "#/components/schemas/RpcTransactionStatusRequest"
+          }
+        }
+      },
+      "RpcTransactionStatusRequest": {
+        "type": "object",
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/SignedTransaction"
+          },
+          {
+            "type": "object",
+            "required": [
+              "sender_account_id",
+              "tx_hash"
+            ],
+            "properties": {
+              "sender_account_id": {
+                "$ref": "#/components/schemas/AccountId"
+              },
+              "tx_hash": {
+                "$ref": "#/components/schemas/CryptoHash"
+              }
+            }
+          }
+        ],
+        "properties": {
+          "wait_until": {
+            "default": "EXECUTED_OPTIMISTIC",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TxExecutionStatus"
+              }
+            ]
+          }
+        }
+      },
+      "SignedTransaction": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "signed_tx_base64"
+            ],
+            "properties": {
+              "signed_tx_base64": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "TxExecutionStatus": {
+        "oneOf": [
+          {
+            "description": "Transaction is waiting to be included into the block",
+            "type": "string",
+            "enum": [
+              "NONE"
+            ]
+          },
+          {
+            "description": "Transaction is included into the block. The block may be not finalized yet",
+            "type": "string",
+            "enum": [
+              "INCLUDED"
+            ]
+          },
+          {
+            "description": "Transaction is included into the block + All non-refund transaction receipts finished their execution. The corresponding blocks for tx and each receipt may be not finalized yet",
+            "type": "string",
+            "enum": [
+              "EXECUTED_OPTIMISTIC"
+            ]
+          },
+          {
+            "description": "Transaction is included into finalized block",
+            "type": "string",
+            "enum": [
+              "INCLUDED_FINAL"
+            ]
+          },
+          {
+            "description": "Transaction is included into finalized block + All non-refund transaction receipts finished their execution. The corresponding blocks for each receipt may be not finalized yet",
+            "type": "string",
+            "enum": [
+              "EXECUTED"
+            ]
+          },
+          {
+            "description": "Transaction is included into finalized block + Execution of all transaction receipts is finalized, including refund receipts",
+            "type": "string",
+            "enum": [
+              "FINAL"
+            ]
+          }
+        ]
+      },
+      "Tx_enum": {
+        "type": "string",
+        "enum": [
+          "tx"
+        ]
+      }
+    }
+  }
+}

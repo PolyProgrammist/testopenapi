@@ -79,17 +79,11 @@ pub enum Tx_enum {
     VALUE
 }
 
-#[derive(JsonSchema)]
-struct RpcParams {
-    request_data: near_jsonrpc_primitives::types::transactions::RpcTransactionStatusRequest,
-    fetch_receipt: bool,
-}
-
 trait HasS {
     type S: JsonSchema;
 }
 
-impl HasS for RpcParams {
+impl HasS for near_jsonrpc_primitives::types::transactions::RpcTransactionStatusRequest {
     type S = Tx_enum;
 }
 
@@ -130,7 +124,7 @@ fn generate_schema<T: JsonSchema>() -> OpenApi {
 
 fn main() {
     let response_schema = generate_schema::<JsonRpcResponse<RpcTransactionResponse, RpcError>>();
-    let request_schema = generate_schema::<JsonRpcRequest<RpcParams>>();
+    let request_schema = generate_schema::<JsonRpcRequest<near_jsonrpc_primitives::types::transactions::RpcTransactionStatusRequest>>();
     
     let spec_json = serde_json::to_string_pretty(&response_schema).unwrap();
     println!("{}", spec_json);
