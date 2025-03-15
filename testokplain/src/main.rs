@@ -96,8 +96,7 @@ struct JsonRpcRequest<T: HasS> {
     method: T::S
 }
 
-
-fn generate_schema<T: JsonSchema>() -> OpenApi {
+fn schema_map<T: JsonSchema>() -> okapi::Map<String, okapi::openapi3::SchemaObject> {
     let settings = schemars::gen::SchemaSettings::openapi3();
     let mut generator = schemars::gen::SchemaGenerator::new(settings);
 
@@ -105,7 +104,48 @@ fn generate_schema<T: JsonSchema>() -> OpenApi {
 
     let mut theMap: okapi::Map<String, okapi::openapi3::SchemaObject> = root_schema.definitions.into_iter().map(|(k, v)| (k, v.into())).collect();
     theMap.insert(T::schema_name(), root_schema.schema);
-    // println!("{:?}", T::schema_name());
+    theMap
+}
+
+fn generate_path_schema<RequestType: JsonSchema, ResponseType: JsonSchema>() -> OpenApi {
+    let mut requestMap = schema_map::<RequestType>();
+    let responseMap = schema_map::<ResponseType>();
+    
+    // println!("len req {}", requestMap.len());
+    // for (key, value) in requestMap.clone().into_iter() {
+    //     println!("{}", key);
+    // }
+    // println!("len resp {}", responseMap.len());
+    // for (key, value) in responseMap.clone().into_iter() {
+    //     println!("{}", key);
+    // }
+    let mut allMap = requestMap;
+
+    allMap.extend(responseMap);
+
+    // println!("len all {}", allMap.len());
+    // for (key, value) in allMap.clone().into_iter() {
+    //     println!("{}", key);
+    // }
+
+
+    OpenApi {
+        openapi: "3.0.0".to_string(),
+        info: okapi::openapi3::Info {
+            title: "My API".to_string(),
+            version: "1.0.0".to_string(),
+            ..Default::default()
+        },
+        components: Some(okapi::openapi3::Components {
+            schemas: allMap,
+            ..Default::default()
+        }),
+        ..Default::default()
+    }
+}
+
+fn generate_schema<T: JsonSchema>() -> OpenApi {
+    let theMap = schema_map::<T>();
 
     OpenApi {
         openapi: "3.0.0".to_string(),
@@ -125,8 +165,9 @@ fn generate_schema<T: JsonSchema>() -> OpenApi {
 fn main() {
     let response_schema = generate_schema::<JsonRpcResponse<RpcTransactionResponse, RpcError>>();
     let request_schema = generate_schema::<JsonRpcRequest<near_jsonrpc_primitives::types::transactions::RpcTransactionStatusRequest>>();
+    let path_schema = generate_path_schema::<JsonRpcResponse<RpcTransactionResponse, RpcError>, JsonRpcRequest<near_jsonrpc_primitives::types::transactions::RpcTransactionStatusRequest>>();
     
-    let spec_json = serde_json::to_string_pretty(&response_schema).unwrap();
+    let spec_json = serde_json::to_string_pretty(&path_schema).unwrap();
     println!("{}", spec_json);
 
     let spec_yaml = serde_yaml::to_string(&response_schema).unwrap();

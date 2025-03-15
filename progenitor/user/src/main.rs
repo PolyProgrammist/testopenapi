@@ -43,7 +43,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
 
     // let x: keeper::types::RpcError = serde_json::from_value(res)?;
 
-    // let x: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = serde_json::from_value(response)?;
+    let x: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = serde_json::from_value(response)?;
 
 
     Ok(())
