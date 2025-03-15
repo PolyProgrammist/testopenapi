@@ -1,4 +1,4 @@
-use reqwest::Client;
+use keeper::Client;
 use serde_json::json;
 use std::error::Error;
 
@@ -14,7 +14,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let transaction_hash = "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1TczCrhZEcG8U"; // Replace with your TX hash
     let sender_account_id = "miraclx.near"; // Replace with sender's account
 
-    let client = Client::new();
+    let client = Client::new(NEAR_RPC_URL);
 
     let payloadX = keeper::types::JsonRpcRequestForRpcTransactionStatusRequest {
         id: String::from("dontcare"),
@@ -27,24 +27,10 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
-    let payload: serde_json::Value = serde_json::to_value(payloadX).unwrap();
 
-    let response = client.post(NEAR_RPC_URL)
-        .json(&payload)
-        .send()
-        .await?
-        .json::<serde_json::Value>()
-        .await?;
+    let x: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client.create_user(&payloadX).await?.into_inner();
 
-    // let res = response.clone().get("result").unwrap().clone();
-
-    println!("{:#?}", response);
-
-
-    // let x: keeper::types::RpcError = serde_json::from_value(res)?;
-
-    let x: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = serde_json::from_value(response)?;
-
+    println!("{:#?}", x);
 
     Ok(())
 }

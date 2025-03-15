@@ -128,7 +128,7 @@ fn get_paths(request_schema_name: String, response_schema_name: String) -> okapi
     // Define response
     let mut responses = okapi::openapi3::Responses::default();
     responses.responses.insert(
-        "201".to_string(),
+        "200".to_string(),
         okapi::openapi3::Response {
             description: "User created successfully".to_string(),
             content: {

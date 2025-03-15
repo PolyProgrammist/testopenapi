@@ -7538,7 +7538,7 @@ impl Client {
 impl Client {
     ///Create a new user
     ///
-    ///Sends a `POST` request to `/users`
+    ///Sends a `POST` request to `/`
     ///
     ///Arguments:
     /// - `body`: User registration data
@@ -7547,7 +7547,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForRpcTransactionStatusRequest,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/users", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -7561,7 +7561,7 @@ impl Client {
         let result = self.client.execute(request).await;
         let response = result?;
         match response.status().as_u16() {
-            201u16 => ResponseValue::from_response(response).await,
+            200u16 => ResponseValue::from_response(response).await,
             _ => Err(Error::UnexpectedResponse(response)),
         }
     }
