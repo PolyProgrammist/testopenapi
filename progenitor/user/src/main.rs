@@ -16,16 +16,16 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
 
     let client = Client::new(NEAR_RPC_URL);
 
-    // let payloadTx = keeper::types::JsonRpcRequestForRpcTransactionStatusRequest {
-    //     id: String::from("dontcare"),
-    //     jsonrpc: String::from("2.0"),
-    //     method: keeper::types::TxEnum::Tx,
-    //     params: keeper::types::RpcTransactionStatusRequest::Variant1 {
-    //         tx_hash: transaction_hash.parse().unwrap(),
-    //         sender_account_id: sender_account_id.parse().unwrap(),
-    //         wait_until: keeper::types::TxExecutionStatus::None,
-    //     }
-    // };
+    let payloadTx = keeper::types::JsonRpcRequestForRpcTransactionStatusRequest {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::TxEnum::Tx,
+        params: keeper::types::RpcTransactionStatusRequest::Variant1 {
+            tx_hash: transaction_hash.parse().unwrap(),
+            sender_account_id: sender_account_id.parse().unwrap(),
+            wait_until: keeper::types::TxExecutionStatus::None,
+        }
+    };
 
     let payloadBlock = keeper::types::JsonRpcRequestForRpcBlockRequest {
         id: String::from("dontcare"),
@@ -37,10 +37,10 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     };
 
     let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client.block(&payloadBlock).await?.into_inner();
-    println!("{:#?}", block);
+    println!("hey answer is - block: {:#?}", block);
 
-    // let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client.tx(&payloadTx).await?.into_inner();
-    // println!("{:#?}", tx);
+    let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client.tx(&payloadTx).await?.into_inner();
+    println!("hey answer is - tx: {:#?}", tx);
 
     Ok(())
 }
