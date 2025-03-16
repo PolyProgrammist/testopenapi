@@ -7529,12 +7529,7 @@ impl Client {
 #[allow(clippy::all)]
 #[allow(elided_named_lifetimes)]
 impl Client {
-    ///Create a new user
-    ///
     ///Sends a `POST` request to `/`
-    ///
-    ///Arguments:
-    /// - `body`: User registration data
     pub async fn create_user<'a>(
         &'a self,
         body: &'a types::JsonRpcRequestForRpcTransactionStatusRequest,

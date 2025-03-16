@@ -7,10 +7,8 @@
     "paths": {
         "/users": {
             "post": {
-                "summary": "Create a new user",
                 "operationId": "createUser",
                 "requestBody": {
-                    "description": "User registration data",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -22,7 +20,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "User created successfully",
+                        "description": "",
                         "content": {
                             "application/json": {
                                 "schema": {

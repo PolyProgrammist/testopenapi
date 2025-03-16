@@ -87,7 +87,6 @@ fn schema_map<T: JsonSchema>() -> okapi::Map<String, okapi::openapi3::SchemaObje
 
 fn get_paths(request_schema_name: String, response_schema_name: String) -> okapi::Map::<String, okapi::openapi3::PathItem> {
     let request_body = okapi::openapi3::RequestBody {
-        description: Some("User registration data".to_string()),
         required: true,
         content: {
             let mut map = okapi::Map::new();
@@ -108,7 +107,6 @@ fn get_paths(request_schema_name: String, response_schema_name: String) -> okapi
     responses.responses.insert(
         "200".to_string(),
         okapi::openapi3::Response {
-            description: "User created successfully".to_string(),
             content: {
                 let mut map = okapi::Map::new();
                 map.insert(
@@ -126,7 +124,6 @@ fn get_paths(request_schema_name: String, response_schema_name: String) -> okapi
 
     // Define operation
     let operation = okapi::openapi3::Operation {
-        summary: Some("Create a new user".to_string()),
         operation_id: Some("createUser".to_string()),
         request_body: Some(request_body.into()),
         responses,
