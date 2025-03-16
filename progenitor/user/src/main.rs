@@ -16,21 +16,31 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
 
     let client = Client::new(NEAR_RPC_URL);
 
-    let payloadX = keeper::types::JsonRpcRequestForRpcTransactionStatusRequest {
+    // let payloadTx = keeper::types::JsonRpcRequestForRpcTransactionStatusRequest {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::TxEnum::Tx,
+    //     params: keeper::types::RpcTransactionStatusRequest::Variant1 {
+    //         tx_hash: transaction_hash.parse().unwrap(),
+    //         sender_account_id: sender_account_id.parse().unwrap(),
+    //         wait_until: keeper::types::TxExecutionStatus::None,
+    //     }
+    // };
+
+    let payloadBlock = keeper::types::JsonRpcRequestForRpcBlockRequest {
         id: String::from("dontcare"),
         jsonrpc: String::from("2.0"),
-        method: keeper::types::TxEnum::Tx,
-        params: keeper::types::RpcTransactionStatusRequest::Variant1 {
-            tx_hash: transaction_hash.parse().unwrap(),
-            sender_account_id: sender_account_id.parse().unwrap(),
-            wait_until: keeper::types::TxExecutionStatus::None,
-        }
+        method: keeper::types::BlockEnum::Block,
+        params: keeper::types::RpcBlockRequest::BlockId({
+            keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap())
+        })
     };
 
+    let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client.block(&payloadBlock).await?.into_inner();
+    println!("{:#?}", block);
 
-    let x: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client.tx(&payloadX).await?.into_inner();
-
-    println!("{:#?}", x);
+    // let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client.tx(&payloadTx).await?.into_inner();
+    // println!("{:#?}", tx);
 
     Ok(())
 }

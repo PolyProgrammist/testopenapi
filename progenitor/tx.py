@@ -4,7 +4,8 @@ filename = '../testokplain/transaction.json'
 f = open(filename)
 spec = json.load(f)
 f.close()
-spec['components']['schemas']['StorageError']['oneOf'][1]['properties']['MissingTrieValue'] = {"type": "string"}
+if 'StorageError' in spec['components']['schemas']:
+    spec['components']['schemas']['StorageError']['oneOf'][1]['properties']['MissingTrieValue'] = {"type": "string"}
 json.dump(spec, open(filename, 'w'), indent = 4)
 
 filename = './keeper/src/lib.rs'

@@ -1,9 +1,5 @@
 use schemars::JsonSchema;
 use serde::{self, Deserialize, Serialize};
-
-use near_jsonrpc_primitives::types::transactions::{
-    RpcTransactionResponse, RpcTransactionStatusRequest
-};
 use near_jsonrpc_primitives::errors::{RpcRequestValidationErrorKind};
 use okapi::openapi3::{OpenApi, SchemaObject};
 
@@ -90,7 +86,6 @@ fn get_paths(request_schema_name: String, response_schema_name: String, method_n
         ..Default::default()
     };
 
-    // Define response
     let mut responses = okapi::openapi3::Responses::default();
     responses.responses.insert(
         "200".to_string(),
@@ -110,7 +105,6 @@ fn get_paths(request_schema_name: String, response_schema_name: String, method_n
         }.into(),
     );
 
-    // Define operation
     let operation = okapi::openapi3::Operation {
         operation_id: Some(method_name.clone()),
         request_body: Some(request_body.into()),
@@ -118,7 +112,6 @@ fn get_paths(request_schema_name: String, response_schema_name: String, method_n
         ..Default::default()
     };
 
-    // Define paths
     let mut paths = okapi::Map::<String, okapi::openapi3::PathItem>::new();
     paths.insert(
         format!("/{}", method_name),
@@ -165,6 +158,15 @@ fn path_spec<Request: JsonSchema + MethodNameTrait, Response: JsonSchema>(method
 }
 
 
+use near_jsonrpc_primitives::types::{
+    transactions::{
+        RpcTransactionResponse, RpcTransactionStatusRequest
+    },
+    blocks::{
+        RpcBlockRequest, RpcBlockResponse
+    }
+    
+};
 
 #[derive(Serialize, Deserialize, JsonSchema)]
 pub enum Tx_enum {
@@ -172,13 +174,25 @@ pub enum Tx_enum {
     VALUE
 }
 
-impl MethodNameTrait for near_jsonrpc_primitives::types::transactions::RpcTransactionStatusRequest {
+impl MethodNameTrait for RpcTransactionStatusRequest {
     type S = Tx_enum;
 }
+
+#[derive(Serialize, Deserialize, JsonSchema)]
+pub enum Block_enum {
+    #[serde(rename = "block")]
+    VALUE
+}
+
+impl MethodNameTrait for RpcBlockRequest {
+    type S = Block_enum;
+}
+
 
 
 fn main() {
     let path_schema = path_spec::<RpcTransactionStatusRequest, RpcTransactionResponse>("tx".to_string());
+    let path_schema = path_spec::<RpcBlockRequest, RpcBlockResponse>("block".to_string());
     
     let spec_json = serde_json::to_string_pretty(&path_schema).unwrap();
     println!("{}", spec_json);
