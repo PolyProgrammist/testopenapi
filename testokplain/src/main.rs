@@ -50,21 +50,9 @@ struct JsonRpcResponse<T, E> {
     reserr: ResponseEither<T, E>,
 }
 
-
-#[derive(Serialize, Deserialize, JsonSchema)]
-pub enum Tx_enum {
-    #[serde(rename = "tx")]
-    VALUE
-}
-
 trait MethodNameTrait {
     type S: JsonSchema;
 }
-
-impl MethodNameTrait for near_jsonrpc_primitives::types::transactions::RpcTransactionStatusRequest {
-    type S = Tx_enum;
-}
-
 
 #[derive(JsonSchema)]
 struct JsonRpcRequest<T: MethodNameTrait> {
@@ -143,7 +131,7 @@ fn get_paths(request_schema_name: String, response_schema_name: String, method_n
     paths
 }
 
-fn path_spec_internal<RequestType: JsonSchema, ResponseType: JsonSchema>() -> OpenApi {
+fn path_spec_internal<RequestType: JsonSchema, ResponseType: JsonSchema>(method_name: String) -> OpenApi {
     let mut requestMap = schema_map::<RequestType>();
     let responseMap = schema_map::<ResponseType>();
 
@@ -153,7 +141,7 @@ fn path_spec_internal<RequestType: JsonSchema, ResponseType: JsonSchema>() -> Op
     let paths = get_paths(
         format!("#/components/schemas/{}", RequestType::schema_name()), 
         format!("#/components/schemas/{}", ResponseType::schema_name()),
-        "tx".to_string()
+        method_name
     );
 
     OpenApi {
@@ -172,12 +160,25 @@ fn path_spec_internal<RequestType: JsonSchema, ResponseType: JsonSchema>() -> Op
     }
 }
 
-fn path_spec<Request: JsonSchema + MethodNameTrait, Response: JsonSchema>() -> OpenApi {
-    path_spec_internal::<JsonRpcRequest<Request>, JsonRpcResponse<Response, RpcError>>()
+fn path_spec<Request: JsonSchema + MethodNameTrait, Response: JsonSchema>(method_name: String) -> OpenApi {
+    path_spec_internal::<JsonRpcRequest<Request>, JsonRpcResponse<Response, RpcError>>(method_name)
 }
 
+
+
+#[derive(Serialize, Deserialize, JsonSchema)]
+pub enum Tx_enum {
+    #[serde(rename = "tx")]
+    VALUE
+}
+
+impl MethodNameTrait for near_jsonrpc_primitives::types::transactions::RpcTransactionStatusRequest {
+    type S = Tx_enum;
+}
+
+
 fn main() {
-    let path_schema = path_spec::<RpcTransactionStatusRequest, RpcTransactionResponse>();
+    let path_schema = path_spec::<RpcTransactionStatusRequest, RpcTransactionResponse>("tx".to_string());
     
     let spec_json = serde_json::to_string_pretty(&path_schema).unwrap();
     println!("{}", spec_json);
