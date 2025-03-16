@@ -3772,16 +3772,13 @@
                         "nullable": true
                     },
                     "code": {
-                        "description": "Deprecated please use the `error_struct` instead",
                         "type": "integer",
                         "format": "int64"
                     },
                     "data": {
-                        "description": "Deprecated please use the `error_struct` instead",
                         "nullable": true
                     },
                     "message": {
-                        "description": "Deprecated please use the `error_struct` instead",
                         "type": "string"
                     },
                     "name": {

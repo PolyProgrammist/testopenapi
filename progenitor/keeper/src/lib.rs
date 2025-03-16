@@ -6275,15 +6275,11 @@ pub mod types {
     ///      ]
     ///    },
     ///    "code": {
-    ///      "description": "Deprecated please use the `error_struct` instead",
     ///      "type": "integer",
     ///      "format": "int64"
     ///    },
-    ///    "data": {
-    ///      "description": "Deprecated please use the `error_struct` instead"
-    ///    },
+    ///    "data": {},
     ///    "message": {
-    ///      "description": "Deprecated please use the `error_struct` instead",
     ///      "type": "string"
     ///    },
     ///    "name": {
@@ -6308,12 +6304,9 @@ pub mod types {
     pub struct RpcError {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub cause: ::std::option::Option<CauseRpcErrorKind>,
-        ///Deprecated please use the `error_struct` instead
         pub code: i64,
-        ///Deprecated please use the `error_struct` instead
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub data: ::std::option::Option<::serde_json::Value>,
-        ///Deprecated please use the `error_struct` instead
         pub message: ::std::string::String,
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub name: ::std::option::Option<NameRpcErrorKind>,

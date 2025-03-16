@@ -1,35 +1,18 @@
 use schemars::JsonSchema;
 use serde::{self, Deserialize, Serialize};
-use near_time;
-
-#[derive(Serialize, Deserialize, JsonSchema)]
-struct MyResponse {
-    message: String,
-    code: u16,
-}
 
 use near_jsonrpc_primitives::types::transactions::{
-    RpcSendTransactionRequest, RpcTransactionResponse, RpcTransactionError
+    RpcTransactionResponse, RpcTransactionStatusRequest
 };
 use near_jsonrpc_primitives::errors::{RpcRequestValidationErrorKind};
 use okapi::openapi3::{OpenApi, SchemaObject};
-use schemars::gen::SchemaGenerator;
-use schemars::schema::RootSchema;
-
-#[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
-#[serde(tag = "name", content = "cause", rename_all = "SCREAMING_SNAKE_CASE")]
-pub enum RpcErrorKind {
-    RequestValidationError(RpcRequestValidationErrorKind),
-    HandlerError(serde_json::Value),
-    InternalError(serde_json::Value),
-}
 
 #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
 #[serde(untagged)]
 pub enum CauseRpcErrorKind {
-    A(RpcRequestValidationErrorKind),
-    B(serde_json::Value),
-    C(serde_json::Value),
+    RequestValidationError(RpcRequestValidationErrorKind),
+    HandlerError(serde_json::Value),
+    InternalError(serde_json::Value),
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
@@ -42,17 +25,12 @@ pub enum NameRpcErrorKind {
 
 #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
 pub struct RpcError {
-    // #[serde(flatten)]
-    // pub error_struct: Option<RpcErrorKind>,
-    /// Deprecated please use the `error_struct` instead
-    pub code: i64,
-    /// Deprecated please use the `error_struct` instead
-    pub message: String,
-    /// Deprecated please use the `error_struct` instead
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub data: Option<serde_json::Value>,
     pub name: Option<NameRpcErrorKind>,
     pub cause: Option<CauseRpcErrorKind>,
+    pub code: i64,
+    pub message: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub data: Option<serde_json::Value>,
 }
 
 #[derive(JsonSchema)]
@@ -79,17 +57,17 @@ pub enum Tx_enum {
     VALUE
 }
 
-trait HasS {
+trait MethodNameTrait {
     type S: JsonSchema;
 }
 
-impl HasS for near_jsonrpc_primitives::types::transactions::RpcTransactionStatusRequest {
+impl MethodNameTrait for near_jsonrpc_primitives::types::transactions::RpcTransactionStatusRequest {
     type S = Tx_enum;
 }
 
 
 #[derive(JsonSchema)]
-struct JsonRpcRequest<T: HasS> {
+struct JsonRpcRequest<T: MethodNameTrait> {
     jsonrpc: String,
     id: String,
     params: T,
@@ -116,7 +94,7 @@ fn get_paths(request_schema_name: String, response_schema_name: String) -> okapi
             map.insert(
                 "application/json".to_string(),
                 okapi::openapi3::MediaType {
-                    schema: Some(SchemaObject{reference: Some("#/components/schemas/JsonRpcRequest_for_RpcTransactionStatusRequest".to_string()), ..Default::default()}),
+                    schema: Some(SchemaObject{reference: Some(request_schema_name), ..Default::default()}),
                     ..Default::default()
                 },
             );
@@ -136,7 +114,7 @@ fn get_paths(request_schema_name: String, response_schema_name: String) -> okapi
                 map.insert(
                     "application/json".to_string(),
                     okapi::openapi3::MediaType {
-                        schema: Some(SchemaObject{reference: Some("#/components/schemas/JsonRpcResponse_for_RpcTransactionResponse_and_RpcError".to_string()), ..Default::default()}),
+                        schema: Some(SchemaObject{reference: Some(response_schema_name), ..Default::default()}),
                         ..Default::default()
                     },
                 );
@@ -168,14 +146,17 @@ fn get_paths(request_schema_name: String, response_schema_name: String) -> okapi
     paths
 }
 
-fn generate_path_schema<RequestType: JsonSchema, ResponseType: JsonSchema>() -> OpenApi {
+fn path_spec_internal<RequestType: JsonSchema, ResponseType: JsonSchema>() -> OpenApi {
     let mut requestMap = schema_map::<RequestType>();
     let responseMap = schema_map::<ResponseType>();
 
     let mut allMap = requestMap;
     allMap.extend(responseMap);
 
-    let paths = get_paths("".to_string(), "".to_string());
+    let paths = get_paths(
+        format!("#/components/schemas/{}", RequestType::schema_name()), 
+        format!("#/components/schemas/{}", ResponseType::schema_name())
+    );
 
     OpenApi {
         openapi: "3.0.0".to_string(),
@@ -193,32 +174,13 @@ fn generate_path_schema<RequestType: JsonSchema, ResponseType: JsonSchema>() -> 
     }
 }
 
-fn generate_schema<T: JsonSchema>() -> OpenApi {
-    let theMap = schema_map::<T>();
-
-    OpenApi {
-        openapi: "3.0.0".to_string(),
-        info: okapi::openapi3::Info {
-            title: "My API".to_string(),
-            version: "1.0.0".to_string(),
-            ..Default::default()
-        },
-        components: Some(okapi::openapi3::Components {
-            schemas: theMap,
-            ..Default::default()
-        }),
-        ..Default::default()
-    }
+fn path_spec<Request: JsonSchema + MethodNameTrait, Response: JsonSchema>() -> OpenApi {
+    path_spec_internal::<JsonRpcRequest<Request>, JsonRpcResponse<Response, RpcError>>()
 }
 
 fn main() {
-    let response_schema = generate_schema::<JsonRpcResponse<RpcTransactionResponse, RpcError>>();
-    let request_schema = generate_schema::<JsonRpcRequest<near_jsonrpc_primitives::types::transactions::RpcTransactionStatusRequest>>();
-    let path_schema = generate_path_schema::<JsonRpcResponse<RpcTransactionResponse, RpcError>, JsonRpcRequest<near_jsonrpc_primitives::types::transactions::RpcTransactionStatusRequest>>();
+    let path_schema = path_spec::<RpcTransactionStatusRequest, RpcTransactionResponse>();
     
     let spec_json = serde_json::to_string_pretty(&path_schema).unwrap();
     println!("{}", spec_json);
-
-    let spec_yaml = serde_yaml::to_string(&response_schema).unwrap();
-    // println!("{}", spec_yaml);
 }
