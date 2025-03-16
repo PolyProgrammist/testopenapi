@@ -7529,8 +7529,8 @@ impl Client {
 #[allow(clippy::all)]
 #[allow(elided_named_lifetimes)]
 impl Client {
-    ///Sends a `POST` request to `/`
-    pub async fn create_user<'a>(
+    ///Sends a `POST` request to `/tx`
+    pub async fn tx<'a>(
         &'a self,
         body: &'a types::JsonRpcRequestForRpcTransactionStatusRequest,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>

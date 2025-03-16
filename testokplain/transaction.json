@@ -5,9 +5,9 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/users": {
+        "/tx": {
             "post": {
-                "operationId": "createUser",
+                "operationId": "tx",
                 "requestBody": {
                     "content": {
                         "application/json": {

@@ -1,4 +1,5 @@
 import json
+import re
 filename = '../testokplain/transaction.json'
 f = open(filename)
 spec = json.load(f)
@@ -11,7 +12,7 @@ f = open(filename, 'r')
 filedata = f.read()
 f.close()
 
-newfiledata = filedata.replace('/users', '/')
+newfiledata = re.sub('"{}/\w*', '"{}/', filedata)
 
 f = open(filename, 'w')
 f.write(newfiledata)

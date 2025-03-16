@@ -85,7 +85,7 @@ fn schema_map<T: JsonSchema>() -> okapi::Map<String, okapi::openapi3::SchemaObje
     theMap
 }
 
-fn get_paths(request_schema_name: String, response_schema_name: String) -> okapi::Map::<String, okapi::openapi3::PathItem> {
+fn get_paths(request_schema_name: String, response_schema_name: String, method_name: String) -> okapi::Map::<String, okapi::openapi3::PathItem> {
     let request_body = okapi::openapi3::RequestBody {
         required: true,
         content: {
@@ -124,7 +124,7 @@ fn get_paths(request_schema_name: String, response_schema_name: String) -> okapi
 
     // Define operation
     let operation = okapi::openapi3::Operation {
-        operation_id: Some("createUser".to_string()),
+        operation_id: Some(method_name.clone()),
         request_body: Some(request_body.into()),
         responses,
         ..Default::default()
@@ -133,7 +133,7 @@ fn get_paths(request_schema_name: String, response_schema_name: String) -> okapi
     // Define paths
     let mut paths = okapi::Map::<String, okapi::openapi3::PathItem>::new();
     paths.insert(
-        "/users".to_string(),
+        format!("/{}", method_name),
         okapi::openapi3::PathItem {
             post: Some(operation),
             ..Default::default()
@@ -152,7 +152,8 @@ fn path_spec_internal<RequestType: JsonSchema, ResponseType: JsonSchema>() -> Op
 
     let paths = get_paths(
         format!("#/components/schemas/{}", RequestType::schema_name()), 
-        format!("#/components/schemas/{}", ResponseType::schema_name())
+        format!("#/components/schemas/{}", ResponseType::schema_name()),
+        "tx".to_string()
     );
 
     OpenApi {

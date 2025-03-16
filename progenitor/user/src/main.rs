@@ -28,7 +28,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     };
 
 
-    let x: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client.create_user(&payloadX).await?.into_inner();
+    let x: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client.tx(&payloadX).await?.into_inner();
 
     println!("{:#?}", x);
 
