@@ -2706,6 +2706,85 @@ pub mod types {
         }
     }
 
+    ///ChunkBlockMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "chunk"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum ChunkBlockMethodNameHelperEnum {
+        #[serde(rename = "chunk")]
+        Chunk,
+    }
+
+    impl ::std::convert::From<&Self> for ChunkBlockMethodNameHelperEnum {
+        fn from(value: &ChunkBlockMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for ChunkBlockMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::Chunk => write!(f, "chunk"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for ChunkBlockMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "chunk" => Ok(Self::Chunk),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for ChunkBlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for ChunkBlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for ChunkBlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
     ///ChunkHeaderView
     ///
     /// <details><summary>JSON schema</summary>
@@ -4431,6 +4510,85 @@ pub mod types {
         }
     }
 
+    ///GasPriceBlockMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "gas_price"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum GasPriceBlockMethodNameHelperEnum {
+        #[serde(rename = "gas_price")]
+        GasPrice,
+    }
+
+    impl ::std::convert::From<&Self> for GasPriceBlockMethodNameHelperEnum {
+        fn from(value: &GasPriceBlockMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for GasPriceBlockMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::GasPrice => write!(f, "gas_price"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for GasPriceBlockMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "gas_price" => Ok(Self::GasPrice),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for GasPriceBlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for GasPriceBlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for GasPriceBlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
     ///GlobalContractData
     ///
     /// <details><summary>JSON schema</summary>
@@ -6001,6 +6159,98 @@ pub mod types {
         }
     }
 
+    ///JsonRpcRequestForRpcChunkRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_RpcChunkRequest",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/ChunkBlockMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcChunkRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForRpcChunkRequest {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: ChunkBlockMethodNameHelperEnum,
+        pub params: RpcChunkRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForRpcChunkRequest> for JsonRpcRequestForRpcChunkRequest {
+        fn from(value: &JsonRpcRequestForRpcChunkRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForRpcGasPriceRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_RpcGasPriceRequest",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/GasPriceBlockMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcGasPriceRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForRpcGasPriceRequest {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: GasPriceBlockMethodNameHelperEnum,
+        pub params: RpcGasPriceRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForRpcGasPriceRequest>
+        for JsonRpcRequestForRpcGasPriceRequest
+    {
+        fn from(value: &JsonRpcRequestForRpcGasPriceRequest) -> Self {
+            value.clone()
+        }
+    }
+
     ///JsonRpcRequestForRpcTransactionStatusRequest
     ///
     /// <details><summary>JSON schema</summary>
@@ -6128,6 +6378,174 @@ pub mod types {
 
     impl ::std::convert::From<&Self> for JsonRpcResponseForRpcBlockResponseAndRpcError {
         fn from(value: &JsonRpcResponseForRpcBlockResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForRpcChunkResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_RpcChunkResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/RpcChunkResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcChunkResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcChunkResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcChunkResponseAndRpcError {
+        fn from(value: &JsonRpcResponseForRpcChunkResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForRpcGasPriceResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_RpcGasPriceResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/RpcGasPriceResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcGasPriceResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcGasPriceResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcGasPriceResponseAndRpcError {
+        fn from(value: &JsonRpcResponseForRpcGasPriceResponseAndRpcError) -> Self {
             value.clone()
         }
     }
@@ -7414,6 +7832,112 @@ pub mod types {
         }
     }
 
+    ///RpcChunkRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "block_id",
+    ///        "shard_id"
+    ///      ],
+    ///      "properties": {
+    ///        "block_id": {
+    ///          "$ref": "#/components/schemas/BlockId"
+    ///        },
+    ///        "shard_id": {
+    ///          "$ref": "#/components/schemas/ShardId"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "chunk_id"
+    ///      ],
+    ///      "properties": {
+    ///        "chunk_id": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        }
+    ///      }
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum RpcChunkRequest {
+        Variant0 {
+            block_id: BlockId,
+            shard_id: ShardId,
+        },
+        Variant1 {
+            chunk_id: CryptoHash,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for RpcChunkRequest {
+        fn from(value: &RpcChunkRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcChunkResponse
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "author",
+    ///    "header",
+    ///    "receipts",
+    ///    "transactions"
+    ///  ],
+    ///  "properties": {
+    ///    "author": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "header": {
+    ///      "$ref": "#/components/schemas/ChunkHeaderView"
+    ///    },
+    ///    "receipts": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/ReceiptView"
+    ///      }
+    ///    },
+    ///    "transactions": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/SignedTransactionView"
+    ///      }
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcChunkResponse {
+        pub author: AccountId,
+        pub header: ChunkHeaderView,
+        pub receipts: ::std::vec::Vec<ReceiptView>,
+        pub transactions: ::std::vec::Vec<SignedTransactionView>,
+    }
+
+    impl ::std::convert::From<&RpcChunkResponse> for RpcChunkResponse {
+        fn from(value: &RpcChunkResponse) -> Self {
+            value.clone()
+        }
+    }
+
     ///RpcError
     ///
     /// <details><summary>JSON schema</summary>
@@ -7480,6 +8004,81 @@ pub mod types {
 
     impl ::std::convert::From<&RpcError> for RpcError {
         fn from(value: &RpcError) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcGasPriceRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "properties": {
+    ///    "block_id": {
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/BlockId"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcGasPriceRequest {
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub block_id: ::std::option::Option<BlockId>,
+    }
+
+    impl ::std::convert::From<&RpcGasPriceRequest> for RpcGasPriceRequest {
+        fn from(value: &RpcGasPriceRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::default::Default for RpcGasPriceRequest {
+        fn default() -> Self {
+            Self {
+                block_id: Default::default(),
+            }
+        }
+    }
+
+    ///RpcGasPriceResponse
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "gas_price"
+    ///  ],
+    ///  "properties": {
+    ///    "gas_price": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcGasPriceResponse {
+        pub gas_price: ::std::string::String,
+    }
+
+    impl ::std::convert::From<&RpcGasPriceResponse> for RpcGasPriceResponse {
+        fn from(value: &RpcGasPriceResponse) -> Self {
             value.clone()
         }
     }
@@ -9065,6 +9664,56 @@ impl Client {
         &'a self,
         body: &'a types::JsonRpcRequestForRpcBlockRequest,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcBlockResponseAndRpcError>, Error<()>>
+    {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/chunk`
+    pub async fn chunk<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForRpcChunkRequest,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcChunkResponseAndRpcError>, Error<()>>
+    {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/gas_price`
+    pub async fn gas_price<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForRpcGasPriceRequest,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcGasPriceResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]

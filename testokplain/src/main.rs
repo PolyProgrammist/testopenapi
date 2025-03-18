@@ -173,6 +173,15 @@ use near_jsonrpc_primitives::types::{
     },
     blocks::{
         RpcBlockRequest, RpcBlockResponse
+    },
+    chunks::{
+        RpcChunkRequest, RpcChunkResponse
+    },
+    gas_price::{
+        RpcGasPriceRequest, RpcGasPriceResponse
+    },
+    status::{
+        RpcHealthResponse
     }
     
 };
@@ -194,8 +203,17 @@ macro_rules! generate_method_name_helper {
     };
 }
 
+#[derive(JsonSchema)]
+struct RpcHealthRequest {
+
+}
+
 generate_method_name_helper!(TxMethodNameHelperEnum, RpcTransactionStatusRequest, "tx");
 generate_method_name_helper!(BlockMethodNameHelperEnum, RpcBlockRequest, "block");
+generate_method_name_helper!(ChunkBlockMethodNameHelperEnum, RpcChunkRequest, "chunk");
+generate_method_name_helper!(GasPriceBlockMethodNameHelperEnum, RpcGasPriceRequest, "gas_price");
+// generate_method_name_helper!(HealthBlockMethodNameHelperEnum, RpcHealthRequest, "health");
+
 
 fn main() {
     let mut all_schemas = SchemasMap::new();
@@ -203,6 +221,9 @@ fn main() {
 
     add_spec_for_path::<RpcTransactionStatusRequest, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "tx".to_string());
     add_spec_for_path::<RpcBlockRequest, RpcBlockResponse>(&mut all_schemas, &mut all_paths, "block".to_string());
+    add_spec_for_path::<RpcChunkRequest, RpcChunkResponse>(&mut all_schemas, &mut all_paths, "chunk".to_string());
+    // add_spec_for_path::<RpcHealthRequest, RpcHealthResponse>(&mut all_schemas, &mut all_paths, "health".to_string());
+    add_spec_for_path::<RpcGasPriceRequest, RpcGasPriceResponse>(&mut all_schemas, &mut all_paths, "gas_price".to_string());
 
     let path_schema = whole_spec(all_schemas, all_paths);
     
