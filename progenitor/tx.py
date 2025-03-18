@@ -5,7 +5,7 @@ f = open(filename)
 spec = json.load(f)
 f.close()
 if 'StorageError' in spec['components']['schemas']:
-    spec['components']['schemas']['StorageError']['oneOf'][1]['properties']['MissingTrieValue'] = {"type": "string"}
+    spec['components']['schemas']['StorageError']['oneOf'][1]['properties']['MissingTrieValue']['items'] = {"oneOf": spec['components']['schemas']['StorageError']['oneOf'][1]['properties']['MissingTrieValue']['items']}
 json.dump(spec, open(filename, 'w'), indent = 4)
 
 filename = './keeper/src/lib.rs'

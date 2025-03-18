@@ -4632,7 +4632,21 @@
                         ],
                         "properties": {
                             "MissingTrieValue": {
-                                "type": "string"
+                                "type": "array",
+                                "items": {
+                                    "oneOf": {
+                                        "oneOf": [
+                                            {
+                                                "$ref": "#/components/schemas/MissingTrieValueContext"
+                                            },
+                                            {
+                                                "$ref": "#/components/schemas/CryptoHash"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "maxItems": 2,
+                                "minItems": 2
                             }
                         },
                         "additionalProperties": false
