@@ -180,25 +180,22 @@ use near_jsonrpc_primitives::types::{
 
 //// ---- implement for all requests ----- 
 
-#[derive(Serialize, Deserialize, JsonSchema)]
-pub enum TxMethodNameHelperEnum {
-    #[serde(rename = "tx")]
-    VALUE
+macro_rules! generate_method_name_helper {
+    ($enum_name:ident, $trait_impl:ty, $method_name:expr) => {
+        #[derive(Serialize, Deserialize, JsonSchema)]
+        pub enum $enum_name {
+            #[serde(rename = $method_name)]
+            VALUE,
+        }
+
+        impl MethodNameTrait for $trait_impl {
+            type S = $enum_name;
+        }
+    };
 }
 
-impl MethodNameTrait for RpcTransactionStatusRequest {
-    type S = TxMethodNameHelperEnum;
-}
-
-#[derive(Serialize, Deserialize, JsonSchema)]
-pub enum BlockMethodNameHelperEnum {
-    #[serde(rename = "block")]
-    VALUE
-}
-
-impl MethodNameTrait for RpcBlockRequest {
-    type S = BlockMethodNameHelperEnum;
-}
+generate_method_name_helper!(TxMethodNameHelperEnum, RpcTransactionStatusRequest, "tx");
+generate_method_name_helper!(BlockMethodNameHelperEnum, RpcBlockRequest, "block");
 
 fn main() {
     let mut all_schemas = SchemasMap::new();

@@ -2208,85 +2208,6 @@ pub mod types {
         }
     }
 
-    ///BlockEnum
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "block"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum BlockEnum {
-        #[serde(rename = "block")]
-        Block,
-    }
-
-    impl ::std::convert::From<&Self> for BlockEnum {
-        fn from(value: &BlockEnum) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for BlockEnum {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::Block => write!(f, "block"),
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for BlockEnum {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "block" => Ok(Self::Block),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for BlockEnum {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String> for BlockEnum {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String> for BlockEnum {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
     ///BlockHeaderView
     ///
     /// <details><summary>JSON schema</summary>
@@ -2649,6 +2570,85 @@ pub mod types {
     impl ::std::convert::From<CryptoHash> for BlockId {
         fn from(value: CryptoHash) -> Self {
             Self::Variant1(value)
+        }
+    }
+
+    ///BlockMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "block"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum BlockMethodNameHelperEnum {
+        #[serde(rename = "block")]
+        Block,
+    }
+
+    impl ::std::convert::From<&Self> for BlockMethodNameHelperEnum {
+        fn from(value: &BlockMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for BlockMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::Block => write!(f, "block"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for BlockMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "block" => Ok(Self::Block),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for BlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for BlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for BlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
         }
     }
 
@@ -5978,7 +5978,7 @@ pub mod types {
     ///      "type": "string"
     ///    },
     ///    "method": {
-    ///      "$ref": "#/components/schemas/Block_enum"
+    ///      "$ref": "#/components/schemas/BlockMethodNameHelperEnum"
     ///    },
     ///    "params": {
     ///      "$ref": "#/components/schemas/RpcBlockRequest"
@@ -5991,7 +5991,7 @@ pub mod types {
     pub struct JsonRpcRequestForRpcBlockRequest {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
-        pub method: BlockEnum,
+        pub method: BlockMethodNameHelperEnum,
         pub params: RpcBlockRequest,
     }
 
@@ -6023,7 +6023,7 @@ pub mod types {
     ///      "type": "string"
     ///    },
     ///    "method": {
-    ///      "$ref": "#/components/schemas/Tx_enum"
+    ///      "$ref": "#/components/schemas/TxMethodNameHelperEnum"
     ///    },
     ///    "params": {
     ///      "$ref": "#/components/schemas/RpcTransactionStatusRequest"
@@ -6036,7 +6036,7 @@ pub mod types {
     pub struct JsonRpcRequestForRpcTransactionStatusRequest {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
-        pub method: TxEnum,
+        pub method: TxMethodNameHelperEnum,
         pub params: RpcTransactionStatusRequest,
     }
 
@@ -8422,85 +8422,6 @@ pub mod types {
         }
     }
 
-    ///TxEnum
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "tx"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum TxEnum {
-        #[serde(rename = "tx")]
-        Tx,
-    }
-
-    impl ::std::convert::From<&Self> for TxEnum {
-        fn from(value: &TxEnum) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for TxEnum {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::Tx => write!(f, "tx"),
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for TxEnum {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "tx" => Ok(Self::Tx),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for TxEnum {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String> for TxEnum {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String> for TxEnum {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
     ///Error returned in the ExecutionOutcome in case of failure
     ///
     /// <details><summary>JSON schema</summary>
@@ -8715,6 +8636,85 @@ pub mod types {
     }
 
     impl ::std::convert::TryFrom<::std::string::String> for TxExecutionStatus {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///TxMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "tx"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum TxMethodNameHelperEnum {
+        #[serde(rename = "tx")]
+        Tx,
+    }
+
+    impl ::std::convert::From<&Self> for TxMethodNameHelperEnum {
+        fn from(value: &TxMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for TxMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::Tx => write!(f, "tx"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for TxMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "tx" => Ok(Self::Tx),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for TxMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for TxMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for TxMethodNameHelperEnum {
         type Error = self::error::ConversionError;
         fn try_from(
             value: ::std::string::String,

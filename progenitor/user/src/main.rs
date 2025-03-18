@@ -19,7 +19,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let payloadTx = keeper::types::JsonRpcRequestForRpcTransactionStatusRequest {
         id: String::from("dontcare"),
         jsonrpc: String::from("2.0"),
-        method: keeper::types::TxEnum::Tx,
+        method: keeper::types::TxMethodNameHelperEnum::Tx,
         params: keeper::types::RpcTransactionStatusRequest::Variant1 {
             tx_hash: transaction_hash.parse().unwrap(),
             sender_account_id: sender_account_id.parse().unwrap(),
@@ -30,7 +30,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let payloadBlock = keeper::types::JsonRpcRequestForRpcBlockRequest {
         id: String::from("dontcare"),
         jsonrpc: String::from("2.0"),
-        method: keeper::types::BlockEnum::Block,
+        method: keeper::types::BlockMethodNameHelperEnum::Block,
         params: keeper::types::RpcBlockRequest::BlockId({
             keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap())
         })
