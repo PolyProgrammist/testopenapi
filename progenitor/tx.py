@@ -1,7 +1,17 @@
 import json
 import re
-# filename = '../testokplain/transaction.json'
-# f = open(filename)
+
+filename = '../testokplain/transaction.json'
+f = open(filename)
+filedata = f.read()
+f.close()
+
+filedata = filedata.replace('"type": "null"', '"type": "object"')
+
+f = open(filename, 'w')
+f.write(filedata)
+f.close()
+
 # spec = json.load(f)
 # f.close()
 # if 'StorageError' in spec['components']['schemas']:

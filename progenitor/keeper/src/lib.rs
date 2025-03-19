@@ -4785,6 +4785,85 @@ pub mod types {
         }
     }
 
+    ///HealthBlockMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "health"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum HealthBlockMethodNameHelperEnum {
+        #[serde(rename = "health")]
+        Health,
+    }
+
+    impl ::std::convert::From<&Self> for HealthBlockMethodNameHelperEnum {
+        fn from(value: &HealthBlockMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for HealthBlockMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::Health => write!(f, "health"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for HealthBlockMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "health" => Ok(Self::Health),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for HealthBlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for HealthBlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for HealthBlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
     ///HostError
     ///
     /// <details><summary>JSON schema</summary>
@@ -6251,6 +6330,53 @@ pub mod types {
         }
     }
 
+    ///JsonRpcRequestForRpcHealthRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_RpcHealthRequest",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/HealthBlockMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcHealthRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForRpcHealthRequest {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: HealthBlockMethodNameHelperEnum,
+        pub params: RpcHealthRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForRpcHealthRequest>
+        for JsonRpcRequestForRpcHealthRequest
+    {
+        fn from(value: &JsonRpcRequestForRpcHealthRequest) -> Self {
+            value.clone()
+        }
+    }
+
     ///JsonRpcRequestForRpcTransactionStatusRequest
     ///
     /// <details><summary>JSON schema</summary>
@@ -6546,6 +6672,90 @@ pub mod types {
 
     impl ::std::convert::From<&Self> for JsonRpcResponseForRpcGasPriceResponseAndRpcError {
         fn from(value: &JsonRpcResponseForRpcGasPriceResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForRpcHealthResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_RpcHealthResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/RpcHealthResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcHealthResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcHealthResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcHealthResponseAndRpcError {
+        fn from(value: &JsonRpcResponseForRpcHealthResponseAndRpcError) -> Self {
             value.clone()
         }
     }
@@ -8117,6 +8327,90 @@ pub mod types {
         }
     }
 
+    ///RpcHealthRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object"
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(transparent)]
+    pub struct RpcHealthRequest(pub ::serde_json::Map<::std::string::String, ::serde_json::Value>);
+    impl ::std::ops::Deref for RpcHealthRequest {
+        type Target = ::serde_json::Map<::std::string::String, ::serde_json::Value>;
+        fn deref(&self) -> &::serde_json::Map<::std::string::String, ::serde_json::Value> {
+            &self.0
+        }
+    }
+
+    impl ::std::convert::From<RpcHealthRequest>
+        for ::serde_json::Map<::std::string::String, ::serde_json::Value>
+    {
+        fn from(value: RpcHealthRequest) -> Self {
+            value.0
+        }
+    }
+
+    impl ::std::convert::From<&RpcHealthRequest> for RpcHealthRequest {
+        fn from(value: &RpcHealthRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<::serde_json::Map<::std::string::String, ::serde_json::Value>>
+        for RpcHealthRequest
+    {
+        fn from(value: ::serde_json::Map<::std::string::String, ::serde_json::Value>) -> Self {
+            Self(value)
+        }
+    }
+
+    ///RpcHealthResponse
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object"
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(transparent)]
+    pub struct RpcHealthResponse(pub ::serde_json::Map<::std::string::String, ::serde_json::Value>);
+    impl ::std::ops::Deref for RpcHealthResponse {
+        type Target = ::serde_json::Map<::std::string::String, ::serde_json::Value>;
+        fn deref(&self) -> &::serde_json::Map<::std::string::String, ::serde_json::Value> {
+            &self.0
+        }
+    }
+
+    impl ::std::convert::From<RpcHealthResponse>
+        for ::serde_json::Map<::std::string::String, ::serde_json::Value>
+    {
+        fn from(value: RpcHealthResponse) -> Self {
+            value.0
+        }
+    }
+
+    impl ::std::convert::From<&RpcHealthResponse> for RpcHealthResponse {
+        fn from(value: &RpcHealthResponse) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<::serde_json::Map<::std::string::String, ::serde_json::Value>>
+        for RpcHealthResponse
+    {
+        fn from(value: ::serde_json::Map<::std::string::String, ::serde_json::Value>) -> Self {
+            Self(value)
+        }
+    }
+
     ///RpcRequestValidationErrorKind
     ///
     /// <details><summary>JSON schema</summary>
@@ -9647,6 +9941,31 @@ impl Client {
         &'a self,
         body: &'a types::JsonRpcRequestForRpcGasPriceRequest,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcGasPriceResponseAndRpcError>, Error<()>>
+    {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/health`
+    pub async fn health<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForRpcHealthRequest,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcHealthResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]

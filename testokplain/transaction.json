@@ -86,6 +86,33 @@
         }
       }
     },
+    "/health": {
+      "post": {
+        "operationId": "health",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcHealthRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonRpcResponse_for_RpcHealthResponse_and_RpcError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/tx": {
       "post": {
         "operationId": "tx",
@@ -2678,6 +2705,12 @@
           }
         ]
       },
+      "HealthBlockMethodNameHelperEnum": {
+        "type": "string",
+        "enum": [
+          "health"
+        ]
+      },
       "HostError": {
         "oneOf": [
           {
@@ -3806,6 +3839,30 @@
           }
         }
       },
+      "JsonRpcRequest_for_RpcHealthRequest": {
+        "title": "JsonRpcRequest_for_RpcHealthRequest",
+        "type": "object",
+        "required": [
+          "id",
+          "jsonrpc",
+          "method",
+          "params"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "jsonrpc": {
+            "type": "string"
+          },
+          "method": {
+            "$ref": "#/components/schemas/HealthBlockMethodNameHelperEnum"
+          },
+          "params": {
+            "$ref": "#/components/schemas/RpcHealthRequest"
+          }
+        }
+      },
       "JsonRpcRequest_for_RpcTransactionStatusRequest": {
         "title": "JsonRpcRequest_for_RpcTransactionStatusRequest",
         "type": "object",
@@ -3944,6 +4001,57 @@
             "properties": {
               "result": {
                 "$ref": "#/components/schemas/RpcGasPriceResponse"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "tmp"
+            ],
+            "properties": {
+              "tmp": {
+                "$ref": "#/components/schemas/RpcError"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "error"
+            ],
+            "properties": {
+              "error": {
+                "$ref": "#/components/schemas/RpcError"
+              }
+            }
+          }
+        ],
+        "required": [
+          "id",
+          "jsonrpc"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "jsonrpc": {
+            "type": "string"
+          }
+        }
+      },
+      "JsonRpcResponse_for_RpcHealthResponse_and_RpcError": {
+        "title": "JsonRpcResponse_for_RpcHealthResponse_and_RpcError",
+        "type": "object",
+        "anyOf": [
+          {
+            "type": "object",
+            "required": [
+              "result"
+            ],
+            "properties": {
+              "result": {
+                "$ref": "#/components/schemas/RpcHealthResponse"
               }
             }
           },
@@ -4697,6 +4805,12 @@
             "type": "string"
           }
         }
+      },
+      "RpcHealthRequest": {
+        "type": "object"
+      },
+      "RpcHealthResponse": {
+        "type": "object"
       },
       "RpcRequestValidationErrorKind": {
         "oneOf": [
