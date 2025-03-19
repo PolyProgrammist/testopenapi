@@ -32,6 +32,87 @@
         }
       }
     },
+    "/chunk": {
+      "post": {
+        "operationId": "chunk",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JsonRpcRequest_for_ChunkMethodNameHelperEnum"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonRpcResponse_for_RpcChunkResponse_and_RpcError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gas_price": {
+      "post": {
+        "operationId": "gas_price",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JsonRpcRequest_for_GasPriceMethodNameHelperEnum"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonRpcResponse_for_RpcGasPriceResponse_and_RpcError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "post": {
+        "operationId": "health",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JsonRpcRequest_for_HealthMethodNameHelperEnum"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonRpcResponse_for_RpcHealthResponse_and_RpcError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/tx": {
       "post": {
         "operationId": "tx",
@@ -1849,6 +1930,12 @@
           }
         }
       },
+      "ChunkMethodNameHelperEnum": {
+        "type": "string",
+        "enum": [
+          "chunk"
+        ]
+      },
       "CompilationError": {
         "oneOf": [
           {
@@ -2551,6 +2638,12 @@
           }
         }
       },
+      "GasPriceMethodNameHelperEnum": {
+        "type": "string",
+        "enum": [
+          "gas_price"
+        ]
+      },
       "GlobalContractData": {
         "type": "object",
         "required": [
@@ -2610,6 +2703,12 @@
             },
             "additionalProperties": false
           }
+        ]
+      },
+      "HealthMethodNameHelperEnum": {
+        "type": "string",
+        "enum": [
+          "health"
         ]
       },
       "HostError": {
@@ -3692,6 +3791,78 @@
           }
         }
       },
+      "JsonRpcRequest_for_ChunkMethodNameHelperEnum": {
+        "title": "JsonRpcRequest_for_ChunkMethodNameHelperEnum",
+        "type": "object",
+        "required": [
+          "id",
+          "jsonrpc",
+          "method",
+          "params"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "jsonrpc": {
+            "type": "string"
+          },
+          "method": {
+            "$ref": "#/components/schemas/ChunkMethodNameHelperEnum"
+          },
+          "params": {
+            "$ref": "#/components/schemas/RpcChunkRequest"
+          }
+        }
+      },
+      "JsonRpcRequest_for_GasPriceMethodNameHelperEnum": {
+        "title": "JsonRpcRequest_for_GasPriceMethodNameHelperEnum",
+        "type": "object",
+        "required": [
+          "id",
+          "jsonrpc",
+          "method",
+          "params"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "jsonrpc": {
+            "type": "string"
+          },
+          "method": {
+            "$ref": "#/components/schemas/GasPriceMethodNameHelperEnum"
+          },
+          "params": {
+            "$ref": "#/components/schemas/RpcGasPriceRequest"
+          }
+        }
+      },
+      "JsonRpcRequest_for_HealthMethodNameHelperEnum": {
+        "title": "JsonRpcRequest_for_HealthMethodNameHelperEnum",
+        "type": "object",
+        "required": [
+          "id",
+          "jsonrpc",
+          "method",
+          "params"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "jsonrpc": {
+            "type": "string"
+          },
+          "method": {
+            "$ref": "#/components/schemas/HealthMethodNameHelperEnum"
+          },
+          "params": {
+            "$ref": "#/components/schemas/RpcHealthRequest"
+          }
+        }
+      },
       "JsonRpcRequest_for_TxMethodNameHelperEnum": {
         "title": "JsonRpcRequest_for_TxMethodNameHelperEnum",
         "type": "object",
@@ -3728,6 +3899,159 @@
             "properties": {
               "result": {
                 "$ref": "#/components/schemas/RpcBlockResponse"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "tmp"
+            ],
+            "properties": {
+              "tmp": {
+                "$ref": "#/components/schemas/RpcError"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "error"
+            ],
+            "properties": {
+              "error": {
+                "$ref": "#/components/schemas/RpcError"
+              }
+            }
+          }
+        ],
+        "required": [
+          "id",
+          "jsonrpc"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "jsonrpc": {
+            "type": "string"
+          }
+        }
+      },
+      "JsonRpcResponse_for_RpcChunkResponse_and_RpcError": {
+        "title": "JsonRpcResponse_for_RpcChunkResponse_and_RpcError",
+        "type": "object",
+        "anyOf": [
+          {
+            "type": "object",
+            "required": [
+              "result"
+            ],
+            "properties": {
+              "result": {
+                "$ref": "#/components/schemas/RpcChunkResponse"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "tmp"
+            ],
+            "properties": {
+              "tmp": {
+                "$ref": "#/components/schemas/RpcError"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "error"
+            ],
+            "properties": {
+              "error": {
+                "$ref": "#/components/schemas/RpcError"
+              }
+            }
+          }
+        ],
+        "required": [
+          "id",
+          "jsonrpc"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "jsonrpc": {
+            "type": "string"
+          }
+        }
+      },
+      "JsonRpcResponse_for_RpcGasPriceResponse_and_RpcError": {
+        "title": "JsonRpcResponse_for_RpcGasPriceResponse_and_RpcError",
+        "type": "object",
+        "anyOf": [
+          {
+            "type": "object",
+            "required": [
+              "result"
+            ],
+            "properties": {
+              "result": {
+                "$ref": "#/components/schemas/RpcGasPriceResponse"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "tmp"
+            ],
+            "properties": {
+              "tmp": {
+                "$ref": "#/components/schemas/RpcError"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "error"
+            ],
+            "properties": {
+              "error": {
+                "$ref": "#/components/schemas/RpcError"
+              }
+            }
+          }
+        ],
+        "required": [
+          "id",
+          "jsonrpc"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "jsonrpc": {
+            "type": "string"
+          }
+        }
+      },
+      "JsonRpcResponse_for_RpcHealthResponse_and_RpcError": {
+        "title": "JsonRpcResponse_for_RpcHealthResponse_and_RpcError",
+        "type": "object",
+        "anyOf": [
+          {
+            "type": "object",
+            "required": [
+              "result"
+            ],
+            "properties": {
+              "result": {
+                "$ref": "#/components/schemas/RpcHealthResponse"
               }
             }
           },
@@ -4363,6 +4687,66 @@
           }
         }
       },
+      "RpcChunkRequest": {
+        "type": "object",
+        "anyOf": [
+          {
+            "type": "object",
+            "required": [
+              "block_id",
+              "shard_id"
+            ],
+            "properties": {
+              "block_id": {
+                "$ref": "#/components/schemas/BlockId"
+              },
+              "shard_id": {
+                "$ref": "#/components/schemas/ShardId"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "chunk_id"
+            ],
+            "properties": {
+              "chunk_id": {
+                "$ref": "#/components/schemas/CryptoHash"
+              }
+            }
+          }
+        ]
+      },
+      "RpcChunkResponse": {
+        "type": "object",
+        "required": [
+          "author",
+          "header",
+          "receipts",
+          "transactions"
+        ],
+        "properties": {
+          "author": {
+            "$ref": "#/components/schemas/AccountId"
+          },
+          "header": {
+            "$ref": "#/components/schemas/ChunkHeaderView"
+          },
+          "receipts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReceiptView"
+            }
+          },
+          "transactions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SignedTransactionView"
+            }
+          }
+        }
+      },
       "RpcError": {
         "type": "object",
         "required": [
@@ -4397,6 +4781,36 @@
             "nullable": true
           }
         }
+      },
+      "RpcGasPriceRequest": {
+        "type": "object",
+        "properties": {
+          "block_id": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BlockId"
+              }
+            ],
+            "nullable": true
+          }
+        }
+      },
+      "RpcGasPriceResponse": {
+        "type": "object",
+        "required": [
+          "gas_price"
+        ],
+        "properties": {
+          "gas_price": {
+            "type": "string"
+          }
+        }
+      },
+      "RpcHealthRequest": {
+        "type": "object"
+      },
+      "RpcHealthResponse": {
+        "type": "object"
       },
       "RpcRequestValidationErrorKind": {
         "oneOf": [
