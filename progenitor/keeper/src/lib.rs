@@ -6754,6 +6754,40 @@ pub mod types {
         }
     }
 
+    ///MissingTrieValue
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "context",
+    ///    "hash"
+    ///  ],
+    ///  "properties": {
+    ///    "context": {
+    ///      "$ref": "#/components/schemas/MissingTrieValueContext"
+    ///    },
+    ///    "hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct MissingTrieValue {
+        pub context: MissingTrieValueContext,
+        pub hash: CryptoHash,
+    }
+
+    impl ::std::convert::From<&MissingTrieValue> for MissingTrieValue {
+        fn from(value: &MissingTrieValue) -> Self {
+            value.clone()
+        }
+    }
+
     ///Contexts in which `StorageError::MissingTrieValue` error might occur.
     ///
     /// <details><summary>JSON schema</summary>
@@ -8696,19 +8730,7 @@ pub mod types {
     ///      ],
     ///      "properties": {
     ///        "MissingTrieValue": {
-    ///          "type": "array",
-    ///          "items": {
-    ///            "oneOf": [
-    ///              {
-    ///                "$ref": "#/components/schemas/MissingTrieValueContext"
-    ///              },
-    ///              {
-    ///                "$ref": "#/components/schemas/CryptoHash"
-    ///              }
-    ///            ]
-    ///          },
-    ///          "maxItems": 2,
-    ///          "minItems": 2
+    ///          "$ref": "#/components/schemas/MissingTrieValue"
     ///        }
     ///      },
     ///      "additionalProperties": false
@@ -8785,7 +8807,7 @@ pub mod types {
         ///Key-value db internal failure
         StorageInternalError,
         ///Requested trie value by its hash which is missing in storage.
-        MissingTrieValue([StorageErrorMissingTrieValueItem; 2usize]),
+        MissingTrieValue(MissingTrieValue),
         ///Found trie node which shouldn't be part of state. Raised during
         /// validation of state sync parts where incorrect node was passed. TODO
         /// (#8997): consider including hash of trie node.
@@ -8813,98 +8835,9 @@ pub mod types {
         }
     }
 
-    impl ::std::convert::From<[StorageErrorMissingTrieValueItem; 2usize]> for StorageError {
-        fn from(value: [StorageErrorMissingTrieValueItem; 2usize]) -> Self {
+    impl ::std::convert::From<MissingTrieValue> for StorageError {
+        fn from(value: MissingTrieValue) -> Self {
             Self::MissingTrieValue(value)
-        }
-    }
-
-    ///StorageErrorMissingTrieValueItem
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "oneOf": [
-    ///    {
-    ///      "$ref": "#/components/schemas/MissingTrieValueContext"
-    ///    },
-    ///    {
-    ///      "$ref": "#/components/schemas/CryptoHash"
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    #[serde(untagged)]
-    pub enum StorageErrorMissingTrieValueItem {
-        MissingTrieValueContext(MissingTrieValueContext),
-        CryptoHash(CryptoHash),
-    }
-
-    impl ::std::convert::From<&Self> for StorageErrorMissingTrieValueItem {
-        fn from(value: &StorageErrorMissingTrieValueItem) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::str::FromStr for StorageErrorMissingTrieValueItem {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            if let Ok(v) = value.parse() {
-                Ok(Self::MissingTrieValueContext(v))
-            } else if let Ok(v) = value.parse() {
-                Ok(Self::CryptoHash(v))
-            } else {
-                Err("string conversion failed for all variants".into())
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for StorageErrorMissingTrieValueItem {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String> for StorageErrorMissingTrieValueItem {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String> for StorageErrorMissingTrieValueItem {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::fmt::Display for StorageErrorMissingTrieValueItem {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match self {
-                Self::MissingTrieValueContext(x) => x.fmt(f),
-                Self::CryptoHash(x) => x.fmt(f),
-            }
-        }
-    }
-
-    impl ::std::convert::From<MissingTrieValueContext> for StorageErrorMissingTrieValueItem {
-        fn from(value: MissingTrieValueContext) -> Self {
-            Self::MissingTrieValueContext(value)
-        }
-    }
-
-    impl ::std::convert::From<CryptoHash> for StorageErrorMissingTrieValueItem {
-        fn from(value: CryptoHash) -> Self {
-            Self::CryptoHash(value)
         }
     }
 
