@@ -16,7 +16,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
 
     let client = Client::new(NEAR_RPC_URL);
 
-    let payloadTx = keeper::types::JsonRpcRequestForRpcTransactionStatusRequest {
+    let payloadTx = keeper::types::JsonRpcRequestForTxMethodNameHelperEnum {
         id: String::from("dontcare"),
         jsonrpc: String::from("2.0"),
         method: keeper::types::TxMethodNameHelperEnum::Tx,
@@ -27,7 +27,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
-    let payloadBlock = keeper::types::JsonRpcRequestForRpcBlockRequest {
+    let payloadBlock = keeper::types::JsonRpcRequestForBlockMethodNameHelperEnum {
         id: String::from("dontcare"),
         jsonrpc: String::from("2.0"),
         method: keeper::types::BlockMethodNameHelperEnum::Block,

@@ -48,15 +48,16 @@ struct JsonRpcResponse<T, E> {
 
 trait MethodNameTrait {
     type S: JsonSchema;
+    type T: JsonSchema;
 }
 
 #[derive(JsonSchema)]
 #[allow(dead_code)] // Suppress fields never read
-struct JsonRpcRequest<T: MethodNameTrait> {
+struct JsonRpcRequest<S: MethodNameTrait> {
     jsonrpc: String,
     id: String,
-    params: T,
-    method: T::S
+    params: S::T,
+    method: S::S,
 }
 
 type SchemasMap = okapi::Map::<String, okapi::openapi3::SchemaObject>;
@@ -69,7 +70,9 @@ fn schemas_map<T: JsonSchema>() -> SchemasMap {
     let root_schema = generator.into_root_schema_for::<T>();
 
     let mut result: SchemasMap = root_schema.definitions.into_iter().map(|(k, v)| (k, v.into())).collect();
-    result.insert(T::schema_name(), root_schema.schema);
+    let mut root_schema_copy = root_schema.schema;
+
+    result.insert(T::schema_name(), root_schema_copy);
     result
 }
 
@@ -166,10 +169,12 @@ fn whole_spec(all_schemas: SchemasMap, all_paths: PathsMap) -> OpenApi {
     }
 }
 
+//// ---- implement for all requests ----- 
+
 
 use near_jsonrpc_primitives::types::{
     transactions::{
-        RpcTransactionResponse, RpcTransactionStatusRequest
+        RpcTransactionResponse, RpcTransactionStatusRequest, RpcSendTransactionRequest
     },
     blocks::{
         RpcBlockRequest, RpcBlockResponse
@@ -182,12 +187,15 @@ use near_jsonrpc_primitives::types::{
     },
     status::{
         RpcHealthResponse
+    },
+    validator::{
+        RpcValidatorRequest
+    },
+    light_client::{
+        RpcLightClientExecutionProofRequest, RpcLightClientNextBlockRequest
     }
     
 };
-
-
-//// ---- implement for all requests ----- 
 
 macro_rules! generate_method_name_helper {
     ($enum_name:ident, $trait_impl:ty, $method_name:expr) => {
@@ -197,33 +205,54 @@ macro_rules! generate_method_name_helper {
             VALUE,
         }
 
-        impl MethodNameTrait for $trait_impl {
+        impl MethodNameTrait for $enum_name {
             type S = $enum_name;
+            type T = $trait_impl;
         }
     };
 }
 
 #[derive(JsonSchema)]
-struct RpcHealthRequest {
+struct RpcHealthRequest;
 
-}
+#[derive(JsonSchema)]
+struct RpcStatusRequest;
+
+#[derive(JsonSchema)]
+struct RpcNetworkInfoRequest;
+
+#[derive(JsonSchema)]
+struct RpcClientConfigRequest;
+
+type RpcSendTransactionRequest2 = RpcSendTransactionRequest;
 
 generate_method_name_helper!(TxMethodNameHelperEnum, RpcTransactionStatusRequest, "tx");
 generate_method_name_helper!(BlockMethodNameHelperEnum, RpcBlockRequest, "block");
-generate_method_name_helper!(ChunkBlockMethodNameHelperEnum, RpcChunkRequest, "chunk");
-generate_method_name_helper!(GasPriceBlockMethodNameHelperEnum, RpcGasPriceRequest, "gas_price");
-generate_method_name_helper!(HealthBlockMethodNameHelperEnum, RpcHealthRequest, "health");
-
+generate_method_name_helper!(ChunkMethodNameHelperEnum, RpcChunkRequest, "chunk");
+generate_method_name_helper!(GasPriceMethodNameHelperEnum, RpcGasPriceRequest, "gas_price");
+generate_method_name_helper!(HealthMethodNameHelperEnum, RpcHealthRequest, "health");
+generate_method_name_helper!(NetworkInfoMethodNameHelperEnum, RpcNetworkInfoRequest, "network_info");
+generate_method_name_helper!(SendTxMethodNameHelperEnum, RpcSendTransactionRequest, "send_tx");
+generate_method_name_helper!(StatusMethodNameHelperEnum, RpcStatusRequest, "status");
+generate_method_name_helper!(ValidatorsMethodNameHelperEnum, RpcValidatorRequest, "validators");
+generate_method_name_helper!(ClientConfigMethodNameHelperEnum, RpcClientConfigRequest, "client_config");
+generate_method_name_helper!(BroadCastTxCommitMethodNameHelperEnum, RpcSendTransactionRequest, "broadcast_tx_commit");
+generate_method_name_helper!(LightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofRequest, "light_client_proof");
+generate_method_name_helper!(NextLightClientBlockMethodNameHelperEnum, RpcLightClientNextBlockRequest, "next_light_client_block");
 
 fn main() {
+
+    // let x = X<"block"> {
+    // }
+
     let mut all_schemas = SchemasMap::new();
     let mut all_paths = PathsMap::new();
 
-    add_spec_for_path::<RpcTransactionStatusRequest, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "tx".to_string());
-    add_spec_for_path::<RpcBlockRequest, RpcBlockResponse>(&mut all_schemas, &mut all_paths, "block".to_string());
-    add_spec_for_path::<RpcChunkRequest, RpcChunkResponse>(&mut all_schemas, &mut all_paths, "chunk".to_string());
-    add_spec_for_path::<RpcHealthRequest, RpcHealthResponse>(&mut all_schemas, &mut all_paths, "health".to_string());
-    add_spec_for_path::<RpcGasPriceRequest, RpcGasPriceResponse>(&mut all_schemas, &mut all_paths, "gas_price".to_string());
+    add_spec_for_path::<TxMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "tx".to_string());
+    add_spec_for_path::<BlockMethodNameHelperEnum, RpcBlockResponse>(&mut all_schemas, &mut all_paths, "block".to_string());
+    add_spec_for_path::<ChunkMethodNameHelperEnum, RpcChunkResponse>(&mut all_schemas, &mut all_paths, "chunk".to_string());
+    add_spec_for_path::<HealthMethodNameHelperEnum, RpcHealthResponse>(&mut all_schemas, &mut all_paths, "health".to_string());
+    add_spec_for_path::<GasPriceMethodNameHelperEnum, RpcGasPriceResponse>(&mut all_schemas, &mut all_paths, "gas_price".to_string());
 
     let path_schema = whole_spec(all_schemas, all_paths);
     
