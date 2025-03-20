@@ -3075,6 +3075,87 @@ pub mod types {
         }
     }
 
+    ///Config for the Chunk Distribution Network feature. This allows nodes to
+    /// push and pull chunks from a central stream. The two benefits of this
+    /// approach are: (1) less request/response traffic on the peer-to-peer
+    /// network and (2) lower latency for RPC nodes indexing the chain.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Config for the Chunk Distribution Network feature. This
+    /// allows nodes to push and pull chunks from a central stream. The two
+    /// benefits of this approach are: (1) less request/response traffic on the
+    /// peer-to-peer network and (2) lower latency for RPC nodes indexing the
+    /// chain.",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "enabled",
+    ///    "uris"
+    ///  ],
+    ///  "properties": {
+    ///    "enabled": {
+    ///      "type": "boolean"
+    ///    },
+    ///    "uris": {
+    ///      "$ref": "#/components/schemas/ChunkDistributionUris"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct ChunkDistributionNetworkConfig {
+        pub enabled: bool,
+        pub uris: ChunkDistributionUris,
+    }
+
+    impl ::std::convert::From<&ChunkDistributionNetworkConfig> for ChunkDistributionNetworkConfig {
+        fn from(value: &ChunkDistributionNetworkConfig) -> Self {
+            value.clone()
+        }
+    }
+
+    ///URIs for the Chunk Distribution Network feature.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "URIs for the Chunk Distribution Network feature.",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "get",
+    ///    "set"
+    ///  ],
+    ///  "properties": {
+    ///    "get": {
+    ///      "description": "URI for pulling chunks from the stream.",
+    ///      "type": "string"
+    ///    },
+    ///    "set": {
+    ///      "description": "URI for publishing chunks to the stream.",
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct ChunkDistributionUris {
+        ///URI for pulling chunks from the stream.
+        pub get: ::std::string::String,
+        ///URI for publishing chunks to the stream.
+        pub set: ::std::string::String,
+    }
+
+    impl ::std::convert::From<&ChunkDistributionUris> for ChunkDistributionUris {
+        fn from(value: &ChunkDistributionUris) -> Self {
+            value.clone()
+        }
+    }
+
     ///ChunkHeaderView
     ///
     /// <details><summary>JSON schema</summary>
@@ -3235,6 +3316,85 @@ pub mod types {
     impl ::std::convert::From<&ChunkHeaderView> for ChunkHeaderView {
         fn from(value: &ChunkHeaderView) -> Self {
             value.clone()
+        }
+    }
+
+    ///ClientConfigMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "client_config"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum ClientConfigMethodNameHelperEnum {
+        #[serde(rename = "client_config")]
+        ClientConfig,
+    }
+
+    impl ::std::convert::From<&Self> for ClientConfigMethodNameHelperEnum {
+        fn from(value: &ClientConfigMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for ClientConfigMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ClientConfig => write!(f, "client_config"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for ClientConfigMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "client_config" => Ok(Self::ClientConfig),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for ClientConfigMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for ClientConfigMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for ClientConfigMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
         }
     }
 
@@ -4102,6 +4262,119 @@ pub mod types {
         }
     }
 
+    ///Configures how to dump state to external storage.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Configures how to dump state to external storage.",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "location"
+    ///  ],
+    ///  "properties": {
+    ///    "credentials_file": {
+    ///      "description": "Location of a json file with credentials allowing
+    /// write access to the bucket.",
+    ///      "type": [
+    ///        "string",
+    ///        "null"
+    ///      ]
+    ///    },
+    ///    "iteration_delay": {
+    ///      "description": "How often to check if a new epoch has started. Feel
+    /// free to set to `None`, defaults are sensible.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/DurationSchemeProvider"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "location": {
+    ///      "description": "Specifies where to write the obtained state
+    /// parts.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/ExternalStorageLocation"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "restart_dump_for_shards": {
+    ///      "description": "Use in case a node that dumps state to the external
+    /// storage gets in trouble.",
+    ///      "type": [
+    ///        "array",
+    ///        "null"
+    ///      ],
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/ShardId"
+    ///      }
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct DumpConfig {
+        ///Location of a json file with credentials allowing write access to
+        /// the bucket.
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub credentials_file: ::std::option::Option<::std::string::String>,
+        ///How often to check if a new epoch has started. Feel free to set to
+        /// `None`, defaults are sensible.
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub iteration_delay: ::std::option::Option<DurationSchemeProvider>,
+        ///Specifies where to write the obtained state parts.
+        pub location: ExternalStorageLocation,
+        ///Use in case a node that dumps state to the external storage gets in
+        /// trouble.
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub restart_dump_for_shards: ::std::option::Option<::std::vec::Vec<ShardId>>,
+    }
+
+    impl ::std::convert::From<&DumpConfig> for DumpConfig {
+        fn from(value: &DumpConfig) -> Self {
+            value.clone()
+        }
+    }
+
+    ///DurationSchemeProvider
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "nanoseconds",
+    ///    "seconds"
+    ///  ],
+    ///  "properties": {
+    ///    "nanoseconds": {
+    ///      "type": "integer",
+    ///      "format": "int32"
+    ///    },
+    ///    "seconds": {
+    ///      "type": "integer",
+    ///      "format": "int64"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct DurationSchemeProvider {
+        pub nanoseconds: i32,
+        pub seconds: i64,
+    }
+
+    impl ::std::convert::From<&DurationSchemeProvider> for DurationSchemeProvider {
+        fn from(value: &DurationSchemeProvider) -> Self {
+            value.clone()
+        }
+    }
+
     ///Epoch identifier -- wrapped hash, to make it easier to distinguish.
     /// EpochId of epoch T is the hash of last block in T-2 EpochId of first two
     /// epochs is 0
@@ -4180,6 +4453,94 @@ pub mod types {
     impl ::std::fmt::Display for EpochId {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             self.0.fmt(f)
+        }
+    }
+
+    ///EpochSyncConfig
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "epoch_sync_horizon",
+    ///    "timeout_for_epoch_sync"
+    ///  ],
+    ///  "properties": {
+    ///    "disable_epoch_sync_for_bootstrapping": {
+    ///      "description": "If true, even if the node started from genesis, it
+    /// will not perform epoch sync. There should be no reason to set this flag
+    /// in production, because on both mainnet and testnet it would be
+    /// infeasible to catch up from genesis without epoch sync.",
+    ///      "default": false,
+    ///      "type": "boolean"
+    ///    },
+    ///    "epoch_sync_horizon": {
+    ///      "description": "This serves as two purposes: (1) the node will not
+    /// epoch sync and instead resort to header sync, if the genesis block is
+    /// within this many blocks from the current block; (2) the node will reject
+    /// an epoch sync proof if the provided proof is for an epoch that is more
+    /// than this many blocks behind the current block.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "ignore_epoch_sync_network_requests": {
+    ///      "description": "If true, the node will ignore epoch sync requests
+    /// from the network. It is strongly recommended not to set this flag,
+    /// because it will prevent other nodes from bootstrapping. This flag is
+    /// only included as a kill-switch and may be removed in a future release.
+    /// Please note that epoch sync requests are heavily rate limited and
+    /// cached, and therefore should not affect the performance of the node or
+    /// introduce any non-negligible increase in network traffic.",
+    ///      "default": false,
+    ///      "type": "boolean"
+    ///    },
+    ///    "timeout_for_epoch_sync": {
+    ///      "description": "Timeout for epoch sync requests. The node will
+    /// continue retrying indefinitely even if this timeout is exceeded.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/DurationSchemeProvider"
+    ///        }
+    ///      ]
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct EpochSyncConfig {
+        ///If true, even if the node started from genesis, it will not perform
+        /// epoch sync. There should be no reason to set this flag in
+        /// production, because on both mainnet and testnet it would be
+        /// infeasible to catch up from genesis without epoch sync.
+        #[serde(default)]
+        pub disable_epoch_sync_for_bootstrapping: bool,
+        ///This serves as two purposes: (1) the node will not epoch sync and
+        /// instead resort to header sync, if the genesis block is within this
+        /// many blocks from the current block; (2) the node will reject an
+        /// epoch sync proof if the provided proof is for an epoch that is more
+        /// than this many blocks behind the current block.
+        pub epoch_sync_horizon: u64,
+        ///If true, the node will ignore epoch sync requests from the network.
+        /// It is strongly recommended not to set this flag, because it will
+        /// prevent other nodes from bootstrapping. This flag is only included
+        /// as a kill-switch and may be removed in a future release. Please note
+        /// that epoch sync requests are heavily rate limited and cached, and
+        /// therefore should not affect the performance of the node or introduce
+        /// any non-negligible increase in network traffic.
+        #[serde(default)]
+        pub ignore_epoch_sync_network_requests: bool,
+        ///Timeout for epoch sync requests. The node will continue retrying
+        /// indefinitely even if this timeout is exceeded.
+        pub timeout_for_epoch_sync: DurationSchemeProvider,
+    }
+
+    impl ::std::convert::From<&EpochSyncConfig> for EpochSyncConfig {
+        fn from(value: &EpochSyncConfig) -> Self {
+            value.clone()
         }
     }
 
@@ -4472,6 +4833,180 @@ pub mod types {
     impl ::std::convert::From<CryptoHash> for ExecutionStatusView {
         fn from(value: CryptoHash) -> Self {
             Self::SuccessReceiptId(value)
+        }
+    }
+
+    ///ExternalStorageConfig
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "location"
+    ///  ],
+    ///  "properties": {
+    ///    "external_storage_fallback_threshold": {
+    ///      "description": "The number of attempts the node will make to obtain
+    /// a part from peers in the network before it fetches from external
+    /// storage.",
+    ///      "default": 3,
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "location": {
+    ///      "description": "Location of state parts.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/ExternalStorageLocation"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "num_concurrent_requests": {
+    ///      "description": "When fetching state parts from external storage,
+    /// throttle fetch requests to this many concurrent requests.",
+    ///      "default": 25,
+    ///      "type": "integer",
+    ///      "format": "uint32",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "num_concurrent_requests_during_catchup": {
+    ///      "description": "During catchup, the node will use a different
+    /// number of concurrent requests to reduce the performance impact of state
+    /// sync.",
+    ///      "default": 5,
+    ///      "type": "integer",
+    ///      "format": "uint32",
+    ///      "minimum": 0.0
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct ExternalStorageConfig {
+        ///The number of attempts the node will make to obtain a part from
+        /// peers in the network before it fetches from external storage.
+        #[serde(default = "defaults::default_u64::<u64, 3>")]
+        pub external_storage_fallback_threshold: u64,
+        ///Location of state parts.
+        pub location: ExternalStorageLocation,
+        ///When fetching state parts from external storage, throttle fetch
+        /// requests to this many concurrent requests.
+        #[serde(default = "defaults::default_u64::<u32, 25>")]
+        pub num_concurrent_requests: u32,
+        ///During catchup, the node will use a different number of concurrent
+        /// requests to reduce the performance impact of state sync.
+        #[serde(default = "defaults::default_u64::<u32, 5>")]
+        pub num_concurrent_requests_during_catchup: u32,
+    }
+
+    impl ::std::convert::From<&ExternalStorageConfig> for ExternalStorageConfig {
+        fn from(value: &ExternalStorageConfig) -> Self {
+            value.clone()
+        }
+    }
+
+    ///ExternalStorageLocation
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "oneOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "S3"
+    ///      ],
+    ///      "properties": {
+    ///        "S3": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "bucket",
+    ///            "region"
+    ///          ],
+    ///          "properties": {
+    ///            "bucket": {
+    ///              "description": "Location of state dumps on S3.",
+    ///              "type": "string"
+    ///            },
+    ///            "region": {
+    ///              "description": "Data may only be available in certain
+    /// locations.",
+    ///              "type": "string"
+    ///            }
+    ///          }
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "Filesystem"
+    ///      ],
+    ///      "properties": {
+    ///        "Filesystem": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "root_dir"
+    ///          ],
+    ///          "properties": {
+    ///            "root_dir": {
+    ///              "type": "string"
+    ///            }
+    ///          }
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "GCS"
+    ///      ],
+    ///      "properties": {
+    ///        "GCS": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "bucket"
+    ///          ],
+    ///          "properties": {
+    ///            "bucket": {
+    ///              "type": "string"
+    ///            }
+    ///          }
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub enum ExternalStorageLocation {
+        S3 {
+            ///Location of state dumps on S3.
+            bucket: ::std::string::String,
+            ///Data may only be available in certain locations.
+            region: ::std::string::String,
+        },
+        Filesystem {
+            root_dir: ::std::string::String,
+        },
+        #[serde(rename = "GCS")]
+        Gcs {
+            bucket: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for ExternalStorageLocation {
+        fn from(value: &ExternalStorageLocation) -> Self {
+            value.clone()
         }
     }
 
@@ -5186,6 +5721,88 @@ pub mod types {
             value: ::std::string::String,
         ) -> ::std::result::Result<Self, self::error::ConversionError> {
             value.parse()
+        }
+    }
+
+    ///Configuration for garbage collection.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Configuration for garbage collection.",
+    ///  "type": "object",
+    ///  "properties": {
+    ///    "gc_blocks_limit": {
+    ///      "description": "Maximum number of blocks to garbage collect at
+    /// every garbage collection call.",
+    ///      "default": 2,
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "gc_fork_clean_step": {
+    ///      "description": "Maximum number of height to go through at each garbage collection step when cleaning forks during garbage collection.",
+    ///      "default": 100,
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "gc_num_epochs_to_keep": {
+    ///      "description": "Number of epochs for which we keep store data.",
+    ///      "default": 5,
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "gc_step_period": {
+    ///      "description": "How often gc should be run",
+    ///      "default": {
+    ///        "nanoseconds": 0,
+    ///        "seconds": 1
+    ///      },
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/DurationSchemeProvider"
+    ///        }
+    ///      ]
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct GcConfig {
+        ///Maximum number of blocks to garbage collect at every garbage
+        /// collection call.
+        #[serde(default = "defaults::default_u64::<u64, 2>")]
+        pub gc_blocks_limit: u64,
+        ///Maximum number of height to go through at each garbage collection
+        /// step when cleaning forks during garbage collection.
+        #[serde(default = "defaults::default_u64::<u64, 100>")]
+        pub gc_fork_clean_step: u64,
+        ///Number of epochs for which we keep store data.
+        #[serde(default = "defaults::default_u64::<u64, 5>")]
+        pub gc_num_epochs_to_keep: u64,
+        ///How often gc should be run
+        #[serde(default = "defaults::gc_config_gc_step_period")]
+        pub gc_step_period: DurationSchemeProvider,
+    }
+
+    impl ::std::convert::From<&GcConfig> for GcConfig {
+        fn from(value: &GcConfig) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::default::Default for GcConfig {
+        fn default() -> Self {
+            Self {
+                gc_blocks_limit: defaults::default_u64::<u64, 2>(),
+                gc_fork_clean_step: defaults::default_u64::<u64, 100>(),
+                gc_num_epochs_to_keep: defaults::default_u64::<u64, 5>(),
+                gc_step_period: defaults::gc_config_gc_step_period(),
+            }
         }
     }
 
@@ -6935,6 +7552,53 @@ pub mod types {
         }
     }
 
+    ///JsonRpcRequestForClientConfigMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_ClientConfigMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/ClientConfigMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForClientConfigMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: ClientConfigMethodNameHelperEnum,
+        pub params: RpcClientConfigRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForClientConfigMethodNameHelperEnum>
+        for JsonRpcRequestForClientConfigMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForClientConfigMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
     ///JsonRpcRequestForGasPriceMethodNameHelperEnum
     ///
     /// <details><summary>JSON schema</summary>
@@ -7439,6 +8103,90 @@ pub mod types {
 
     impl ::std::convert::From<&Self> for JsonRpcResponseForRpcBlockResponseAndRpcError {
         fn from(value: &JsonRpcResponseForRpcBlockResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForRpcClientConfigResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_RpcClientConfigResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/RpcClientConfigResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcClientConfigResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcClientConfigResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcClientConfigResponseAndRpcError {
+        fn from(value: &JsonRpcResponseForRpcClientConfigResponseAndRpcError) -> Self {
             value.clone()
         }
     }
@@ -8286,6 +9034,90 @@ pub mod types {
         }
     }
 
+    ///LogSummaryStyle
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "plain",
+    ///    "colored"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum LogSummaryStyle {
+        #[serde(rename = "plain")]
+        Plain,
+        #[serde(rename = "colored")]
+        Colored,
+    }
+
+    impl ::std::convert::From<&Self> for LogSummaryStyle {
+        fn from(value: &LogSummaryStyle) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for LogSummaryStyle {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::Plain => write!(f, "plain"),
+                Self::Colored => write!(f, "colored"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for LogSummaryStyle {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "plain" => Ok(Self::Plain),
+                "colored" => Ok(Self::Colored),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for LogSummaryStyle {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for LogSummaryStyle {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for LogSummaryStyle {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
     ///MerklePathItem
     ///
     /// <details><summary>JSON schema</summary>
@@ -8559,6 +9391,67 @@ pub mod types {
             value: ::std::string::String,
         ) -> ::std::result::Result<Self, self::error::ConversionError> {
             value.parse()
+        }
+    }
+
+    ///MutableConfigValue
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string"
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    #[serde(transparent)]
+    pub struct MutableConfigValue(pub ::std::string::String);
+    impl ::std::ops::Deref for MutableConfigValue {
+        type Target = ::std::string::String;
+        fn deref(&self) -> &::std::string::String {
+            &self.0
+        }
+    }
+
+    impl ::std::convert::From<MutableConfigValue> for ::std::string::String {
+        fn from(value: MutableConfigValue) -> Self {
+            value.0
+        }
+    }
+
+    impl ::std::convert::From<&MutableConfigValue> for MutableConfigValue {
+        fn from(value: &MutableConfigValue) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<::std::string::String> for MutableConfigValue {
+        fn from(value: ::std::string::String) -> Self {
+            Self(value)
+        }
+    }
+
+    impl ::std::str::FromStr for MutableConfigValue {
+        type Err = ::std::convert::Infallible;
+        fn from_str(value: &str) -> ::std::result::Result<Self, Self::Err> {
+            Ok(Self(value.to_string()))
+        }
+    }
+
+    impl ::std::fmt::Display for MutableConfigValue {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            self.0.fmt(f)
         }
     }
 
@@ -10017,6 +10910,666 @@ pub mod types {
 
     impl ::std::convert::From<&RpcBlockResponse> for RpcBlockResponse {
         fn from(value: &RpcBlockResponse) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcClientConfigRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object"
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(transparent)]
+    pub struct RpcClientConfigRequest(
+        pub ::serde_json::Map<::std::string::String, ::serde_json::Value>,
+    );
+    impl ::std::ops::Deref for RpcClientConfigRequest {
+        type Target = ::serde_json::Map<::std::string::String, ::serde_json::Value>;
+        fn deref(&self) -> &::serde_json::Map<::std::string::String, ::serde_json::Value> {
+            &self.0
+        }
+    }
+
+    impl ::std::convert::From<RpcClientConfigRequest>
+        for ::serde_json::Map<::std::string::String, ::serde_json::Value>
+    {
+        fn from(value: RpcClientConfigRequest) -> Self {
+            value.0
+        }
+    }
+
+    impl ::std::convert::From<&RpcClientConfigRequest> for RpcClientConfigRequest {
+        fn from(value: &RpcClientConfigRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<::serde_json::Map<::std::string::String, ::serde_json::Value>>
+        for RpcClientConfigRequest
+    {
+        fn from(value: ::serde_json::Map<::std::string::String, ::serde_json::Value>) -> Self {
+            Self(value)
+        }
+    }
+
+    ///ClientConfig where some fields can be updated at runtime.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "ClientConfig where some fields can be updated at
+    /// runtime.",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "archive",
+    ///    "block_fetch_horizon",
+    ///    "block_header_fetch_horizon",
+    ///    "block_production_tracking_delay",
+    ///    "catchup_step_period",
+    ///    "chain_id",
+    ///    "chunk_request_retry_period",
+    ///    "client_background_migration_threads",
+    ///    "doomslug_step_period",
+    ///    "enable_multiline_logging",
+    ///    "enable_statistics_export",
+    ///    "epoch_length",
+    ///    "epoch_sync",
+    ///    "expected_shutdown",
+    ///    "gc",
+    ///    "header_sync_expected_height_per_second",
+    ///    "header_sync_initial_timeout",
+    ///    "header_sync_progress_timeout",
+    ///    "header_sync_stall_ban_timeout",
+    ///    "log_summary_period",
+    ///    "log_summary_style",
+    ///    "max_block_production_delay",
+    ///    "max_block_wait_delay",
+    ///    "min_block_production_delay",
+    ///    "min_num_peers",
+    ///    "num_block_producer_seats",
+    ///    "orphan_state_witness_max_size",
+    ///    "orphan_state_witness_pool_size",
+    ///    "produce_chunk_add_transactions_time_limit",
+    ///    "produce_empty_blocks",
+    ///    "resharding_config",
+    ///    "save_latest_witnesses",
+    ///    "save_trie_changes",
+    ///    "skip_sync_wait",
+    ///    "state_sync",
+    ///    "state_sync_enabled",
+    ///    "state_sync_external_backoff",
+    ///    "state_sync_external_timeout",
+    ///    "state_sync_p2p_timeout",
+    ///    "state_sync_retry_backoff",
+    ///    "sync_check_period",
+    ///    "sync_height_threshold",
+    ///    "sync_max_block_requests",
+    ///    "sync_step_period",
+    ///    "tracked_accounts",
+    ///    "tracked_shard_schedule",
+    ///    "tracked_shards",
+    ///    "ttl_account_id_router",
+    ///    "tx_routing_height_horizon",
+    ///    "version",
+    ///    "view_client_threads",
+    ///    "view_client_throttle_period"
+    ///  ],
+    ///  "properties": {
+    ///    "archive": {
+    ///      "description": "Not clear old data, set `true` for archive nodes.",
+    ///      "type": "boolean"
+    ///    },
+    ///    "block_fetch_horizon": {
+    ///      "description": "Horizon at which instead of fetching block, fetch
+    /// full state.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "block_header_fetch_horizon": {
+    ///      "description": "Behind this horizon header fetch kicks in.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "block_production_tracking_delay": {
+    ///      "description": "Duration to check for producing / skipping block.",
+    ///      "type": "string"
+    ///    },
+    ///    "catchup_step_period": {
+    ///      "description": "Time between check to perform catchup.",
+    ///      "type": "string"
+    ///    },
+    ///    "chain_id": {
+    ///      "description": "Chain id for status.",
+    ///      "type": "string"
+    ///    },
+    ///    "chunk_distribution_network": {
+    ///      "description": "Optional config for the Chunk Distribution Network
+    /// feature. If set to `None` then this node does not participate in the
+    /// Chunk Distribution Network. Nodes not participating will still function
+    /// fine, but possibly with higher latency due to the need of requesting
+    /// chunks over the peer-to-peer network.",
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref":
+    /// "#/components/schemas/ChunkDistributionNetworkConfig"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
+    ///    },
+    ///    "chunk_request_retry_period": {
+    ///      "description": "Time between checking to re-request chunks.",
+    ///      "type": "string"
+    ///    },
+    ///    "client_background_migration_threads": {
+    ///      "description": "Number of threads to execute background migration
+    /// work in client.",
+    ///      "type": "integer",
+    ///      "format": "uint",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "doomslug_step_period": {
+    ///      "description": "Time between running doomslug timer.",
+    ///      "type": "string"
+    ///    },
+    ///    "enable_multiline_logging": {
+    ///      "type": "boolean"
+    ///    },
+    ///    "enable_statistics_export": {
+    ///      "description": "Re-export storage layer statistics as prometheus
+    /// metrics.",
+    ///      "type": "boolean"
+    ///    },
+    ///    "epoch_length": {
+    ///      "description": "Epoch length.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "epoch_sync": {
+    ///      "description": "Options for epoch sync.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/EpochSyncConfig"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "expected_shutdown": {
+    ///      "description": "Graceful shutdown at expected block height.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/MutableConfigValue"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "gc": {
+    ///      "description": "Garbage collection configuration.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/GCConfig"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "header_sync_expected_height_per_second": {
+    ///      "description": "Expected increase of header head height per second
+    /// during header sync",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "header_sync_initial_timeout": {
+    ///      "description": "How much time to wait after initial header sync",
+    ///      "type": "string"
+    ///    },
+    ///    "header_sync_progress_timeout": {
+    ///      "description": "How much time to wait after some progress is made
+    /// in header sync",
+    ///      "type": "string"
+    ///    },
+    ///    "header_sync_stall_ban_timeout": {
+    ///      "description": "How much time to wait before banning a peer in
+    /// header sync if sync is too slow",
+    ///      "type": "string"
+    ///    },
+    ///    "log_summary_period": {
+    ///      "description": "Period between logging summary information.",
+    ///      "type": "string"
+    ///    },
+    ///    "log_summary_style": {
+    ///      "description": "Enable coloring of the logs",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/LogSummaryStyle"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "max_block_production_delay": {
+    ///      "description": "Maximum wait for approvals before producing
+    /// block.",
+    ///      "type": "string"
+    ///    },
+    ///    "max_block_wait_delay": {
+    ///      "description": "Maximum duration before skipping given height.",
+    ///      "type": "string"
+    ///    },
+    ///    "max_gas_burnt_view": {
+    ///      "description": "Max burnt gas per view method.  If present,
+    /// overrides value stored in genesis file.  The value only affects the RPCs
+    /// without influencing the protocol thus changing it per-node doesn’t
+    /// affect the blockchain.",
+    ///      "type": [
+    ///        "integer",
+    ///        "null"
+    ///      ],
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "min_block_production_delay": {
+    ///      "description": "Minimum duration before producing block.",
+    ///      "type": "string"
+    ///    },
+    ///    "min_num_peers": {
+    ///      "description": "Minimum number of peers to start syncing.",
+    ///      "type": "integer",
+    ///      "format": "uint",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "num_block_producer_seats": {
+    ///      "description": "Number of block producer seats",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "orphan_state_witness_max_size": {
+    ///      "description": "Maximum size of state witnesses in the
+    /// OrphanStateWitnessPool.\n\nWe keep only orphan witnesses which are
+    /// smaller than this size. This limits the maximum memory usage of
+    /// OrphanStateWitnessPool.",
+    ///      "type": "string"
+    ///    },
+    ///    "orphan_state_witness_pool_size": {
+    ///      "description": "OrphanStateWitnessPool keeps instances of
+    /// ChunkStateWitness which can't be processed because the previous block
+    /// isn't available. The witnesses wait in the pool until the required block
+    /// appears. This variable controls how many witnesses can be stored in the
+    /// pool.",
+    ///      "type": "integer",
+    ///      "format": "uint",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "produce_chunk_add_transactions_time_limit": {
+    ///      "description": "Limit the time of adding transactions to a chunk. A
+    /// node produces a chunk by adding transactions from the transaction pool
+    /// until some limit is reached. This time limit ensures that adding
+    /// transactions won't take longer than the specified duration, which helps
+    /// to produce the chunk quickly.",
+    ///      "type": "string"
+    ///    },
+    ///    "produce_empty_blocks": {
+    ///      "description": "Produce empty blocks, use `false` for testing.",
+    ///      "type": "boolean"
+    ///    },
+    ///    "resharding_config": {
+    ///      "$ref": "#/components/schemas/MutableConfigValue"
+    ///    },
+    ///    "rpc_addr": {
+    ///      "description": "Listening rpc port for status.",
+    ///      "type": [
+    ///        "string",
+    ///        "null"
+    ///      ]
+    ///    },
+    ///    "save_latest_witnesses": {
+    ///      "description": "Save observed instances of ChunkStateWitness to the
+    /// database in DBCol::LatestChunkStateWitnesses. Saving the latest
+    /// witnesses is useful for analysis and debugging. When this option is
+    /// enabled, the node will save ALL witnesses it observes, even invalid
+    /// ones, which can cause extra load on the database. This option is not
+    /// recommended for production use, as a large number of incoming witnesses
+    /// could cause denial of service.",
+    ///      "type": "boolean"
+    ///    },
+    ///    "save_trie_changes": {
+    ///      "description": "save_trie_changes should be set to true iff -
+    /// archive if false - non-archival nodes need trie changes to perform
+    /// garbage collection - archive is true, cold_store is configured and
+    /// migration to split_storage is finished - node working in split storage
+    /// mode needs trie changes in order to do garbage collection on hot.",
+    ///      "type": "boolean"
+    ///    },
+    ///    "skip_sync_wait": {
+    ///      "description": "Skip waiting for sync (for testing or single node
+    /// testnet).",
+    ///      "type": "boolean"
+    ///    },
+    ///    "state_sync": {
+    ///      "description": "Options for syncing state.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/StateSyncConfig"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "state_sync_enabled": {
+    ///      "description": "Whether to use the State Sync mechanism. If
+    /// disabled, the node will do Block Sync instead of State Sync.",
+    ///      "type": "boolean"
+    ///    },
+    ///    "state_sync_external_backoff": {
+    ///      "description": "Additional waiting period after a failed request to
+    /// external storage",
+    ///      "type": "string"
+    ///    },
+    ///    "state_sync_external_timeout": {
+    ///      "description": "How long to wait for a response from centralized
+    /// state sync",
+    ///      "type": "string"
+    ///    },
+    ///    "state_sync_p2p_timeout": {
+    ///      "description": "How long to wait for a response from p2p state
+    /// sync",
+    ///      "type": "string"
+    ///    },
+    ///    "state_sync_retry_backoff": {
+    ///      "description": "How long to wait after a failed state sync
+    /// request",
+    ///      "type": "string"
+    ///    },
+    ///    "sync_check_period": {
+    ///      "description": "How often to check that we are not out of sync.",
+    ///      "type": "string"
+    ///    },
+    ///    "sync_height_threshold": {
+    ///      "description": "Sync height threshold: below this difference in
+    /// height don't start syncing.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "sync_max_block_requests": {
+    ///      "description": "Maximum number of block requests to send to peers
+    /// to sync",
+    ///      "type": "integer",
+    ///      "format": "uint",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "sync_step_period": {
+    ///      "description": "While syncing, how long to check for each step.",
+    ///      "type": "string"
+    ///    },
+    ///    "tracked_accounts": {
+    ///      "description": "Accounts that this client tracks.",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/AccountId"
+    ///      }
+    ///    },
+    ///    "tracked_shadow_validator": {
+    ///      "description": "Track shards that should be tracked by given
+    /// validator.",
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
+    ///    },
+    ///    "tracked_shard_schedule": {
+    ///      "description": "Rotate between these sets of tracked shards. Used
+    /// to simulate the behavior of chunk only producers without staking tokens.
+    /// This field is only used if `tracked_shards` is empty.",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "array",
+    ///        "items": {
+    ///          "$ref": "#/components/schemas/ShardId"
+    ///        }
+    ///      }
+    ///    },
+    ///    "tracked_shards": {
+    ///      "description": "Shards that this client tracks.",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/ShardId"
+    ///      }
+    ///    },
+    ///    "transaction_pool_size_limit": {
+    ///      "description": "Limit of the size of per-shard transaction pool
+    /// measured in bytes. If not set, the size will be unbounded.",
+    ///      "type": [
+    ///        "integer",
+    ///        "null"
+    ///      ],
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "trie_viewer_state_size_limit": {
+    ///      "description": "Upper bound of the byte size of contract state that
+    /// is still viewable. None is no limit",
+    ///      "type": [
+    ///        "integer",
+    ///        "null"
+    ///      ],
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "ttl_account_id_router": {
+    ///      "description": "Time to persist Accounts Id in the router without
+    /// removing them.",
+    ///      "type": "string"
+    ///    },
+    ///    "tx_routing_height_horizon": {
+    ///      "description": "If the node is not a chunk producer within that
+    /// many blocks, then route to upcoming chunk producers.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "version": {
+    ///      "description": "Version of the binary.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Version"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "view_client_threads": {
+    ///      "description": "Number of threads for ViewClientActor pool.",
+    ///      "type": "integer",
+    ///      "format": "uint",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "view_client_throttle_period": {
+    ///      "description": "Number of seconds between state requests for view
+    /// client.",
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcClientConfigResponse {
+        ///Not clear old data, set `true` for archive nodes.
+        pub archive: bool,
+        ///Horizon at which instead of fetching block, fetch full state.
+        pub block_fetch_horizon: u64,
+        ///Behind this horizon header fetch kicks in.
+        pub block_header_fetch_horizon: u64,
+        ///Duration to check for producing / skipping block.
+        pub block_production_tracking_delay: ::std::string::String,
+        ///Time between check to perform catchup.
+        pub catchup_step_period: ::std::string::String,
+        ///Chain id for status.
+        pub chain_id: ::std::string::String,
+        ///Optional config for the Chunk Distribution Network feature. If set
+        /// to `None` then this node does not participate in the Chunk
+        /// Distribution Network. Nodes not participating will still function
+        /// fine, but possibly with higher latency due to the need of requesting
+        /// chunks over the peer-to-peer network.
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub chunk_distribution_network: ::std::option::Option<ChunkDistributionNetworkConfig>,
+        ///Time between checking to re-request chunks.
+        pub chunk_request_retry_period: ::std::string::String,
+        ///Number of threads to execute background migration work in client.
+        pub client_background_migration_threads: u32,
+        ///Time between running doomslug timer.
+        pub doomslug_step_period: ::std::string::String,
+        pub enable_multiline_logging: bool,
+        ///Re-export storage layer statistics as prometheus metrics.
+        pub enable_statistics_export: bool,
+        ///Epoch length.
+        pub epoch_length: u64,
+        ///Options for epoch sync.
+        pub epoch_sync: EpochSyncConfig,
+        ///Graceful shutdown at expected block height.
+        pub expected_shutdown: MutableConfigValue,
+        ///Garbage collection configuration.
+        pub gc: GcConfig,
+        ///Expected increase of header head height per second during header
+        /// sync
+        pub header_sync_expected_height_per_second: u64,
+        ///How much time to wait after initial header sync
+        pub header_sync_initial_timeout: ::std::string::String,
+        ///How much time to wait after some progress is made in header sync
+        pub header_sync_progress_timeout: ::std::string::String,
+        ///How much time to wait before banning a peer in header sync if sync
+        /// is too slow
+        pub header_sync_stall_ban_timeout: ::std::string::String,
+        ///Period between logging summary information.
+        pub log_summary_period: ::std::string::String,
+        ///Enable coloring of the logs
+        pub log_summary_style: LogSummaryStyle,
+        ///Maximum wait for approvals before producing block.
+        pub max_block_production_delay: ::std::string::String,
+        ///Maximum duration before skipping given height.
+        pub max_block_wait_delay: ::std::string::String,
+        ///Max burnt gas per view method.  If present, overrides value stored
+        /// in genesis file.  The value only affects the RPCs without
+        /// influencing the protocol thus changing it per-node doesn’t affect
+        /// the blockchain.
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub max_gas_burnt_view: ::std::option::Option<u64>,
+        ///Minimum duration before producing block.
+        pub min_block_production_delay: ::std::string::String,
+        ///Minimum number of peers to start syncing.
+        pub min_num_peers: u32,
+        ///Number of block producer seats
+        pub num_block_producer_seats: u64,
+        ///Maximum size of state witnesses in the OrphanStateWitnessPool.
+        ///
+        ///We keep only orphan witnesses which are smaller than this size. This
+        /// limits the maximum memory usage of OrphanStateWitnessPool.
+        pub orphan_state_witness_max_size: ::std::string::String,
+        ///OrphanStateWitnessPool keeps instances of ChunkStateWitness which
+        /// can't be processed because the previous block isn't available. The
+        /// witnesses wait in the pool until the required block appears. This
+        /// variable controls how many witnesses can be stored in the pool.
+        pub orphan_state_witness_pool_size: u32,
+        ///Limit the time of adding transactions to a chunk. A node produces a
+        /// chunk by adding transactions from the transaction pool until some
+        /// limit is reached. This time limit ensures that adding transactions
+        /// won't take longer than the specified duration, which helps to
+        /// produce the chunk quickly.
+        pub produce_chunk_add_transactions_time_limit: ::std::string::String,
+        ///Produce empty blocks, use `false` for testing.
+        pub produce_empty_blocks: bool,
+        pub resharding_config: MutableConfigValue,
+        ///Listening rpc port for status.
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub rpc_addr: ::std::option::Option<::std::string::String>,
+        ///Save observed instances of ChunkStateWitness to the database in
+        /// DBCol::LatestChunkStateWitnesses. Saving the latest witnesses is
+        /// useful for analysis and debugging. When this option is enabled, the
+        /// node will save ALL witnesses it observes, even invalid ones, which
+        /// can cause extra load on the database. This option is not recommended
+        /// for production use, as a large number of incoming witnesses could
+        /// cause denial of service.
+        pub save_latest_witnesses: bool,
+        ///save_trie_changes should be set to true iff - archive if false -
+        /// non-archival nodes need trie changes to perform garbage collection -
+        /// archive is true, cold_store is configured and migration to
+        /// split_storage is finished - node working in split storage mode needs
+        /// trie changes in order to do garbage collection on hot.
+        pub save_trie_changes: bool,
+        ///Skip waiting for sync (for testing or single node testnet).
+        pub skip_sync_wait: bool,
+        ///Options for syncing state.
+        pub state_sync: StateSyncConfig,
+        ///Whether to use the State Sync mechanism. If disabled, the node will
+        /// do Block Sync instead of State Sync.
+        pub state_sync_enabled: bool,
+        ///Additional waiting period after a failed request to external storage
+        pub state_sync_external_backoff: ::std::string::String,
+        ///How long to wait for a response from centralized state sync
+        pub state_sync_external_timeout: ::std::string::String,
+        ///How long to wait for a response from p2p state sync
+        pub state_sync_p2p_timeout: ::std::string::String,
+        ///How long to wait after a failed state sync request
+        pub state_sync_retry_backoff: ::std::string::String,
+        ///How often to check that we are not out of sync.
+        pub sync_check_period: ::std::string::String,
+        ///Sync height threshold: below this difference in height don't start
+        /// syncing.
+        pub sync_height_threshold: u64,
+        ///Maximum number of block requests to send to peers to sync
+        pub sync_max_block_requests: u32,
+        ///While syncing, how long to check for each step.
+        pub sync_step_period: ::std::string::String,
+        ///Accounts that this client tracks.
+        pub tracked_accounts: ::std::vec::Vec<AccountId>,
+        ///Track shards that should be tracked by given validator.
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub tracked_shadow_validator: ::std::option::Option<AccountId>,
+        ///Rotate between these sets of tracked shards. Used to simulate the
+        /// behavior of chunk only producers without staking tokens. This field
+        /// is only used if `tracked_shards` is empty.
+        pub tracked_shard_schedule: ::std::vec::Vec<::std::vec::Vec<ShardId>>,
+        ///Shards that this client tracks.
+        pub tracked_shards: ::std::vec::Vec<ShardId>,
+        ///Limit of the size of per-shard transaction pool measured in bytes.
+        /// If not set, the size will be unbounded.
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub transaction_pool_size_limit: ::std::option::Option<u64>,
+        ///Upper bound of the byte size of contract state that is still
+        /// viewable. None is no limit
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub trie_viewer_state_size_limit: ::std::option::Option<u64>,
+        ///Time to persist Accounts Id in the router without removing them.
+        pub ttl_account_id_router: ::std::string::String,
+        ///If the node is not a chunk producer within that many blocks, then
+        /// route to upcoming chunk producers.
+        pub tx_routing_height_horizon: u64,
+        ///Version of the binary.
+        pub version: Version,
+        ///Number of threads for ViewClientActor pool.
+        pub view_client_threads: u32,
+        ///Number of seconds between state requests for view client.
+        pub view_client_throttle_period: ::std::string::String,
+    }
+
+    impl ::std::convert::From<&RpcClientConfigResponse> for RpcClientConfigResponse {
+        fn from(value: &RpcClientConfigResponse) -> Self {
             value.clone()
         }
     }
@@ -12015,6 +13568,62 @@ pub mod types {
         }
     }
 
+    ///Options for dumping state to S3.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Options for dumping state to S3.",
+    ///  "type": "object",
+    ///  "properties": {
+    ///    "dump": {
+    ///      "description": "`none` value disables state dump to external
+    /// storage.",
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/DumpConfig"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
+    ///    },
+    ///    "sync": {
+    ///      "$ref": "#/components/schemas/SyncConfig"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct StateSyncConfig {
+        ///`none` value disables state dump to external storage.
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub dump: ::std::option::Option<DumpConfig>,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub sync: ::std::option::Option<SyncConfig>,
+    }
+
+    impl ::std::convert::From<&StateSyncConfig> for StateSyncConfig {
+        fn from(value: &StateSyncConfig) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::default::Default for StateSyncConfig {
+        fn default() -> Self {
+            Self {
+                dump: Default::default(),
+                sync: Default::default(),
+            }
+        }
+    }
+
     ///StatusMethodNameHelperEnum
     ///
     /// <details><summary>JSON schema</summary>
@@ -12421,6 +14030,62 @@ pub mod types {
             value: ::std::string::String,
         ) -> ::std::result::Result<Self, self::error::ConversionError> {
             value.parse()
+        }
+    }
+
+    ///Configures how to fetch state parts during state sync.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Configures how to fetch state parts during state
+    /// sync.",
+    ///  "oneOf": [
+    ///    {
+    ///      "description": "Syncs state from the peers without reading anything
+    /// from external storage.",
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "Peers"
+    ///      ]
+    ///    },
+    ///    {
+    ///      "description": "Expects parts to be available in external
+    /// storage.",
+    ///      "type": "object",
+    ///      "required": [
+    ///        "ExternalStorage"
+    ///      ],
+    ///      "properties": {
+    ///        "ExternalStorage": {
+    ///          "$ref": "#/components/schemas/ExternalStorageConfig"
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub enum SyncConfig {
+        ///Syncs state from the peers without reading anything from external
+        /// storage.
+        Peers,
+        ///Expects parts to be available in external storage.
+        ExternalStorage(ExternalStorageConfig),
+    }
+
+    impl ::std::convert::From<&Self> for SyncConfig {
+        fn from(value: &SyncConfig) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<ExternalStorageConfig> for SyncConfig {
+        fn from(value: ExternalStorageConfig) -> Self {
+            Self::ExternalStorage(value)
         }
     }
 
@@ -13417,10 +15082,25 @@ pub mod types {
 
     /// Generation of default values for serde.
     pub mod defaults {
+        pub(super) fn default_u64<T, const V: u64>() -> T
+        where
+            T: std::convert::TryFrom<u64>,
+            <T as std::convert::TryFrom<u64>>::Error: std::fmt::Debug,
+        {
+            T::try_from(V).unwrap()
+        }
+
         pub(super) fn execution_outcome_view_metadata() -> super::ExecutionMetadataView {
             super::ExecutionMetadataView {
                 gas_profile: ::std::option::Option::None,
                 version: 1_u32,
+            }
+        }
+
+        pub(super) fn gc_config_gc_step_period() -> super::DurationSchemeProvider {
+            super::DurationSchemeProvider {
+                nanoseconds: 0_i32,
+                seconds: 1_i64,
             }
         }
 
@@ -13578,6 +15258,31 @@ impl Client {
         &'a self,
         body: &'a types::JsonRpcRequestForBlockMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcBlockResponseAndRpcError>, Error<()>>
+    {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/client_config`
+    pub async fn client_config<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForClientConfigMethodNameHelperEnum,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcClientConfigResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]

@@ -7,6 +7,8 @@ filedata = f.read()
 f.close()
 
 filedata = filedata.replace('"type": "null"', '"type": "object"')
+filedata = filedata.replace('"nanos"', '"nanoseconds"')
+filedata = filedata.replace('"secs"', '"seconds"')
 
 f = open(filename, 'w')
 f.write(filedata)

@@ -113,6 +113,33 @@
         }
       }
     },
+    "/client_config": {
+      "post": {
+        "operationId": "client_config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JsonRpcRequest_for_ClientConfigMethodNameHelperEnum"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonRpcResponse_for_RpcClientConfigResponse_and_RpcError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/gas_price": {
       "post": {
         "operationId": "gas_price",
@@ -2170,6 +2197,40 @@
           {}
         ]
       },
+      "ChunkDistributionNetworkConfig": {
+        "description": "Config for the Chunk Distribution Network feature. This allows nodes to push and pull chunks from a central stream. The two benefits of this approach are: (1) less request/response traffic on the peer-to-peer network and (2) lower latency for RPC nodes indexing the chain.",
+        "type": "object",
+        "required": [
+          "enabled",
+          "uris"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "uris": {
+            "$ref": "#/components/schemas/ChunkDistributionUris"
+          }
+        }
+      },
+      "ChunkDistributionUris": {
+        "description": "URIs for the Chunk Distribution Network feature.",
+        "type": "object",
+        "required": [
+          "get",
+          "set"
+        ],
+        "properties": {
+          "get": {
+            "description": "URI for pulling chunks from the stream.",
+            "type": "string"
+          },
+          "set": {
+            "description": "URI for publishing chunks to the stream.",
+            "type": "string"
+          }
+        }
+      },
       "ChunkHeaderView": {
         "type": "object",
         "required": [
@@ -2279,6 +2340,12 @@
             "type": "string"
           }
         }
+      },
+      "ClientConfigMethodNameHelperEnum": {
+        "type": "string",
+        "enum": [
+          "client_config"
+        ]
       },
       "CompilationError": {
         "oneOf": [
@@ -2675,6 +2742,61 @@
           "Right"
         ]
       },
+      "DumpConfig": {
+        "description": "Configures how to dump state to external storage.",
+        "type": "object",
+        "required": [
+          "location"
+        ],
+        "properties": {
+          "credentials_file": {
+            "description": "Location of a json file with credentials allowing write access to the bucket.",
+            "type": "string",
+            "nullable": true
+          },
+          "iteration_delay": {
+            "description": "How often to check if a new epoch has started. Feel free to set to `None`, defaults are sensible.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DurationSchemeProvider"
+              }
+            ]
+          },
+          "location": {
+            "description": "Specifies where to write the obtained state parts.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExternalStorageLocation"
+              }
+            ]
+          },
+          "restart_dump_for_shards": {
+            "description": "Use in case a node that dumps state to the external storage gets in trouble.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShardId"
+            },
+            "nullable": true
+          }
+        }
+      },
+      "DurationSchemeProvider": {
+        "type": "object",
+        "required": [
+          "nanoseconds",
+          "seconds"
+        ],
+        "properties": {
+          "nanoseconds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "seconds": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
       "EpochId": {
         "description": "Epoch identifier -- wrapped hash, to make it easier to distinguish. EpochId of epoch T is the hash of last block in T-2 EpochId of first two epochs is 0",
         "allOf": [
@@ -2682,6 +2804,39 @@
             "$ref": "#/components/schemas/CryptoHash"
           }
         ]
+      },
+      "EpochSyncConfig": {
+        "type": "object",
+        "required": [
+          "epoch_sync_horizon",
+          "timeout_for_epoch_sync"
+        ],
+        "properties": {
+          "disable_epoch_sync_for_bootstrapping": {
+            "description": "If true, even if the node started from genesis, it will not perform epoch sync. There should be no reason to set this flag in production, because on both mainnet and testnet it would be infeasible to catch up from genesis without epoch sync.",
+            "default": false,
+            "type": "boolean"
+          },
+          "epoch_sync_horizon": {
+            "description": "This serves as two purposes: (1) the node will not epoch sync and instead resort to header sync, if the genesis block is within this many blocks from the current block; (2) the node will reject an epoch sync proof if the provided proof is for an epoch that is more than this many blocks behind the current block.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "ignore_epoch_sync_network_requests": {
+            "description": "If true, the node will ignore epoch sync requests from the network. It is strongly recommended not to set this flag, because it will prevent other nodes from bootstrapping. This flag is only included as a kill-switch and may be removed in a future release. Please note that epoch sync requests are heavily rate limited and cached, and therefore should not affect the performance of the node or introduce any non-negligible increase in network traffic.",
+            "default": false,
+            "type": "boolean"
+          },
+          "timeout_for_epoch_sync": {
+            "description": "Timeout for epoch sync requests. The node will continue retrying indefinitely even if this timeout is exceeded.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DurationSchemeProvider"
+              }
+            ]
+          }
+        }
       },
       "ExecutionMetadataView": {
         "type": "object",
@@ -2838,6 +2993,113 @@
             "properties": {
               "SuccessReceiptId": {
                 "$ref": "#/components/schemas/CryptoHash"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "ExternalStorageConfig": {
+        "type": "object",
+        "required": [
+          "location"
+        ],
+        "properties": {
+          "external_storage_fallback_threshold": {
+            "description": "The number of attempts the node will make to obtain a part from peers in the network before it fetches from external storage.",
+            "default": 3,
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "location": {
+            "description": "Location of state parts.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ExternalStorageLocation"
+              }
+            ]
+          },
+          "num_concurrent_requests": {
+            "description": "When fetching state parts from external storage, throttle fetch requests to this many concurrent requests.",
+            "default": 25,
+            "type": "integer",
+            "format": "uint32",
+            "minimum": 0.0
+          },
+          "num_concurrent_requests_during_catchup": {
+            "description": "During catchup, the node will use a different number of concurrent requests to reduce the performance impact of state sync.",
+            "default": 5,
+            "type": "integer",
+            "format": "uint32",
+            "minimum": 0.0
+          }
+        }
+      },
+      "ExternalStorageLocation": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "S3"
+            ],
+            "properties": {
+              "S3": {
+                "type": "object",
+                "required": [
+                  "bucket",
+                  "region"
+                ],
+                "properties": {
+                  "bucket": {
+                    "description": "Location of state dumps on S3.",
+                    "type": "string"
+                  },
+                  "region": {
+                    "description": "Data may only be available in certain locations.",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": [
+              "Filesystem"
+            ],
+            "properties": {
+              "Filesystem": {
+                "type": "object",
+                "required": [
+                  "root_dir"
+                ],
+                "properties": {
+                  "root_dir": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": [
+              "GCS"
+            ],
+            "properties": {
+              "GCS": {
+                "type": "object",
+                "required": [
+                  "bucket"
+                ],
+                "properties": {
+                  "bucket": {
+                    "type": "string"
+                  }
+                }
               }
             },
             "additionalProperties": false
@@ -3136,6 +3398,45 @@
           "receiver_id": {
             "description": "The access key only allows transactions with the given receiver's account id.",
             "type": "string"
+          }
+        }
+      },
+      "GCConfig": {
+        "description": "Configuration for garbage collection.",
+        "type": "object",
+        "properties": {
+          "gc_blocks_limit": {
+            "description": "Maximum number of blocks to garbage collect at every garbage collection call.",
+            "default": 2,
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "gc_fork_clean_step": {
+            "description": "Maximum number of height to go through at each garbage collection step when cleaning forks during garbage collection.",
+            "default": 100,
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "gc_num_epochs_to_keep": {
+            "description": "Number of epochs for which we keep store data.",
+            "default": 5,
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "gc_step_period": {
+            "description": "How often gc should be run",
+            "default": {
+              "nanoseconds": 0,
+              "seconds": 1
+            },
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DurationSchemeProvider"
+              }
+            ]
           }
         }
       },
@@ -4340,6 +4641,30 @@
           }
         }
       },
+      "JsonRpcRequest_for_ClientConfigMethodNameHelperEnum": {
+        "title": "JsonRpcRequest_for_ClientConfigMethodNameHelperEnum",
+        "type": "object",
+        "required": [
+          "id",
+          "jsonrpc",
+          "method",
+          "params"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "jsonrpc": {
+            "type": "string"
+          },
+          "method": {
+            "$ref": "#/components/schemas/ClientConfigMethodNameHelperEnum"
+          },
+          "params": {
+            "$ref": "#/components/schemas/RpcClientConfigRequest"
+          }
+        }
+      },
       "JsonRpcRequest_for_GasPriceMethodNameHelperEnum": {
         "title": "JsonRpcRequest_for_GasPriceMethodNameHelperEnum",
         "type": "object",
@@ -4568,6 +4893,57 @@
             "properties": {
               "result": {
                 "$ref": "#/components/schemas/RpcBlockResponse"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "tmp"
+            ],
+            "properties": {
+              "tmp": {
+                "$ref": "#/components/schemas/RpcError"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "error"
+            ],
+            "properties": {
+              "error": {
+                "$ref": "#/components/schemas/RpcError"
+              }
+            }
+          }
+        ],
+        "required": [
+          "id",
+          "jsonrpc"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "jsonrpc": {
+            "type": "string"
+          }
+        }
+      },
+      "JsonRpcResponse_for_RpcClientConfigResponse_and_RpcError": {
+        "title": "JsonRpcResponse_for_RpcClientConfigResponse_and_RpcError",
+        "type": "object",
+        "anyOf": [
+          {
+            "type": "object",
+            "required": [
+              "result"
+            ],
+            "properties": {
+              "result": {
+                "$ref": "#/components/schemas/RpcClientConfigResponse"
               }
             }
           },
@@ -5063,6 +5439,13 @@
           "light_client_proof"
         ]
       },
+      "LogSummaryStyle": {
+        "type": "string",
+        "enum": [
+          "plain",
+          "colored"
+        ]
+      },
       "MerklePathItem": {
         "type": "object",
         "required": [
@@ -5133,6 +5516,9 @@
             ]
           }
         ]
+      },
+      "MutableConfigValue": {
+        "type": "string"
       },
       "NameRpcErrorKind": {
         "type": "string",
@@ -5798,6 +6184,379 @@
           },
           "header": {
             "$ref": "#/components/schemas/BlockHeaderView"
+          }
+        }
+      },
+      "RpcClientConfigRequest": {
+        "type": "object"
+      },
+      "RpcClientConfigResponse": {
+        "description": "ClientConfig where some fields can be updated at runtime.",
+        "type": "object",
+        "required": [
+          "archive",
+          "block_fetch_horizon",
+          "block_header_fetch_horizon",
+          "block_production_tracking_delay",
+          "catchup_step_period",
+          "chain_id",
+          "chunk_request_retry_period",
+          "client_background_migration_threads",
+          "doomslug_step_period",
+          "enable_multiline_logging",
+          "enable_statistics_export",
+          "epoch_length",
+          "epoch_sync",
+          "expected_shutdown",
+          "gc",
+          "header_sync_expected_height_per_second",
+          "header_sync_initial_timeout",
+          "header_sync_progress_timeout",
+          "header_sync_stall_ban_timeout",
+          "log_summary_period",
+          "log_summary_style",
+          "max_block_production_delay",
+          "max_block_wait_delay",
+          "min_block_production_delay",
+          "min_num_peers",
+          "num_block_producer_seats",
+          "orphan_state_witness_max_size",
+          "orphan_state_witness_pool_size",
+          "produce_chunk_add_transactions_time_limit",
+          "produce_empty_blocks",
+          "resharding_config",
+          "save_latest_witnesses",
+          "save_trie_changes",
+          "skip_sync_wait",
+          "state_sync",
+          "state_sync_enabled",
+          "state_sync_external_backoff",
+          "state_sync_external_timeout",
+          "state_sync_p2p_timeout",
+          "state_sync_retry_backoff",
+          "sync_check_period",
+          "sync_height_threshold",
+          "sync_max_block_requests",
+          "sync_step_period",
+          "tracked_accounts",
+          "tracked_shard_schedule",
+          "tracked_shards",
+          "ttl_account_id_router",
+          "tx_routing_height_horizon",
+          "version",
+          "view_client_threads",
+          "view_client_throttle_period"
+        ],
+        "properties": {
+          "archive": {
+            "description": "Not clear old data, set `true` for archive nodes.",
+            "type": "boolean"
+          },
+          "block_fetch_horizon": {
+            "description": "Horizon at which instead of fetching block, fetch full state.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "block_header_fetch_horizon": {
+            "description": "Behind this horizon header fetch kicks in.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "block_production_tracking_delay": {
+            "description": "Duration to check for producing / skipping block.",
+            "type": "string"
+          },
+          "catchup_step_period": {
+            "description": "Time between check to perform catchup.",
+            "type": "string"
+          },
+          "chain_id": {
+            "description": "Chain id for status.",
+            "type": "string"
+          },
+          "chunk_distribution_network": {
+            "description": "Optional config for the Chunk Distribution Network feature. If set to `None` then this node does not participate in the Chunk Distribution Network. Nodes not participating will still function fine, but possibly with higher latency due to the need of requesting chunks over the peer-to-peer network.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ChunkDistributionNetworkConfig"
+              }
+            ],
+            "nullable": true
+          },
+          "chunk_request_retry_period": {
+            "description": "Time between checking to re-request chunks.",
+            "type": "string"
+          },
+          "client_background_migration_threads": {
+            "description": "Number of threads to execute background migration work in client.",
+            "type": "integer",
+            "format": "uint",
+            "minimum": 0.0
+          },
+          "doomslug_step_period": {
+            "description": "Time between running doomslug timer.",
+            "type": "string"
+          },
+          "enable_multiline_logging": {
+            "type": "boolean"
+          },
+          "enable_statistics_export": {
+            "description": "Re-export storage layer statistics as prometheus metrics.",
+            "type": "boolean"
+          },
+          "epoch_length": {
+            "description": "Epoch length.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "epoch_sync": {
+            "description": "Options for epoch sync.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EpochSyncConfig"
+              }
+            ]
+          },
+          "expected_shutdown": {
+            "description": "Graceful shutdown at expected block height.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MutableConfigValue"
+              }
+            ]
+          },
+          "gc": {
+            "description": "Garbage collection configuration.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GCConfig"
+              }
+            ]
+          },
+          "header_sync_expected_height_per_second": {
+            "description": "Expected increase of header head height per second during header sync",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "header_sync_initial_timeout": {
+            "description": "How much time to wait after initial header sync",
+            "type": "string"
+          },
+          "header_sync_progress_timeout": {
+            "description": "How much time to wait after some progress is made in header sync",
+            "type": "string"
+          },
+          "header_sync_stall_ban_timeout": {
+            "description": "How much time to wait before banning a peer in header sync if sync is too slow",
+            "type": "string"
+          },
+          "log_summary_period": {
+            "description": "Period between logging summary information.",
+            "type": "string"
+          },
+          "log_summary_style": {
+            "description": "Enable coloring of the logs",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/LogSummaryStyle"
+              }
+            ]
+          },
+          "max_block_production_delay": {
+            "description": "Maximum wait for approvals before producing block.",
+            "type": "string"
+          },
+          "max_block_wait_delay": {
+            "description": "Maximum duration before skipping given height.",
+            "type": "string"
+          },
+          "max_gas_burnt_view": {
+            "description": "Max burnt gas per view method.  If present, overrides value stored in genesis file.  The value only affects the RPCs without influencing the protocol thus changing it per-node doesn’t affect the blockchain.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0,
+            "nullable": true
+          },
+          "min_block_production_delay": {
+            "description": "Minimum duration before producing block.",
+            "type": "string"
+          },
+          "min_num_peers": {
+            "description": "Minimum number of peers to start syncing.",
+            "type": "integer",
+            "format": "uint",
+            "minimum": 0.0
+          },
+          "num_block_producer_seats": {
+            "description": "Number of block producer seats",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "orphan_state_witness_max_size": {
+            "description": "Maximum size of state witnesses in the OrphanStateWitnessPool.\n\nWe keep only orphan witnesses which are smaller than this size. This limits the maximum memory usage of OrphanStateWitnessPool.",
+            "type": "string"
+          },
+          "orphan_state_witness_pool_size": {
+            "description": "OrphanStateWitnessPool keeps instances of ChunkStateWitness which can't be processed because the previous block isn't available. The witnesses wait in the pool until the required block appears. This variable controls how many witnesses can be stored in the pool.",
+            "type": "integer",
+            "format": "uint",
+            "minimum": 0.0
+          },
+          "produce_chunk_add_transactions_time_limit": {
+            "description": "Limit the time of adding transactions to a chunk. A node produces a chunk by adding transactions from the transaction pool until some limit is reached. This time limit ensures that adding transactions won't take longer than the specified duration, which helps to produce the chunk quickly.",
+            "type": "string"
+          },
+          "produce_empty_blocks": {
+            "description": "Produce empty blocks, use `false` for testing.",
+            "type": "boolean"
+          },
+          "resharding_config": {
+            "$ref": "#/components/schemas/MutableConfigValue"
+          },
+          "rpc_addr": {
+            "description": "Listening rpc port for status.",
+            "type": "string",
+            "nullable": true
+          },
+          "save_latest_witnesses": {
+            "description": "Save observed instances of ChunkStateWitness to the database in DBCol::LatestChunkStateWitnesses. Saving the latest witnesses is useful for analysis and debugging. When this option is enabled, the node will save ALL witnesses it observes, even invalid ones, which can cause extra load on the database. This option is not recommended for production use, as a large number of incoming witnesses could cause denial of service.",
+            "type": "boolean"
+          },
+          "save_trie_changes": {
+            "description": "save_trie_changes should be set to true iff - archive if false - non-archival nodes need trie changes to perform garbage collection - archive is true, cold_store is configured and migration to split_storage is finished - node working in split storage mode needs trie changes in order to do garbage collection on hot.",
+            "type": "boolean"
+          },
+          "skip_sync_wait": {
+            "description": "Skip waiting for sync (for testing or single node testnet).",
+            "type": "boolean"
+          },
+          "state_sync": {
+            "description": "Options for syncing state.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StateSyncConfig"
+              }
+            ]
+          },
+          "state_sync_enabled": {
+            "description": "Whether to use the State Sync mechanism. If disabled, the node will do Block Sync instead of State Sync.",
+            "type": "boolean"
+          },
+          "state_sync_external_backoff": {
+            "description": "Additional waiting period after a failed request to external storage",
+            "type": "string"
+          },
+          "state_sync_external_timeout": {
+            "description": "How long to wait for a response from centralized state sync",
+            "type": "string"
+          },
+          "state_sync_p2p_timeout": {
+            "description": "How long to wait for a response from p2p state sync",
+            "type": "string"
+          },
+          "state_sync_retry_backoff": {
+            "description": "How long to wait after a failed state sync request",
+            "type": "string"
+          },
+          "sync_check_period": {
+            "description": "How often to check that we are not out of sync.",
+            "type": "string"
+          },
+          "sync_height_threshold": {
+            "description": "Sync height threshold: below this difference in height don't start syncing.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "sync_max_block_requests": {
+            "description": "Maximum number of block requests to send to peers to sync",
+            "type": "integer",
+            "format": "uint",
+            "minimum": 0.0
+          },
+          "sync_step_period": {
+            "description": "While syncing, how long to check for each step.",
+            "type": "string"
+          },
+          "tracked_accounts": {
+            "description": "Accounts that this client tracks.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountId"
+            }
+          },
+          "tracked_shadow_validator": {
+            "description": "Track shards that should be tracked by given validator.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AccountId"
+              }
+            ],
+            "nullable": true
+          },
+          "tracked_shard_schedule": {
+            "description": "Rotate between these sets of tracked shards. Used to simulate the behavior of chunk only producers without staking tokens. This field is only used if `tracked_shards` is empty.",
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ShardId"
+              }
+            }
+          },
+          "tracked_shards": {
+            "description": "Shards that this client tracks.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShardId"
+            }
+          },
+          "transaction_pool_size_limit": {
+            "description": "Limit of the size of per-shard transaction pool measured in bytes. If not set, the size will be unbounded.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0,
+            "nullable": true
+          },
+          "trie_viewer_state_size_limit": {
+            "description": "Upper bound of the byte size of contract state that is still viewable. None is no limit",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0,
+            "nullable": true
+          },
+          "ttl_account_id_router": {
+            "description": "Time to persist Accounts Id in the router without removing them.",
+            "type": "string"
+          },
+          "tx_routing_height_horizon": {
+            "description": "If the node is not a chunk producer within that many blocks, then route to upcoming chunk producers.",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "version": {
+            "description": "Version of the binary.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Version"
+              }
+            ]
+          },
+          "view_client_threads": {
+            "description": "Number of threads for ViewClientActor pool.",
+            "type": "integer",
+            "format": "uint",
+            "minimum": 0.0
+          },
+          "view_client_throttle_period": {
+            "description": "Number of seconds between state requests for view client.",
+            "type": "string"
           }
         }
       },
@@ -6570,6 +7329,24 @@
           }
         }
       },
+      "StateSyncConfig": {
+        "description": "Options for dumping state to S3.",
+        "type": "object",
+        "properties": {
+          "dump": {
+            "description": "`none` value disables state dump to external storage.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DumpConfig"
+              }
+            ],
+            "nullable": true
+          },
+          "sync": {
+            "$ref": "#/components/schemas/SyncConfig"
+          }
+        }
+      },
       "StatusMethodNameHelperEnum": {
         "type": "string",
         "enum": [
@@ -6720,6 +7497,31 @@
         "enum": [
           "genesis",
           "earliest_available"
+        ]
+      },
+      "SyncConfig": {
+        "description": "Configures how to fetch state parts during state sync.",
+        "oneOf": [
+          {
+            "description": "Syncs state from the peers without reading anything from external storage.",
+            "type": "string",
+            "enum": [
+              "Peers"
+            ]
+          },
+          {
+            "description": "Expects parts to be available in external storage.",
+            "type": "object",
+            "required": [
+              "ExternalStorage"
+            ],
+            "properties": {
+              "ExternalStorage": {
+                "$ref": "#/components/schemas/ExternalStorageConfig"
+              }
+            },
+            "additionalProperties": false
+          }
         ]
       },
       "Tier1ProxyView": {
