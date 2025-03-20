@@ -244,6 +244,53 @@ pub mod types {
         }
     }
 
+    ///AccountDataView
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_key",
+    ///    "peer_id",
+    ///    "proxies",
+    ///    "timestamp"
+    ///  ],
+    ///  "properties": {
+    ///    "account_key": {
+    ///      "$ref": "#/components/schemas/PublicKey"
+    ///    },
+    ///    "peer_id": {
+    ///      "$ref": "#/components/schemas/PublicKey"
+    ///    },
+    ///    "proxies": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/Tier1ProxyView"
+    ///      }
+    ///    },
+    ///    "timestamp": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct AccountDataView {
+        pub account_key: PublicKey,
+        pub peer_id: PublicKey,
+        pub proxies: ::std::vec::Vec<Tier1ProxyView>,
+        pub timestamp: ::std::string::String,
+    }
+
+    impl ::std::convert::From<&AccountDataView> for AccountDataView {
+        fn from(value: &AccountDataView) -> Self {
+            value.clone()
+        }
+    }
+
     ///NEAR Account Identifier.
     ///
     ///This is a unique, syntactically valid, human-readable account identifier
@@ -2208,6 +2255,81 @@ pub mod types {
         }
     }
 
+    ///BlockHeaderInnerLiteView
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "block_merkle_root",
+    ///    "epoch_id",
+    ///    "height",
+    ///    "next_bp_hash",
+    ///    "next_epoch_id",
+    ///    "outcome_root",
+    ///    "prev_state_root",
+    ///    "timestamp",
+    ///    "timestamp_nanosec"
+    ///  ],
+    ///  "properties": {
+    ///    "block_merkle_root": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "epoch_id": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "height": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "next_bp_hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "next_epoch_id": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "outcome_root": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "prev_state_root": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "timestamp": {
+    ///      "description": "Legacy json number. Should not be used.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "timestamp_nanosec": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct BlockHeaderInnerLiteView {
+        pub block_merkle_root: CryptoHash,
+        pub epoch_id: CryptoHash,
+        pub height: u64,
+        pub next_bp_hash: CryptoHash,
+        pub next_epoch_id: CryptoHash,
+        pub outcome_root: CryptoHash,
+        pub prev_state_root: CryptoHash,
+        ///Legacy json number. Should not be used.
+        pub timestamp: u64,
+        pub timestamp_nanosec: ::std::string::String,
+    }
+
+    impl ::std::convert::From<&BlockHeaderInnerLiteView> for BlockHeaderInnerLiteView {
+        fn from(value: &BlockHeaderInnerLiteView) -> Self {
+            value.clone()
+        }
+    }
+
     ///BlockHeaderView
     ///
     /// <details><summary>JSON schema</summary>
@@ -2652,6 +2774,253 @@ pub mod types {
         }
     }
 
+    ///BlockStatusView
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "hash",
+    ///    "height"
+    ///  ],
+    ///  "properties": {
+    ///    "hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "height": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct BlockStatusView {
+        pub hash: CryptoHash,
+        pub height: u64,
+    }
+
+    impl ::std::convert::From<&BlockStatusView> for BlockStatusView {
+        fn from(value: &BlockStatusView) -> Self {
+            value.clone()
+        }
+    }
+
+    ///BroadCastTxAsyncMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "broadcast_tx_async"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum BroadCastTxAsyncMethodNameHelperEnum {
+        #[serde(rename = "broadcast_tx_async")]
+        BroadcastTxAsync,
+    }
+
+    impl ::std::convert::From<&Self> for BroadCastTxAsyncMethodNameHelperEnum {
+        fn from(value: &BroadCastTxAsyncMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for BroadCastTxAsyncMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::BroadcastTxAsync => write!(f, "broadcast_tx_async"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for BroadCastTxAsyncMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "broadcast_tx_async" => Ok(Self::BroadcastTxAsync),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for BroadCastTxAsyncMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for BroadCastTxAsyncMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for BroadCastTxAsyncMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///BroadCastTxCommitMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "broadcast_tx_commit"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum BroadCastTxCommitMethodNameHelperEnum {
+        #[serde(rename = "broadcast_tx_commit")]
+        BroadcastTxCommit,
+    }
+
+    impl ::std::convert::From<&Self> for BroadCastTxCommitMethodNameHelperEnum {
+        fn from(value: &BroadCastTxCommitMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for BroadCastTxCommitMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::BroadcastTxCommit => write!(f, "broadcast_tx_commit"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for BroadCastTxCommitMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "broadcast_tx_commit" => Ok(Self::BroadcastTxCommit),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for BroadCastTxCommitMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for BroadCastTxCommitMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for BroadCastTxCommitMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///CatchupStatusView
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "blocks_to_catchup",
+    ///    "shard_sync_status",
+    ///    "sync_block_hash",
+    ///    "sync_block_height"
+    ///  ],
+    ///  "properties": {
+    ///    "blocks_to_catchup": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/BlockStatusView"
+    ///      }
+    ///    },
+    ///    "shard_sync_status": {
+    ///      "type": "object",
+    ///      "additionalProperties": {
+    ///        "type": "string"
+    ///      }
+    ///    },
+    ///    "sync_block_hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "sync_block_height": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct CatchupStatusView {
+        pub blocks_to_catchup: ::std::vec::Vec<BlockStatusView>,
+        pub shard_sync_status:
+            ::std::collections::HashMap<::std::string::String, ::std::string::String>,
+        pub sync_block_hash: CryptoHash,
+        pub sync_block_height: u64,
+    }
+
+    impl ::std::convert::From<&CatchupStatusView> for CatchupStatusView {
+        fn from(value: &CatchupStatusView) -> Self {
+            value.clone()
+        }
+    }
+
     ///CauseRpcErrorKind
     ///
     /// <details><summary>JSON schema</summary>
@@ -2866,85 +3235,6 @@ pub mod types {
     impl ::std::convert::From<&ChunkHeaderView> for ChunkHeaderView {
         fn from(value: &ChunkHeaderView) -> Self {
             value.clone()
-        }
-    }
-
-    ///ChunkMethodNameHelperEnum
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "chunk"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum ChunkMethodNameHelperEnum {
-        #[serde(rename = "chunk")]
-        Chunk,
-    }
-
-    impl ::std::convert::From<&Self> for ChunkMethodNameHelperEnum {
-        fn from(value: &ChunkMethodNameHelperEnum) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for ChunkMethodNameHelperEnum {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::Chunk => write!(f, "chunk"),
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for ChunkMethodNameHelperEnum {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "chunk" => Ok(Self::Chunk),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for ChunkMethodNameHelperEnum {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String> for ChunkMethodNameHelperEnum {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String> for ChunkMethodNameHelperEnum {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
         }
     }
 
@@ -3233,6 +3523,176 @@ pub mod types {
         }
     }
 
+    ///CurrentEpochValidatorInfo
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_id",
+    ///    "is_slashed",
+    ///    "num_expected_blocks",
+    ///    "num_produced_blocks",
+    ///    "public_key",
+    ///    "shards",
+    ///    "shards_endorsed",
+    ///    "stake"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "is_slashed": {
+    ///      "type": "boolean"
+    ///    },
+    ///    "num_expected_blocks": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "num_expected_chunks": {
+    ///      "default": 0,
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "num_expected_chunks_per_shard": {
+    ///      "description": "Number of chunks this validator was expected to
+    /// produce in each shard. Each entry in the array corresponds to the shard
+    /// in the `shards_produced` array.",
+    ///      "default": [],
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      }
+    ///    },
+    ///    "num_expected_endorsements": {
+    ///      "default": 0,
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "num_expected_endorsements_per_shard": {
+    ///      "description": "Number of chunks this validator was expected to
+    /// validate and endorse in each shard. Each entry in the array corresponds
+    /// to the shard in the `shards_endorsed` array.",
+    ///      "default": [],
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      }
+    ///    },
+    ///    "num_produced_blocks": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "num_produced_chunks": {
+    ///      "default": 0,
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "num_produced_chunks_per_shard": {
+    ///      "default": [],
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      }
+    ///    },
+    ///    "num_produced_endorsements": {
+    ///      "default": 0,
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "num_produced_endorsements_per_shard": {
+    ///      "default": [],
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      }
+    ///    },
+    ///    "public_key": {
+    ///      "$ref": "#/components/schemas/PublicKey"
+    ///    },
+    ///    "shards": {
+    ///      "description": "Shards this validator is assigned to as chunk
+    /// producer in the current epoch.",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/ShardId"
+    ///      }
+    ///    },
+    ///    "shards_endorsed": {
+    ///      "description": "Shards this validator is assigned to as chunk
+    /// validator in the current epoch.",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/ShardId"
+    ///      }
+    ///    },
+    ///    "stake": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct CurrentEpochValidatorInfo {
+        pub account_id: AccountId,
+        pub is_slashed: bool,
+        pub num_expected_blocks: u64,
+        #[serde(default)]
+        pub num_expected_chunks: u64,
+        ///Number of chunks this validator was expected to produce in each
+        /// shard. Each entry in the array corresponds to the shard in the
+        /// `shards_produced` array.
+        #[serde(default, skip_serializing_if = "::std::vec::Vec::is_empty")]
+        pub num_expected_chunks_per_shard: ::std::vec::Vec<u64>,
+        #[serde(default)]
+        pub num_expected_endorsements: u64,
+        ///Number of chunks this validator was expected to validate and endorse
+        /// in each shard. Each entry in the array corresponds to the shard in
+        /// the `shards_endorsed` array.
+        #[serde(default, skip_serializing_if = "::std::vec::Vec::is_empty")]
+        pub num_expected_endorsements_per_shard: ::std::vec::Vec<u64>,
+        pub num_produced_blocks: u64,
+        #[serde(default)]
+        pub num_produced_chunks: u64,
+        #[serde(default, skip_serializing_if = "::std::vec::Vec::is_empty")]
+        pub num_produced_chunks_per_shard: ::std::vec::Vec<u64>,
+        #[serde(default)]
+        pub num_produced_endorsements: u64,
+        #[serde(default, skip_serializing_if = "::std::vec::Vec::is_empty")]
+        pub num_produced_endorsements_per_shard: ::std::vec::Vec<u64>,
+        pub public_key: PublicKey,
+        ///Shards this validator is assigned to as chunk producer in the
+        /// current epoch.
+        pub shards: ::std::vec::Vec<ShardId>,
+        ///Shards this validator is assigned to as chunk validator in the
+        /// current epoch.
+        pub shards_endorsed: ::std::vec::Vec<ShardId>,
+        pub stake: ::std::string::String,
+    }
+
+    impl ::std::convert::From<&CurrentEpochValidatorInfo> for CurrentEpochValidatorInfo {
+        fn from(value: &CurrentEpochValidatorInfo) -> Self {
+            value.clone()
+        }
+    }
+
     ///DataReceiverView
     ///
     /// <details><summary>JSON schema</summary>
@@ -3501,6 +3961,65 @@ pub mod types {
         }
     }
 
+    ///DetailedDebugStatus
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "block_production_delay_millis",
+    ///    "catchup_status",
+    ///    "current_head_status",
+    ///    "current_header_head_status",
+    ///    "network_info",
+    ///    "sync_status"
+    ///  ],
+    ///  "properties": {
+    ///    "block_production_delay_millis": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "catchup_status": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/CatchupStatusView"
+    ///      }
+    ///    },
+    ///    "current_head_status": {
+    ///      "$ref": "#/components/schemas/BlockStatusView"
+    ///    },
+    ///    "current_header_head_status": {
+    ///      "$ref": "#/components/schemas/BlockStatusView"
+    ///    },
+    ///    "network_info": {
+    ///      "$ref": "#/components/schemas/NetworkInfoView"
+    ///    },
+    ///    "sync_status": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct DetailedDebugStatus {
+        pub block_production_delay_millis: u64,
+        pub catchup_status: ::std::vec::Vec<CatchupStatusView>,
+        pub current_head_status: BlockStatusView,
+        pub current_header_head_status: BlockStatusView,
+        pub network_info: NetworkInfoView,
+        pub sync_status: ::std::string::String,
+    }
+
+    impl ::std::convert::From<&DetailedDebugStatus> for DetailedDebugStatus {
+        fn from(value: &DetailedDebugStatus) -> Self {
+            value.clone()
+        }
+    }
+
     ///Direction
     ///
     /// <details><summary>JSON schema</summary>
@@ -3580,6 +4099,87 @@ pub mod types {
             value: ::std::string::String,
         ) -> ::std::result::Result<Self, self::error::ConversionError> {
             value.parse()
+        }
+    }
+
+    ///Epoch identifier -- wrapped hash, to make it easier to distinguish.
+    /// EpochId of epoch T is the hash of last block in T-2 EpochId of first two
+    /// epochs is 0
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Epoch identifier -- wrapped hash, to make it easier to
+    /// distinguish. EpochId of epoch T is the hash of last block in T-2 EpochId
+    /// of first two epochs is 0",
+    ///  "allOf": [
+    ///    {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(transparent)]
+    pub struct EpochId(pub CryptoHash);
+    impl ::std::ops::Deref for EpochId {
+        type Target = CryptoHash;
+        fn deref(&self) -> &CryptoHash {
+            &self.0
+        }
+    }
+
+    impl ::std::convert::From<EpochId> for CryptoHash {
+        fn from(value: EpochId) -> Self {
+            value.0
+        }
+    }
+
+    impl ::std::convert::From<&EpochId> for EpochId {
+        fn from(value: &EpochId) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<CryptoHash> for EpochId {
+        fn from(value: CryptoHash) -> Self {
+            Self(value)
+        }
+    }
+
+    impl ::std::str::FromStr for EpochId {
+        type Err = <CryptoHash as ::std::str::FromStr>::Err;
+        fn from_str(value: &str) -> ::std::result::Result<Self, Self::Err> {
+            Ok(Self(value.parse()?))
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for EpochId {
+        type Error = <CryptoHash as ::std::str::FromStr>::Err;
+        fn try_from(value: &str) -> ::std::result::Result<Self, Self::Error> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&String> for EpochId {
+        type Error = <CryptoHash as ::std::str::FromStr>::Err;
+        fn try_from(value: &String) -> ::std::result::Result<Self, Self::Error> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<String> for EpochId {
+        type Error = <CryptoHash as ::std::str::FromStr>::Err;
+        fn try_from(value: String) -> ::std::result::Result<Self, Self::Error> {
+            value.parse()
+        }
+    }
+
+    impl ::std::fmt::Display for EpochId {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            self.0.fmt(f)
         }
     }
 
@@ -6240,13 +6840,13 @@ pub mod types {
         }
     }
 
-    ///JsonRpcRequestForChunkMethodNameHelperEnum
+    ///JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "title": "JsonRpcRequest_for_ChunkMethodNameHelperEnum",
+    ///  "title": "JsonRpcRequest_for_BroadCastTxAsyncMethodNameHelperEnum",
     ///  "type": "object",
     ///  "required": [
     ///    "id",
@@ -6262,27 +6862,75 @@ pub mod types {
     ///      "type": "string"
     ///    },
     ///    "method": {
-    ///      "$ref": "#/components/schemas/ChunkMethodNameHelperEnum"
+    ///      "$ref": "#/components/schemas/BroadCastTxAsyncMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcChunkRequest"
+    ///      "$ref": "#/components/schemas/RpcSendTransactionRequest"
     ///    }
     ///  }
     ///}
     /// ```
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForChunkMethodNameHelperEnum {
+    pub struct JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
-        pub method: ChunkMethodNameHelperEnum,
-        pub params: RpcChunkRequest,
+        pub method: BroadCastTxAsyncMethodNameHelperEnum,
+        pub params: RpcSendTransactionRequest,
     }
 
-    impl ::std::convert::From<&JsonRpcRequestForChunkMethodNameHelperEnum>
-        for JsonRpcRequestForChunkMethodNameHelperEnum
+    impl ::std::convert::From<&JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum>
+        for JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum
     {
-        fn from(value: &JsonRpcRequestForChunkMethodNameHelperEnum) -> Self {
+        fn from(value: &JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForBroadCastTxCommitMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_BroadCastTxCommitMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref":
+    /// "#/components/schemas/BroadCastTxCommitMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcSendTransactionRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForBroadCastTxCommitMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: BroadCastTxCommitMethodNameHelperEnum,
+        pub params: RpcSendTransactionRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForBroadCastTxCommitMethodNameHelperEnum>
+        for JsonRpcRequestForBroadCastTxCommitMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForBroadCastTxCommitMethodNameHelperEnum) -> Self {
             value.clone()
         }
     }
@@ -6381,6 +7029,242 @@ pub mod types {
         }
     }
 
+    ///JsonRpcRequestForLightClientProofMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_LightClientProofMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/LightClientProofMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcLightClientExecutionProofRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForLightClientProofMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: LightClientProofMethodNameHelperEnum,
+        pub params: RpcLightClientExecutionProofRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForLightClientProofMethodNameHelperEnum>
+        for JsonRpcRequestForLightClientProofMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForLightClientProofMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForNetworkInfoMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_NetworkInfoMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/NetworkInfoMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcNetworkInfoRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForNetworkInfoMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: NetworkInfoMethodNameHelperEnum,
+        pub params: RpcNetworkInfoRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForNetworkInfoMethodNameHelperEnum>
+        for JsonRpcRequestForNetworkInfoMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForNetworkInfoMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForNextLightClientBlockMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_NextLightClientBlockMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref":
+    /// "#/components/schemas/NextLightClientBlockMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcLightClientNextBlockRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForNextLightClientBlockMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: NextLightClientBlockMethodNameHelperEnum,
+        pub params: RpcLightClientNextBlockRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForNextLightClientBlockMethodNameHelperEnum>
+        for JsonRpcRequestForNextLightClientBlockMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForNextLightClientBlockMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForSendTxMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_SendTxMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/SendTxMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcSendTransactionRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForSendTxMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: SendTxMethodNameHelperEnum,
+        pub params: RpcSendTransactionRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForSendTxMethodNameHelperEnum>
+        for JsonRpcRequestForSendTxMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForSendTxMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForStatusMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_StatusMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/StatusMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcStatusRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForStatusMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: StatusMethodNameHelperEnum,
+        pub params: RpcStatusRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForStatusMethodNameHelperEnum>
+        for JsonRpcRequestForStatusMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForStatusMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
     ///JsonRpcRequestForTxMethodNameHelperEnum
     ///
     /// <details><summary>JSON schema</summary>
@@ -6424,6 +7308,53 @@ pub mod types {
         for JsonRpcRequestForTxMethodNameHelperEnum
     {
         fn from(value: &JsonRpcRequestForTxMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForValidatorsMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_ValidatorsMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/ValidatorsMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcValidatorRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForValidatorsMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: ValidatorsMethodNameHelperEnum,
+        pub params: RpcValidatorRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForValidatorsMethodNameHelperEnum>
+        for JsonRpcRequestForValidatorsMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForValidatorsMethodNameHelperEnum) -> Self {
             value.clone()
         }
     }
@@ -6508,90 +7439,6 @@ pub mod types {
 
     impl ::std::convert::From<&Self> for JsonRpcResponseForRpcBlockResponseAndRpcError {
         fn from(value: &JsonRpcResponseForRpcBlockResponseAndRpcError) -> Self {
-            value.clone()
-        }
-    }
-
-    ///JsonRpcResponseForRpcChunkResponseAndRpcError
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "JsonRpcResponse_for_RpcChunkResponse_and_RpcError",
-    ///  "type": "object",
-    ///  "anyOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "result"
-    ///      ],
-    ///      "properties": {
-    ///        "result": {
-    ///          "$ref": "#/components/schemas/RpcChunkResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "error"
-    ///      ],
-    ///      "properties": {
-    ///        "error": {
-    ///          "$ref": "#/components/schemas/RpcError"
-    ///        }
-    ///      }
-    ///    }
-    ///  ],
-    ///  "required": [
-    ///    "id",
-    ///    "jsonrpc"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "jsonrpc": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    #[serde(untagged)]
-    pub enum JsonRpcResponseForRpcChunkResponseAndRpcError {
-        Variant0 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            result: RpcChunkResponse,
-        },
-        Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
-            error: RpcError,
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-        },
-    }
-
-    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcChunkResponseAndRpcError {
-        fn from(value: &JsonRpcResponseForRpcChunkResponseAndRpcError) -> Self {
             value.clone()
         }
     }
@@ -6764,6 +7611,346 @@ pub mod types {
         }
     }
 
+    ///JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_RpcLightClientExecutionProofResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref":
+    /// "#/components/schemas/RpcLightClientExecutionProofResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcLightClientExecutionProofResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self>
+        for JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError
+    {
+        fn from(value: &JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "
+    /// JsonRpcResponse_for_RpcLightClientNextBlockResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/RpcLightClientNextBlockResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcLightClientNextBlockResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError {
+        fn from(value: &JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForRpcNetworkInfoResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_RpcNetworkInfoResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/RpcNetworkInfoResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcNetworkInfoResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcNetworkInfoResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcNetworkInfoResponseAndRpcError {
+        fn from(value: &JsonRpcResponseForRpcNetworkInfoResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForRpcStatusResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_RpcStatusResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/RpcStatusResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcStatusResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcStatusResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcStatusResponseAndRpcError {
+        fn from(value: &JsonRpcResponseForRpcStatusResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
     ///JsonRpcResponseForRpcTransactionResponseAndRpcError
     ///
     /// <details><summary>JSON schema</summary>
@@ -6845,6 +8032,257 @@ pub mod types {
     impl ::std::convert::From<&Self> for JsonRpcResponseForRpcTransactionResponseAndRpcError {
         fn from(value: &JsonRpcResponseForRpcTransactionResponseAndRpcError) -> Self {
             value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForRpcValidatorResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_RpcValidatorResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/RpcValidatorResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcValidatorResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcValidatorResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcValidatorResponseAndRpcError {
+        fn from(value: &JsonRpcResponseForRpcValidatorResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
+    ///Information about a Producer: its account name, peer_id and a list of
+    /// connected peers that the node can use to send message for this producer.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Information about a Producer: its account name, peer_id
+    /// and a list of connected peers that the node can use to send message for
+    /// this producer.",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_id",
+    ///    "peer_id"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "next_hops": {
+    ///      "type": [
+    ///        "array",
+    ///        "null"
+    ///      ],
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/PublicKey"
+    ///      }
+    ///    },
+    ///    "peer_id": {
+    ///      "$ref": "#/components/schemas/PublicKey"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct KnownProducerView {
+        pub account_id: AccountId,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub next_hops: ::std::option::Option<::std::vec::Vec<PublicKey>>,
+        pub peer_id: PublicKey,
+    }
+
+    impl ::std::convert::From<&KnownProducerView> for KnownProducerView {
+        fn from(value: &KnownProducerView) -> Self {
+            value.clone()
+        }
+    }
+
+    ///LightClientBlockLiteView
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "inner_lite",
+    ///    "inner_rest_hash",
+    ///    "prev_block_hash"
+    ///  ],
+    ///  "properties": {
+    ///    "inner_lite": {
+    ///      "$ref": "#/components/schemas/BlockHeaderInnerLiteView"
+    ///    },
+    ///    "inner_rest_hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "prev_block_hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct LightClientBlockLiteView {
+        pub inner_lite: BlockHeaderInnerLiteView,
+        pub inner_rest_hash: CryptoHash,
+        pub prev_block_hash: CryptoHash,
+    }
+
+    impl ::std::convert::From<&LightClientBlockLiteView> for LightClientBlockLiteView {
+        fn from(value: &LightClientBlockLiteView) -> Self {
+            value.clone()
+        }
+    }
+
+    ///LightClientProofMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "light_client_proof"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum LightClientProofMethodNameHelperEnum {
+        #[serde(rename = "light_client_proof")]
+        LightClientProof,
+    }
+
+    impl ::std::convert::From<&Self> for LightClientProofMethodNameHelperEnum {
+        fn from(value: &LightClientProofMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for LightClientProofMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::LightClientProof => write!(f, "light_client_proof"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for LightClientProofMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "light_client_proof" => Ok(Self::LightClientProof),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for LightClientProofMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for LightClientProofMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for LightClientProofMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
         }
     }
 
@@ -7213,6 +8651,289 @@ pub mod types {
         }
     }
 
+    ///NetworkInfoMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "network_info"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum NetworkInfoMethodNameHelperEnum {
+        #[serde(rename = "network_info")]
+        NetworkInfo,
+    }
+
+    impl ::std::convert::From<&Self> for NetworkInfoMethodNameHelperEnum {
+        fn from(value: &NetworkInfoMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for NetworkInfoMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::NetworkInfo => write!(f, "network_info"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for NetworkInfoMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "network_info" => Ok(Self::NetworkInfo),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for NetworkInfoMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for NetworkInfoMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for NetworkInfoMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///NetworkInfoView
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "connected_peers",
+    ///    "known_producers",
+    ///    "num_connected_peers",
+    ///    "peer_max_count",
+    ///    "tier1_accounts_data",
+    ///    "tier1_accounts_keys",
+    ///    "tier1_connections"
+    ///  ],
+    ///  "properties": {
+    ///    "connected_peers": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/PeerInfoView"
+    ///      }
+    ///    },
+    ///    "known_producers": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/KnownProducerView"
+    ///      }
+    ///    },
+    ///    "num_connected_peers": {
+    ///      "type": "integer",
+    ///      "format": "uint",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "peer_max_count": {
+    ///      "type": "integer",
+    ///      "format": "uint32",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "tier1_accounts_data": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/AccountDataView"
+    ///      }
+    ///    },
+    ///    "tier1_accounts_keys": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/PublicKey"
+    ///      }
+    ///    },
+    ///    "tier1_connections": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/PeerInfoView"
+    ///      }
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct NetworkInfoView {
+        pub connected_peers: ::std::vec::Vec<PeerInfoView>,
+        pub known_producers: ::std::vec::Vec<KnownProducerView>,
+        pub num_connected_peers: u32,
+        pub peer_max_count: u32,
+        pub tier1_accounts_data: ::std::vec::Vec<AccountDataView>,
+        pub tier1_accounts_keys: ::std::vec::Vec<PublicKey>,
+        pub tier1_connections: ::std::vec::Vec<PeerInfoView>,
+    }
+
+    impl ::std::convert::From<&NetworkInfoView> for NetworkInfoView {
+        fn from(value: &NetworkInfoView) -> Self {
+            value.clone()
+        }
+    }
+
+    ///NextEpochValidatorInfo
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_id",
+    ///    "public_key",
+    ///    "shards",
+    ///    "stake"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "public_key": {
+    ///      "$ref": "#/components/schemas/PublicKey"
+    ///    },
+    ///    "shards": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/ShardId"
+    ///      }
+    ///    },
+    ///    "stake": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct NextEpochValidatorInfo {
+        pub account_id: AccountId,
+        pub public_key: PublicKey,
+        pub shards: ::std::vec::Vec<ShardId>,
+        pub stake: ::std::string::String,
+    }
+
+    impl ::std::convert::From<&NextEpochValidatorInfo> for NextEpochValidatorInfo {
+        fn from(value: &NextEpochValidatorInfo) -> Self {
+            value.clone()
+        }
+    }
+
+    ///NextLightClientBlockMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "next_light_client_block"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum NextLightClientBlockMethodNameHelperEnum {
+        #[serde(rename = "next_light_client_block")]
+        NextLightClientBlock,
+    }
+
+    impl ::std::convert::From<&Self> for NextLightClientBlockMethodNameHelperEnum {
+        fn from(value: &NextLightClientBlockMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for NextLightClientBlockMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::NextLightClientBlock => write!(f, "next_light_client_block"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for NextLightClientBlockMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "next_light_client_block" => Ok(Self::NextLightClientBlock),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for NextLightClientBlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for NextLightClientBlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for NextLightClientBlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
     ///This is Action which mustn't contain DelegateAction.
     ///
     ///This struct is needed to avoid the recursion when Action/DelegateAction
@@ -7273,6 +8994,226 @@ pub mod types {
     impl ::std::convert::From<Action> for NonDelegateAction {
         fn from(value: Action) -> Self {
             Self(value)
+        }
+    }
+
+    ///Peer id is the public key.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Peer id is the public key.",
+    ///  "allOf": [
+    ///    {
+    ///      "$ref": "#/components/schemas/PublicKey"
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(transparent)]
+    pub struct PeerId(pub PublicKey);
+    impl ::std::ops::Deref for PeerId {
+        type Target = PublicKey;
+        fn deref(&self) -> &PublicKey {
+            &self.0
+        }
+    }
+
+    impl ::std::convert::From<PeerId> for PublicKey {
+        fn from(value: PeerId) -> Self {
+            value.0
+        }
+    }
+
+    impl ::std::convert::From<&PeerId> for PeerId {
+        fn from(value: &PeerId) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<PublicKey> for PeerId {
+        fn from(value: PublicKey) -> Self {
+            Self(value)
+        }
+    }
+
+    impl ::std::str::FromStr for PeerId {
+        type Err = <PublicKey as ::std::str::FromStr>::Err;
+        fn from_str(value: &str) -> ::std::result::Result<Self, Self::Err> {
+            Ok(Self(value.parse()?))
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for PeerId {
+        type Error = <PublicKey as ::std::str::FromStr>::Err;
+        fn try_from(value: &str) -> ::std::result::Result<Self, Self::Error> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&String> for PeerId {
+        type Error = <PublicKey as ::std::str::FromStr>::Err;
+        fn try_from(value: &String) -> ::std::result::Result<Self, Self::Error> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<String> for PeerId {
+        type Error = <PublicKey as ::std::str::FromStr>::Err;
+        fn try_from(value: String) -> ::std::result::Result<Self, Self::Error> {
+            value.parse()
+        }
+    }
+
+    impl ::std::fmt::Display for PeerId {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            self.0.fmt(f)
+        }
+    }
+
+    ///PeerInfoView
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "addr",
+    ///    "archival",
+    ///    "connection_established_time_millis",
+    ///    "is_highest_block_invalid",
+    ///    "is_outbound_peer",
+    ///    "last_time_peer_requested_millis",
+    ///    "last_time_received_message_millis",
+    ///    "nonce",
+    ///    "peer_id",
+    ///    "received_bytes_per_sec",
+    ///    "sent_bytes_per_sec",
+    ///    "tracked_shards"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
+    ///    },
+    ///    "addr": {
+    ///      "type": "string"
+    ///    },
+    ///    "archival": {
+    ///      "type": "boolean"
+    ///    },
+    ///    "block_hash": {
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/CryptoHash"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
+    ///    },
+    ///    "connection_established_time_millis": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "height": {
+    ///      "type": [
+    ///        "integer",
+    ///        "null"
+    ///      ],
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "is_highest_block_invalid": {
+    ///      "type": "boolean"
+    ///    },
+    ///    "is_outbound_peer": {
+    ///      "type": "boolean"
+    ///    },
+    ///    "last_time_peer_requested_millis": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "last_time_received_message_millis": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "nonce": {
+    ///      "description": "Connection nonce.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "peer_id": {
+    ///      "$ref": "#/components/schemas/PublicKey"
+    ///    },
+    ///    "received_bytes_per_sec": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "sent_bytes_per_sec": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "tracked_shards": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/ShardId"
+    ///      }
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct PeerInfoView {
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub account_id: ::std::option::Option<AccountId>,
+        pub addr: ::std::string::String,
+        pub archival: bool,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub block_hash: ::std::option::Option<CryptoHash>,
+        pub connection_established_time_millis: u64,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub height: ::std::option::Option<u64>,
+        pub is_highest_block_invalid: bool,
+        pub is_outbound_peer: bool,
+        pub last_time_peer_requested_millis: u64,
+        pub last_time_received_message_millis: u64,
+        ///Connection nonce.
+        pub nonce: u64,
+        pub peer_id: PublicKey,
+        pub received_bytes_per_sec: u64,
+        pub sent_bytes_per_sec: u64,
+        pub tracked_shards: ::std::vec::Vec<ShardId>,
+    }
+
+    impl ::std::convert::From<&PeerInfoView> for PeerInfoView {
+        fn from(value: &PeerInfoView) -> Self {
+            value.clone()
         }
     }
 
@@ -8080,112 +10021,6 @@ pub mod types {
         }
     }
 
-    ///RpcChunkRequest
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "anyOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "block_id",
-    ///        "shard_id"
-    ///      ],
-    ///      "properties": {
-    ///        "block_id": {
-    ///          "$ref": "#/components/schemas/BlockId"
-    ///        },
-    ///        "shard_id": {
-    ///          "$ref": "#/components/schemas/ShardId"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "chunk_id"
-    ///      ],
-    ///      "properties": {
-    ///        "chunk_id": {
-    ///          "$ref": "#/components/schemas/CryptoHash"
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    #[serde(untagged)]
-    pub enum RpcChunkRequest {
-        Variant0 {
-            block_id: BlockId,
-            shard_id: ShardId,
-        },
-        Variant1 {
-            chunk_id: CryptoHash,
-        },
-    }
-
-    impl ::std::convert::From<&Self> for RpcChunkRequest {
-        fn from(value: &RpcChunkRequest) -> Self {
-            value.clone()
-        }
-    }
-
-    ///RpcChunkResponse
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "author",
-    ///    "header",
-    ///    "receipts",
-    ///    "transactions"
-    ///  ],
-    ///  "properties": {
-    ///    "author": {
-    ///      "$ref": "#/components/schemas/AccountId"
-    ///    },
-    ///    "header": {
-    ///      "$ref": "#/components/schemas/ChunkHeaderView"
-    ///    },
-    ///    "receipts": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/ReceiptView"
-    ///      }
-    ///    },
-    ///    "transactions": {
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/SignedTransactionView"
-    ///      }
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct RpcChunkResponse {
-        pub author: AccountId,
-        pub header: ChunkHeaderView,
-        pub receipts: ::std::vec::Vec<ReceiptView>,
-        pub transactions: ::std::vec::Vec<SignedTransactionView>,
-    }
-
-    impl ::std::convert::From<&RpcChunkResponse> for RpcChunkResponse {
-        fn from(value: &RpcChunkResponse) -> Self {
-            value.clone()
-        }
-    }
-
     ///RpcError
     ///
     /// <details><summary>JSON schema</summary>
@@ -8415,6 +10250,651 @@ pub mod types {
         }
     }
 
+    ///RpcKnownProducer
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_id",
+    ///    "peer_id"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "addr": {
+    ///      "type": [
+    ///        "string",
+    ///        "null"
+    ///      ]
+    ///    },
+    ///    "peer_id": {
+    ///      "$ref": "#/components/schemas/PeerId"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcKnownProducer {
+        pub account_id: AccountId,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub addr: ::std::option::Option<::std::string::String>,
+        pub peer_id: PeerId,
+    }
+
+    impl ::std::convert::From<&RpcKnownProducer> for RpcKnownProducer {
+        fn from(value: &RpcKnownProducer) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcLightClientExecutionProofRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "oneOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "sender_id",
+    ///        "transaction_hash",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "sender_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        },
+    ///        "transaction_hash": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "transaction"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "receipt_id",
+    ///        "receiver_id",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "receipt_id": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        },
+    ///        "receiver_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "receipt"
+    ///          ]
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "light_client_head"
+    ///  ],
+    ///  "properties": {
+    ///    "light_client_head": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum RpcLightClientExecutionProofRequest {
+        Variant0(RpcLightClientExecutionProofRequestVariant0),
+        Variant1(RpcLightClientExecutionProofRequestVariant1),
+    }
+
+    impl ::std::convert::From<&Self> for RpcLightClientExecutionProofRequest {
+        fn from(value: &RpcLightClientExecutionProofRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<RpcLightClientExecutionProofRequestVariant0>
+        for RpcLightClientExecutionProofRequest
+    {
+        fn from(value: RpcLightClientExecutionProofRequestVariant0) -> Self {
+            Self::Variant0(value)
+        }
+    }
+
+    impl ::std::convert::From<RpcLightClientExecutionProofRequestVariant1>
+        for RpcLightClientExecutionProofRequest
+    {
+        fn from(value: RpcLightClientExecutionProofRequestVariant1) -> Self {
+            Self::Variant1(value)
+        }
+    }
+
+    ///RpcLightClientExecutionProofRequestVariant0
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "allOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "light_client_head"
+    ///      ],
+    ///      "properties": {
+    ///        "light_client_head": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "sender_id",
+    ///        "transaction_hash",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "sender_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        },
+    ///        "transaction_hash": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "transaction"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "receipt_id",
+    ///          "receiver_id",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "receipt_id": {
+    ///            "$ref": "#/components/schemas/CryptoHash"
+    ///          },
+    ///          "receiver_id": {
+    ///            "$ref": "#/components/schemas/AccountId"
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "receipt"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    #[serde(deny_unknown_fields)]
+    pub enum RpcLightClientExecutionProofRequestVariant0 {}
+    impl ::std::convert::From<&Self> for RpcLightClientExecutionProofRequestVariant0 {
+        fn from(value: &RpcLightClientExecutionProofRequestVariant0) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcLightClientExecutionProofRequestVariant1
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "allOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "light_client_head"
+    ///      ],
+    ///      "properties": {
+    ///        "light_client_head": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "receipt_id",
+    ///        "receiver_id",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "receipt_id": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        },
+    ///        "receiver_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "receipt"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "sender_id",
+    ///          "transaction_hash",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "sender_id": {
+    ///            "$ref": "#/components/schemas/AccountId"
+    ///          },
+    ///          "transaction_hash": {
+    ///            "$ref": "#/components/schemas/CryptoHash"
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "transaction"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    #[serde(deny_unknown_fields)]
+    pub enum RpcLightClientExecutionProofRequestVariant1 {}
+    impl ::std::convert::From<&Self> for RpcLightClientExecutionProofRequestVariant1 {
+        fn from(value: &RpcLightClientExecutionProofRequestVariant1) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcLightClientExecutionProofResponse
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "block_header_lite",
+    ///    "block_proof",
+    ///    "outcome_proof",
+    ///    "outcome_root_proof"
+    ///  ],
+    ///  "properties": {
+    ///    "block_header_lite": {
+    ///      "$ref": "#/components/schemas/LightClientBlockLiteView"
+    ///    },
+    ///    "block_proof": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/MerklePathItem"
+    ///      }
+    ///    },
+    ///    "outcome_proof": {
+    ///      "$ref": "#/components/schemas/ExecutionOutcomeWithIdView"
+    ///    },
+    ///    "outcome_root_proof": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/MerklePathItem"
+    ///      }
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcLightClientExecutionProofResponse {
+        pub block_header_lite: LightClientBlockLiteView,
+        pub block_proof: ::std::vec::Vec<MerklePathItem>,
+        pub outcome_proof: ExecutionOutcomeWithIdView,
+        pub outcome_root_proof: ::std::vec::Vec<MerklePathItem>,
+    }
+
+    impl ::std::convert::From<&RpcLightClientExecutionProofResponse>
+        for RpcLightClientExecutionProofResponse
+    {
+        fn from(value: &RpcLightClientExecutionProofResponse) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcLightClientNextBlockRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "last_block_hash"
+    ///  ],
+    ///  "properties": {
+    ///    "last_block_hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcLightClientNextBlockRequest {
+        pub last_block_hash: CryptoHash,
+    }
+
+    impl ::std::convert::From<&RpcLightClientNextBlockRequest> for RpcLightClientNextBlockRequest {
+        fn from(value: &RpcLightClientNextBlockRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcLightClientNextBlockResponse
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "properties": {
+    ///    "approvals_after_next": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "oneOf": [
+    ///          {
+    ///            "type": "null"
+    ///          },
+    ///          {
+    ///            "allOf": [
+    ///              {
+    ///                "$ref": "#/components/schemas/Signature"
+    ///              }
+    ///            ]
+    ///          }
+    ///        ]
+    ///      }
+    ///    },
+    ///    "inner_lite": {
+    ///      "$ref": "#/components/schemas/BlockHeaderInnerLiteView"
+    ///    },
+    ///    "inner_rest_hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "next_block_inner_hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "next_bps": {
+    ///      "type": [
+    ///        "array",
+    ///        "null"
+    ///      ],
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/ValidatorStakeView"
+    ///      }
+    ///    },
+    ///    "prev_block_hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcLightClientNextBlockResponse {
+        #[serde(default, skip_serializing_if = "::std::vec::Vec::is_empty")]
+        pub approvals_after_next: ::std::vec::Vec<::std::option::Option<Signature>>,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub inner_lite: ::std::option::Option<BlockHeaderInnerLiteView>,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub inner_rest_hash: ::std::option::Option<CryptoHash>,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub next_block_inner_hash: ::std::option::Option<CryptoHash>,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub next_bps: ::std::option::Option<::std::vec::Vec<ValidatorStakeView>>,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub prev_block_hash: ::std::option::Option<CryptoHash>,
+    }
+
+    impl ::std::convert::From<&RpcLightClientNextBlockResponse> for RpcLightClientNextBlockResponse {
+        fn from(value: &RpcLightClientNextBlockResponse) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::default::Default for RpcLightClientNextBlockResponse {
+        fn default() -> Self {
+            Self {
+                approvals_after_next: Default::default(),
+                inner_lite: Default::default(),
+                inner_rest_hash: Default::default(),
+                next_block_inner_hash: Default::default(),
+                next_bps: Default::default(),
+                prev_block_hash: Default::default(),
+            }
+        }
+    }
+
+    ///RpcNetworkInfoRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object"
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(transparent)]
+    pub struct RpcNetworkInfoRequest(
+        pub ::serde_json::Map<::std::string::String, ::serde_json::Value>,
+    );
+    impl ::std::ops::Deref for RpcNetworkInfoRequest {
+        type Target = ::serde_json::Map<::std::string::String, ::serde_json::Value>;
+        fn deref(&self) -> &::serde_json::Map<::std::string::String, ::serde_json::Value> {
+            &self.0
+        }
+    }
+
+    impl ::std::convert::From<RpcNetworkInfoRequest>
+        for ::serde_json::Map<::std::string::String, ::serde_json::Value>
+    {
+        fn from(value: RpcNetworkInfoRequest) -> Self {
+            value.0
+        }
+    }
+
+    impl ::std::convert::From<&RpcNetworkInfoRequest> for RpcNetworkInfoRequest {
+        fn from(value: &RpcNetworkInfoRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<::serde_json::Map<::std::string::String, ::serde_json::Value>>
+        for RpcNetworkInfoRequest
+    {
+        fn from(value: ::serde_json::Map<::std::string::String, ::serde_json::Value>) -> Self {
+            Self(value)
+        }
+    }
+
+    ///RpcNetworkInfoResponse
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "active_peers",
+    ///    "known_producers",
+    ///    "num_active_peers",
+    ///    "peer_max_count",
+    ///    "received_bytes_per_sec",
+    ///    "sent_bytes_per_sec"
+    ///  ],
+    ///  "properties": {
+    ///    "active_peers": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/RpcPeerInfo"
+    ///      }
+    ///    },
+    ///    "known_producers": {
+    ///      "description": "Accounts of known block and chunk producers from
+    /// routing table.",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/RpcKnownProducer"
+    ///      }
+    ///    },
+    ///    "num_active_peers": {
+    ///      "type": "integer",
+    ///      "format": "uint",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "peer_max_count": {
+    ///      "type": "integer",
+    ///      "format": "uint32",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "received_bytes_per_sec": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "sent_bytes_per_sec": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcNetworkInfoResponse {
+        pub active_peers: ::std::vec::Vec<RpcPeerInfo>,
+        ///Accounts of known block and chunk producers from routing table.
+        pub known_producers: ::std::vec::Vec<RpcKnownProducer>,
+        pub num_active_peers: u32,
+        pub peer_max_count: u32,
+        pub received_bytes_per_sec: u64,
+        pub sent_bytes_per_sec: u64,
+    }
+
+    impl ::std::convert::From<&RpcNetworkInfoResponse> for RpcNetworkInfoResponse {
+        fn from(value: &RpcNetworkInfoResponse) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcPeerInfo
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
+    ///    },
+    ///    "addr": {
+    ///      "type": [
+    ///        "string",
+    ///        "null"
+    ///      ]
+    ///    },
+    ///    "id": {
+    ///      "$ref": "#/components/schemas/PeerId"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcPeerInfo {
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub account_id: ::std::option::Option<AccountId>,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub addr: ::std::option::Option<::std::string::String>,
+        pub id: PeerId,
+    }
+
+    impl ::std::convert::From<&RpcPeerInfo> for RpcPeerInfo {
+        fn from(value: &RpcPeerInfo) -> Self {
+            value.clone()
+        }
+    }
+
     ///RpcRequestValidationErrorKind
     ///
     /// <details><summary>JSON schema</summary>
@@ -8491,6 +10971,287 @@ pub mod types {
 
     impl ::std::convert::From<&Self> for RpcRequestValidationErrorKind {
         fn from(value: &RpcRequestValidationErrorKind) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcSendTransactionRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "signed_tx_base64"
+    ///  ],
+    ///  "properties": {
+    ///    "signed_tx_base64": {
+    ///      "type": "string"
+    ///    },
+    ///    "wait_until": {
+    ///      "default": "EXECUTED_OPTIMISTIC",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/TxExecutionStatus"
+    ///        }
+    ///      ]
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcSendTransactionRequest {
+        pub signed_tx_base64: ::std::string::String,
+        #[serde(default = "defaults::rpc_send_transaction_request_wait_until")]
+        pub wait_until: TxExecutionStatus,
+    }
+
+    impl ::std::convert::From<&RpcSendTransactionRequest> for RpcSendTransactionRequest {
+        fn from(value: &RpcSendTransactionRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcStatusRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object"
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(transparent)]
+    pub struct RpcStatusRequest(pub ::serde_json::Map<::std::string::String, ::serde_json::Value>);
+    impl ::std::ops::Deref for RpcStatusRequest {
+        type Target = ::serde_json::Map<::std::string::String, ::serde_json::Value>;
+        fn deref(&self) -> &::serde_json::Map<::std::string::String, ::serde_json::Value> {
+            &self.0
+        }
+    }
+
+    impl ::std::convert::From<RpcStatusRequest>
+        for ::serde_json::Map<::std::string::String, ::serde_json::Value>
+    {
+        fn from(value: RpcStatusRequest) -> Self {
+            value.0
+        }
+    }
+
+    impl ::std::convert::From<&RpcStatusRequest> for RpcStatusRequest {
+        fn from(value: &RpcStatusRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<::serde_json::Map<::std::string::String, ::serde_json::Value>>
+        for RpcStatusRequest
+    {
+        fn from(value: ::serde_json::Map<::std::string::String, ::serde_json::Value>) -> Self {
+            Self(value)
+        }
+    }
+
+    ///RpcStatusResponse
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "chain_id",
+    ///    "genesis_hash",
+    ///    "latest_protocol_version",
+    ///    "node_public_key",
+    ///    "protocol_version",
+    ///    "sync_info",
+    ///    "uptime_sec",
+    ///    "validators",
+    ///    "version"
+    ///  ],
+    ///  "properties": {
+    ///    "chain_id": {
+    ///      "description": "Unique chain id.",
+    ///      "type": "string"
+    ///    },
+    ///    "detailed_debug_status": {
+    ///      "description": "Information about last blocks, network, epoch and
+    /// chain & chunk info.",
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/DetailedDebugStatus"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
+    ///    },
+    ///    "genesis_hash": {
+    ///      "description": "Genesis hash of the chain.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "latest_protocol_version": {
+    ///      "description": "Latest protocol version that this client
+    /// supports.",
+    ///      "type": "integer",
+    ///      "format": "uint32",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "node_key": {
+    ///      "description": "Deprecated; same as `validator_public_key` which
+    /// you should use instead.",
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/PublicKey"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
+    ///    },
+    ///    "node_public_key": {
+    ///      "description": "Public key of the node.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/PublicKey"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "protocol_version": {
+    ///      "description": "Currently active protocol version.",
+    ///      "type": "integer",
+    ///      "format": "uint32",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "rpc_addr": {
+    ///      "description": "Address for RPC server.  None if node doesn’t have
+    /// RPC endpoint enabled.",
+    ///      "type": [
+    ///        "string",
+    ///        "null"
+    ///      ]
+    ///    },
+    ///    "sync_info": {
+    ///      "description": "Sync status of the node.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/StatusSyncInfo"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "uptime_sec": {
+    ///      "description": "Uptime of the node.",
+    ///      "type": "integer",
+    ///      "format": "int64"
+    ///    },
+    ///    "validator_account_id": {
+    ///      "description": "Validator id of the node",
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
+    ///    },
+    ///    "validator_public_key": {
+    ///      "description": "Public key of the validator.",
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/PublicKey"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
+    ///    },
+    ///    "validators": {
+    ///      "description": "Current epoch validators.",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/ValidatorInfo"
+    ///      }
+    ///    },
+    ///    "version": {
+    ///      "description": "Binary version.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Version"
+    ///        }
+    ///      ]
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcStatusResponse {
+        ///Unique chain id.
+        pub chain_id: ::std::string::String,
+        ///Information about last blocks, network, epoch and chain & chunk
+        /// info.
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub detailed_debug_status: ::std::option::Option<DetailedDebugStatus>,
+        ///Genesis hash of the chain.
+        pub genesis_hash: CryptoHash,
+        ///Latest protocol version that this client supports.
+        pub latest_protocol_version: u32,
+        ///Deprecated; same as `validator_public_key` which you should use
+        /// instead.
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub node_key: ::std::option::Option<PublicKey>,
+        ///Public key of the node.
+        pub node_public_key: PublicKey,
+        ///Currently active protocol version.
+        pub protocol_version: u32,
+        ///Address for RPC server.  None if node doesn’t have RPC endpoint
+        /// enabled.
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub rpc_addr: ::std::option::Option<::std::string::String>,
+        ///Sync status of the node.
+        pub sync_info: StatusSyncInfo,
+        ///Uptime of the node.
+        pub uptime_sec: i64,
+        ///Validator id of the node
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub validator_account_id: ::std::option::Option<AccountId>,
+        ///Public key of the validator.
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub validator_public_key: ::std::option::Option<PublicKey>,
+        ///Current epoch validators.
+        pub validators: ::std::vec::Vec<ValidatorInfo>,
+        ///Binary version.
+        pub version: Version,
+    }
+
+    impl ::std::convert::From<&RpcStatusResponse> for RpcStatusResponse {
+        fn from(value: &RpcStatusResponse) -> Self {
             value.clone()
         }
     }
@@ -8629,6 +11390,259 @@ pub mod types {
     impl ::std::convert::From<&Self> for RpcTransactionStatusRequest {
         fn from(value: &RpcTransactionStatusRequest) -> Self {
             value.clone()
+        }
+    }
+
+    ///RpcValidatorRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "oneOf": [
+    ///    {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "latest"
+    ///      ]
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "epoch_id"
+    ///      ],
+    ///      "properties": {
+    ///        "epoch_id": {
+    ///          "$ref": "#/components/schemas/EpochId"
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "block_id"
+    ///      ],
+    ///      "properties": {
+    ///        "block_id": {
+    ///          "$ref": "#/components/schemas/BlockId"
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub enum RpcValidatorRequest {
+        #[serde(rename = "latest")]
+        Latest,
+        #[serde(rename = "epoch_id")]
+        EpochId(EpochId),
+        #[serde(rename = "block_id")]
+        BlockId(BlockId),
+    }
+
+    impl ::std::convert::From<&Self> for RpcValidatorRequest {
+        fn from(value: &RpcValidatorRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<EpochId> for RpcValidatorRequest {
+        fn from(value: EpochId) -> Self {
+            Self::EpochId(value)
+        }
+    }
+
+    impl ::std::convert::From<BlockId> for RpcValidatorRequest {
+        fn from(value: BlockId) -> Self {
+            Self::BlockId(value)
+        }
+    }
+
+    ///Information about this epoch validators and next epoch validators
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Information about this epoch validators and next epoch
+    /// validators",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "current_fishermen",
+    ///    "current_proposals",
+    ///    "current_validators",
+    ///    "epoch_height",
+    ///    "epoch_start_height",
+    ///    "next_fishermen",
+    ///    "next_validators",
+    ///    "prev_epoch_kickout"
+    ///  ],
+    ///  "properties": {
+    ///    "current_fishermen": {
+    ///      "description": "Fishermen for the current epoch",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/ValidatorStakeView"
+    ///      }
+    ///    },
+    ///    "current_proposals": {
+    ///      "description": "Proposals in the current epoch",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/ValidatorStakeView"
+    ///      }
+    ///    },
+    ///    "current_validators": {
+    ///      "description": "Validators for the current epoch",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/CurrentEpochValidatorInfo"
+    ///      }
+    ///    },
+    ///    "epoch_height": {
+    ///      "description": "Epoch height",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "epoch_start_height": {
+    ///      "description": "Epoch start block height",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "next_fishermen": {
+    ///      "description": "Fishermen for the next epoch",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/ValidatorStakeView"
+    ///      }
+    ///    },
+    ///    "next_validators": {
+    ///      "description": "Validators for the next epoch",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/NextEpochValidatorInfo"
+    ///      }
+    ///    },
+    ///    "prev_epoch_kickout": {
+    ///      "description": "Kickout in the previous epoch",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/ValidatorKickoutView"
+    ///      }
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcValidatorResponse {
+        ///Fishermen for the current epoch
+        pub current_fishermen: ::std::vec::Vec<ValidatorStakeView>,
+        ///Proposals in the current epoch
+        pub current_proposals: ::std::vec::Vec<ValidatorStakeView>,
+        ///Validators for the current epoch
+        pub current_validators: ::std::vec::Vec<CurrentEpochValidatorInfo>,
+        ///Epoch height
+        pub epoch_height: u64,
+        ///Epoch start block height
+        pub epoch_start_height: u64,
+        ///Fishermen for the next epoch
+        pub next_fishermen: ::std::vec::Vec<ValidatorStakeView>,
+        ///Validators for the next epoch
+        pub next_validators: ::std::vec::Vec<NextEpochValidatorInfo>,
+        ///Kickout in the previous epoch
+        pub prev_epoch_kickout: ::std::vec::Vec<ValidatorKickoutView>,
+    }
+
+    impl ::std::convert::From<&RpcValidatorResponse> for RpcValidatorResponse {
+        fn from(value: &RpcValidatorResponse) -> Self {
+            value.clone()
+        }
+    }
+
+    ///SendTxMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "send_tx"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum SendTxMethodNameHelperEnum {
+        #[serde(rename = "send_tx")]
+        SendTx,
+    }
+
+    impl ::std::convert::From<&Self> for SendTxMethodNameHelperEnum {
+        fn from(value: &SendTxMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for SendTxMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::SendTx => write!(f, "send_tx"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for SendTxMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "send_tx" => Ok(Self::SendTx),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for SendTxMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for SendTxMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for SendTxMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
         }
     }
 
@@ -9001,6 +12015,193 @@ pub mod types {
         }
     }
 
+    ///StatusMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "status"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum StatusMethodNameHelperEnum {
+        #[serde(rename = "status")]
+        Status,
+    }
+
+    impl ::std::convert::From<&Self> for StatusMethodNameHelperEnum {
+        fn from(value: &StatusMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for StatusMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::Status => write!(f, "status"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for StatusMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "status" => Ok(Self::Status),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for StatusMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for StatusMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for StatusMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///StatusSyncInfo
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "earliest_block_time",
+    ///    "latest_block_hash",
+    ///    "latest_block_height",
+    ///    "latest_block_time",
+    ///    "latest_state_root",
+    ///    "syncing"
+    ///  ],
+    ///  "properties": {
+    ///    "earliest_block_hash": {
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/CryptoHash"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
+    ///    },
+    ///    "earliest_block_height": {
+    ///      "type": [
+    ///        "integer",
+    ///        "null"
+    ///      ],
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "earliest_block_time": {
+    ///      "type": "string"
+    ///    },
+    ///    "epoch_id": {
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/EpochId"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
+    ///    },
+    ///    "epoch_start_height": {
+    ///      "type": [
+    ///        "integer",
+    ///        "null"
+    ///      ],
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "latest_block_hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "latest_block_height": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "latest_block_time": {
+    ///      "type": "string"
+    ///    },
+    ///    "latest_state_root": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "syncing": {
+    ///      "type": "boolean"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct StatusSyncInfo {
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub earliest_block_hash: ::std::option::Option<CryptoHash>,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub earliest_block_height: ::std::option::Option<u64>,
+        pub earliest_block_time: ::std::string::String,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub epoch_id: ::std::option::Option<EpochId>,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub epoch_start_height: ::std::option::Option<u64>,
+        pub latest_block_hash: CryptoHash,
+        pub latest_block_height: u64,
+        pub latest_block_time: ::std::string::String,
+        pub latest_state_root: CryptoHash,
+        pub syncing: bool,
+    }
+
+    impl ::std::convert::From<&StatusSyncInfo> for StatusSyncInfo {
+        fn from(value: &StatusSyncInfo) -> Self {
+            value.clone()
+        }
+    }
+
     ///Errors which may occur during working with trie storages, storing trie
     /// values (trie nodes and state values) by their hashes.
     ///
@@ -9220,6 +12421,40 @@ pub mod types {
             value: ::std::string::String,
         ) -> ::std::result::Result<Self, self::error::ConversionError> {
             value.parse()
+        }
+    }
+
+    ///Tier1ProxyView
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "addr",
+    ///    "peer_id"
+    ///  ],
+    ///  "properties": {
+    ///    "addr": {
+    ///      "type": "string"
+    ///    },
+    ///    "peer_id": {
+    ///      "$ref": "#/components/schemas/PublicKey"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct Tier1ProxyView {
+        pub addr: ::std::string::String,
+        pub peer_id: PublicKey,
+    }
+
+    impl ::std::convert::From<&Tier1ProxyView> for Tier1ProxyView {
+        fn from(value: &Tier1ProxyView) -> Self {
+            value.clone()
         }
     }
 
@@ -9583,6 +12818,249 @@ pub mod types {
         }
     }
 
+    ///ValidatorInfo
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_id",
+    ///    "is_slashed"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "is_slashed": {
+    ///      "type": "boolean"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct ValidatorInfo {
+        pub account_id: AccountId,
+        pub is_slashed: bool,
+    }
+
+    impl ::std::convert::From<&ValidatorInfo> for ValidatorInfo {
+        fn from(value: &ValidatorInfo) -> Self {
+            value.clone()
+        }
+    }
+
+    ///Reasons for removing a validator from the validator set.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Reasons for removing a validator from the validator
+    /// set.",
+    ///  "oneOf": [
+    ///    {
+    ///      "description": "Slashed validators are kicked out.",
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "Slashed"
+    ///      ]
+    ///    },
+    ///    {
+    ///      "description": "Validator didn't produce enough blocks.",
+    ///      "type": "object",
+    ///      "required": [
+    ///        "NotEnoughBlocks"
+    ///      ],
+    ///      "properties": {
+    ///        "NotEnoughBlocks": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "expected",
+    ///            "produced"
+    ///          ],
+    ///          "properties": {
+    ///            "expected": {
+    ///              "type": "integer",
+    ///              "format": "uint64",
+    ///              "minimum": 0.0
+    ///            },
+    ///            "produced": {
+    ///              "type": "integer",
+    ///              "format": "uint64",
+    ///              "minimum": 0.0
+    ///            }
+    ///          }
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "description": "Validator didn't produce enough chunks.",
+    ///      "type": "object",
+    ///      "required": [
+    ///        "NotEnoughChunks"
+    ///      ],
+    ///      "properties": {
+    ///        "NotEnoughChunks": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "expected",
+    ///            "produced"
+    ///          ],
+    ///          "properties": {
+    ///            "expected": {
+    ///              "type": "integer",
+    ///              "format": "uint64",
+    ///              "minimum": 0.0
+    ///            },
+    ///            "produced": {
+    ///              "type": "integer",
+    ///              "format": "uint64",
+    ///              "minimum": 0.0
+    ///            }
+    ///          }
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "description": "Validator unstaked themselves.",
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "Unstaked"
+    ///      ]
+    ///    },
+    ///    {
+    ///      "description": "Validator stake is now below threshold",
+    ///      "type": "object",
+    ///      "required": [
+    ///        "NotEnoughStake"
+    ///      ],
+    ///      "properties": {
+    ///        "NotEnoughStake": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "stake_u128",
+    ///            "threshold_u128"
+    ///          ],
+    ///          "properties": {
+    ///            "stake_u128": {
+    ///              "type": "string"
+    ///            },
+    ///            "threshold_u128": {
+    ///              "type": "string"
+    ///            }
+    ///          }
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "description": "Enough stake but is not chosen because of seat
+    /// limits.",
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "DidNotGetASeat"
+    ///      ]
+    ///    },
+    ///    {
+    ///      "description": "Validator didn't produce enough chunk
+    /// endorsements.",
+    ///      "type": "object",
+    ///      "required": [
+    ///        "NotEnoughChunkEndorsements"
+    ///      ],
+    ///      "properties": {
+    ///        "NotEnoughChunkEndorsements": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "expected",
+    ///            "produced"
+    ///          ],
+    ///          "properties": {
+    ///            "expected": {
+    ///              "type": "integer",
+    ///              "format": "uint64",
+    ///              "minimum": 0.0
+    ///            },
+    ///            "produced": {
+    ///              "type": "integer",
+    ///              "format": "uint64",
+    ///              "minimum": 0.0
+    ///            }
+    ///          }
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub enum ValidatorKickoutReason {
+        ///Slashed validators are kicked out.
+        Slashed,
+        ///Validator didn't produce enough blocks.
+        NotEnoughBlocks { expected: u64, produced: u64 },
+        ///Validator didn't produce enough chunks.
+        NotEnoughChunks { expected: u64, produced: u64 },
+        ///Validator unstaked themselves.
+        Unstaked,
+        ///Validator stake is now below threshold
+        NotEnoughStake {
+            stake_u128: ::std::string::String,
+            threshold_u128: ::std::string::String,
+        },
+        ///Enough stake but is not chosen because of seat limits.
+        DidNotGetASeat,
+        ///Validator didn't produce enough chunk endorsements.
+        NotEnoughChunkEndorsements { expected: u64, produced: u64 },
+    }
+
+    impl ::std::convert::From<&Self> for ValidatorKickoutReason {
+        fn from(value: &ValidatorKickoutReason) -> Self {
+            value.clone()
+        }
+    }
+
+    ///ValidatorKickoutView
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_id",
+    ///    "reason"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "reason": {
+    ///      "$ref": "#/components/schemas/ValidatorKickoutReason"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct ValidatorKickoutView {
+        pub account_id: AccountId,
+        pub reason: ValidatorKickoutReason,
+    }
+
+    impl ::std::convert::From<&ValidatorKickoutView> for ValidatorKickoutView {
+        fn from(value: &ValidatorKickoutView) -> Self {
+            value.clone()
+        }
+    }
+
     ///ValidatorStakeView
     ///
     /// <details><summary>JSON schema</summary>
@@ -9632,6 +13110,132 @@ pub mod types {
 
     impl ::std::convert::From<&Self> for ValidatorStakeView {
         fn from(value: &ValidatorStakeView) -> Self {
+            value.clone()
+        }
+    }
+
+    ///ValidatorsMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "validators"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum ValidatorsMethodNameHelperEnum {
+        #[serde(rename = "validators")]
+        Validators,
+    }
+
+    impl ::std::convert::From<&Self> for ValidatorsMethodNameHelperEnum {
+        fn from(value: &ValidatorsMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for ValidatorsMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::Validators => write!(f, "validators"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for ValidatorsMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "validators" => Ok(Self::Validators),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for ValidatorsMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for ValidatorsMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for ValidatorsMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///Data structure for semver version and github tag or commit.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Data structure for semver version and github tag or
+    /// commit.",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "build",
+    ///    "commit",
+    ///    "version"
+    ///  ],
+    ///  "properties": {
+    ///    "build": {
+    ///      "type": "string"
+    ///    },
+    ///    "commit": {
+    ///      "type": "string"
+    ///    },
+    ///    "rustc_version": {
+    ///      "default": "",
+    ///      "type": "string"
+    ///    },
+    ///    "version": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct Version {
+        pub build: ::std::string::String,
+        pub commit: ::std::string::String,
+        #[serde(default)]
+        pub rustc_version: ::std::string::String,
+        pub version: ::std::string::String,
+    }
+
+    impl ::std::convert::From<&Version> for Version {
+        fn from(value: &Version) -> Self {
             value.clone()
         }
     }
@@ -9820,6 +13424,10 @@ pub mod types {
             }
         }
 
+        pub(super) fn rpc_send_transaction_request_wait_until() -> super::TxExecutionStatus {
+            super::TxExecutionStatus::ExecutedOptimistic
+        }
+
         pub(super) fn rpc_transaction_status_request_variant1_wait_until(
         ) -> super::TxExecutionStatus {
             super::TxExecutionStatus::ExecutedOptimistic
@@ -9915,11 +13523,61 @@ impl Client {
         }
     }
 
+    ///Sends a `POST` request to `/broadcast_tx_async`
+    pub async fn broadcast_tx_async<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcBlockResponseAndRpcError>, Error<()>>
+    {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/broadcast_tx_commit`
+    pub async fn broadcast_tx_commit<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForBroadCastTxCommitMethodNameHelperEnum,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
+    {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
     ///Sends a `POST` request to `/chunk`
     pub async fn chunk<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForChunkMethodNameHelperEnum,
-    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcChunkResponseAndRpcError>, Error<()>>
+        body: &'a types::JsonRpcRequestForBlockMethodNameHelperEnum,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcBlockResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
@@ -9990,11 +13648,165 @@ impl Client {
         }
     }
 
+    ///Sends a `POST` request to `/light_client_proof`
+    pub async fn light_client_proof<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForLightClientProofMethodNameHelperEnum,
+    ) -> Result<
+        ResponseValue<types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError>,
+        Error<()>,
+    > {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/network_info`
+    pub async fn network_info<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForNetworkInfoMethodNameHelperEnum,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcNetworkInfoResponseAndRpcError>, Error<()>>
+    {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/next_light_client_block`
+    pub async fn next_light_client_block<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForNextLightClientBlockMethodNameHelperEnum,
+    ) -> Result<
+        ResponseValue<types::JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError>,
+        Error<()>,
+    > {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/send_tx`
+    pub async fn send_tx<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForSendTxMethodNameHelperEnum,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
+    {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/status`
+    pub async fn status<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForStatusMethodNameHelperEnum,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcStatusResponseAndRpcError>, Error<()>>
+    {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
     ///Sends a `POST` request to `/tx`
     pub async fn tx<'a>(
         &'a self,
         body: &'a types::JsonRpcRequestForTxMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
+    {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/validators`
+    pub async fn validators<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForValidatorsMethodNameHelperEnum,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcValidatorResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
