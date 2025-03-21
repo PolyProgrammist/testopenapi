@@ -217,9 +217,11 @@ use near_jsonrpc_primitives::types::{
     },
     split_storage::{
         RpcSplitStorageInfoResponse
-    }
-    
+    }    
 };
+
+use near_chain_configs::GenesisConfig;
+
 
 macro_rules! generate_method_name_helper {
     ($enum_name:ident, $trait_impl:ty, $method_name:expr) => {
@@ -247,8 +249,6 @@ struct RpcNetworkInfoRequest;
 
 #[derive(JsonSchema)]
 struct RpcClientConfigRequest;
-
-type RpcSendTransactionRequest2 = RpcSendTransactionRequest;
 
 generate_method_name_helper!(BlockMethodNameHelperEnum, RpcBlockRequest, "block");
 generate_method_name_helper!(BroadCastTxAsyncMethodNameHelperEnum, RpcSendTransactionRequest, "broadcast_tx_async");
@@ -302,10 +302,10 @@ fn main() {
     add_spec_for_path::<ValidatorsMethodNameHelperEnum, RpcValidatorResponse>(&mut all_schemas, &mut all_paths, "validators".to_string());
     add_spec_for_path::<ClientConfigMethodNameHelperEnum, RpcClientConfigResponse>(&mut all_schemas, &mut all_paths, "client_config".to_string());
 
-    // add_spec_for_path::<ExpChangeMethodNameHelperEnum, RpcStateChangesInBlockResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes".to_string());
-    // add_spec_for_path::<ExpChangesBlockMethodNameHelperEnum, RpcStateChangesInBlockByTypeResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes_in_block".to_string());
-    // add_spec_for_path::<ExpGongestionMethodNameHelperEnum, RpcCongestionLevelResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_congestion_level".to_string());
-    // // add_spec_for_path::<ExpGenesisMethodNameHelperEnum, RpcExperimentalGenesisConfigResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_genesis_config".to_string());
+    add_spec_for_path::<ExpChangeMethodNameHelperEnum, RpcStateChangesInBlockResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes".to_string());
+    add_spec_for_path::<ExpChangesBlockMethodNameHelperEnum, RpcStateChangesInBlockByTypeResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes_in_block".to_string());
+    add_spec_for_path::<ExpGongestionMethodNameHelperEnum, RpcCongestionLevelResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_congestion_level".to_string());
+    add_spec_for_path::<ExpGenesisMethodNameHelperEnum, GenesisConfig>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_genesis_config".to_string());
     // add_spec_for_path::<ExpLightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_proof".to_string());
     // add_spec_for_path::<ExpLightClientBlockProofMethodNameHelperEnum, RpcLightClientBlockProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_block_proof".to_string());
     // add_spec_for_path::<ExpProtocolConfigMethodNameHelperEnum, RpcProtocolConfigResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_protocol_config".to_string());

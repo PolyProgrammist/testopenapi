@@ -11,3 +11,5 @@ serde_json = "1.0.139"
 serde_yaml = "0.9"
 near-jsonrpc-primitives = { path = "../../nearcore/chain/jsonrpc-primitives", features = ["full"] }
 near-time = { path = "../../nearcore/core/time", features = ["clock"] }
+near-chain-configs = { path = "../../nearcore/core/chain-configs" }
+

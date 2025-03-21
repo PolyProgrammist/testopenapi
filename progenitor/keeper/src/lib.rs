@@ -376,6 +376,46 @@ pub mod types {
         }
     }
 
+    ///Account info for validators
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Account info for validators",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_id",
+    ///    "amount",
+    ///    "public_key"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "amount": {
+    ///      "type": "string"
+    ///    },
+    ///    "public_key": {
+    ///      "$ref": "#/components/schemas/PublicKey"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct AccountInfo {
+        pub account_id: AccountId,
+        pub amount: ::std::string::String,
+        pub public_key: PublicKey,
+    }
+
+    impl ::std::convert::From<&AccountInfo> for AccountInfo {
+        fn from(value: &AccountInfo) -> Self {
+            value.clone()
+        }
+    }
+
     ///Action
     ///
     /// <details><summary>JSON schema</summary>
@@ -4836,6 +4876,322 @@ pub mod types {
         }
     }
 
+    ///ExpChangeMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_changes"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum ExpChangeMethodNameHelperEnum {
+        #[serde(rename = "EXPERIMENTAL_changes")]
+        ExperimentalChanges,
+    }
+
+    impl ::std::convert::From<&Self> for ExpChangeMethodNameHelperEnum {
+        fn from(value: &ExpChangeMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for ExpChangeMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalChanges => write!(f, "EXPERIMENTAL_changes"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for ExpChangeMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_changes" => Ok(Self::ExperimentalChanges),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for ExpChangeMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for ExpChangeMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for ExpChangeMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///ExpChangesBlockMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_changes_in_block"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum ExpChangesBlockMethodNameHelperEnum {
+        #[serde(rename = "EXPERIMENTAL_changes_in_block")]
+        ExperimentalChangesInBlock,
+    }
+
+    impl ::std::convert::From<&Self> for ExpChangesBlockMethodNameHelperEnum {
+        fn from(value: &ExpChangesBlockMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for ExpChangesBlockMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalChangesInBlock => write!(f, "EXPERIMENTAL_changes_in_block"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for ExpChangesBlockMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_changes_in_block" => Ok(Self::ExperimentalChangesInBlock),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for ExpChangesBlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for ExpChangesBlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for ExpChangesBlockMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///ExpGenesisMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_genesis_config"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum ExpGenesisMethodNameHelperEnum {
+        #[serde(rename = "EXPERIMENTAL_genesis_config")]
+        ExperimentalGenesisConfig,
+    }
+
+    impl ::std::convert::From<&Self> for ExpGenesisMethodNameHelperEnum {
+        fn from(value: &ExpGenesisMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for ExpGenesisMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalGenesisConfig => write!(f, "EXPERIMENTAL_genesis_config"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for ExpGenesisMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_genesis_config" => Ok(Self::ExperimentalGenesisConfig),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for ExpGenesisMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for ExpGenesisMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for ExpGenesisMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///ExpGongestionMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_congestion_level"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum ExpGongestionMethodNameHelperEnum {
+        #[serde(rename = "EXPERIMENTAL_congestion_level")]
+        ExperimentalCongestionLevel,
+    }
+
+    impl ::std::convert::From<&Self> for ExpGongestionMethodNameHelperEnum {
+        fn from(value: &ExpGongestionMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for ExpGongestionMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalCongestionLevel => write!(f, "EXPERIMENTAL_congestion_level"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for ExpGongestionMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_congestion_level" => Ok(Self::ExperimentalCongestionLevel),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for ExpGongestionMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for ExpGongestionMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for ExpGongestionMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
     ///ExternalStorageConfig
     ///
     /// <details><summary>JSON schema</summary>
@@ -5803,6 +6159,476 @@ pub mod types {
                 gc_num_epochs_to_keep: defaults::default_u64::<u64, 5>(),
                 gc_step_period: defaults::gc_config_gc_step_period(),
             }
+        }
+    }
+
+    ///GenesisConfig
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "avg_hidden_validator_seats_per_shard",
+    ///    "block_producer_kickout_threshold",
+    ///    "chain_id",
+    ///    "chunk_producer_kickout_threshold",
+    ///    "dynamic_resharding",
+    ///    "epoch_length",
+    ///    "fishermen_threshold",
+    ///    "gas_limit",
+    ///    "gas_price_adjustment_rate",
+    ///    "genesis_height",
+    ///    "genesis_time",
+    ///    "max_gas_price",
+    ///    "max_inflation_rate",
+    ///    "min_gas_price",
+    ///    "num_block_producer_seats",
+    ///    "num_block_producer_seats_per_shard",
+    ///    "num_blocks_per_year",
+    ///    "protocol_reward_rate",
+    ///    "protocol_treasury_account",
+    ///    "protocol_version",
+    ///    "total_supply",
+    ///    "transaction_validity_period",
+    ///    "validators"
+    ///  ],
+    ///  "properties": {
+    ///    "avg_hidden_validator_seats_per_shard": {
+    ///      "description": "Expected number of hidden validators per shard.",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      }
+    ///    },
+    ///    "block_producer_kickout_threshold": {
+    ///      "description": "Threshold for kicking out block producers, between
+    /// 0 and 100.",
+    ///      "type": "integer",
+    ///      "format": "uint8",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "chain_id": {
+    ///      "description": "ID of the blockchain. This must be unique for every
+    /// blockchain. If your testnet blockchains do not have unique chain IDs,
+    /// you will have a bad time.",
+    ///      "type": "string"
+    ///    },
+    ///    "chunk_producer_assignment_changes_limit": {
+    ///      "description": "Limits the number of shard changes in chunk
+    /// producer assignments, if algorithm is able to choose assignment with
+    /// better balance of number of chunk producers for shards.",
+    ///      "default": 5,
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "chunk_producer_kickout_threshold": {
+    ///      "description": "Threshold for kicking out chunk producers, between
+    /// 0 and 100.",
+    ///      "type": "integer",
+    ///      "format": "uint8",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "chunk_validator_only_kickout_threshold": {
+    ///      "description": "Threshold for kicking out nodes which are only
+    /// chunk validators, between 0 and 100.",
+    ///      "default": 80,
+    ///      "type": "integer",
+    ///      "format": "uint8",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "dynamic_resharding": {
+    ///      "description": "Enable dynamic re-sharding.",
+    ///      "type": "boolean"
+    ///    },
+    ///    "epoch_length": {
+    ///      "description": "Epoch length counted in block heights.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "fishermen_threshold": {
+    ///      "description": "Fishermen stake threshold.",
+    ///      "type": "string"
+    ///    },
+    ///    "gas_limit": {
+    ///      "description": "Initial gas limit.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "gas_price_adjustment_rate": {
+    ///      "description": "Gas price adjustment rate",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "genesis_height": {
+    ///      "description": "Height of genesis block.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "genesis_time": {
+    ///      "description": "Official time of blockchain start.",
+    ///      "type": "string",
+    ///      "format": "date-time"
+    ///    },
+    ///    "max_gas_price": {
+    ///      "type": "string"
+    ///    },
+    ///    "max_inflation_rate": {
+    ///      "description": "Maximum inflation on the total supply every
+    /// epoch.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "max_kickout_stake_perc": {
+    ///      "description": "Max stake percentage of the validators we will kick
+    /// out.",
+    ///      "default": 100,
+    ///      "type": "integer",
+    ///      "format": "uint8",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "min_gas_price": {
+    ///      "description": "Minimum gas price. It is also the initial gas
+    /// price.",
+    ///      "type": "string"
+    ///    },
+    ///    "minimum_stake_divisor": {
+    ///      "description": "The minimum stake required for staking is last seat
+    /// price divided by this number.",
+    ///      "default": 10,
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "minimum_stake_ratio": {
+    ///      "description": "The lowest ratio s/s_total any block producer can have. See <https://github.com/near/NEPs/pull/167> for details",
+    ///      "default": {
+    ///        "denom": 1,
+    ///        "numer": 6250
+    ///      },
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "minimum_validators_per_shard": {
+    ///      "description": "The minimum number of validators each shard must
+    /// have",
+    ///      "default": 1,
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "num_block_producer_seats": {
+    ///      "description": "Number of block producer seats at genesis.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "num_block_producer_seats_per_shard": {
+    ///      "description": "Defines number of shards and number of block
+    /// producer seats per each shard at genesis. Note: not used with
+    /// protocol_feature_chunk_only_producers -- replaced by
+    /// minimum_validators_per_shard Note: not used before as all block
+    /// producers produce chunks for all shards",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      }
+    ///    },
+    ///    "num_blocks_per_year": {
+    ///      "description": "Expected number of blocks per year",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "num_chunk_only_producer_seats": {
+    ///      "description": "Deprecated.",
+    ///      "default": 300,
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "num_chunk_producer_seats": {
+    ///      "description": "Number of chunk producers. Don't mess it up with
+    /// chunk-only producers feature which is deprecated.",
+    ///      "default": 100,
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "num_chunk_validator_seats": {
+    ///      "default": 300,
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "online_max_threshold": {
+    ///      "description": "Online maximum threshold above which validator gets
+    /// full reward.",
+    ///      "default": {
+    ///        "denom": 99,
+    ///        "numer": 100
+    ///      },
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "online_min_threshold": {
+    ///      "description": "Online minimum threshold below which validator
+    /// doesn't receive reward.",
+    ///      "default": {
+    ///        "denom": 9,
+    ///        "numer": 10
+    ///      },
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "protocol_reward_rate": {
+    ///      "description": "Protocol treasury rate",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "protocol_treasury_account": {
+    ///      "description": "Protocol treasury account",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "protocol_upgrade_stake_threshold": {
+    ///      "description": "Threshold of stake that needs to indicate that they
+    /// ready for upgrade.",
+    ///      "default": {
+    ///        "denom": 4,
+    ///        "numer": 5
+    ///      },
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "protocol_version": {
+    ///      "description": "Protocol version that this genesis works with.",
+    ///      "type": "integer",
+    ///      "format": "uint32",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "shard_layout": {
+    ///      "description": "Layout information regarding how to split accounts
+    /// to shards",
+    ///      "default": {
+    ///        "V2": {
+    ///          "boundary_accounts": [],
+    ///          "id_to_index_map": {
+    ///            "0": 0
+    ///          },
+    ///          "index_to_id_map": {
+    ///            "0": 0
+    ///          },
+    ///          "shard_ids": [
+    ///            0
+    ///          ],
+    ///          "shards_parent_map": null,
+    ///          "shards_split_map": null,
+    ///          "version": 0
+    ///        }
+    ///      },
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/ShardLayout"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "shuffle_shard_assignment_for_chunk_producers": {
+    ///      "description": "If true, shuffle the chunk producers across shards.
+    /// In other words, if the shard assignments were `[S_0, S_1, S_2, S_3]`
+    /// where `S_i` represents the set of chunk producers for shard `i`, if this
+    /// flag were true, the shard assignments might become, for example, `[S_2,
+    /// S_0, S_3, S_1]`.",
+    ///      "default": false,
+    ///      "type": "boolean"
+    ///    },
+    ///    "target_validator_mandates_per_shard": {
+    ///      "description": "Number of target chunk validator mandates for each
+    /// shard.",
+    ///      "default": 68,
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "total_supply": {
+    ///      "description": "Total supply of tokens at genesis.",
+    ///      "type": "string"
+    ///    },
+    ///    "transaction_validity_period": {
+    ///      "description": "Number of blocks for which a given transaction is
+    /// valid",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "use_production_config": {
+    ///      "description": "This is only for test purposes. We hard code some configs for mainnet and testnet in AllEpochConfig, and we want to have a way to test that code path. This flag is for that. If set to true, the node will use the same config override path as mainnet and testnet.",
+    ///      "default": false,
+    ///      "type": "boolean"
+    ///    },
+    ///    "validators": {
+    ///      "description": "List of initial validators.",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/AccountInfo"
+    ///      }
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct GenesisConfig {
+        ///Expected number of hidden validators per shard.
+        pub avg_hidden_validator_seats_per_shard: ::std::vec::Vec<u64>,
+        ///Threshold for kicking out block producers, between 0 and 100.
+        pub block_producer_kickout_threshold: u8,
+        ///ID of the blockchain. This must be unique for every blockchain. If
+        /// your testnet blockchains do not have unique chain IDs, you will have
+        /// a bad time.
+        pub chain_id: ::std::string::String,
+        ///Limits the number of shard changes in chunk producer assignments, if
+        /// algorithm is able to choose assignment with better balance of number
+        /// of chunk producers for shards.
+        #[serde(default = "defaults::default_u64::<u64, 5>")]
+        pub chunk_producer_assignment_changes_limit: u64,
+        ///Threshold for kicking out chunk producers, between 0 and 100.
+        pub chunk_producer_kickout_threshold: u8,
+        ///Threshold for kicking out nodes which are only chunk validators,
+        /// between 0 and 100.
+        #[serde(default = "defaults::default_u64::<u8, 80>")]
+        pub chunk_validator_only_kickout_threshold: u8,
+        ///Enable dynamic re-sharding.
+        pub dynamic_resharding: bool,
+        ///Epoch length counted in block heights.
+        pub epoch_length: u64,
+        ///Fishermen stake threshold.
+        pub fishermen_threshold: ::std::string::String,
+        ///Initial gas limit.
+        pub gas_limit: u64,
+        ///Gas price adjustment rate
+        pub gas_price_adjustment_rate: Rational32SchemaProvider,
+        ///Height of genesis block.
+        pub genesis_height: u64,
+        ///Official time of blockchain start.
+        pub genesis_time: chrono::DateTime<chrono::offset::Utc>,
+        pub max_gas_price: ::std::string::String,
+        ///Maximum inflation on the total supply every epoch.
+        pub max_inflation_rate: Rational32SchemaProvider,
+        ///Max stake percentage of the validators we will kick out.
+        #[serde(default = "defaults::default_u64::<u8, 100>")]
+        pub max_kickout_stake_perc: u8,
+        ///Minimum gas price. It is also the initial gas price.
+        pub min_gas_price: ::std::string::String,
+        ///The minimum stake required for staking is last seat price divided by
+        /// this number.
+        #[serde(default = "defaults::default_u64::<u64, 10>")]
+        pub minimum_stake_divisor: u64,
+        ///The lowest ratio s/s_total any block producer can have. See <https://github.com/near/NEPs/pull/167> for details
+        #[serde(default = "defaults::genesis_config_minimum_stake_ratio")]
+        pub minimum_stake_ratio: Rational32SchemaProvider,
+        ///The minimum number of validators each shard must have
+        #[serde(default = "defaults::default_u64::<u64, 1>")]
+        pub minimum_validators_per_shard: u64,
+        ///Number of block producer seats at genesis.
+        pub num_block_producer_seats: u64,
+        ///Defines number of shards and number of block producer seats per each
+        /// shard at genesis. Note: not used with
+        /// protocol_feature_chunk_only_producers -- replaced by
+        /// minimum_validators_per_shard Note: not used before as all block
+        /// producers produce chunks for all shards
+        pub num_block_producer_seats_per_shard: ::std::vec::Vec<u64>,
+        ///Expected number of blocks per year
+        pub num_blocks_per_year: u64,
+        ///Deprecated.
+        #[serde(default = "defaults::default_u64::<u64, 300>")]
+        pub num_chunk_only_producer_seats: u64,
+        ///Number of chunk producers. Don't mess it up with chunk-only
+        /// producers feature which is deprecated.
+        #[serde(default = "defaults::default_u64::<u64, 100>")]
+        pub num_chunk_producer_seats: u64,
+        #[serde(default = "defaults::default_u64::<u64, 300>")]
+        pub num_chunk_validator_seats: u64,
+        ///Online maximum threshold above which validator gets full reward.
+        #[serde(default = "defaults::genesis_config_online_max_threshold")]
+        pub online_max_threshold: Rational32SchemaProvider,
+        ///Online minimum threshold below which validator doesn't receive
+        /// reward.
+        #[serde(default = "defaults::genesis_config_online_min_threshold")]
+        pub online_min_threshold: Rational32SchemaProvider,
+        ///Protocol treasury rate
+        pub protocol_reward_rate: Rational32SchemaProvider,
+        ///Protocol treasury account
+        pub protocol_treasury_account: AccountId,
+        ///Threshold of stake that needs to indicate that they ready for
+        /// upgrade.
+        #[serde(default = "defaults::genesis_config_protocol_upgrade_stake_threshold")]
+        pub protocol_upgrade_stake_threshold: Rational32SchemaProvider,
+        ///Protocol version that this genesis works with.
+        pub protocol_version: u32,
+        ///Layout information regarding how to split accounts to shards
+        #[serde(default = "defaults::genesis_config_shard_layout")]
+        pub shard_layout: ShardLayout,
+        ///If true, shuffle the chunk producers across shards. In other words,
+        /// if the shard assignments were `[S_0, S_1, S_2, S_3]` where `S_i`
+        /// represents the set of chunk producers for shard `i`, if this flag
+        /// were true, the shard assignments might become, for example, `[S_2,
+        /// S_0, S_3, S_1]`.
+        #[serde(default)]
+        pub shuffle_shard_assignment_for_chunk_producers: bool,
+        ///Number of target chunk validator mandates for each shard.
+        #[serde(default = "defaults::default_u64::<u64, 68>")]
+        pub target_validator_mandates_per_shard: u64,
+        ///Total supply of tokens at genesis.
+        pub total_supply: ::std::string::String,
+        ///Number of blocks for which a given transaction is valid
+        pub transaction_validity_period: u64,
+        ///This is only for test purposes. We hard code some configs for
+        /// mainnet and testnet in AllEpochConfig, and we want to have a way to
+        /// test that code path. This flag is for that. If set to true, the node
+        /// will use the same config override path as mainnet and testnet.
+        #[serde(default)]
+        pub use_production_config: bool,
+        ///List of initial validators.
+        pub validators: ::std::vec::Vec<AccountInfo>,
+    }
+
+    impl ::std::convert::From<&GenesisConfig> for GenesisConfig {
+        fn from(value: &GenesisConfig) -> Self {
+            value.clone()
         }
     }
 
@@ -7599,6 +8425,194 @@ pub mod types {
         }
     }
 
+    ///JsonRpcRequestForExpChangeMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_ExpChangeMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/ExpChangeMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExpChangeMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: ExpChangeMethodNameHelperEnum,
+        pub params: RpcClientConfigRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExpChangeMethodNameHelperEnum>
+        for JsonRpcRequestForExpChangeMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForExpChangeMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForExpChangesBlockMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_ExpChangesBlockMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/ExpChangesBlockMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExpChangesBlockMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: ExpChangesBlockMethodNameHelperEnum,
+        pub params: RpcClientConfigRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExpChangesBlockMethodNameHelperEnum>
+        for JsonRpcRequestForExpChangesBlockMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForExpChangesBlockMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForExpGenesisMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_ExpGenesisMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/ExpGenesisMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExpGenesisMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: ExpGenesisMethodNameHelperEnum,
+        pub params: RpcClientConfigRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExpGenesisMethodNameHelperEnum>
+        for JsonRpcRequestForExpGenesisMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForExpGenesisMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForExpGongestionMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_ExpGongestionMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/ExpGongestionMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExpGongestionMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: ExpGongestionMethodNameHelperEnum,
+        pub params: RpcClientConfigRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExpGongestionMethodNameHelperEnum>
+        for JsonRpcRequestForExpGongestionMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForExpGongestionMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
     ///JsonRpcRequestForGasPriceMethodNameHelperEnum
     ///
     /// <details><summary>JSON schema</summary>
@@ -8023,6 +9037,90 @@ pub mod types {
         }
     }
 
+    ///JsonRpcResponseForGenesisConfigAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_GenesisConfig_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/GenesisConfig"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForGenesisConfigAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: GenesisConfig,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForGenesisConfigAndRpcError {
+        fn from(value: &JsonRpcResponseForGenesisConfigAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
     ///JsonRpcResponseForRpcBlockResponseAndRpcError
     ///
     /// <details><summary>JSON schema</summary>
@@ -8187,6 +9285,90 @@ pub mod types {
 
     impl ::std::convert::From<&Self> for JsonRpcResponseForRpcClientConfigResponseAndRpcError {
         fn from(value: &JsonRpcResponseForRpcClientConfigResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForRpcCongestionLevelResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_RpcCongestionLevelResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/RpcCongestionLevelResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcCongestionLevelResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcCongestionLevelResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcCongestionLevelResponseAndRpcError {
+        fn from(value: &JsonRpcResponseForRpcCongestionLevelResponseAndRpcError) -> Self {
             value.clone()
         }
     }
@@ -8611,6 +9793,178 @@ pub mod types {
 
     impl ::std::convert::From<&Self> for JsonRpcResponseForRpcNetworkInfoResponseAndRpcError {
         fn from(value: &JsonRpcResponseForRpcNetworkInfoResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForRpcStateChangesInBlockByTypeResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_RpcStateChangesInBlockByTypeResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref":
+    /// "#/components/schemas/RpcStateChangesInBlockByTypeResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcStateChangesInBlockByTypeResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcStateChangesInBlockByTypeResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self>
+        for JsonRpcResponseForRpcStateChangesInBlockByTypeResponseAndRpcError
+    {
+        fn from(value: &JsonRpcResponseForRpcStateChangesInBlockByTypeResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForRpcStateChangesInBlockResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "
+    /// JsonRpcResponse_for_RpcStateChangesInBlockResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/RpcStateChangesInBlockResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcStateChangesInBlockResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcStateChangesInBlockResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcStateChangesInBlockResponseAndRpcError {
+        fn from(value: &JsonRpcResponseForRpcStateChangesInBlockResponseAndRpcError) -> Self {
             value.clone()
         }
     }
@@ -10357,6 +11711,42 @@ pub mod types {
         }
     }
 
+    ///Rational32SchemaProvider
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "denom",
+    ///    "numer"
+    ///  ],
+    ///  "properties": {
+    ///    "denom": {
+    ///      "type": "integer",
+    ///      "format": "int32"
+    ///    },
+    ///    "numer": {
+    ///      "type": "integer",
+    ///      "format": "int32"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct Rational32SchemaProvider {
+        pub denom: i32,
+        pub numer: i32,
+    }
+
+    impl ::std::convert::From<&Rational32SchemaProvider> for Rational32SchemaProvider {
+        fn from(value: &Rational32SchemaProvider) -> Self {
+            value.clone()
+        }
+    }
+
     ///ReceiptEnumView
     ///
     /// <details><summary>JSON schema</summary>
@@ -11574,6 +12964,36 @@ pub mod types {
         }
     }
 
+    ///RpcCongestionLevelResponse
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "congestion_level"
+    ///  ],
+    ///  "properties": {
+    ///    "congestion_level": {
+    ///      "type": "number",
+    ///      "format": "double"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcCongestionLevelResponse {
+        pub congestion_level: f64,
+    }
+
+    impl ::std::convert::From<&RpcCongestionLevelResponse> for RpcCongestionLevelResponse {
+        fn from(value: &RpcCongestionLevelResponse) -> Self {
+            value.clone()
+        }
+    }
+
     ///RpcError
     ///
     /// <details><summary>JSON schema</summary>
@@ -12567,6 +13987,82 @@ pub mod types {
         }
     }
 
+    ///RpcStateChangesInBlockByTypeResponse
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "block_hash",
+    ///    "changes"
+    ///  ],
+    ///  "properties": {
+    ///    "block_hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "changes": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/StateChangeKindView"
+    ///      }
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcStateChangesInBlockByTypeResponse {
+        pub block_hash: CryptoHash,
+        pub changes: ::std::vec::Vec<StateChangeKindView>,
+    }
+
+    impl ::std::convert::From<&RpcStateChangesInBlockByTypeResponse>
+        for RpcStateChangesInBlockByTypeResponse
+    {
+        fn from(value: &RpcStateChangesInBlockByTypeResponse) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcStateChangesInBlockResponse
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "block_hash",
+    ///    "changes"
+    ///  ],
+    ///  "properties": {
+    ///    "block_hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "changes": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/StateChangeWithCauseView"
+    ///      }
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcStateChangesInBlockResponse {
+        pub block_hash: CryptoHash,
+        pub changes: ::std::vec::Vec<StateChangeWithCauseView>,
+    }
+
+    impl ::std::convert::From<&RpcStateChangesInBlockResponse> for RpcStateChangesInBlockResponse {
+        fn from(value: &RpcStateChangesInBlockResponse) -> Self {
+            value.clone()
+        }
+    }
+
     ///RpcStatusRequest
     ///
     /// <details><summary>JSON schema</summary>
@@ -13286,6 +14782,342 @@ pub mod types {
         }
     }
 
+    ///A versioned struct that contains all information needed to assign
+    /// accounts to shards.
+    ///
+    ///Because of re-sharding, the chain may use different shard layout to
+    /// split shards at different times. Currently, `ShardLayout` is stored as
+    /// part of `EpochConfig`, which is generated each epoch given the epoch
+    /// protocol version. In mainnet/testnet, we use two shard layouts since
+    /// re-sharding has only happened once. It is stored as part of genesis
+    /// config, see default_simple_nightshade_shard_layout() Below is an
+    /// overview for some important functionalities of ShardLayout interface.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "A versioned struct that contains all information needed
+    /// to assign accounts to shards.\n\nBecause of re-sharding, the chain may
+    /// use different shard layout to split shards at different times.
+    /// Currently, `ShardLayout` is stored as part of `EpochConfig`, which is
+    /// generated each epoch given the epoch protocol version. In
+    /// mainnet/testnet, we use two shard layouts since re-sharding has only
+    /// happened once. It is stored as part of genesis config, see
+    /// default_simple_nightshade_shard_layout() Below is an overview for some
+    /// important functionalities of ShardLayout interface.",
+    ///  "oneOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "V0"
+    ///      ],
+    ///      "properties": {
+    ///        "V0": {
+    ///          "$ref": "#/components/schemas/ShardLayoutV0"
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "V1"
+    ///      ],
+    ///      "properties": {
+    ///        "V1": {
+    ///          "$ref": "#/components/schemas/ShardLayoutV1"
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "V2"
+    ///      ],
+    ///      "properties": {
+    ///        "V2": {
+    ///          "$ref": "#/components/schemas/ShardLayoutV2"
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub enum ShardLayout {
+        V0(ShardLayoutV0),
+        V1(ShardLayoutV1),
+        V2(ShardLayoutV2),
+    }
+
+    impl ::std::convert::From<&Self> for ShardLayout {
+        fn from(value: &ShardLayout) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<ShardLayoutV0> for ShardLayout {
+        fn from(value: ShardLayoutV0) -> Self {
+            Self::V0(value)
+        }
+    }
+
+    impl ::std::convert::From<ShardLayoutV1> for ShardLayout {
+        fn from(value: ShardLayoutV1) -> Self {
+            Self::V1(value)
+        }
+    }
+
+    impl ::std::convert::From<ShardLayoutV2> for ShardLayout {
+        fn from(value: ShardLayoutV2) -> Self {
+            Self::V2(value)
+        }
+    }
+
+    ///A shard layout that maps accounts evenly across all shards -- by
+    /// calculate the hash of account id and mod number of shards. This is added
+    /// to capture the old `account_id_to_shard_id` algorithm, to keep backward
+    /// compatibility for some existing tests. `parent_shards` for
+    /// `ShardLayoutV1` is always `None`, meaning it can only be the first shard
+    /// layout a chain uses.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "A shard layout that maps accounts evenly across all
+    /// shards -- by calculate the hash of account id and mod number of shards.
+    /// This is added to capture the old `account_id_to_shard_id` algorithm, to
+    /// keep backward compatibility for some existing tests. `parent_shards` for
+    /// `ShardLayoutV1` is always `None`, meaning it can only be the first shard
+    /// layout a chain uses.",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "num_shards",
+    ///    "version"
+    ///  ],
+    ///  "properties": {
+    ///    "num_shards": {
+    ///      "description": "Map accounts evenly across all shards",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "version": {
+    ///      "description": "Version of the shard layout, this is useful for
+    /// uniquely identify the shard layout",
+    ///      "type": "integer",
+    ///      "format": "uint32",
+    ///      "minimum": 0.0
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct ShardLayoutV0 {
+        ///Map accounts evenly across all shards
+        pub num_shards: u64,
+        ///Version of the shard layout, this is useful for uniquely identify
+        /// the shard layout
+        pub version: u32,
+    }
+
+    impl ::std::convert::From<&ShardLayoutV0> for ShardLayoutV0 {
+        fn from(value: &ShardLayoutV0) -> Self {
+            value.clone()
+        }
+    }
+
+    ///ShardLayoutV1
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "boundary_accounts",
+    ///    "version"
+    ///  ],
+    ///  "properties": {
+    ///    "boundary_accounts": {
+    ///      "description": "The boundary accounts are the accounts on
+    /// boundaries between shards. Each shard contains a range of accounts from
+    /// one boundary account to another - or the smallest or largest account
+    /// possible. The total number of shards is equal to the number of boundary
+    /// accounts plus 1.",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/AccountId"
+    ///      }
+    ///    },
+    ///    "shards_split_map": {
+    ///      "description": "Maps shards from the last shard layout to shards
+    /// that it splits to in this shard layout, Useful for constructing states
+    /// for the shards. None for the genesis shard layout",
+    ///      "type": [
+    ///        "array",
+    ///        "null"
+    ///      ],
+    ///      "items": {
+    ///        "type": "array",
+    ///        "items": {
+    ///          "$ref": "#/components/schemas/ShardId"
+    ///        }
+    ///      }
+    ///    },
+    ///    "to_parent_shard_map": {
+    ///      "description": "Maps shard in this shard layout to their parent
+    /// shard Since shard_ids always range from 0 to num_shards - 1, we use vec
+    /// instead of a hashmap",
+    ///      "type": [
+    ///        "array",
+    ///        "null"
+    ///      ],
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/ShardId"
+    ///      }
+    ///    },
+    ///    "version": {
+    ///      "description": "Version of the shard layout, this is useful for
+    /// uniquely identify the shard layout",
+    ///      "type": "integer",
+    ///      "format": "uint32",
+    ///      "minimum": 0.0
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct ShardLayoutV1 {
+        ///The boundary accounts are the accounts on boundaries between shards.
+        /// Each shard contains a range of accounts from one boundary account to
+        /// another - or the smallest or largest account possible. The total
+        /// number of shards is equal to the number of boundary accounts plus 1.
+        pub boundary_accounts: ::std::vec::Vec<AccountId>,
+        ///Maps shards from the last shard layout to shards that it splits to
+        /// in this shard layout, Useful for constructing states for the shards.
+        /// None for the genesis shard layout
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub shards_split_map: ::std::option::Option<::std::vec::Vec<::std::vec::Vec<ShardId>>>,
+        ///Maps shard in this shard layout to their parent shard Since
+        /// shard_ids always range from 0 to num_shards - 1, we use vec instead
+        /// of a hashmap
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub to_parent_shard_map: ::std::option::Option<::std::vec::Vec<ShardId>>,
+        ///Version of the shard layout, this is useful for uniquely identify
+        /// the shard layout
+        pub version: u32,
+    }
+
+    impl ::std::convert::From<&ShardLayoutV1> for ShardLayoutV1 {
+        fn from(value: &ShardLayoutV1) -> Self {
+            value.clone()
+        }
+    }
+
+    ///Counterpart to `ShardLayoutV2` composed of maps with string keys to aid
+    /// serde serialization.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Counterpart to `ShardLayoutV2` composed of maps with
+    /// string keys to aid serde serialization.",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "boundary_accounts",
+    ///    "id_to_index_map",
+    ///    "index_to_id_map",
+    ///    "shard_ids",
+    ///    "version"
+    ///  ],
+    ///  "properties": {
+    ///    "boundary_accounts": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/AccountId"
+    ///      }
+    ///    },
+    ///    "id_to_index_map": {
+    ///      "type": "object",
+    ///      "additionalProperties": {
+    ///        "type": "integer",
+    ///        "format": "uint",
+    ///        "minimum": 0.0
+    ///      }
+    ///    },
+    ///    "index_to_id_map": {
+    ///      "type": "object",
+    ///      "additionalProperties": {
+    ///        "$ref": "#/components/schemas/ShardId"
+    ///      }
+    ///    },
+    ///    "shard_ids": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/ShardId"
+    ///      }
+    ///    },
+    ///    "shards_parent_map": {
+    ///      "type": [
+    ///        "object",
+    ///        "null"
+    ///      ],
+    ///      "additionalProperties": {
+    ///        "$ref": "#/components/schemas/ShardId"
+    ///      }
+    ///    },
+    ///    "shards_split_map": {
+    ///      "type": [
+    ///        "object",
+    ///        "null"
+    ///      ],
+    ///      "additionalProperties": {
+    ///        "type": "array",
+    ///        "items": {
+    ///          "$ref": "#/components/schemas/ShardId"
+    ///        }
+    ///      }
+    ///    },
+    ///    "version": {
+    ///      "type": "integer",
+    ///      "format": "uint32",
+    ///      "minimum": 0.0
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct ShardLayoutV2 {
+        pub boundary_accounts: ::std::vec::Vec<AccountId>,
+        pub id_to_index_map: ::std::collections::HashMap<::std::string::String, u32>,
+        pub index_to_id_map: ::std::collections::HashMap<::std::string::String, ShardId>,
+        pub shard_ids: ::std::vec::Vec<ShardId>,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub shards_parent_map:
+            ::std::option::Option<::std::collections::HashMap<::std::string::String, ShardId>>,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub shards_split_map: ::std::option::Option<
+            ::std::collections::HashMap<::std::string::String, ::std::vec::Vec<ShardId>>,
+        >,
+        pub version: u32,
+    }
+
+    impl ::std::convert::From<&ShardLayoutV2> for ShardLayoutV2 {
+        fn from(value: &ShardLayoutV2) -> Self {
+            value.clone()
+        }
+    }
+
     ///Signature
     ///
     /// <details><summary>JSON schema</summary>
@@ -13564,6 +15396,3493 @@ pub mod types {
 
     impl ::std::convert::From<&StakeAction> for StakeAction {
         fn from(value: &StakeAction) -> Self {
+            value.clone()
+        }
+    }
+
+    ///See crate::types::StateChangeCause for details.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "See crate::types::StateChangeCause for details.",
+    ///  "oneOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "not_writable_to_disk"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "initial_state"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tx_hash",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "tx_hash": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "transaction_processing"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "receipt_hash",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "receipt_hash": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "action_receipt_processing_started"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "receipt_hash",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "receipt_hash": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "action_receipt_gas_reward"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "receipt_hash",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "receipt_hash": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "receipt_processing"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "receipt_hash",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "receipt_hash": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "postponed_receipt"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "updated_delayed_receipts"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "validator_accounts_update"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "migration"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "resharding_v2"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "bandwidth_scheduler_state_update"
+    ///          ]
+    ///        }
+    ///      }
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(tag = "type")]
+    pub enum StateChangeCauseView {
+        #[serde(rename = "not_writable_to_disk")]
+        NotWritableToDisk,
+        #[serde(rename = "initial_state")]
+        InitialState,
+        #[serde(rename = "transaction_processing")]
+        TransactionProcessing { tx_hash: CryptoHash },
+        #[serde(rename = "action_receipt_processing_started")]
+        ActionReceiptProcessingStarted { receipt_hash: CryptoHash },
+        #[serde(rename = "action_receipt_gas_reward")]
+        ActionReceiptGasReward { receipt_hash: CryptoHash },
+        #[serde(rename = "receipt_processing")]
+        ReceiptProcessing { receipt_hash: CryptoHash },
+        #[serde(rename = "postponed_receipt")]
+        PostponedReceipt { receipt_hash: CryptoHash },
+        #[serde(rename = "updated_delayed_receipts")]
+        UpdatedDelayedReceipts,
+        #[serde(rename = "validator_accounts_update")]
+        ValidatorAccountsUpdate,
+        #[serde(rename = "migration")]
+        Migration,
+        #[serde(rename = "resharding_v2")]
+        ReshardingV2,
+        #[serde(rename = "bandwidth_scheduler_state_update")]
+        BandwidthSchedulerStateUpdate,
+    }
+
+    impl ::std::convert::From<&Self> for StateChangeCauseView {
+        fn from(value: &StateChangeCauseView) -> Self {
+            value.clone()
+        }
+    }
+
+    ///It is a [serializable view] of [`StateChangeKind`].
+    ///
+    ///[serializable view]: ./index.html [`StateChangeKind`]: ../types/struct.StateChangeKind.html
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "It is a [serializable view] of
+    /// [`StateChangeKind`].\n\n[serializable view]: ./index.html
+    /// [`StateChangeKind`]: ../types/struct.StateChangeKind.html",
+    ///  "oneOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "account_id",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "account_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "account_touched"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "account_id",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "account_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "access_key_touched"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "account_id",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "account_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "data_touched"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "account_id",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "account_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "contract_code_touched"
+    ///          ]
+    ///        }
+    ///      }
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(tag = "type", content = "account_id")]
+    pub enum StateChangeKindView {
+        #[serde(rename = "account_touched")]
+        AccountTouched(AccountId),
+        #[serde(rename = "access_key_touched")]
+        AccessKeyTouched(AccountId),
+        #[serde(rename = "data_touched")]
+        DataTouched(AccountId),
+        #[serde(rename = "contract_code_touched")]
+        ContractCodeTouched(AccountId),
+    }
+
+    impl ::std::convert::From<&Self> for StateChangeKindView {
+        fn from(value: &StateChangeKindView) -> Self {
+            value.clone()
+        }
+    }
+
+    ///StateChangeWithCauseView
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "oneOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "change",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "change": {
+    ///          "description": "A view of the account",
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_id",
+    ///            "amount",
+    ///            "code_hash",
+    ///            "locked",
+    ///            "storage_usage"
+    ///          ],
+    ///          "properties": {
+    ///            "account_id": {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            },
+    ///            "amount": {
+    ///              "type": "string"
+    ///            },
+    ///            "code_hash": {
+    ///              "$ref": "#/components/schemas/CryptoHash"
+    ///            },
+    ///            "global_contract_account_id": {
+    ///              "oneOf": [
+    ///                {
+    ///                  "type": "null"
+    ///                },
+    ///                {
+    ///                  "allOf": [
+    ///                    {
+    ///                      "$ref": "#/components/schemas/AccountId"
+    ///                    }
+    ///                  ]
+    ///                }
+    ///              ]
+    ///            },
+    ///            "global_contract_hash": {
+    ///              "oneOf": [
+    ///                {
+    ///                  "type": "null"
+    ///                },
+    ///                {
+    ///                  "allOf": [
+    ///                    {
+    ///                      "$ref": "#/components/schemas/CryptoHash"
+    ///                    }
+    ///                  ]
+    ///                }
+    ///              ]
+    ///            },
+    ///            "locked": {
+    ///              "type": "string"
+    ///            },
+    ///            "storage_paid_at": {
+    ///              "description": "TODO(2271): deprecated.",
+    ///              "default": 0,
+    ///              "type": "integer",
+    ///              "format": "uint64",
+    ///              "minimum": 0.0
+    ///            },
+    ///            "storage_usage": {
+    ///              "type": "integer",
+    ///              "format": "uint64",
+    ///              "minimum": 0.0
+    ///            }
+    ///          }
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "account_update"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "change",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "change": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_id"
+    ///          ],
+    ///          "properties": {
+    ///            "account_id": {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            }
+    ///          }
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "account_deletion"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "change",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "change": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "access_key",
+    ///            "account_id",
+    ///            "public_key"
+    ///          ],
+    ///          "properties": {
+    ///            "access_key": {
+    ///              "$ref": "#/components/schemas/AccessKeyView"
+    ///            },
+    ///            "account_id": {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            },
+    ///            "public_key": {
+    ///              "$ref": "#/components/schemas/PublicKey"
+    ///            }
+    ///          }
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "access_key_update"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "change",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "change": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_id",
+    ///            "public_key"
+    ///          ],
+    ///          "properties": {
+    ///            "account_id": {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            },
+    ///            "public_key": {
+    ///              "$ref": "#/components/schemas/PublicKey"
+    ///            }
+    ///          }
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "access_key_deletion"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "change",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "change": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_id",
+    ///            "key_base64",
+    ///            "value_base64"
+    ///          ],
+    ///          "properties": {
+    ///            "account_id": {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            },
+    ///            "key_base64": {
+    ///              "type": "string"
+    ///            },
+    ///            "value_base64": {
+    ///              "type": "string"
+    ///            }
+    ///          }
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "data_update"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "change",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "change": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_id",
+    ///            "key_base64"
+    ///          ],
+    ///          "properties": {
+    ///            "account_id": {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            },
+    ///            "key_base64": {
+    ///              "type": "string"
+    ///            }
+    ///          }
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "data_deletion"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "change",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "change": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_id",
+    ///            "code_base64"
+    ///          ],
+    ///          "properties": {
+    ///            "account_id": {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            },
+    ///            "code_base64": {
+    ///              "type": "string"
+    ///            }
+    ///          }
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "contract_code_update"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "change",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "change": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_id"
+    ///          ],
+    ///          "properties": {
+    ///            "account_id": {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            }
+    ///          }
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "contract_code_deletion"
+    ///          ]
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "cause"
+    ///  ],
+    ///  "properties": {
+    ///    "cause": {
+    ///      "$ref": "#/components/schemas/StateChangeCauseView"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum StateChangeWithCauseView {
+        Variant0(StateChangeWithCauseViewVariant0),
+        Variant1(StateChangeWithCauseViewVariant1),
+        Variant2(StateChangeWithCauseViewVariant2),
+        Variant3(StateChangeWithCauseViewVariant3),
+        Variant4(StateChangeWithCauseViewVariant4),
+        Variant5(StateChangeWithCauseViewVariant5),
+        Variant6(StateChangeWithCauseViewVariant6),
+        Variant7(StateChangeWithCauseViewVariant7),
+    }
+
+    impl ::std::convert::From<&Self> for StateChangeWithCauseView {
+        fn from(value: &StateChangeWithCauseView) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<StateChangeWithCauseViewVariant0> for StateChangeWithCauseView {
+        fn from(value: StateChangeWithCauseViewVariant0) -> Self {
+            Self::Variant0(value)
+        }
+    }
+
+    impl ::std::convert::From<StateChangeWithCauseViewVariant1> for StateChangeWithCauseView {
+        fn from(value: StateChangeWithCauseViewVariant1) -> Self {
+            Self::Variant1(value)
+        }
+    }
+
+    impl ::std::convert::From<StateChangeWithCauseViewVariant2> for StateChangeWithCauseView {
+        fn from(value: StateChangeWithCauseViewVariant2) -> Self {
+            Self::Variant2(value)
+        }
+    }
+
+    impl ::std::convert::From<StateChangeWithCauseViewVariant3> for StateChangeWithCauseView {
+        fn from(value: StateChangeWithCauseViewVariant3) -> Self {
+            Self::Variant3(value)
+        }
+    }
+
+    impl ::std::convert::From<StateChangeWithCauseViewVariant4> for StateChangeWithCauseView {
+        fn from(value: StateChangeWithCauseViewVariant4) -> Self {
+            Self::Variant4(value)
+        }
+    }
+
+    impl ::std::convert::From<StateChangeWithCauseViewVariant5> for StateChangeWithCauseView {
+        fn from(value: StateChangeWithCauseViewVariant5) -> Self {
+            Self::Variant5(value)
+        }
+    }
+
+    impl ::std::convert::From<StateChangeWithCauseViewVariant6> for StateChangeWithCauseView {
+        fn from(value: StateChangeWithCauseViewVariant6) -> Self {
+            Self::Variant6(value)
+        }
+    }
+
+    impl ::std::convert::From<StateChangeWithCauseViewVariant7> for StateChangeWithCauseView {
+        fn from(value: StateChangeWithCauseViewVariant7) -> Self {
+            Self::Variant7(value)
+        }
+    }
+
+    ///StateChangeWithCauseViewVariant0
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "allOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "cause"
+    ///      ],
+    ///      "properties": {
+    ///        "cause": {
+    ///          "$ref": "#/components/schemas/StateChangeCauseView"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "change",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "change": {
+    ///          "description": "A view of the account",
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_id",
+    ///            "amount",
+    ///            "code_hash",
+    ///            "locked",
+    ///            "storage_usage"
+    ///          ],
+    ///          "properties": {
+    ///            "account_id": {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            },
+    ///            "amount": {
+    ///              "type": "string"
+    ///            },
+    ///            "code_hash": {
+    ///              "$ref": "#/components/schemas/CryptoHash"
+    ///            },
+    ///            "global_contract_account_id": {
+    ///              "oneOf": [
+    ///                {
+    ///                  "type": "null"
+    ///                },
+    ///                {
+    ///                  "allOf": [
+    ///                    {
+    ///                      "$ref": "#/components/schemas/AccountId"
+    ///                    }
+    ///                  ]
+    ///                }
+    ///              ]
+    ///            },
+    ///            "global_contract_hash": {
+    ///              "oneOf": [
+    ///                {
+    ///                  "type": "null"
+    ///                },
+    ///                {
+    ///                  "allOf": [
+    ///                    {
+    ///                      "$ref": "#/components/schemas/CryptoHash"
+    ///                    }
+    ///                  ]
+    ///                }
+    ///              ]
+    ///            },
+    ///            "locked": {
+    ///              "type": "string"
+    ///            },
+    ///            "storage_paid_at": {
+    ///              "description": "TODO(2271): deprecated.",
+    ///              "default": 0,
+    ///              "type": "integer",
+    ///              "format": "uint64",
+    ///              "minimum": 0.0
+    ///            },
+    ///            "storage_usage": {
+    ///              "type": "integer",
+    ///              "format": "uint64",
+    ///              "minimum": 0.0
+    ///            }
+    ///          }
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "account_update"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "account_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "access_key",
+    ///              "account_id",
+    ///              "public_key"
+    ///            ],
+    ///            "properties": {
+    ///              "access_key": {
+    ///                "$ref": "#/components/schemas/AccessKeyView"
+    ///              },
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "public_key": {
+    ///                "$ref": "#/components/schemas/PublicKey"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "access_key_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "public_key"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "public_key": {
+    ///                "$ref": "#/components/schemas/PublicKey"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "access_key_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "key_base64",
+    ///              "value_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "key_base64": {
+    ///                "type": "string"
+    ///              },
+    ///              "value_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "data_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "key_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "key_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "data_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "code_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "code_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "contract_code_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "contract_code_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    #[serde(deny_unknown_fields)]
+    pub enum StateChangeWithCauseViewVariant0 {}
+    impl ::std::convert::From<&Self> for StateChangeWithCauseViewVariant0 {
+        fn from(value: &StateChangeWithCauseViewVariant0) -> Self {
+            value.clone()
+        }
+    }
+
+    ///StateChangeWithCauseViewVariant1
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "allOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "cause"
+    ///      ],
+    ///      "properties": {
+    ///        "cause": {
+    ///          "$ref": "#/components/schemas/StateChangeCauseView"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "change",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "change": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_id"
+    ///          ],
+    ///          "properties": {
+    ///            "account_id": {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            }
+    ///          }
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "account_deletion"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "description": "A view of the account",
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "amount",
+    ///              "code_hash",
+    ///              "locked",
+    ///              "storage_usage"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "amount": {
+    ///                "type": "string"
+    ///              },
+    ///              "code_hash": {
+    ///                "$ref": "#/components/schemas/CryptoHash"
+    ///              },
+    ///              "global_contract_account_id": {
+    ///                "oneOf": [
+    ///                  {
+    ///                    "type": "null"
+    ///                  },
+    ///                  {
+    ///                    "allOf": [
+    ///                      {
+    ///                        "$ref": "#/components/schemas/AccountId"
+    ///                      }
+    ///                    ]
+    ///                  }
+    ///                ]
+    ///              },
+    ///              "global_contract_hash": {
+    ///                "oneOf": [
+    ///                  {
+    ///                    "type": "null"
+    ///                  },
+    ///                  {
+    ///                    "allOf": [
+    ///                      {
+    ///                        "$ref": "#/components/schemas/CryptoHash"
+    ///                      }
+    ///                    ]
+    ///                  }
+    ///                ]
+    ///              },
+    ///              "locked": {
+    ///                "type": "string"
+    ///              },
+    ///              "storage_paid_at": {
+    ///                "description": "TODO(2271): deprecated.",
+    ///                "default": 0,
+    ///                "type": "integer",
+    ///                "format": "uint64",
+    ///                "minimum": 0.0
+    ///              },
+    ///              "storage_usage": {
+    ///                "type": "integer",
+    ///                "format": "uint64",
+    ///                "minimum": 0.0
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "account_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "access_key",
+    ///              "account_id",
+    ///              "public_key"
+    ///            ],
+    ///            "properties": {
+    ///              "access_key": {
+    ///                "$ref": "#/components/schemas/AccessKeyView"
+    ///              },
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "public_key": {
+    ///                "$ref": "#/components/schemas/PublicKey"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "access_key_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "public_key"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "public_key": {
+    ///                "$ref": "#/components/schemas/PublicKey"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "access_key_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "key_base64",
+    ///              "value_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "key_base64": {
+    ///                "type": "string"
+    ///              },
+    ///              "value_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "data_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "key_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "key_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "data_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "code_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "code_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "contract_code_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "contract_code_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    #[serde(deny_unknown_fields)]
+    pub enum StateChangeWithCauseViewVariant1 {}
+    impl ::std::convert::From<&Self> for StateChangeWithCauseViewVariant1 {
+        fn from(value: &StateChangeWithCauseViewVariant1) -> Self {
+            value.clone()
+        }
+    }
+
+    ///StateChangeWithCauseViewVariant2
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "allOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "cause"
+    ///      ],
+    ///      "properties": {
+    ///        "cause": {
+    ///          "$ref": "#/components/schemas/StateChangeCauseView"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "change",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "change": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "access_key",
+    ///            "account_id",
+    ///            "public_key"
+    ///          ],
+    ///          "properties": {
+    ///            "access_key": {
+    ///              "$ref": "#/components/schemas/AccessKeyView"
+    ///            },
+    ///            "account_id": {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            },
+    ///            "public_key": {
+    ///              "$ref": "#/components/schemas/PublicKey"
+    ///            }
+    ///          }
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "access_key_update"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "description": "A view of the account",
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "amount",
+    ///              "code_hash",
+    ///              "locked",
+    ///              "storage_usage"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "amount": {
+    ///                "type": "string"
+    ///              },
+    ///              "code_hash": {
+    ///                "$ref": "#/components/schemas/CryptoHash"
+    ///              },
+    ///              "global_contract_account_id": {
+    ///                "oneOf": [
+    ///                  {
+    ///                    "type": "null"
+    ///                  },
+    ///                  {
+    ///                    "allOf": [
+    ///                      {
+    ///                        "$ref": "#/components/schemas/AccountId"
+    ///                      }
+    ///                    ]
+    ///                  }
+    ///                ]
+    ///              },
+    ///              "global_contract_hash": {
+    ///                "oneOf": [
+    ///                  {
+    ///                    "type": "null"
+    ///                  },
+    ///                  {
+    ///                    "allOf": [
+    ///                      {
+    ///                        "$ref": "#/components/schemas/CryptoHash"
+    ///                      }
+    ///                    ]
+    ///                  }
+    ///                ]
+    ///              },
+    ///              "locked": {
+    ///                "type": "string"
+    ///              },
+    ///              "storage_paid_at": {
+    ///                "description": "TODO(2271): deprecated.",
+    ///                "default": 0,
+    ///                "type": "integer",
+    ///                "format": "uint64",
+    ///                "minimum": 0.0
+    ///              },
+    ///              "storage_usage": {
+    ///                "type": "integer",
+    ///                "format": "uint64",
+    ///                "minimum": 0.0
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "account_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "account_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "public_key"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "public_key": {
+    ///                "$ref": "#/components/schemas/PublicKey"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "access_key_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "key_base64",
+    ///              "value_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "key_base64": {
+    ///                "type": "string"
+    ///              },
+    ///              "value_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "data_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "key_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "key_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "data_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "code_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "code_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "contract_code_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "contract_code_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    #[serde(deny_unknown_fields)]
+    pub enum StateChangeWithCauseViewVariant2 {}
+    impl ::std::convert::From<&Self> for StateChangeWithCauseViewVariant2 {
+        fn from(value: &StateChangeWithCauseViewVariant2) -> Self {
+            value.clone()
+        }
+    }
+
+    ///StateChangeWithCauseViewVariant3
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "allOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "cause"
+    ///      ],
+    ///      "properties": {
+    ///        "cause": {
+    ///          "$ref": "#/components/schemas/StateChangeCauseView"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "change",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "change": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_id",
+    ///            "public_key"
+    ///          ],
+    ///          "properties": {
+    ///            "account_id": {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            },
+    ///            "public_key": {
+    ///              "$ref": "#/components/schemas/PublicKey"
+    ///            }
+    ///          }
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "access_key_deletion"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "description": "A view of the account",
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "amount",
+    ///              "code_hash",
+    ///              "locked",
+    ///              "storage_usage"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "amount": {
+    ///                "type": "string"
+    ///              },
+    ///              "code_hash": {
+    ///                "$ref": "#/components/schemas/CryptoHash"
+    ///              },
+    ///              "global_contract_account_id": {
+    ///                "oneOf": [
+    ///                  {
+    ///                    "type": "null"
+    ///                  },
+    ///                  {
+    ///                    "allOf": [
+    ///                      {
+    ///                        "$ref": "#/components/schemas/AccountId"
+    ///                      }
+    ///                    ]
+    ///                  }
+    ///                ]
+    ///              },
+    ///              "global_contract_hash": {
+    ///                "oneOf": [
+    ///                  {
+    ///                    "type": "null"
+    ///                  },
+    ///                  {
+    ///                    "allOf": [
+    ///                      {
+    ///                        "$ref": "#/components/schemas/CryptoHash"
+    ///                      }
+    ///                    ]
+    ///                  }
+    ///                ]
+    ///              },
+    ///              "locked": {
+    ///                "type": "string"
+    ///              },
+    ///              "storage_paid_at": {
+    ///                "description": "TODO(2271): deprecated.",
+    ///                "default": 0,
+    ///                "type": "integer",
+    ///                "format": "uint64",
+    ///                "minimum": 0.0
+    ///              },
+    ///              "storage_usage": {
+    ///                "type": "integer",
+    ///                "format": "uint64",
+    ///                "minimum": 0.0
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "account_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "account_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "access_key",
+    ///              "account_id",
+    ///              "public_key"
+    ///            ],
+    ///            "properties": {
+    ///              "access_key": {
+    ///                "$ref": "#/components/schemas/AccessKeyView"
+    ///              },
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "public_key": {
+    ///                "$ref": "#/components/schemas/PublicKey"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "access_key_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "key_base64",
+    ///              "value_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "key_base64": {
+    ///                "type": "string"
+    ///              },
+    ///              "value_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "data_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "key_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "key_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "data_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "code_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "code_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "contract_code_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "contract_code_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    #[serde(deny_unknown_fields)]
+    pub enum StateChangeWithCauseViewVariant3 {}
+    impl ::std::convert::From<&Self> for StateChangeWithCauseViewVariant3 {
+        fn from(value: &StateChangeWithCauseViewVariant3) -> Self {
+            value.clone()
+        }
+    }
+
+    ///StateChangeWithCauseViewVariant4
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "allOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "cause"
+    ///      ],
+    ///      "properties": {
+    ///        "cause": {
+    ///          "$ref": "#/components/schemas/StateChangeCauseView"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "change",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "change": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_id",
+    ///            "key_base64",
+    ///            "value_base64"
+    ///          ],
+    ///          "properties": {
+    ///            "account_id": {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            },
+    ///            "key_base64": {
+    ///              "type": "string"
+    ///            },
+    ///            "value_base64": {
+    ///              "type": "string"
+    ///            }
+    ///          }
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "data_update"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "description": "A view of the account",
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "amount",
+    ///              "code_hash",
+    ///              "locked",
+    ///              "storage_usage"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "amount": {
+    ///                "type": "string"
+    ///              },
+    ///              "code_hash": {
+    ///                "$ref": "#/components/schemas/CryptoHash"
+    ///              },
+    ///              "global_contract_account_id": {
+    ///                "oneOf": [
+    ///                  {
+    ///                    "type": "null"
+    ///                  },
+    ///                  {
+    ///                    "allOf": [
+    ///                      {
+    ///                        "$ref": "#/components/schemas/AccountId"
+    ///                      }
+    ///                    ]
+    ///                  }
+    ///                ]
+    ///              },
+    ///              "global_contract_hash": {
+    ///                "oneOf": [
+    ///                  {
+    ///                    "type": "null"
+    ///                  },
+    ///                  {
+    ///                    "allOf": [
+    ///                      {
+    ///                        "$ref": "#/components/schemas/CryptoHash"
+    ///                      }
+    ///                    ]
+    ///                  }
+    ///                ]
+    ///              },
+    ///              "locked": {
+    ///                "type": "string"
+    ///              },
+    ///              "storage_paid_at": {
+    ///                "description": "TODO(2271): deprecated.",
+    ///                "default": 0,
+    ///                "type": "integer",
+    ///                "format": "uint64",
+    ///                "minimum": 0.0
+    ///              },
+    ///              "storage_usage": {
+    ///                "type": "integer",
+    ///                "format": "uint64",
+    ///                "minimum": 0.0
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "account_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "account_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "access_key",
+    ///              "account_id",
+    ///              "public_key"
+    ///            ],
+    ///            "properties": {
+    ///              "access_key": {
+    ///                "$ref": "#/components/schemas/AccessKeyView"
+    ///              },
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "public_key": {
+    ///                "$ref": "#/components/schemas/PublicKey"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "access_key_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "public_key"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "public_key": {
+    ///                "$ref": "#/components/schemas/PublicKey"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "access_key_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "key_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "key_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "data_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "code_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "code_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "contract_code_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "contract_code_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    #[serde(deny_unknown_fields)]
+    pub enum StateChangeWithCauseViewVariant4 {}
+    impl ::std::convert::From<&Self> for StateChangeWithCauseViewVariant4 {
+        fn from(value: &StateChangeWithCauseViewVariant4) -> Self {
+            value.clone()
+        }
+    }
+
+    ///StateChangeWithCauseViewVariant5
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "allOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "cause"
+    ///      ],
+    ///      "properties": {
+    ///        "cause": {
+    ///          "$ref": "#/components/schemas/StateChangeCauseView"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "change",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "change": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_id",
+    ///            "key_base64"
+    ///          ],
+    ///          "properties": {
+    ///            "account_id": {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            },
+    ///            "key_base64": {
+    ///              "type": "string"
+    ///            }
+    ///          }
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "data_deletion"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "description": "A view of the account",
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "amount",
+    ///              "code_hash",
+    ///              "locked",
+    ///              "storage_usage"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "amount": {
+    ///                "type": "string"
+    ///              },
+    ///              "code_hash": {
+    ///                "$ref": "#/components/schemas/CryptoHash"
+    ///              },
+    ///              "global_contract_account_id": {
+    ///                "oneOf": [
+    ///                  {
+    ///                    "type": "null"
+    ///                  },
+    ///                  {
+    ///                    "allOf": [
+    ///                      {
+    ///                        "$ref": "#/components/schemas/AccountId"
+    ///                      }
+    ///                    ]
+    ///                  }
+    ///                ]
+    ///              },
+    ///              "global_contract_hash": {
+    ///                "oneOf": [
+    ///                  {
+    ///                    "type": "null"
+    ///                  },
+    ///                  {
+    ///                    "allOf": [
+    ///                      {
+    ///                        "$ref": "#/components/schemas/CryptoHash"
+    ///                      }
+    ///                    ]
+    ///                  }
+    ///                ]
+    ///              },
+    ///              "locked": {
+    ///                "type": "string"
+    ///              },
+    ///              "storage_paid_at": {
+    ///                "description": "TODO(2271): deprecated.",
+    ///                "default": 0,
+    ///                "type": "integer",
+    ///                "format": "uint64",
+    ///                "minimum": 0.0
+    ///              },
+    ///              "storage_usage": {
+    ///                "type": "integer",
+    ///                "format": "uint64",
+    ///                "minimum": 0.0
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "account_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "account_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "access_key",
+    ///              "account_id",
+    ///              "public_key"
+    ///            ],
+    ///            "properties": {
+    ///              "access_key": {
+    ///                "$ref": "#/components/schemas/AccessKeyView"
+    ///              },
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "public_key": {
+    ///                "$ref": "#/components/schemas/PublicKey"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "access_key_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "public_key"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "public_key": {
+    ///                "$ref": "#/components/schemas/PublicKey"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "access_key_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "key_base64",
+    ///              "value_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "key_base64": {
+    ///                "type": "string"
+    ///              },
+    ///              "value_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "data_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "code_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "code_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "contract_code_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "contract_code_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    #[serde(deny_unknown_fields)]
+    pub enum StateChangeWithCauseViewVariant5 {}
+    impl ::std::convert::From<&Self> for StateChangeWithCauseViewVariant5 {
+        fn from(value: &StateChangeWithCauseViewVariant5) -> Self {
+            value.clone()
+        }
+    }
+
+    ///StateChangeWithCauseViewVariant6
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "allOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "cause"
+    ///      ],
+    ///      "properties": {
+    ///        "cause": {
+    ///          "$ref": "#/components/schemas/StateChangeCauseView"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "change",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "change": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_id",
+    ///            "code_base64"
+    ///          ],
+    ///          "properties": {
+    ///            "account_id": {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            },
+    ///            "code_base64": {
+    ///              "type": "string"
+    ///            }
+    ///          }
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "contract_code_update"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "description": "A view of the account",
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "amount",
+    ///              "code_hash",
+    ///              "locked",
+    ///              "storage_usage"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "amount": {
+    ///                "type": "string"
+    ///              },
+    ///              "code_hash": {
+    ///                "$ref": "#/components/schemas/CryptoHash"
+    ///              },
+    ///              "global_contract_account_id": {
+    ///                "oneOf": [
+    ///                  {
+    ///                    "type": "null"
+    ///                  },
+    ///                  {
+    ///                    "allOf": [
+    ///                      {
+    ///                        "$ref": "#/components/schemas/AccountId"
+    ///                      }
+    ///                    ]
+    ///                  }
+    ///                ]
+    ///              },
+    ///              "global_contract_hash": {
+    ///                "oneOf": [
+    ///                  {
+    ///                    "type": "null"
+    ///                  },
+    ///                  {
+    ///                    "allOf": [
+    ///                      {
+    ///                        "$ref": "#/components/schemas/CryptoHash"
+    ///                      }
+    ///                    ]
+    ///                  }
+    ///                ]
+    ///              },
+    ///              "locked": {
+    ///                "type": "string"
+    ///              },
+    ///              "storage_paid_at": {
+    ///                "description": "TODO(2271): deprecated.",
+    ///                "default": 0,
+    ///                "type": "integer",
+    ///                "format": "uint64",
+    ///                "minimum": 0.0
+    ///              },
+    ///              "storage_usage": {
+    ///                "type": "integer",
+    ///                "format": "uint64",
+    ///                "minimum": 0.0
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "account_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "account_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "access_key",
+    ///              "account_id",
+    ///              "public_key"
+    ///            ],
+    ///            "properties": {
+    ///              "access_key": {
+    ///                "$ref": "#/components/schemas/AccessKeyView"
+    ///              },
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "public_key": {
+    ///                "$ref": "#/components/schemas/PublicKey"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "access_key_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "public_key"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "public_key": {
+    ///                "$ref": "#/components/schemas/PublicKey"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "access_key_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "key_base64",
+    ///              "value_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "key_base64": {
+    ///                "type": "string"
+    ///              },
+    ///              "value_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "data_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "key_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "key_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "data_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "contract_code_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    #[serde(deny_unknown_fields)]
+    pub enum StateChangeWithCauseViewVariant6 {}
+    impl ::std::convert::From<&Self> for StateChangeWithCauseViewVariant6 {
+        fn from(value: &StateChangeWithCauseViewVariant6) -> Self {
+            value.clone()
+        }
+    }
+
+    ///StateChangeWithCauseViewVariant7
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "allOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "cause"
+    ///      ],
+    ///      "properties": {
+    ///        "cause": {
+    ///          "$ref": "#/components/schemas/StateChangeCauseView"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "change",
+    ///        "type"
+    ///      ],
+    ///      "properties": {
+    ///        "change": {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_id"
+    ///          ],
+    ///          "properties": {
+    ///            "account_id": {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            }
+    ///          }
+    ///        },
+    ///        "type": {
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "contract_code_deletion"
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "description": "A view of the account",
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "amount",
+    ///              "code_hash",
+    ///              "locked",
+    ///              "storage_usage"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "amount": {
+    ///                "type": "string"
+    ///              },
+    ///              "code_hash": {
+    ///                "$ref": "#/components/schemas/CryptoHash"
+    ///              },
+    ///              "global_contract_account_id": {
+    ///                "oneOf": [
+    ///                  {
+    ///                    "type": "null"
+    ///                  },
+    ///                  {
+    ///                    "allOf": [
+    ///                      {
+    ///                        "$ref": "#/components/schemas/AccountId"
+    ///                      }
+    ///                    ]
+    ///                  }
+    ///                ]
+    ///              },
+    ///              "global_contract_hash": {
+    ///                "oneOf": [
+    ///                  {
+    ///                    "type": "null"
+    ///                  },
+    ///                  {
+    ///                    "allOf": [
+    ///                      {
+    ///                        "$ref": "#/components/schemas/CryptoHash"
+    ///                      }
+    ///                    ]
+    ///                  }
+    ///                ]
+    ///              },
+    ///              "locked": {
+    ///                "type": "string"
+    ///              },
+    ///              "storage_paid_at": {
+    ///                "description": "TODO(2271): deprecated.",
+    ///                "default": 0,
+    ///                "type": "integer",
+    ///                "format": "uint64",
+    ///                "minimum": 0.0
+    ///              },
+    ///              "storage_usage": {
+    ///                "type": "integer",
+    ///                "format": "uint64",
+    ///                "minimum": 0.0
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "account_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "account_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "access_key",
+    ///              "account_id",
+    ///              "public_key"
+    ///            ],
+    ///            "properties": {
+    ///              "access_key": {
+    ///                "$ref": "#/components/schemas/AccessKeyView"
+    ///              },
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "public_key": {
+    ///                "$ref": "#/components/schemas/PublicKey"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "access_key_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "public_key"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "public_key": {
+    ///                "$ref": "#/components/schemas/PublicKey"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "access_key_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "key_base64",
+    ///              "value_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "key_base64": {
+    ///                "type": "string"
+    ///              },
+    ///              "value_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "data_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "key_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "key_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "data_deletion"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "not": {
+    ///        "type": "object",
+    ///        "required": [
+    ///          "change",
+    ///          "type"
+    ///        ],
+    ///        "properties": {
+    ///          "change": {
+    ///            "type": "object",
+    ///            "required": [
+    ///              "account_id",
+    ///              "code_base64"
+    ///            ],
+    ///            "properties": {
+    ///              "account_id": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              },
+    ///              "code_base64": {
+    ///                "type": "string"
+    ///              }
+    ///            }
+    ///          },
+    ///          "type": {
+    ///            "type": "string",
+    ///            "enum": [
+    ///              "contract_code_update"
+    ///            ]
+    ///          }
+    ///        }
+    ///      }
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    #[serde(deny_unknown_fields)]
+    pub enum StateChangeWithCauseViewVariant7 {}
+    impl ::std::convert::From<&Self> for StateChangeWithCauseViewVariant7 {
+        fn from(value: &StateChangeWithCauseViewVariant7) -> Self {
             value.clone()
         }
     }
@@ -15104,6 +20423,49 @@ pub mod types {
             }
         }
 
+        pub(super) fn genesis_config_minimum_stake_ratio() -> super::Rational32SchemaProvider {
+            super::Rational32SchemaProvider {
+                denom: 1_i32,
+                numer: 6250_i32,
+            }
+        }
+
+        pub(super) fn genesis_config_online_max_threshold() -> super::Rational32SchemaProvider {
+            super::Rational32SchemaProvider {
+                denom: 99_i32,
+                numer: 100_i32,
+            }
+        }
+
+        pub(super) fn genesis_config_online_min_threshold() -> super::Rational32SchemaProvider {
+            super::Rational32SchemaProvider {
+                denom: 9_i32,
+                numer: 10_i32,
+            }
+        }
+
+        pub(super) fn genesis_config_protocol_upgrade_stake_threshold(
+        ) -> super::Rational32SchemaProvider {
+            super::Rational32SchemaProvider {
+                denom: 4_i32,
+                numer: 5_i32,
+            }
+        }
+
+        pub(super) fn genesis_config_shard_layout() -> super::ShardLayout {
+            super::ShardLayout::V2(super::ShardLayoutV2 {
+                boundary_accounts: vec![],
+                id_to_index_map: [("0".to_string(), 0_u32)].into_iter().collect(),
+                index_to_id_map: [("0".to_string(), super::ShardId(0_u64))]
+                    .into_iter()
+                    .collect(),
+                shard_ids: vec![super::ShardId(0_u64)],
+                shards_parent_map: ::std::option::Option::None,
+                shards_split_map: ::std::option::Option::None,
+                version: 0_u32,
+            })
+        }
+
         pub(super) fn rpc_send_transaction_request_wait_until() -> super::TxExecutionStatus {
             super::TxExecutionStatus::ExecutedOptimistic
         }
@@ -15178,6 +20540,111 @@ impl Client {
 #[allow(clippy::all)]
 #[allow(elided_named_lifetimes)]
 impl Client {
+    ///Sends a `POST` request to `/EXPERIMENTAL_changes`
+    pub async fn experimental_changes<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForExpChangeMethodNameHelperEnum,
+    ) -> Result<
+        ResponseValue<types::JsonRpcResponseForRpcStateChangesInBlockResponseAndRpcError>,
+        Error<()>,
+    > {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/EXPERIMENTAL_changes_in_block`
+    pub async fn experimental_changes_in_block<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForExpChangesBlockMethodNameHelperEnum,
+    ) -> Result<
+        ResponseValue<types::JsonRpcResponseForRpcStateChangesInBlockByTypeResponseAndRpcError>,
+        Error<()>,
+    > {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/EXPERIMENTAL_congestion_level`
+    pub async fn experimental_congestion_level<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForExpGongestionMethodNameHelperEnum,
+    ) -> Result<
+        ResponseValue<types::JsonRpcResponseForRpcCongestionLevelResponseAndRpcError>,
+        Error<()>,
+    > {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/EXPERIMENTAL_genesis_config`
+    pub async fn experimental_genesis_config<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForExpGenesisMethodNameHelperEnum,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForGenesisConfigAndRpcError>, Error<()>> {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
     ///Sends a `POST` request to `/block`
     pub async fn block<'a>(
         &'a self,
