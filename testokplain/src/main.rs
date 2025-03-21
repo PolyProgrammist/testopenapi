@@ -306,12 +306,12 @@ fn main() {
     add_spec_for_path::<ExpChangesBlockMethodNameHelperEnum, RpcStateChangesInBlockByTypeResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes_in_block".to_string());
     add_spec_for_path::<ExpGongestionMethodNameHelperEnum, RpcCongestionLevelResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_congestion_level".to_string());
     add_spec_for_path::<ExpGenesisMethodNameHelperEnum, GenesisConfig>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_genesis_config".to_string());
-    // add_spec_for_path::<ExpLightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_proof".to_string());
-    // add_spec_for_path::<ExpLightClientBlockProofMethodNameHelperEnum, RpcLightClientBlockProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_block_proof".to_string());
-    // add_spec_for_path::<ExpProtocolConfigMethodNameHelperEnum, RpcProtocolConfigResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_protocol_config".to_string());
-    // add_spec_for_path::<ExpReceiptMethodNameHelperEnum, RpcReceiptResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_receipt".to_string());
-    // add_spec_for_path::<ExpTxStatusMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_tx_status".to_string());
-    // add_spec_for_path::<ExpValidatorsMethodNameHelperEnum, RpcValidatorsOrderedResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_validators_ordered".to_string());
+    add_spec_for_path::<ExpLightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_proof".to_string());
+    add_spec_for_path::<ExpLightClientBlockProofMethodNameHelperEnum, RpcLightClientBlockProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_block_proof".to_string());
+    add_spec_for_path::<ExpProtocolConfigMethodNameHelperEnum, RpcProtocolConfigResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_protocol_config".to_string());
+    add_spec_for_path::<ExpReceiptMethodNameHelperEnum, RpcReceiptResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_receipt".to_string());
+    add_spec_for_path::<ExpTxStatusMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_tx_status".to_string());
+    add_spec_for_path::<ExpValidatorsMethodNameHelperEnum, RpcValidatorsOrderedResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_validators_ordered".to_string());
     // add_spec_for_path::<ExpMaintenanceWindoesMethodNameHelperEnum, RpcMaintenanceWindowsResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_maintenance_windows".to_string());
     // add_spec_for_path::<ExpSplitStorageInfoMethodNameHelperEnum, RpcSplitStorageInfoResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_split_storage_info".to_string());
 

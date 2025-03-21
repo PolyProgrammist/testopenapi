@@ -92,6 +92,67 @@ pub mod types {
         }
     }
 
+    ///Describes the cost of creating an access key.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Describes the cost of creating an access key.",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "full_access_cost",
+    ///    "function_call_cost",
+    ///    "function_call_cost_per_byte"
+    ///  ],
+    ///  "properties": {
+    ///    "full_access_cost": {
+    ///      "description": "Base cost of creating a full access access-key.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "function_call_cost": {
+    ///      "description": "Base cost of creating an access-key restricted to
+    /// specific functions.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "function_call_cost_per_byte": {
+    ///      "description": "Cost per byte of method_names of creating a
+    /// restricted access-key.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct AccessKeyCreationConfigView {
+        ///Base cost of creating a full access access-key.
+        pub full_access_cost: Fee,
+        ///Base cost of creating an access-key restricted to specific
+        /// functions.
+        pub function_call_cost: Fee,
+        ///Cost per byte of method_names of creating a restricted access-key.
+        pub function_call_cost_per_byte: Fee,
+    }
+
+    impl ::std::convert::From<&AccessKeyCreationConfigView> for AccessKeyCreationConfigView {
+        fn from(value: &AccessKeyCreationConfigView) -> Self {
+            value.clone()
+        }
+    }
+
     ///Defines permissions for AccessKey
     ///
     /// <details><summary>JSON schema</summary>
@@ -240,6 +301,55 @@ pub mod types {
 
     impl ::std::convert::From<&AccessKeyView> for AccessKeyView {
         fn from(value: &AccessKeyView) -> Self {
+            value.clone()
+        }
+    }
+
+    ///The structure describes configuration for creation of new accounts.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "The structure describes configuration for creation of
+    /// new accounts.",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "min_allowed_top_level_account_length",
+    ///    "registrar_account_id"
+    ///  ],
+    ///  "properties": {
+    ///    "min_allowed_top_level_account_length": {
+    ///      "description": "The minimum length of the top-level account ID that
+    /// is allowed to be created by any account.",
+    ///      "type": "integer",
+    ///      "format": "uint8",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "registrar_account_id": {
+    ///      "description": "The account ID of the account registrar. This account ID allowed to create top-level accounts of any valid length.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        }
+    ///      ]
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct AccountCreationConfigView {
+        ///The minimum length of the top-level account ID that is allowed to be
+        /// created by any account.
+        pub min_allowed_top_level_account_length: u8,
+        ///The account ID of the account registrar. This account ID allowed to
+        /// create top-level accounts of any valid length.
+        pub registrar_account_id: AccountId,
+    }
+
+    impl ::std::convert::From<&AccountCreationConfigView> for AccountCreationConfigView {
+        fn from(value: &AccountCreationConfigView) -> Self {
             value.clone()
         }
     }
@@ -647,6 +757,159 @@ pub mod types {
     impl ::std::convert::From<UseGlobalContractAction> for Action {
         fn from(value: UseGlobalContractAction) -> Self {
             Self::UseGlobalContract(value)
+        }
+    }
+
+    ///Describes the cost of creating a specific action, `Action`. Includes all
+    /// variants.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Describes the cost of creating a specific action,
+    /// `Action`. Includes all variants.",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "add_key_cost",
+    ///    "create_account_cost",
+    ///    "delegate_cost",
+    ///    "delete_account_cost",
+    ///    "delete_key_cost",
+    ///    "deploy_contract_cost",
+    ///    "deploy_contract_cost_per_byte",
+    ///    "function_call_cost",
+    ///    "function_call_cost_per_byte",
+    ///    "stake_cost",
+    ///    "transfer_cost"
+    ///  ],
+    ///  "properties": {
+    ///    "add_key_cost": {
+    ///      "description": "Base cost of adding a key.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/AccessKeyCreationConfigView"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "create_account_cost": {
+    ///      "description": "Base cost of creating an account.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "delegate_cost": {
+    ///      "description": "Base cost for processing a delegate action.\n\nThis
+    /// is on top of the costs for the actions inside the delegate action.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "delete_account_cost": {
+    ///      "description": "Base cost of deleting an account.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "delete_key_cost": {
+    ///      "description": "Base cost of deleting a key.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "deploy_contract_cost": {
+    ///      "description": "Base cost of deploying a contract.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "deploy_contract_cost_per_byte": {
+    ///      "description": "Cost per byte of deploying a contract.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "function_call_cost": {
+    ///      "description": "Base cost of calling a function.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "function_call_cost_per_byte": {
+    ///      "description": "Cost per byte of method name and arguments of
+    /// calling a function.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "stake_cost": {
+    ///      "description": "Base cost of staking.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "transfer_cost": {
+    ///      "description": "Base cost of making a transfer.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct ActionCreationConfigView {
+        ///Base cost of adding a key.
+        pub add_key_cost: AccessKeyCreationConfigView,
+        ///Base cost of creating an account.
+        pub create_account_cost: Fee,
+        ///Base cost for processing a delegate action.
+        ///
+        ///This is on top of the costs for the actions inside the delegate
+        /// action.
+        pub delegate_cost: Fee,
+        ///Base cost of deleting an account.
+        pub delete_account_cost: Fee,
+        ///Base cost of deleting a key.
+        pub delete_key_cost: Fee,
+        ///Base cost of deploying a contract.
+        pub deploy_contract_cost: Fee,
+        ///Cost per byte of deploying a contract.
+        pub deploy_contract_cost_per_byte: Fee,
+        ///Base cost of calling a function.
+        pub function_call_cost: Fee,
+        ///Cost per byte of method name and arguments of calling a function.
+        pub function_call_cost_per_byte: Fee,
+        ///Base cost of staking.
+        pub stake_cost: Fee,
+        ///Base cost of making a transfer.
+        pub transfer_cost: Fee,
+    }
+
+    impl ::std::convert::From<&ActionCreationConfigView> for ActionCreationConfigView {
+        fn from(value: &ActionCreationConfigView) -> Self {
+            value.clone()
         }
     }
 
@@ -3530,6 +3793,193 @@ pub mod types {
         }
     }
 
+    ///CongestionControlConfigView
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "allowed_shard_outgoing_gas",
+    ///    "max_congestion_incoming_gas",
+    ///    "max_congestion_memory_consumption",
+    ///    "max_congestion_missed_chunks",
+    ///    "max_congestion_outgoing_gas",
+    ///    "max_outgoing_gas",
+    ///    "max_tx_gas",
+    ///    "min_outgoing_gas",
+    ///    "min_tx_gas",
+    ///    "outgoing_receipts_big_size_limit",
+    ///    "outgoing_receipts_usual_size_limit",
+    ///    "reject_tx_congestion_threshold"
+    ///  ],
+    ///  "properties": {
+    ///    "allowed_shard_outgoing_gas": {
+    ///      "description": "How much gas the chosen allowed shard can send to a
+    /// 100% congested shard.\n\nSee [`CongestionControlConfig`] for more
+    /// details.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_congestion_incoming_gas": {
+    ///      "description": "How much gas in delayed receipts of a shard is 100%
+    /// incoming congestion.\n\nSee [`CongestionControlConfig`] for more
+    /// details.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_congestion_memory_consumption": {
+    ///      "description": "How much memory space of all delayed and buffered
+    /// receipts in a shard is considered 100% congested.\n\nSee
+    /// [`CongestionControlConfig`] for more details.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_congestion_missed_chunks": {
+    ///      "description": "How many missed chunks in a row in a shard is
+    /// considered 100% congested.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_congestion_outgoing_gas": {
+    ///      "description": "How much gas in outgoing buffered receipts of a
+    /// shard is 100% congested.\n\nOutgoing congestion contributes to overall
+    /// congestion, which reduces how much other shards are allowed to forward
+    /// to this shard.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_outgoing_gas": {
+    ///      "description": "The maximum amount of gas attached to receipts a
+    /// shard can forward to another shard per chunk.\n\nSee
+    /// [`CongestionControlConfig`] for more details.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_tx_gas": {
+    ///      "description": "The maximum amount of gas in a chunk spent on
+    /// converting new transactions to receipts.\n\nSee
+    /// [`CongestionControlConfig`] for more details.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "min_outgoing_gas": {
+    ///      "description": "The minimum gas each shard can send to a shard that
+    /// is not fully congested.\n\nSee [`CongestionControlConfig`] for more
+    /// details.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "min_tx_gas": {
+    ///      "description": "The minimum amount of gas in a chunk spent on converting new transactions to receipts, as long as the receiving shard is not congested.\n\nSee [`CongestionControlConfig`] for more details.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "outgoing_receipts_big_size_limit": {
+    ///      "description": "Large size limit for outgoing receipts to a shard,
+    /// used when it's safe to send a lot of receipts without making the state
+    /// witness too large. It limits the total sum of outgoing receipts, not
+    /// individual receipts.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "outgoing_receipts_usual_size_limit": {
+    ///      "description": "The standard size limit for outgoing receipts aimed
+    /// at a single shard. This limit is pretty small to keep the size of
+    /// source_receipt_proofs under control. It limits the total sum of outgoing
+    /// receipts, not individual receipts.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "reject_tx_congestion_threshold": {
+    ///      "description": "How much congestion a shard can tolerate before it
+    /// stops all shards from accepting new transactions with the receiver set
+    /// to the congested shard.",
+    ///      "type": "number",
+    ///      "format": "double"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct CongestionControlConfigView {
+        ///How much gas the chosen allowed shard can send to a 100% congested
+        /// shard.
+        ///
+        ///See [`CongestionControlConfig`] for more details.
+        pub allowed_shard_outgoing_gas: u64,
+        ///How much gas in delayed receipts of a shard is 100% incoming
+        /// congestion.
+        ///
+        ///See [`CongestionControlConfig`] for more details.
+        pub max_congestion_incoming_gas: u64,
+        ///How much memory space of all delayed and buffered receipts in a
+        /// shard is considered 100% congested.
+        ///
+        ///See [`CongestionControlConfig`] for more details.
+        pub max_congestion_memory_consumption: u64,
+        ///How many missed chunks in a row in a shard is considered 100%
+        /// congested.
+        pub max_congestion_missed_chunks: u64,
+        ///How much gas in outgoing buffered receipts of a shard is 100%
+        /// congested.
+        ///
+        ///Outgoing congestion contributes to overall congestion, which reduces
+        /// how much other shards are allowed to forward to this shard.
+        pub max_congestion_outgoing_gas: u64,
+        ///The maximum amount of gas attached to receipts a shard can forward
+        /// to another shard per chunk.
+        ///
+        ///See [`CongestionControlConfig`] for more details.
+        pub max_outgoing_gas: u64,
+        ///The maximum amount of gas in a chunk spent on converting new
+        /// transactions to receipts.
+        ///
+        ///See [`CongestionControlConfig`] for more details.
+        pub max_tx_gas: u64,
+        ///The minimum gas each shard can send to a shard that is not fully
+        /// congested.
+        ///
+        ///See [`CongestionControlConfig`] for more details.
+        pub min_outgoing_gas: u64,
+        ///The minimum amount of gas in a chunk spent on converting new
+        /// transactions to receipts, as long as the receiving shard is not
+        /// congested.
+        ///
+        ///See [`CongestionControlConfig`] for more details.
+        pub min_tx_gas: u64,
+        ///Large size limit for outgoing receipts to a shard, used when it's
+        /// safe to send a lot of receipts without making the state witness too
+        /// large. It limits the total sum of outgoing receipts, not individual
+        /// receipts.
+        pub outgoing_receipts_big_size_limit: u64,
+        ///The standard size limit for outgoing receipts aimed at a single
+        /// shard. This limit is pretty small to keep the size of
+        /// source_receipt_proofs under control. It limits the total sum of
+        /// outgoing receipts, not individual receipts.
+        pub outgoing_receipts_usual_size_limit: u64,
+        pub reject_tx_congestion_threshold: f64,
+    }
+
+    impl ::std::convert::From<&CongestionControlConfigView> for CongestionControlConfigView {
+        fn from(value: &CongestionControlConfigView) -> Self {
+            value.clone()
+        }
+    }
+
     ///CongestionInfoView
     ///
     /// <details><summary>JSON schema</summary>
@@ -3889,6 +4339,71 @@ pub mod types {
 
     impl ::std::convert::From<&CurrentEpochValidatorInfo> for CurrentEpochValidatorInfo {
         fn from(value: &CurrentEpochValidatorInfo) -> Self {
+            value.clone()
+        }
+    }
+
+    ///DataReceiptCreationConfigView
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "base_cost",
+    ///    "cost_per_byte"
+    ///  ],
+    ///  "properties": {
+    ///    "base_cost": {
+    ///      "description": "Base cost of creating a data receipt. Both `send`
+    /// and `exec` costs are burned when a new receipt has input dependencies.
+    /// The gas is charged for each input dependency. The dependencies are
+    /// specified when a receipt is created using `promise_then` and
+    /// `promise_batch_then`. NOTE: Any receipt with output dependencies will
+    /// produce data receipts. Even if it fails. Even if the last action is not
+    /// a function call (in case of success it will return empty value).",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "cost_per_byte": {
+    ///      "description": "Additional cost per byte sent. Both `send` and
+    /// `exec` costs are burned when a function call finishes execution and
+    /// returns `N` bytes of data to every output dependency. For each output
+    /// dependency the cost is `(send(sir) + exec()) * N`.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct DataReceiptCreationConfigView {
+        ///Base cost of creating a data receipt. Both `send` and `exec` costs
+        /// are burned when a new receipt has input dependencies. The gas is
+        /// charged for each input dependency. The dependencies are specified
+        /// when a receipt is created using `promise_then` and
+        /// `promise_batch_then`. NOTE: Any receipt with output dependencies
+        /// will produce data receipts. Even if it fails. Even if the last
+        /// action is not a function call (in case of success it will return
+        /// empty value).
+        pub base_cost: Fee,
+        ///Additional cost per byte sent. Both `send` and `exec` costs are
+        /// burned when a function call finishes execution and returns `N` bytes
+        /// of data to every output dependency. For each output dependency the
+        /// cost is `(send(sir) + exec()) * N`.
+        pub cost_per_byte: Fee,
+    }
+
+    impl ::std::convert::From<&DataReceiptCreationConfigView> for DataReceiptCreationConfigView {
+        fn from(value: &DataReceiptCreationConfigView) -> Self {
             value.clone()
         }
     }
@@ -5192,6 +5707,1270 @@ pub mod types {
         }
     }
 
+    ///ExpLightClientBlockProofMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_light_client_block_proof"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum ExpLightClientBlockProofMethodNameHelperEnum {
+        #[serde(rename = "EXPERIMENTAL_light_client_block_proof")]
+        ExperimentalLightClientBlockProof,
+    }
+
+    impl ::std::convert::From<&Self> for ExpLightClientBlockProofMethodNameHelperEnum {
+        fn from(value: &ExpLightClientBlockProofMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for ExpLightClientBlockProofMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalLightClientBlockProof => {
+                    write!(f, "EXPERIMENTAL_light_client_block_proof")
+                }
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for ExpLightClientBlockProofMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_light_client_block_proof" => {
+                    Ok(Self::ExperimentalLightClientBlockProof)
+                }
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for ExpLightClientBlockProofMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for ExpLightClientBlockProofMethodNameHelperEnum
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for ExpLightClientBlockProofMethodNameHelperEnum
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///ExpLightClientProofMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_light_client_proof"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum ExpLightClientProofMethodNameHelperEnum {
+        #[serde(rename = "EXPERIMENTAL_light_client_proof")]
+        ExperimentalLightClientProof,
+    }
+
+    impl ::std::convert::From<&Self> for ExpLightClientProofMethodNameHelperEnum {
+        fn from(value: &ExpLightClientProofMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for ExpLightClientProofMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalLightClientProof => write!(f, "EXPERIMENTAL_light_client_proof"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for ExpLightClientProofMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_light_client_proof" => Ok(Self::ExperimentalLightClientProof),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for ExpLightClientProofMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for ExpLightClientProofMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for ExpLightClientProofMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///ExpProtocolConfigMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_protocol_config"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum ExpProtocolConfigMethodNameHelperEnum {
+        #[serde(rename = "EXPERIMENTAL_protocol_config")]
+        ExperimentalProtocolConfig,
+    }
+
+    impl ::std::convert::From<&Self> for ExpProtocolConfigMethodNameHelperEnum {
+        fn from(value: &ExpProtocolConfigMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for ExpProtocolConfigMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalProtocolConfig => write!(f, "EXPERIMENTAL_protocol_config"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for ExpProtocolConfigMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_protocol_config" => Ok(Self::ExperimentalProtocolConfig),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for ExpProtocolConfigMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for ExpProtocolConfigMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for ExpProtocolConfigMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///ExpReceiptMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_receipt"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum ExpReceiptMethodNameHelperEnum {
+        #[serde(rename = "EXPERIMENTAL_receipt")]
+        ExperimentalReceipt,
+    }
+
+    impl ::std::convert::From<&Self> for ExpReceiptMethodNameHelperEnum {
+        fn from(value: &ExpReceiptMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for ExpReceiptMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalReceipt => write!(f, "EXPERIMENTAL_receipt"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for ExpReceiptMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_receipt" => Ok(Self::ExperimentalReceipt),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for ExpReceiptMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for ExpReceiptMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for ExpReceiptMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///ExpTxStatusMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_tx_status"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum ExpTxStatusMethodNameHelperEnum {
+        #[serde(rename = "EXPERIMENTAL_tx_status")]
+        ExperimentalTxStatus,
+    }
+
+    impl ::std::convert::From<&Self> for ExpTxStatusMethodNameHelperEnum {
+        fn from(value: &ExpTxStatusMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for ExpTxStatusMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalTxStatus => write!(f, "EXPERIMENTAL_tx_status"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for ExpTxStatusMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_tx_status" => Ok(Self::ExperimentalTxStatus),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for ExpTxStatusMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for ExpTxStatusMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for ExpTxStatusMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///ExpValidatorsMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_validators_ordered"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum ExpValidatorsMethodNameHelperEnum {
+        #[serde(rename = "EXPERIMENTAL_validators_ordered")]
+        ExperimentalValidatorsOrdered,
+    }
+
+    impl ::std::convert::From<&Self> for ExpValidatorsMethodNameHelperEnum {
+        fn from(value: &ExpValidatorsMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for ExpValidatorsMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalValidatorsOrdered => write!(f, "EXPERIMENTAL_validators_ordered"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for ExpValidatorsMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_validators_ordered" => Ok(Self::ExperimentalValidatorsOrdered),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for ExpValidatorsMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for ExpValidatorsMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for ExpValidatorsMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///Typed view of ExtCostsConfig to preserve JSON output field names in
+    /// protocol config RPC output.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Typed view of ExtCostsConfig to preserve JSON output
+    /// field names in protocol config RPC output.",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "alt_bn128_g1_multiexp_base",
+    ///    "alt_bn128_g1_multiexp_element",
+    ///    "alt_bn128_g1_sum_base",
+    ///    "alt_bn128_g1_sum_element",
+    ///    "alt_bn128_pairing_check_base",
+    ///    "alt_bn128_pairing_check_element",
+    ///    "base",
+    ///    "bls12381_g1_multiexp_base",
+    ///    "bls12381_g1_multiexp_element",
+    ///    "bls12381_g2_multiexp_base",
+    ///    "bls12381_g2_multiexp_element",
+    ///    "bls12381_map_fp2_to_g2_base",
+    ///    "bls12381_map_fp2_to_g2_element",
+    ///    "bls12381_map_fp_to_g1_base",
+    ///    "bls12381_map_fp_to_g1_element",
+    ///    "bls12381_p1_decompress_base",
+    ///    "bls12381_p1_decompress_element",
+    ///    "bls12381_p1_sum_base",
+    ///    "bls12381_p1_sum_element",
+    ///    "bls12381_p2_decompress_base",
+    ///    "bls12381_p2_decompress_element",
+    ///    "bls12381_p2_sum_base",
+    ///    "bls12381_p2_sum_element",
+    ///    "bls12381_pairing_base",
+    ///    "bls12381_pairing_element",
+    ///    "contract_compile_base",
+    ///    "contract_compile_bytes",
+    ///    "contract_loading_base",
+    ///    "contract_loading_bytes",
+    ///    "ecrecover_base",
+    ///    "ed25519_verify_base",
+    ///    "ed25519_verify_byte",
+    ///    "keccak256_base",
+    ///    "keccak256_byte",
+    ///    "keccak512_base",
+    ///    "keccak512_byte",
+    ///    "log_base",
+    ///    "log_byte",
+    ///    "promise_and_base",
+    ///    "promise_and_per_promise",
+    ///    "promise_return",
+    ///    "read_cached_trie_node",
+    ///    "read_memory_base",
+    ///    "read_memory_byte",
+    ///    "read_register_base",
+    ///    "read_register_byte",
+    ///    "ripemd160_base",
+    ///    "ripemd160_block",
+    ///    "sha256_base",
+    ///    "sha256_byte",
+    ///    "storage_has_key_base",
+    ///    "storage_has_key_byte",
+    ///    "storage_iter_create_from_byte",
+    ///    "storage_iter_create_prefix_base",
+    ///    "storage_iter_create_prefix_byte",
+    ///    "storage_iter_create_range_base",
+    ///    "storage_iter_create_to_byte",
+    ///    "storage_iter_next_base",
+    ///    "storage_iter_next_key_byte",
+    ///    "storage_iter_next_value_byte",
+    ///    "storage_large_read_overhead_base",
+    ///    "storage_large_read_overhead_byte",
+    ///    "storage_read_base",
+    ///    "storage_read_key_byte",
+    ///    "storage_read_value_byte",
+    ///    "storage_remove_base",
+    ///    "storage_remove_key_byte",
+    ///    "storage_remove_ret_value_byte",
+    ///    "storage_write_base",
+    ///    "storage_write_evicted_byte",
+    ///    "storage_write_key_byte",
+    ///    "storage_write_value_byte",
+    ///    "touching_trie_node",
+    ///    "utf16_decoding_base",
+    ///    "utf16_decoding_byte",
+    ///    "utf8_decoding_base",
+    ///    "utf8_decoding_byte",
+    ///    "validator_stake_base",
+    ///    "validator_total_stake_base",
+    ///    "write_memory_base",
+    ///    "write_memory_byte",
+    ///    "write_register_base",
+    ///    "write_register_byte",
+    ///    "yield_create_base",
+    ///    "yield_create_byte",
+    ///    "yield_resume_base",
+    ///    "yield_resume_byte"
+    ///  ],
+    ///  "properties": {
+    ///    "alt_bn128_g1_multiexp_base": {
+    ///      "description": "Base cost for multiexp",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "alt_bn128_g1_multiexp_element": {
+    ///      "description": "Per element cost for multiexp",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "alt_bn128_g1_sum_base": {
+    ///      "description": "Base cost for sum",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "alt_bn128_g1_sum_element": {
+    ///      "description": "Per element cost for sum",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "alt_bn128_pairing_check_base": {
+    ///      "description": "Base cost for pairing check",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "alt_bn128_pairing_check_element": {
+    ///      "description": "Per element cost for pairing check",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "base": {
+    ///      "description": "Base cost for calling a host function.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_g1_multiexp_base": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_g1_multiexp_element": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_g2_multiexp_base": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_g2_multiexp_element": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_map_fp2_to_g2_base": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_map_fp2_to_g2_element": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_map_fp_to_g1_base": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_map_fp_to_g1_element": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_p1_decompress_base": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_p1_decompress_element": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_p1_sum_base": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_p1_sum_element": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_p2_decompress_base": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_p2_decompress_element": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_p2_sum_base": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_p2_sum_element": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_pairing_base": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "bls12381_pairing_element": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "contract_compile_base": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "contract_compile_bytes": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "contract_loading_base": {
+    ///      "description": "Base cost of loading a pre-compiled contract",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "contract_loading_bytes": {
+    ///      "description": "Cost per byte of loading a pre-compiled contract",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "ecrecover_base": {
+    ///      "description": "Cost of calling ecrecover",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "ed25519_verify_base": {
+    ///      "description": "Cost of getting ed25519 base",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "ed25519_verify_byte": {
+    ///      "description": "Cost of getting ed25519 per byte",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "keccak256_base": {
+    ///      "description": "Cost of getting sha256 base",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "keccak256_byte": {
+    ///      "description": "Cost of getting sha256 per byte",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "keccak512_base": {
+    ///      "description": "Cost of getting sha256 base",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "keccak512_byte": {
+    ///      "description": "Cost of getting sha256 per byte",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "log_base": {
+    ///      "description": "Cost for calling logging.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "log_byte": {
+    ///      "description": "Cost for logging per byte",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "promise_and_base": {
+    ///      "description": "Cost for calling `promise_and`",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "promise_and_per_promise": {
+    ///      "description": "Cost for calling `promise_and` for each promise",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "promise_return": {
+    ///      "description": "Cost for calling `promise_return`",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "read_cached_trie_node": {
+    ///      "description": "Cost for reading trie node from memory",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "read_memory_base": {
+    ///      "description": "Base cost for guest memory read",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "read_memory_byte": {
+    ///      "description": "Cost for guest memory read",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "read_register_base": {
+    ///      "description": "Base cost for reading from register",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "read_register_byte": {
+    ///      "description": "Cost for reading byte from register",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "ripemd160_base": {
+    ///      "description": "Cost of getting ripemd160 base",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "ripemd160_block": {
+    ///      "description": "Cost of getting ripemd160 per message block",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "sha256_base": {
+    ///      "description": "Cost of getting sha256 base",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "sha256_byte": {
+    ///      "description": "Cost of getting sha256 per byte",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_has_key_base": {
+    ///      "description": "Storage trie check for key existence cost base",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_has_key_byte": {
+    ///      "description": "Storage trie check for key existence per key byte",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_iter_create_from_byte": {
+    ///      "description": "Create trie range iterator cost per byte of from
+    /// key.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_iter_create_prefix_base": {
+    ///      "description": "Create trie prefix iterator cost base",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_iter_create_prefix_byte": {
+    ///      "description": "Create trie prefix iterator cost per byte.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_iter_create_range_base": {
+    ///      "description": "Create trie range iterator cost base",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_iter_create_to_byte": {
+    ///      "description": "Create trie range iterator cost per byte of to
+    /// key.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_iter_next_base": {
+    ///      "description": "Trie iterator per key base cost",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_iter_next_key_byte": {
+    ///      "description": "Trie iterator next key byte cost",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_iter_next_value_byte": {
+    ///      "description": "Trie iterator next key byte cost",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_large_read_overhead_base": {
+    ///      "description": "Storage trie read key overhead base cost, when
+    /// doing large reads",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_large_read_overhead_byte": {
+    ///      "description": "Storage trie read key overhead  per-byte cost, when
+    /// doing large reads",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_read_base": {
+    ///      "description": "Storage trie read key base cost",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_read_key_byte": {
+    ///      "description": "Storage trie read key per byte cost",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_read_value_byte": {
+    ///      "description": "Storage trie read value cost per byte cost",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_remove_base": {
+    ///      "description": "Remove key from trie base cost",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_remove_key_byte": {
+    ///      "description": "Remove key from trie per byte cost",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_remove_ret_value_byte": {
+    ///      "description": "Remove key from trie ret value byte cost",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_write_base": {
+    ///      "description": "Storage trie write key base cost",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_write_evicted_byte": {
+    ///      "description": "Storage trie write cost per byte of evicted
+    /// value.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_write_key_byte": {
+    ///      "description": "Storage trie write key per byte cost",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_write_value_byte": {
+    ///      "description": "Storage trie write value per byte cost",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "touching_trie_node": {
+    ///      "description": "Cost per reading trie node from DB",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "utf16_decoding_base": {
+    ///      "description": "Base cost of decoding utf16. It's used for
+    /// `log_utf16`.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "utf16_decoding_byte": {
+    ///      "description": "Cost per byte of decoding utf16. It's used for
+    /// `log_utf16`.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "utf8_decoding_base": {
+    ///      "description": "Base cost of decoding utf8. It's used for
+    /// `log_utf8` and `panic_utf8`.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "utf8_decoding_byte": {
+    ///      "description": "Cost per byte of decoding utf8. It's used for
+    /// `log_utf8` and `panic_utf8`.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "validator_stake_base": {
+    ///      "description": "Cost of calling `validator_stake`.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "validator_total_stake_base": {
+    ///      "description": "Cost of calling `validator_total_stake`.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "write_memory_base": {
+    ///      "description": "Base cost for guest memory write",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "write_memory_byte": {
+    ///      "description": "Cost for guest memory write per byte",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "write_register_base": {
+    ///      "description": "Base cost for writing into register",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "write_register_byte": {
+    ///      "description": "Cost for writing byte into register",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "yield_create_base": {
+    ///      "description": "Base cost for creating a yield promise.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "yield_create_byte": {
+    ///      "description": "Per byte cost of arguments and method name.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "yield_resume_base": {
+    ///      "description": "Base cost for resuming a yield receipt.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "yield_resume_byte": {
+    ///      "description": "Per byte cost of resume payload.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct ExtCostsConfigView {
+        ///Base cost for multiexp
+        pub alt_bn128_g1_multiexp_base: u64,
+        ///Per element cost for multiexp
+        pub alt_bn128_g1_multiexp_element: u64,
+        ///Base cost for sum
+        pub alt_bn128_g1_sum_base: u64,
+        ///Per element cost for sum
+        pub alt_bn128_g1_sum_element: u64,
+        ///Base cost for pairing check
+        pub alt_bn128_pairing_check_base: u64,
+        ///Per element cost for pairing check
+        pub alt_bn128_pairing_check_element: u64,
+        ///Base cost for calling a host function.
+        pub base: u64,
+        pub bls12381_g1_multiexp_base: u64,
+        pub bls12381_g1_multiexp_element: u64,
+        pub bls12381_g2_multiexp_base: u64,
+        pub bls12381_g2_multiexp_element: u64,
+        pub bls12381_map_fp2_to_g2_base: u64,
+        pub bls12381_map_fp2_to_g2_element: u64,
+        pub bls12381_map_fp_to_g1_base: u64,
+        pub bls12381_map_fp_to_g1_element: u64,
+        pub bls12381_p1_decompress_base: u64,
+        pub bls12381_p1_decompress_element: u64,
+        pub bls12381_p1_sum_base: u64,
+        pub bls12381_p1_sum_element: u64,
+        pub bls12381_p2_decompress_base: u64,
+        pub bls12381_p2_decompress_element: u64,
+        pub bls12381_p2_sum_base: u64,
+        pub bls12381_p2_sum_element: u64,
+        pub bls12381_pairing_base: u64,
+        pub bls12381_pairing_element: u64,
+        pub contract_compile_base: u64,
+        pub contract_compile_bytes: u64,
+        ///Base cost of loading a pre-compiled contract
+        pub contract_loading_base: u64,
+        ///Cost per byte of loading a pre-compiled contract
+        pub contract_loading_bytes: u64,
+        ///Cost of calling ecrecover
+        pub ecrecover_base: u64,
+        ///Cost of getting ed25519 base
+        pub ed25519_verify_base: u64,
+        ///Cost of getting ed25519 per byte
+        pub ed25519_verify_byte: u64,
+        ///Cost of getting sha256 base
+        pub keccak256_base: u64,
+        ///Cost of getting sha256 per byte
+        pub keccak256_byte: u64,
+        ///Cost of getting sha256 base
+        pub keccak512_base: u64,
+        ///Cost of getting sha256 per byte
+        pub keccak512_byte: u64,
+        ///Cost for calling logging.
+        pub log_base: u64,
+        ///Cost for logging per byte
+        pub log_byte: u64,
+        ///Cost for calling `promise_and`
+        pub promise_and_base: u64,
+        ///Cost for calling `promise_and` for each promise
+        pub promise_and_per_promise: u64,
+        ///Cost for calling `promise_return`
+        pub promise_return: u64,
+        ///Cost for reading trie node from memory
+        pub read_cached_trie_node: u64,
+        ///Base cost for guest memory read
+        pub read_memory_base: u64,
+        ///Cost for guest memory read
+        pub read_memory_byte: u64,
+        ///Base cost for reading from register
+        pub read_register_base: u64,
+        ///Cost for reading byte from register
+        pub read_register_byte: u64,
+        ///Cost of getting ripemd160 base
+        pub ripemd160_base: u64,
+        ///Cost of getting ripemd160 per message block
+        pub ripemd160_block: u64,
+        ///Cost of getting sha256 base
+        pub sha256_base: u64,
+        ///Cost of getting sha256 per byte
+        pub sha256_byte: u64,
+        ///Storage trie check for key existence cost base
+        pub storage_has_key_base: u64,
+        ///Storage trie check for key existence per key byte
+        pub storage_has_key_byte: u64,
+        ///Create trie range iterator cost per byte of from key.
+        pub storage_iter_create_from_byte: u64,
+        ///Create trie prefix iterator cost base
+        pub storage_iter_create_prefix_base: u64,
+        ///Create trie prefix iterator cost per byte.
+        pub storage_iter_create_prefix_byte: u64,
+        ///Create trie range iterator cost base
+        pub storage_iter_create_range_base: u64,
+        ///Create trie range iterator cost per byte of to key.
+        pub storage_iter_create_to_byte: u64,
+        ///Trie iterator per key base cost
+        pub storage_iter_next_base: u64,
+        ///Trie iterator next key byte cost
+        pub storage_iter_next_key_byte: u64,
+        ///Trie iterator next key byte cost
+        pub storage_iter_next_value_byte: u64,
+        ///Storage trie read key overhead base cost, when doing large reads
+        pub storage_large_read_overhead_base: u64,
+        ///Storage trie read key overhead  per-byte cost, when doing large
+        /// reads
+        pub storage_large_read_overhead_byte: u64,
+        ///Storage trie read key base cost
+        pub storage_read_base: u64,
+        ///Storage trie read key per byte cost
+        pub storage_read_key_byte: u64,
+        ///Storage trie read value cost per byte cost
+        pub storage_read_value_byte: u64,
+        ///Remove key from trie base cost
+        pub storage_remove_base: u64,
+        ///Remove key from trie per byte cost
+        pub storage_remove_key_byte: u64,
+        ///Remove key from trie ret value byte cost
+        pub storage_remove_ret_value_byte: u64,
+        ///Storage trie write key base cost
+        pub storage_write_base: u64,
+        ///Storage trie write cost per byte of evicted value.
+        pub storage_write_evicted_byte: u64,
+        ///Storage trie write key per byte cost
+        pub storage_write_key_byte: u64,
+        ///Storage trie write value per byte cost
+        pub storage_write_value_byte: u64,
+        ///Cost per reading trie node from DB
+        pub touching_trie_node: u64,
+        ///Base cost of decoding utf16. It's used for `log_utf16`.
+        pub utf16_decoding_base: u64,
+        ///Cost per byte of decoding utf16. It's used for `log_utf16`.
+        pub utf16_decoding_byte: u64,
+        ///Base cost of decoding utf8. It's used for `log_utf8` and
+        /// `panic_utf8`.
+        pub utf8_decoding_base: u64,
+        ///Cost per byte of decoding utf8. It's used for `log_utf8` and
+        /// `panic_utf8`.
+        pub utf8_decoding_byte: u64,
+        ///Cost of calling `validator_stake`.
+        pub validator_stake_base: u64,
+        ///Cost of calling `validator_total_stake`.
+        pub validator_total_stake_base: u64,
+        ///Base cost for guest memory write
+        pub write_memory_base: u64,
+        ///Cost for guest memory write per byte
+        pub write_memory_byte: u64,
+        ///Base cost for writing into register
+        pub write_register_base: u64,
+        ///Cost for writing byte into register
+        pub write_register_byte: u64,
+        ///Base cost for creating a yield promise.
+        pub yield_create_base: u64,
+        ///Per byte cost of arguments and method name.
+        pub yield_create_byte: u64,
+        ///Base cost for resuming a yield receipt.
+        pub yield_resume_base: u64,
+        ///Per byte cost of resume payload.
+        pub yield_resume_byte: u64,
+    }
+
+    impl ::std::convert::From<&ExtCostsConfigView> for ExtCostsConfigView {
+        fn from(value: &ExtCostsConfigView) -> Self {
+            value.clone()
+        }
+    }
+
     ///ExternalStorageConfig
     ///
     /// <details><summary>JSON schema</summary>
@@ -5362,6 +7141,67 @@ pub mod types {
 
     impl ::std::convert::From<&Self> for ExternalStorageLocation {
         fn from(value: &ExternalStorageLocation) -> Self {
+            value.clone()
+        }
+    }
+
+    ///Costs associated with an object that can only be sent over the network
+    /// (and executed by the receiver). NOTE: `send_sir` or `send_not_sir` fees
+    /// are usually burned when the item is being created. And `execution` fee
+    /// is burned when the item is being executed.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Costs associated with an object that can only be sent
+    /// over the network (and executed by the receiver). NOTE: `send_sir` or
+    /// `send_not_sir` fees are usually burned when the item is being created.
+    /// And `execution` fee is burned when the item is being executed.",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "execution",
+    ///    "send_not_sir",
+    ///    "send_sir"
+    ///  ],
+    ///  "properties": {
+    ///    "execution": {
+    ///      "description": "Fee for executing the object.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "send_not_sir": {
+    ///      "description": "Fee for sending an object potentially across the
+    /// shards.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "send_sir": {
+    ///      "description": "Fee for sending an object from the sender to
+    /// itself, guaranteeing that it does not leave the shard.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct Fee {
+        ///Fee for executing the object.
+        pub execution: u64,
+        ///Fee for sending an object potentially across the shards.
+        pub send_not_sir: u64,
+        ///Fee for sending an object from the sender to itself, guaranteeing
+        /// that it does not leave the shard.
+        pub send_sir: u64,
+    }
+
+    impl ::std::convert::From<&Fee> for Fee {
+        fn from(value: &Fee) -> Self {
             value.clone()
         }
     }
@@ -8613,6 +10453,292 @@ pub mod types {
         }
     }
 
+    ///JsonRpcRequestForExpLightClientBlockProofMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "
+    /// JsonRpcRequest_for_ExpLightClientBlockProofMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref":
+    /// "#/components/schemas/ExpLightClientBlockProofMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExpLightClientBlockProofMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: ExpLightClientBlockProofMethodNameHelperEnum,
+        pub params: RpcClientConfigRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExpLightClientBlockProofMethodNameHelperEnum>
+        for JsonRpcRequestForExpLightClientBlockProofMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForExpLightClientBlockProofMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForExpLightClientProofMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_ExpLightClientProofMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref":
+    /// "#/components/schemas/ExpLightClientProofMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExpLightClientProofMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: ExpLightClientProofMethodNameHelperEnum,
+        pub params: RpcClientConfigRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExpLightClientProofMethodNameHelperEnum>
+        for JsonRpcRequestForExpLightClientProofMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForExpLightClientProofMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForExpProtocolConfigMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_ExpProtocolConfigMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref":
+    /// "#/components/schemas/ExpProtocolConfigMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExpProtocolConfigMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: ExpProtocolConfigMethodNameHelperEnum,
+        pub params: RpcClientConfigRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExpProtocolConfigMethodNameHelperEnum>
+        for JsonRpcRequestForExpProtocolConfigMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForExpProtocolConfigMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForExpReceiptMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_ExpReceiptMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/ExpReceiptMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExpReceiptMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: ExpReceiptMethodNameHelperEnum,
+        pub params: RpcClientConfigRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExpReceiptMethodNameHelperEnum>
+        for JsonRpcRequestForExpReceiptMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForExpReceiptMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForExpTxStatusMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_ExpTxStatusMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/ExpTxStatusMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExpTxStatusMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: ExpTxStatusMethodNameHelperEnum,
+        pub params: RpcClientConfigRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExpTxStatusMethodNameHelperEnum>
+        for JsonRpcRequestForExpTxStatusMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForExpTxStatusMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForExpValidatorsMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_ExpValidatorsMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/ExpValidatorsMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExpValidatorsMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: ExpValidatorsMethodNameHelperEnum,
+        pub params: RpcClientConfigRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExpValidatorsMethodNameHelperEnum>
+        for JsonRpcRequestForExpValidatorsMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForExpValidatorsMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
     ///JsonRpcRequestForGasPriceMethodNameHelperEnum
     ///
     /// <details><summary>JSON schema</summary>
@@ -9033,6 +11159,94 @@ pub mod types {
         for JsonRpcRequestForValidatorsMethodNameHelperEnum
     {
         fn from(value: &JsonRpcRequestForValidatorsMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForArrayOfValidatorStakeViewAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_Array_of_ValidatorStakeView_and_RpcError"
+    /// ,
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "type": "array",
+    ///          "items": {
+    ///            "$ref": "#/components/schemas/ValidatorStakeView"
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForArrayOfValidatorStakeViewAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: ::std::vec::Vec<ValidatorStakeView>,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForArrayOfValidatorStakeViewAndRpcError {
+        fn from(value: &JsonRpcResponseForArrayOfValidatorStakeViewAndRpcError) -> Self {
             value.clone()
         }
     }
@@ -9541,6 +11755,91 @@ pub mod types {
         }
     }
 
+    ///JsonRpcResponseForRpcLightClientBlockProofResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "
+    /// JsonRpcResponse_for_RpcLightClientBlockProofResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/RpcLightClientBlockProofResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcLightClientBlockProofResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcLightClientBlockProofResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcLightClientBlockProofResponseAndRpcError {
+        fn from(value: &JsonRpcResponseForRpcLightClientBlockProofResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
     ///JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError
     ///
     /// <details><summary>JSON schema</summary>
@@ -9793,6 +12092,174 @@ pub mod types {
 
     impl ::std::convert::From<&Self> for JsonRpcResponseForRpcNetworkInfoResponseAndRpcError {
         fn from(value: &JsonRpcResponseForRpcNetworkInfoResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForRpcProtocolConfigResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_RpcProtocolConfigResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/RpcProtocolConfigResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcProtocolConfigResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcProtocolConfigResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcProtocolConfigResponseAndRpcError {
+        fn from(value: &JsonRpcResponseForRpcProtocolConfigResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForRpcReceiptResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_RpcReceiptResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/RpcReceiptResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcReceiptResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcReceiptResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcReceiptResponseAndRpcError {
+        fn from(value: &JsonRpcResponseForRpcReceiptResponseAndRpcError) -> Self {
             value.clone()
         }
     }
@@ -10385,6 +12852,349 @@ pub mod types {
             value: ::std::string::String,
         ) -> ::std::result::Result<Self, self::error::ConversionError> {
             value.parse()
+        }
+    }
+
+    ///Describes limits for VM and Runtime. TODO #4139: consider switching to
+    /// strongly-typed wrappers instead of raw quantities
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Describes limits for VM and Runtime. TODO #4139:
+    /// consider switching to strongly-typed wrappers instead of raw
+    /// quantities",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "initial_memory_pages",
+    ///    "max_actions_per_receipt",
+    ///    "max_arguments_length",
+    ///    "max_contract_size",
+    ///    "max_gas_burnt",
+    ///    "max_length_method_name",
+    ///    "max_length_returned_data",
+    ///    "max_length_storage_key",
+    ///    "max_length_storage_value",
+    ///    "max_memory_pages",
+    ///    "max_number_bytes_method_names",
+    ///    "max_number_input_data_dependencies",
+    ///    "max_number_logs",
+    ///    "max_number_registers",
+    ///    "max_promises_per_function_call_action",
+    ///    "max_receipt_size",
+    ///    "max_register_size",
+    ///    "max_stack_height",
+    ///    "max_total_log_length",
+    ///    "max_total_prepaid_gas",
+    ///    "max_transaction_size",
+    ///    "max_yield_payload_size",
+    ///    "per_receipt_storage_proof_size_limit",
+    ///    "registers_memory_limit",
+    ///    "yield_timeout_length_in_blocks"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id_validity_rules_version": {
+    ///      "description": "Whether to enforce account_id well-formed-ness
+    /// where it wasn't enforced historically.",
+    ///      "default": 0,
+    ///      "type": "integer",
+    ///      "format": "uint8",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "contract_prepare_version": {
+    ///      "description": "Whether a legacy version of stack limiting should
+    /// be used, see [`ContractPrepareVersion`].",
+    ///      "default": 0,
+    ///      "type": "integer",
+    ///      "format": "uint8",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "initial_memory_pages": {
+    ///      "description": "The initial number of memory pages. NOTE: It's not a limiter itself, but it's a value we use for initial_memory_pages.",
+    ///      "type": "integer",
+    ///      "format": "uint32",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_actions_per_receipt": {
+    ///      "description": "Max number of actions per receipt.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_arguments_length": {
+    ///      "description": "Max length of arguments in a function call
+    /// action.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_contract_size": {
+    ///      "description": "Max contract size",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_functions_number_per_contract": {
+    ///      "description": "If present, stores max number of functions in one
+    /// contract",
+    ///      "type": [
+    ///        "integer",
+    ///        "null"
+    ///      ],
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_gas_burnt": {
+    ///      "description": "Max amount of gas that can be used, excluding gas
+    /// attached to promises.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_length_method_name": {
+    ///      "description": "Max length of any method name (without terminating
+    /// character).",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_length_returned_data": {
+    ///      "description": "Max length of returned data",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_length_storage_key": {
+    ///      "description": "Max storage key size",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_length_storage_value": {
+    ///      "description": "Max storage value size",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_locals_per_contract": {
+    ///      "description": "If present, stores max number of locals declared
+    /// globally in one contract",
+    ///      "type": [
+    ///        "integer",
+    ///        "null"
+    ///      ],
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_memory_pages": {
+    ///      "description": "What is the maximal memory pages amount is allowed
+    /// to have for a contract.",
+    ///      "type": "integer",
+    ///      "format": "uint32",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_number_bytes_method_names": {
+    ///      "description": "Max total length of all method names (including
+    /// terminating character) for a function call permission access key.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_number_input_data_dependencies": {
+    ///      "description": "Max number of input data dependencies",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_number_logs": {
+    ///      "description": "Maximum number of log entries.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_number_registers": {
+    ///      "description": "Maximum number of registers that can be used
+    /// simultaneously.\n\nNote that due to an implementation quirk [read: a
+    /// bug] in VMLogic, if we have this number of registers, no subsequent
+    /// writes to the registers will succeed even if they replace an existing
+    /// register.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_promises_per_function_call_action": {
+    ///      "description": "Max number of promises that a function call can
+    /// create",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_receipt_size": {
+    ///      "description": "Max receipt size",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_register_size": {
+    ///      "description": "Maximum number of bytes that can be stored in a
+    /// single register.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_stack_height": {
+    ///      "description": "How tall the stack is allowed to grow?\n\nSee <https://wiki.parity.io/WebAssembly-StackHeight> to find out how the stack frame cost is calculated.",
+    ///      "type": "integer",
+    ///      "format": "uint32",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_total_log_length": {
+    ///      "description": "Maximum total length in bytes of all log
+    /// messages.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_total_prepaid_gas": {
+    ///      "description": "Max total prepaid gas for all function call actions
+    /// per receipt.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_transaction_size": {
+    ///      "description": "Max transaction size",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "max_yield_payload_size": {
+    ///      "description": "Maximum number of bytes for payload passed over a
+    /// yield resume.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "per_receipt_storage_proof_size_limit": {
+    ///      "description": "Hard limit on the size of storage proof generated
+    /// while executing a single receipt.",
+    ///      "type": "integer",
+    ///      "format": "uint",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "registers_memory_limit": {
+    ///      "description": "Limit of memory used by registers.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "wasmer2_stack_limit": {
+    ///      "description": "If present, stores the secondary stack limit as implemented by wasmer2.\n\nThis limit should never be hit normally.",
+    ///      "default": 102400,
+    ///      "type": "integer",
+    ///      "format": "int32"
+    ///    },
+    ///    "yield_timeout_length_in_blocks": {
+    ///      "description": "Number of blocks after which a yielded promise
+    /// times out.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct LimitConfig {
+        ///Whether to enforce account_id well-formed-ness where it wasn't
+        /// enforced historically.
+        #[serde(default)]
+        pub account_id_validity_rules_version: u8,
+        ///Whether a legacy version of stack limiting should be used, see
+        /// [`ContractPrepareVersion`].
+        #[serde(default)]
+        pub contract_prepare_version: u8,
+        ///The initial number of memory pages. NOTE: It's not a limiter itself,
+        /// but it's a value we use for initial_memory_pages.
+        pub initial_memory_pages: u32,
+        ///Max number of actions per receipt.
+        pub max_actions_per_receipt: u64,
+        ///Max length of arguments in a function call action.
+        pub max_arguments_length: u64,
+        ///Max contract size
+        pub max_contract_size: u64,
+        ///If present, stores max number of functions in one contract
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub max_functions_number_per_contract: ::std::option::Option<u64>,
+        ///Max amount of gas that can be used, excluding gas attached to
+        /// promises.
+        pub max_gas_burnt: u64,
+        ///Max length of any method name (without terminating character).
+        pub max_length_method_name: u64,
+        ///Max length of returned data
+        pub max_length_returned_data: u64,
+        ///Max storage key size
+        pub max_length_storage_key: u64,
+        ///Max storage value size
+        pub max_length_storage_value: u64,
+        ///If present, stores max number of locals declared globally in one
+        /// contract
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub max_locals_per_contract: ::std::option::Option<u64>,
+        ///What is the maximal memory pages amount is allowed to have for a
+        /// contract.
+        pub max_memory_pages: u32,
+        ///Max total length of all method names (including terminating
+        /// character) for a function call permission access key.
+        pub max_number_bytes_method_names: u64,
+        ///Max number of input data dependencies
+        pub max_number_input_data_dependencies: u64,
+        ///Maximum number of log entries.
+        pub max_number_logs: u64,
+        ///Maximum number of registers that can be used simultaneously.
+        ///
+        ///Note that due to an implementation quirk [read: a bug] in VMLogic,
+        /// if we have this number of registers, no subsequent writes to the
+        /// registers will succeed even if they replace an existing register.
+        pub max_number_registers: u64,
+        ///Max number of promises that a function call can create
+        pub max_promises_per_function_call_action: u64,
+        ///Max receipt size
+        pub max_receipt_size: u64,
+        ///Maximum number of bytes that can be stored in a single register.
+        pub max_register_size: u64,
+        ///How tall the stack is allowed to grow?
+        ///
+        ///See <https://wiki.parity.io/WebAssembly-StackHeight> to find out how the stack frame cost is calculated.
+        pub max_stack_height: u32,
+        ///Maximum total length in bytes of all log messages.
+        pub max_total_log_length: u64,
+        ///Max total prepaid gas for all function call actions per receipt.
+        pub max_total_prepaid_gas: u64,
+        ///Max transaction size
+        pub max_transaction_size: u64,
+        ///Maximum number of bytes for payload passed over a yield resume.
+        pub max_yield_payload_size: u64,
+        ///Hard limit on the size of storage proof generated while executing a
+        /// single receipt.
+        pub per_receipt_storage_proof_size_limit: u32,
+        ///Limit of memory used by registers.
+        pub registers_memory_limit: u64,
+        ///If present, stores the secondary stack limit as implemented by
+        /// wasmer2.
+        ///
+        ///This limit should never be hit normally.
+        #[serde(default = "defaults::default_u64::<i32, 102400>")]
+        pub wasmer2_stack_limit: i32,
+        ///Number of blocks after which a yielded promise times out.
+        pub yield_timeout_length_in_blocks: u64,
+    }
+
+    impl ::std::convert::From<&LimitConfig> for LimitConfig {
+        fn from(value: &LimitConfig) -> Self {
+            value.clone()
         }
     }
 
@@ -13265,6 +16075,43 @@ pub mod types {
         }
     }
 
+    ///RpcLightClientBlockProofResponse
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "block_header_lite",
+    ///    "block_proof"
+    ///  ],
+    ///  "properties": {
+    ///    "block_header_lite": {
+    ///      "$ref": "#/components/schemas/LightClientBlockLiteView"
+    ///    },
+    ///    "block_proof": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/MerklePathItem"
+    ///      }
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcLightClientBlockProofResponse {
+        pub block_header_lite: LightClientBlockLiteView,
+        pub block_proof: ::std::vec::Vec<MerklePathItem>,
+    }
+
+    impl ::std::convert::From<&RpcLightClientBlockProofResponse> for RpcLightClientBlockProofResponse {
+        fn from(value: &RpcLightClientBlockProofResponse) -> Self {
+            value.clone()
+        }
+    }
+
     ///RpcLightClientExecutionProofRequest
     ///
     /// <details><summary>JSON schema</summary>
@@ -13864,6 +16711,435 @@ pub mod types {
 
     impl ::std::convert::From<&RpcPeerInfo> for RpcPeerInfo {
         fn from(value: &RpcPeerInfo) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcProtocolConfigResponse
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "avg_hidden_validator_seats_per_shard",
+    ///    "block_producer_kickout_threshold",
+    ///    "chain_id",
+    ///    "chunk_producer_kickout_threshold",
+    ///    "chunk_validator_only_kickout_threshold",
+    ///    "dynamic_resharding",
+    ///    "epoch_length",
+    ///    "fishermen_threshold",
+    ///    "gas_limit",
+    ///    "gas_price_adjustment_rate",
+    ///    "genesis_height",
+    ///    "genesis_time",
+    ///    "max_gas_price",
+    ///    "max_inflation_rate",
+    ///    "max_kickout_stake_perc",
+    ///    "min_gas_price",
+    ///    "minimum_stake_divisor",
+    ///    "minimum_stake_ratio",
+    ///    "minimum_validators_per_shard",
+    ///    "num_block_producer_seats",
+    ///    "num_block_producer_seats_per_shard",
+    ///    "num_blocks_per_year",
+    ///    "num_chunk_only_producer_seats",
+    ///    "online_max_threshold",
+    ///    "online_min_threshold",
+    ///    "protocol_reward_rate",
+    ///    "protocol_treasury_account",
+    ///    "protocol_upgrade_stake_threshold",
+    ///    "protocol_version",
+    ///    "runtime_config",
+    ///    "shard_layout",
+    ///    "shuffle_shard_assignment_for_chunk_producers",
+    ///    "target_validator_mandates_per_shard",
+    ///    "transaction_validity_period"
+    ///  ],
+    ///  "properties": {
+    ///    "avg_hidden_validator_seats_per_shard": {
+    ///      "description": "Expected number of hidden validators per shard.",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      }
+    ///    },
+    ///    "block_producer_kickout_threshold": {
+    ///      "description": "Threshold for kicking out block producers, between
+    /// 0 and 100.",
+    ///      "type": "integer",
+    ///      "format": "uint8",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "chain_id": {
+    ///      "description": "ID of the blockchain. This must be unique for every
+    /// blockchain. If your testnet blockchains do not have unique chain IDs,
+    /// you will have a bad time.",
+    ///      "type": "string"
+    ///    },
+    ///    "chunk_producer_kickout_threshold": {
+    ///      "description": "Threshold for kicking out chunk producers, between
+    /// 0 and 100.",
+    ///      "type": "integer",
+    ///      "format": "uint8",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "chunk_validator_only_kickout_threshold": {
+    ///      "description": "Threshold for kicking out nodes which are only
+    /// chunk validators, between 0 and 100.",
+    ///      "type": "integer",
+    ///      "format": "uint8",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "dynamic_resharding": {
+    ///      "description": "Enable dynamic re-sharding.",
+    ///      "type": "boolean"
+    ///    },
+    ///    "epoch_length": {
+    ///      "description": "Epoch length counted in block heights.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "fishermen_threshold": {
+    ///      "description": "Fishermen stake threshold.",
+    ///      "type": "string"
+    ///    },
+    ///    "gas_limit": {
+    ///      "description": "Initial gas limit.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "gas_price_adjustment_rate": {
+    ///      "description": "Gas price adjustment rate",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "genesis_height": {
+    ///      "description": "Height of genesis block.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "genesis_time": {
+    ///      "description": "Official time of blockchain start.",
+    ///      "type": "string",
+    ///      "format": "date-time"
+    ///    },
+    ///    "max_gas_price": {
+    ///      "description": "Maximum gas price.",
+    ///      "type": "string"
+    ///    },
+    ///    "max_inflation_rate": {
+    ///      "description": "Maximum inflation on the total supply every
+    /// epoch.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "max_kickout_stake_perc": {
+    ///      "description": "Max stake percentage of the validators we will kick
+    /// out.",
+    ///      "type": "integer",
+    ///      "format": "uint8",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "min_gas_price": {
+    ///      "description": "Minimum gas price. It is also the initial gas
+    /// price.",
+    ///      "type": "string"
+    ///    },
+    ///    "minimum_stake_divisor": {
+    ///      "description": "The minimum stake required for staking is last seat
+    /// price divided by this number.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "minimum_stake_ratio": {
+    ///      "description": "The lowest ratio s/s_total any block producer can have. See <https://github.com/near/NEPs/pull/167> for details",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "minimum_validators_per_shard": {
+    ///      "description": "The minimum number of validators each shard must
+    /// have",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "num_block_producer_seats": {
+    ///      "description": "Number of block producer seats at genesis.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "num_block_producer_seats_per_shard": {
+    ///      "description": "Defines number of shards and number of block
+    /// producer seats per each shard at genesis.",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      }
+    ///    },
+    ///    "num_blocks_per_year": {
+    ///      "description": "Expected number of blocks per year",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "num_chunk_only_producer_seats": {
+    ///      "description": "Number of validator seats for chunk only
+    /// producers.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "online_max_threshold": {
+    ///      "description": "Online maximum threshold above which validator gets
+    /// full reward.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "online_min_threshold": {
+    ///      "description": "Online minimum threshold below which validator
+    /// doesn't receive reward.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "protocol_reward_rate": {
+    ///      "description": "Protocol treasury rate",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "protocol_treasury_account": {
+    ///      "description": "Protocol treasury account",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "protocol_upgrade_stake_threshold": {
+    ///      "description": "Threshold of stake that needs to indicate that they
+    /// ready for upgrade.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "protocol_version": {
+    ///      "description": "Current Protocol Version",
+    ///      "type": "integer",
+    ///      "format": "uint32",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "runtime_config": {
+    ///      "description": "Runtime configuration (mostly economics
+    /// constants).",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/RuntimeConfigView"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "shard_layout": {
+    ///      "description": "Layout information regarding how to split accounts
+    /// to shards",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/ShardLayout"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "shuffle_shard_assignment_for_chunk_producers": {
+    ///      "description": "If true, shuffle the chunk producers across shards.
+    /// In other words, if the shard assignments were `[S_0, S_1, S_2, S_3]`
+    /// where `S_i` represents the set of chunk producers for shard `i`, if this
+    /// flag were true, the shard assignments might become, for example, `[S_2,
+    /// S_0, S_3, S_1]`.",
+    ///      "type": "boolean"
+    ///    },
+    ///    "target_validator_mandates_per_shard": {
+    ///      "description": "Number of target chunk validator mandates for each
+    /// shard.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "transaction_validity_period": {
+    ///      "description": "Number of blocks for which a given transaction is
+    /// valid",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcProtocolConfigResponse {
+        ///Expected number of hidden validators per shard.
+        pub avg_hidden_validator_seats_per_shard: ::std::vec::Vec<u64>,
+        ///Threshold for kicking out block producers, between 0 and 100.
+        pub block_producer_kickout_threshold: u8,
+        ///ID of the blockchain. This must be unique for every blockchain. If
+        /// your testnet blockchains do not have unique chain IDs, you will have
+        /// a bad time.
+        pub chain_id: ::std::string::String,
+        ///Threshold for kicking out chunk producers, between 0 and 100.
+        pub chunk_producer_kickout_threshold: u8,
+        ///Threshold for kicking out nodes which are only chunk validators,
+        /// between 0 and 100.
+        pub chunk_validator_only_kickout_threshold: u8,
+        ///Enable dynamic re-sharding.
+        pub dynamic_resharding: bool,
+        ///Epoch length counted in block heights.
+        pub epoch_length: u64,
+        ///Fishermen stake threshold.
+        pub fishermen_threshold: ::std::string::String,
+        ///Initial gas limit.
+        pub gas_limit: u64,
+        ///Gas price adjustment rate
+        pub gas_price_adjustment_rate: Rational32SchemaProvider,
+        ///Height of genesis block.
+        pub genesis_height: u64,
+        ///Official time of blockchain start.
+        pub genesis_time: chrono::DateTime<chrono::offset::Utc>,
+        ///Maximum gas price.
+        pub max_gas_price: ::std::string::String,
+        ///Maximum inflation on the total supply every epoch.
+        pub max_inflation_rate: Rational32SchemaProvider,
+        ///Max stake percentage of the validators we will kick out.
+        pub max_kickout_stake_perc: u8,
+        ///Minimum gas price. It is also the initial gas price.
+        pub min_gas_price: ::std::string::String,
+        ///The minimum stake required for staking is last seat price divided by
+        /// this number.
+        pub minimum_stake_divisor: u64,
+        ///The lowest ratio s/s_total any block producer can have. See <https://github.com/near/NEPs/pull/167> for details
+        pub minimum_stake_ratio: Rational32SchemaProvider,
+        ///The minimum number of validators each shard must have
+        pub minimum_validators_per_shard: u64,
+        ///Number of block producer seats at genesis.
+        pub num_block_producer_seats: u64,
+        ///Defines number of shards and number of block producer seats per each
+        /// shard at genesis.
+        pub num_block_producer_seats_per_shard: ::std::vec::Vec<u64>,
+        ///Expected number of blocks per year
+        pub num_blocks_per_year: u64,
+        ///Number of validator seats for chunk only producers.
+        pub num_chunk_only_producer_seats: u64,
+        ///Online maximum threshold above which validator gets full reward.
+        pub online_max_threshold: Rational32SchemaProvider,
+        ///Online minimum threshold below which validator doesn't receive
+        /// reward.
+        pub online_min_threshold: Rational32SchemaProvider,
+        ///Protocol treasury rate
+        pub protocol_reward_rate: Rational32SchemaProvider,
+        ///Protocol treasury account
+        pub protocol_treasury_account: AccountId,
+        ///Threshold of stake that needs to indicate that they ready for
+        /// upgrade.
+        pub protocol_upgrade_stake_threshold: Rational32SchemaProvider,
+        ///Current Protocol Version
+        pub protocol_version: u32,
+        ///Runtime configuration (mostly economics constants).
+        pub runtime_config: RuntimeConfigView,
+        ///Layout information regarding how to split accounts to shards
+        pub shard_layout: ShardLayout,
+        ///If true, shuffle the chunk producers across shards. In other words,
+        /// if the shard assignments were `[S_0, S_1, S_2, S_3]` where `S_i`
+        /// represents the set of chunk producers for shard `i`, if this flag
+        /// were true, the shard assignments might become, for example, `[S_2,
+        /// S_0, S_3, S_1]`.
+        pub shuffle_shard_assignment_for_chunk_producers: bool,
+        ///Number of target chunk validator mandates for each shard.
+        pub target_validator_mandates_per_shard: u64,
+        ///Number of blocks for which a given transaction is valid
+        pub transaction_validity_period: u64,
+    }
+
+    impl ::std::convert::From<&RpcProtocolConfigResponse> for RpcProtocolConfigResponse {
+        fn from(value: &RpcProtocolConfigResponse) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcReceiptResponse
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "predecessor_id",
+    ///    "receipt",
+    ///    "receipt_id",
+    ///    "receiver_id"
+    ///  ],
+    ///  "properties": {
+    ///    "predecessor_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "priority": {
+    ///      "default": 0,
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "receipt": {
+    ///      "$ref": "#/components/schemas/ReceiptEnumView"
+    ///    },
+    ///    "receipt_id": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "receiver_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcReceiptResponse {
+        pub predecessor_id: AccountId,
+        #[serde(default)]
+        pub priority: u64,
+        pub receipt: ReceiptEnumView,
+        pub receipt_id: CryptoHash,
+        pub receiver_id: AccountId,
+    }
+
+    impl ::std::convert::From<&RpcReceiptResponse> for RpcReceiptResponse {
+        fn from(value: &RpcReceiptResponse) -> Self {
             value.clone()
         }
     }
@@ -14612,6 +17888,198 @@ pub mod types {
 
     impl ::std::convert::From<&RpcValidatorResponse> for RpcValidatorResponse {
         fn from(value: &RpcValidatorResponse) -> Self {
+            value.clone()
+        }
+    }
+
+    ///View that preserves JSON format of the runtime config.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "View that preserves JSON format of the runtime
+    /// config.",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_creation_config",
+    ///    "congestion_control_config",
+    ///    "storage_amount_per_byte",
+    ///    "transaction_costs",
+    ///    "wasm_config",
+    ///    "witness_config"
+    ///  ],
+    ///  "properties": {
+    ///    "account_creation_config": {
+    ///      "description": "Config that defines rules for account creation.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/AccountCreationConfigView"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "congestion_control_config": {
+    ///      "description": "The configuration for congestion control.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/CongestionControlConfigView"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "storage_amount_per_byte": {
+    ///      "description": "Amount of yN per byte required to have on the account.  See <https://nomicon.io/Economics/Economic#state-stake> for details.",
+    ///      "type": "string"
+    ///    },
+    ///    "transaction_costs": {
+    ///      "description": "Costs of different actions that need to be
+    /// performed when sending and processing transaction and receipts.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/RuntimeFeesConfigView"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "wasm_config": {
+    ///      "description": "Config of wasm operations.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/VMConfigView"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "witness_config": {
+    ///      "description": "Configuration specific to ChunkStateWitness.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/WitnessConfigView"
+    ///        }
+    ///      ]
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RuntimeConfigView {
+        ///Config that defines rules for account creation.
+        pub account_creation_config: AccountCreationConfigView,
+        ///The configuration for congestion control.
+        pub congestion_control_config: CongestionControlConfigView,
+        ///Amount of yN per byte required to have on the account.  See <https://nomicon.io/Economics/Economic#state-stake> for details.
+        pub storage_amount_per_byte: ::std::string::String,
+        ///Costs of different actions that need to be performed when sending
+        /// and processing transaction and receipts.
+        pub transaction_costs: RuntimeFeesConfigView,
+        ///Config of wasm operations.
+        pub wasm_config: VmConfigView,
+        ///Configuration specific to ChunkStateWitness.
+        pub witness_config: WitnessConfigView,
+    }
+
+    impl ::std::convert::From<&RuntimeConfigView> for RuntimeConfigView {
+        fn from(value: &RuntimeConfigView) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RuntimeFeesConfigView
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "action_creation_config",
+    ///    "action_receipt_creation_config",
+    ///    "burnt_gas_reward",
+    ///    "data_receipt_creation_config",
+    ///    "pessimistic_gas_price_inflation_ratio",
+    ///    "storage_usage_config"
+    ///  ],
+    ///  "properties": {
+    ///    "action_creation_config": {
+    ///      "description": "Describes the cost of creating a certain action,
+    /// `Action`. Includes all variants.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/ActionCreationConfigView"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "action_receipt_creation_config": {
+    ///      "description": "Describes the cost of creating an action receipt,
+    /// `ActionReceipt`, excluding the actual cost of actions. - `send` cost is
+    /// burned when a receipt is created using `promise_create` or
+    /// `promise_batch_create` - `exec` cost is burned when the receipt is being
+    /// executed.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "burnt_gas_reward": {
+    ///      "description": "Fraction of the burnt gas to reward to the contract
+    /// account for execution.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "data_receipt_creation_config": {
+    ///      "description": "Describes the cost of creating a data receipt,
+    /// `DataReceipt`.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/DataReceiptCreationConfigView"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "pessimistic_gas_price_inflation_ratio": {
+    ///      "description": "Pessimistic gas price inflation ratio.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "storage_usage_config": {
+    ///      "description": "Describes fees for storage.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/StorageUsageConfigView"
+    ///        }
+    ///      ]
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RuntimeFeesConfigView {
+        ///Describes the cost of creating a certain action, `Action`. Includes
+        /// all variants.
+        pub action_creation_config: ActionCreationConfigView,
+        ///Describes the cost of creating an action receipt, `ActionReceipt`,
+        /// excluding the actual cost of actions. - `send` cost is burned when a
+        /// receipt is created using `promise_create` or `promise_batch_create`
+        /// - `exec` cost is burned when the receipt is being executed.
+        pub action_receipt_creation_config: Fee,
+        ///Fraction of the burnt gas to reward to the contract account for
+        /// execution.
+        pub burnt_gas_reward: Rational32SchemaProvider,
+        ///Describes the cost of creating a data receipt, `DataReceipt`.
+        pub data_receipt_creation_config: DataReceiptCreationConfigView,
+        ///Pessimistic gas price inflation ratio.
+        pub pessimistic_gas_price_inflation_ratio: Rational32SchemaProvider,
+        ///Describes fees for storage.
+        pub storage_usage_config: StorageUsageConfigView,
+    }
+
+    impl ::std::convert::From<&RuntimeFeesConfigView> for RuntimeFeesConfigView {
+        fn from(value: &RuntimeFeesConfigView) -> Self {
             value.clone()
         }
     }
@@ -19268,6 +22736,136 @@ pub mod types {
         }
     }
 
+    ///This enum represents if a storage_get call will be performed through
+    /// flat storage or trie
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "This enum represents if a storage_get call will be
+    /// performed through flat storage or trie",
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "FlatStorage",
+    ///    "Trie"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum StorageGetMode {
+        FlatStorage,
+        Trie,
+    }
+
+    impl ::std::convert::From<&Self> for StorageGetMode {
+        fn from(value: &StorageGetMode) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for StorageGetMode {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::FlatStorage => write!(f, "FlatStorage"),
+                Self::Trie => write!(f, "Trie"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for StorageGetMode {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "FlatStorage" => Ok(Self::FlatStorage),
+                "Trie" => Ok(Self::Trie),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for StorageGetMode {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for StorageGetMode {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for StorageGetMode {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///Describes cost of storage per block
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Describes cost of storage per block",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "num_bytes_account",
+    ///    "num_extra_bytes_record"
+    ///  ],
+    ///  "properties": {
+    ///    "num_bytes_account": {
+    ///      "description": "Number of bytes for an account record, including
+    /// rounding up for account id.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "num_extra_bytes_record": {
+    ///      "description": "Additional number of bytes for a k/v record",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct StorageUsageConfigView {
+        ///Number of bytes for an account record, including rounding up for
+        /// account id.
+        pub num_bytes_account: u64,
+        ///Additional number of bytes for a k/v record
+        pub num_extra_bytes_record: u64,
+    }
+
+    impl ::std::convert::From<&StorageUsageConfigView> for StorageUsageConfigView {
+        fn from(value: &StorageUsageConfigView) -> Self {
+            value.clone()
+        }
+    }
+
     ///SyncCheckpoint
     ///
     /// <details><summary>JSON schema</summary>
@@ -20224,6 +23822,302 @@ pub mod types {
         }
     }
 
+    ///VmConfigView
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "alt_bn128",
+    ///    "disable_9393_fix",
+    ///    "discard_custom_sections",
+    ///    "ed25519_verify",
+    ///    "eth_implicit_accounts",
+    ///    "ext_costs",
+    ///    "fix_contract_loading_cost",
+    ///    "function_call_weight",
+    ///    "grow_mem_cost",
+    ///    "implicit_account_creation",
+    ///    "limit_config",
+    ///    "math_extension",
+    ///    "regular_op_cost",
+    ///    "storage_get_mode",
+    ///    "vm_kind",
+    ///    "yield_resume_host_functions"
+    ///  ],
+    ///  "properties": {
+    ///    "alt_bn128": {
+    ///      "description": "See
+    /// [VMConfig::alt_bn128](crate::vm::Config::alt_bn128).",
+    ///      "type": "boolean"
+    ///    },
+    ///    "disable_9393_fix": {
+    ///      "description": "See
+    /// [VMConfig::disable_9393_fix](crate::vm::Config::disable_9393_fix).",
+    ///      "type": "boolean"
+    ///    },
+    ///    "discard_custom_sections": {
+    ///      "description": "See
+    /// [VMConfig::discard_custom_sections](crate::vm::Config::discard_custom_sections).
+    /// ",
+    ///      "type": "boolean"
+    ///    },
+    ///    "ed25519_verify": {
+    ///      "description": "See
+    /// [VMConfig::ed25519_verify](crate::vm::Config::ed25519_verify).",
+    ///      "type": "boolean"
+    ///    },
+    ///    "eth_implicit_accounts": {
+    ///      "description": "See
+    /// [VMConfig::eth_implicit_accounts](crate::vm::Config::eth_implicit_accounts).
+    /// ",
+    ///      "type": "boolean"
+    ///    },
+    ///    "ext_costs": {
+    ///      "description": "Costs for runtime externals",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/ExtCostsConfigView"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "fix_contract_loading_cost": {
+    ///      "description": "See
+    /// [VMConfig::fix_contract_loading_cost](crate::vm::Config::fix_contract_loading_cost).
+    /// ",
+    ///      "type": "boolean"
+    ///    },
+    ///    "function_call_weight": {
+    ///      "description": "See
+    /// [VMConfig::function_call_weight](crate::vm::Config::function_call_weight).
+    /// ",
+    ///      "type": "boolean"
+    ///    },
+    ///    "grow_mem_cost": {
+    ///      "description": "Gas cost of a growing memory by single page.",
+    ///      "type": "integer",
+    ///      "format": "uint32",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "implicit_account_creation": {
+    ///      "description": "See
+    /// [VMConfig::implicit_account_creation](crate::vm::Config::implicit_account_creation).
+    /// ",
+    ///      "type": "boolean"
+    ///    },
+    ///    "limit_config": {
+    ///      "description": "Describes limits for VM and Runtime.\n\nTODO:
+    /// Consider changing this to `VMLimitConfigView` to avoid dependency on
+    /// runtime.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/LimitConfig"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "math_extension": {
+    ///      "description": "See
+    /// [VMConfig::math_extension](crate::vm::Config::math_extension).",
+    ///      "type": "boolean"
+    ///    },
+    ///    "regular_op_cost": {
+    ///      "description": "Gas cost of a regular operation.",
+    ///      "type": "integer",
+    ///      "format": "uint32",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_get_mode": {
+    ///      "description": "See
+    /// [VMConfig::storage_get_mode](crate::vm::Config::storage_get_mode).",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/StorageGetMode"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "vm_kind": {
+    ///      "description": "See
+    /// [VMConfig::vm_kind](crate::vm::Config::vm_kind).",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/VMKind"
+    ///        }
+    ///      ]
+    ///    },
+    ///    "yield_resume_host_functions": {
+    ///      "description": "See
+    /// [VMConfig::yield_resume_host_functions](`crate::vm::Config::yield_resume_host_functions).
+    /// ",
+    ///      "type": "boolean"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct VmConfigView {
+        ///See [VMConfig::alt_bn128](crate::vm::Config::alt_bn128).
+        pub alt_bn128: bool,
+        ///See [VMConfig::disable_9393_fix](crate::vm::Config::disable_9393_fix).
+        pub disable_9393_fix: bool,
+        ///See [VMConfig::discard_custom_sections](crate::vm::Config::discard_custom_sections).
+        pub discard_custom_sections: bool,
+        ///See [VMConfig::ed25519_verify](crate::vm::Config::ed25519_verify).
+        pub ed25519_verify: bool,
+        ///See [VMConfig::eth_implicit_accounts](crate::vm::Config::eth_implicit_accounts).
+        pub eth_implicit_accounts: bool,
+        ///Costs for runtime externals
+        pub ext_costs: ExtCostsConfigView,
+        ///See [VMConfig::fix_contract_loading_cost](crate::vm::Config::fix_contract_loading_cost).
+        pub fix_contract_loading_cost: bool,
+        ///See [VMConfig::function_call_weight](crate::vm::Config::function_call_weight).
+        pub function_call_weight: bool,
+        ///Gas cost of a growing memory by single page.
+        pub grow_mem_cost: u32,
+        ///See [VMConfig::implicit_account_creation](crate::vm::Config::implicit_account_creation).
+        pub implicit_account_creation: bool,
+        ///Describes limits for VM and Runtime.
+        ///
+        ///TODO: Consider changing this to `VMLimitConfigView` to avoid
+        /// dependency on runtime.
+        pub limit_config: LimitConfig,
+        ///See [VMConfig::math_extension](crate::vm::Config::math_extension).
+        pub math_extension: bool,
+        ///Gas cost of a regular operation.
+        pub regular_op_cost: u32,
+        ///See [VMConfig::storage_get_mode](crate::vm::Config::storage_get_mode).
+        pub storage_get_mode: StorageGetMode,
+        ///See [VMConfig::vm_kind](crate::vm::Config::vm_kind).
+        pub vm_kind: VmKind,
+        ///See [VMConfig::yield_resume_host_functions](`crate::vm::Config::yield_resume_host_functions).
+        pub yield_resume_host_functions: bool,
+    }
+
+    impl ::std::convert::From<&VmConfigView> for VmConfigView {
+        fn from(value: &VmConfigView) -> Self {
+            value.clone()
+        }
+    }
+
+    ///VmKind
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "oneOf": [
+    ///    {
+    ///      "description": "Wasmer 0.17.x VM.",
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "Wasmer0"
+    ///      ]
+    ///    },
+    ///    {
+    ///      "description": "Wasmtime VM.",
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "Wasmtime"
+    ///      ]
+    ///    },
+    ///    {
+    ///      "description": "Wasmer 2.x VM.",
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "Wasmer2"
+    ///      ]
+    ///    },
+    ///    {
+    ///      "description": "NearVM.",
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "NearVm"
+    ///      ]
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum VmKind {
+        ///Wasmer 0.17.x VM.
+        Wasmer0,
+        ///Wasmtime VM.
+        Wasmtime,
+        ///Wasmer 2.x VM.
+        Wasmer2,
+        ///NearVM.
+        NearVm,
+    }
+
+    impl ::std::convert::From<&Self> for VmKind {
+        fn from(value: &VmKind) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for VmKind {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::Wasmer0 => write!(f, "Wasmer0"),
+                Self::Wasmtime => write!(f, "Wasmtime"),
+                Self::Wasmer2 => write!(f, "Wasmer2"),
+                Self::NearVm => write!(f, "NearVm"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for VmKind {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "Wasmer0" => Ok(Self::Wasmer0),
+                "Wasmtime" => Ok(Self::Wasmtime),
+                "Wasmer2" => Ok(Self::Wasmer2),
+                "NearVm" => Ok(Self::NearVm),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for VmKind {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for VmKind {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for VmKind {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
     ///A kind of a trap happened during execution of a binary
     ///
     /// <details><summary>JSON schema</summary>
@@ -20396,6 +24290,68 @@ pub mod types {
             value: ::std::string::String,
         ) -> ::std::result::Result<Self, self::error::ConversionError> {
             value.parse()
+        }
+    }
+
+    ///Configuration specific to ChunkStateWitness.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Configuration specific to ChunkStateWitness.",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "combined_transactions_size_limit",
+    ///    "main_storage_proof_size_soft_limit",
+    ///    "new_transactions_validation_state_size_soft_limit"
+    ///  ],
+    ///  "properties": {
+    ///    "combined_transactions_size_limit": {
+    ///      "description": "A witness contains transactions from both the
+    /// previous chunk and the current one. This parameter limits the sum of
+    /// sizes of transactions from both of those chunks.",
+    ///      "type": "integer",
+    ///      "format": "uint",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "main_storage_proof_size_soft_limit": {
+    ///      "description": "Size limit for storage proof generated while
+    /// executing receipts in a chunk. After this limit is reached we defer
+    /// execution of any new receipts.",
+    ///      "type": "integer",
+    ///      "format": "uint",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "new_transactions_validation_state_size_soft_limit": {
+    ///      "description": "Soft size limit of storage proof used to validate
+    /// new transactions in ChunkStateWitness.",
+    ///      "type": "integer",
+    ///      "format": "uint",
+    ///      "minimum": 0.0
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct WitnessConfigView {
+        ///A witness contains transactions from both the previous chunk and the
+        /// current one. This parameter limits the sum of sizes of transactions
+        /// from both of those chunks.
+        pub combined_transactions_size_limit: u32,
+        ///Size limit for storage proof generated while executing receipts in a
+        /// chunk. After this limit is reached we defer execution of any new
+        /// receipts.
+        pub main_storage_proof_size_soft_limit: u32,
+        ///Soft size limit of storage proof used to validate new transactions
+        /// in ChunkStateWitness.
+        pub new_transactions_validation_state_size_soft_limit: u32,
+    }
+
+    impl ::std::convert::From<&WitnessConfigView> for WitnessConfigView {
+        fn from(value: &WitnessConfigView) -> Self {
+            value.clone()
         }
     }
 
@@ -20626,6 +24582,164 @@ impl Client {
         &'a self,
         body: &'a types::JsonRpcRequestForExpGenesisMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForGenesisConfigAndRpcError>, Error<()>> {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/EXPERIMENTAL_light_client_block_proof`
+    pub async fn experimental_light_client_block_proof<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForExpLightClientBlockProofMethodNameHelperEnum,
+    ) -> Result<
+        ResponseValue<types::JsonRpcResponseForRpcLightClientBlockProofResponseAndRpcError>,
+        Error<()>,
+    > {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/EXPERIMENTAL_light_client_proof`
+    pub async fn experimental_light_client_proof<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForExpLightClientProofMethodNameHelperEnum,
+    ) -> Result<
+        ResponseValue<types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError>,
+        Error<()>,
+    > {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/EXPERIMENTAL_protocol_config`
+    pub async fn experimental_protocol_config<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForExpProtocolConfigMethodNameHelperEnum,
+    ) -> Result<
+        ResponseValue<types::JsonRpcResponseForRpcProtocolConfigResponseAndRpcError>,
+        Error<()>,
+    > {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/EXPERIMENTAL_receipt`
+    pub async fn experimental_receipt<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForExpReceiptMethodNameHelperEnum,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcReceiptResponseAndRpcError>, Error<()>>
+    {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/EXPERIMENTAL_tx_status`
+    pub async fn experimental_tx_status<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForExpTxStatusMethodNameHelperEnum,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
+    {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/EXPERIMENTAL_validators_ordered`
+    pub async fn experimental_validators_ordered<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForExpValidatorsMethodNameHelperEnum,
+    ) -> Result<
+        ResponseValue<types::JsonRpcResponseForArrayOfValidatorStakeViewAndRpcError>,
+        Error<()>,
+    > {
         let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
