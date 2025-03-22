@@ -167,6 +167,33 @@
                 }
             }
         },
+        "/EXPERIMENTAL_maintenance_windows": {
+            "post": {
+                "operationId": "EXPERIMENTAL_maintenance_windows",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_ExpMaintenanceWindoesMethodNameHelperEnum"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonRpcResponse_for_Array_of_Tuple_of_uint64_and_uint64_and_RpcError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/EXPERIMENTAL_protocol_config": {
             "post": {
                 "operationId": "EXPERIMENTAL_protocol_config",
@@ -3621,6 +3648,12 @@
                     "EXPERIMENTAL_light_client_proof"
                 ]
             },
+            "ExpMaintenanceWindoesMethodNameHelperEnum": {
+                "type": "string",
+                "enum": [
+                    "EXPERIMENTAL_maintenance_windows"
+                ]
+            },
             "ExpProtocolConfigMethodNameHelperEnum": {
                 "type": "string",
                 "enum": [
@@ -6398,6 +6431,30 @@
                     }
                 }
             },
+            "JsonRpcRequest_for_ExpMaintenanceWindoesMethodNameHelperEnum": {
+                "title": "JsonRpcRequest_for_ExpMaintenanceWindoesMethodNameHelperEnum",
+                "type": "object",
+                "required": [
+                    "id",
+                    "jsonrpc",
+                    "method",
+                    "params"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "$ref": "#/components/schemas/ExpMaintenanceWindoesMethodNameHelperEnum"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcMaintenanceWindowsRequest"
+                    }
+                }
+            },
             "JsonRpcRequest_for_ExpProtocolConfigMethodNameHelperEnum": {
                 "title": "JsonRpcRequest_for_ExpProtocolConfigMethodNameHelperEnum",
                 "type": "object",
@@ -6707,6 +6764,67 @@
                     },
                     "params": {
                         "$ref": "#/components/schemas/RpcValidatorRequest"
+                    }
+                }
+            },
+            "JsonRpcResponse_for_Array_of_Tuple_of_uint64_and_uint64_and_RpcError": {
+                "title": "JsonRpcResponse_for_Array_of_Tuple_of_uint64_and_uint64_and_RpcError",
+                "type": "object",
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "required": [
+                            "result"
+                        ],
+                        "properties": {
+                            "result": {
+                                "type": "array",
+                                "items": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer",
+                                        "format": "uint64",
+                                        "minimum": 0.0
+                                    },
+                                    "maxItems": 2,
+                                    "minItems": 2
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "tmp"
+                        ],
+                        "properties": {
+                            "tmp": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        }
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "error"
+                        ],
+                        "properties": {
+                            "error": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        }
+                    }
+                ],
+                "required": [
+                    "id",
+                    "jsonrpc"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
                     }
                 }
             },
@@ -9323,6 +9441,17 @@
                     },
                     "prev_block_hash": {
                         "$ref": "#/components/schemas/CryptoHash"
+                    }
+                }
+            },
+            "RpcMaintenanceWindowsRequest": {
+                "type": "object",
+                "required": [
+                    "account_id"
+                ],
+                "properties": {
+                    "account_id": {
+                        "$ref": "#/components/schemas/AccountId"
                     }
                 }
             },

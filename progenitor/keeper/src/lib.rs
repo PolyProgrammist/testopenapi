@@ -5907,6 +5907,87 @@ pub mod types {
         }
     }
 
+    ///ExpMaintenanceWindoesMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_maintenance_windows"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum ExpMaintenanceWindoesMethodNameHelperEnum {
+        #[serde(rename = "EXPERIMENTAL_maintenance_windows")]
+        ExperimentalMaintenanceWindows,
+    }
+
+    impl ::std::convert::From<&Self> for ExpMaintenanceWindoesMethodNameHelperEnum {
+        fn from(value: &ExpMaintenanceWindoesMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for ExpMaintenanceWindoesMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalMaintenanceWindows => {
+                    write!(f, "EXPERIMENTAL_maintenance_windows")
+                }
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for ExpMaintenanceWindoesMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_maintenance_windows" => Ok(Self::ExperimentalMaintenanceWindows),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for ExpMaintenanceWindoesMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for ExpMaintenanceWindoesMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for ExpMaintenanceWindoesMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
     ///ExpProtocolConfigMethodNameHelperEnum
     ///
     /// <details><summary>JSON schema</summary>
@@ -10628,6 +10709,55 @@ pub mod types {
         }
     }
 
+    ///JsonRpcRequestForExpMaintenanceWindoesMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_ExpMaintenanceWindoesMethodNameHelperEnum"
+    /// ,
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref":
+    /// "#/components/schemas/ExpMaintenanceWindoesMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcMaintenanceWindowsRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExpMaintenanceWindoesMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: ExpMaintenanceWindoesMethodNameHelperEnum,
+        pub params: RpcMaintenanceWindowsRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExpMaintenanceWindoesMethodNameHelperEnum>
+        for JsonRpcRequestForExpMaintenanceWindoesMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForExpMaintenanceWindoesMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
     ///JsonRpcRequestForExpProtocolConfigMethodNameHelperEnum
     ///
     /// <details><summary>JSON schema</summary>
@@ -11237,6 +11367,100 @@ pub mod types {
         for JsonRpcRequestForValidatorsMethodNameHelperEnum
     {
         fn from(value: &JsonRpcRequestForValidatorsMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_Array_of_Tuple_of_uint64_and_uint64_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "type": "array",
+    ///          "items": {
+    ///            "type": "array",
+    ///            "items": {
+    ///              "type": "integer",
+    ///              "format": "uint64",
+    ///              "minimum": 0.0
+    ///            },
+    ///            "maxItems": 2,
+    ///            "minItems": 2
+    ///          }
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: ::std::vec::Vec<[u64; 2usize]>,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcError {
+        fn from(value: &JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcError) -> Self {
             value.clone()
         }
     }
@@ -16712,6 +16936,35 @@ pub mod types {
                 next_bps: Default::default(),
                 prev_block_hash: Default::default(),
             }
+        }
+    }
+
+    ///RpcMaintenanceWindowsRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_id"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcMaintenanceWindowsRequest {
+        pub account_id: AccountId,
+    }
+
+    impl ::std::convert::From<&RpcMaintenanceWindowsRequest> for RpcMaintenanceWindowsRequest {
+        fn from(value: &RpcMaintenanceWindowsRequest) -> Self {
+            value.clone()
         }
     }
 
@@ -25082,6 +25335,33 @@ impl Client {
         body: &'a types::JsonRpcRequestForExpLightClientProofMethodNameHelperEnum,
     ) -> Result<
         ResponseValue<types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError>,
+        Error<()>,
+    > {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/EXPERIMENTAL_maintenance_windows`
+    pub async fn experimental_maintenance_windows<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForExpMaintenanceWindoesMethodNameHelperEnum,
+    ) -> Result<
+        ResponseValue<types::JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcError>,
         Error<()>,
     > {
         let url = format!("{}/", self.baseurl,);

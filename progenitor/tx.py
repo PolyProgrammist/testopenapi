@@ -31,14 +31,18 @@ f.close()
 
 iterate_nested_json_for_loop(spec)
 
+if 'JsonRpcResponse_for_Array_of_Tuple_of_uint64_and_uint64_and_RpcError' in spec['components']['schemas']:
+    spec['components']['schemas']['JsonRpcResponse_for_Array_of_Tuple_of_uint64_and_uint64_and_RpcError']['anyOf'][0]['properties']['result']['items']['items'] = {
+                                            "type": "integer",
+                                            "format": "uint64",
+                                            "minimum": 0.0
+                                        }
+
+
 f = open(filename, 'w')
 json.dump(spec, f, indent=4)
 f.close()
 
-# f.close()
-# if 'StorageError' in spec['components']['schemas']:
-#     spec['components']['schemas']['StorageError']['oneOf'][1]['properties']['MissingTrieValue']['items'] = {"oneOf": spec['components']['schemas']['StorageError']['oneOf'][1]['properties']['MissingTrieValue']['items']}
-# json.dump(spec, open(filename, 'w'), indent = 4)
 
 filename = './keeper/src/lib.rs'
 f = open(filename, 'r')
