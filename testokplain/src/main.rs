@@ -265,18 +265,18 @@ generate_method_name_helper!(TxMethodNameHelperEnum, RpcTransactionStatusRequest
 generate_method_name_helper!(ValidatorsMethodNameHelperEnum, RpcValidatorRequest, "validators");
 generate_method_name_helper!(ClientConfigMethodNameHelperEnum, RpcClientConfigRequest, "client_config");
 
-generate_method_name_helper!(ExpChangeMethodNameHelperEnum, RpcClientConfigRequest, "EXPERIMENTAL_changes");
-generate_method_name_helper!(ExpChangesBlockMethodNameHelperEnum, RpcClientConfigRequest, "EXPERIMENTAL_changes_in_block");
-generate_method_name_helper!(ExpGongestionMethodNameHelperEnum, RpcClientConfigRequest, "EXPERIMENTAL_congestion_level");
-generate_method_name_helper!(ExpGenesisMethodNameHelperEnum, RpcClientConfigRequest, "EXPERIMENTAL_genesis_config");
-generate_method_name_helper!(ExpLightClientProofMethodNameHelperEnum, RpcClientConfigRequest, "EXPERIMENTAL_light_client_proof");
-generate_method_name_helper!(ExpLightClientBlockProofMethodNameHelperEnum, RpcClientConfigRequest, "EXPERIMENTAL_light_client_block_proof");
-generate_method_name_helper!(ExpProtocolConfigMethodNameHelperEnum, RpcClientConfigRequest, "EXPERIMENTAL_protocol_config");
-generate_method_name_helper!(ExpReceiptMethodNameHelperEnum, RpcClientConfigRequest, "EXPERIMENTAL_receipt");
-generate_method_name_helper!(ExpTxStatusMethodNameHelperEnum, RpcClientConfigRequest, "EXPERIMENTAL_tx_status");
+generate_method_name_helper!(ExpChangeMethodNameHelperEnum, RpcStateChangesInBlockResponse, "EXPERIMENTAL_changes");
+generate_method_name_helper!(ExpChangesBlockMethodNameHelperEnum, RpcStateChangesInBlockByTypeResponse, "EXPERIMENTAL_changes_in_block");
+generate_method_name_helper!(ExpGongestionMethodNameHelperEnum, RpcCongestionLevelResponse, "EXPERIMENTAL_congestion_level");
+generate_method_name_helper!(ExpGenesisMethodNameHelperEnum, GenesisConfig, "EXPERIMENTAL_genesis_config");
+generate_method_name_helper!(ExpLightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofResponse, "EXPERIMENTAL_light_client_proof");
+generate_method_name_helper!(ExpLightClientBlockProofMethodNameHelperEnum, RpcLightClientBlockProofResponse, "EXPERIMENTAL_light_client_block_proof");
+generate_method_name_helper!(ExpProtocolConfigMethodNameHelperEnum, RpcProtocolConfigResponse, "EXPERIMENTAL_protocol_config");
+generate_method_name_helper!(ExpReceiptMethodNameHelperEnum, RpcReceiptResponse, "EXPERIMENTAL_receipt");
+generate_method_name_helper!(ExpTxStatusMethodNameHelperEnum, RpcTransactionResponse, "EXPERIMENTAL_tx_status");
 generate_method_name_helper!(ExpValidatorsMethodNameHelperEnum, RpcClientConfigRequest, "EXPERIMENTAL_validators_ordered");
-generate_method_name_helper!(ExpMaintenanceWindoesMethodNameHelperEnum, RpcClientConfigRequest, "EXPERIMENTAL_maintenance_windows");
-generate_method_name_helper!(ExpSplitStorageInfoMethodNameHelperEnum, RpcClientConfigRequest, "EXPERIMENTAL_split_storage_info");
+generate_method_name_helper!(ExpMaintenanceWindoesMethodNameHelperEnum, RpcMaintenanceWindowsResponse, "EXPERIMENTAL_maintenance_windows");
+generate_method_name_helper!(ExpSplitStorageInfoMethodNameHelperEnum, RpcSplitStorageInfoResponse, "EXPERIMENTAL_split_storage_info");
 
 
 fn main() {

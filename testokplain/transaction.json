@@ -6256,7 +6256,7 @@
                         "$ref": "#/components/schemas/ExpChangeMethodNameHelperEnum"
                     },
                     "params": {
-                        "$ref": "#/components/schemas/RpcClientConfigRequest"
+                        "$ref": "#/components/schemas/RpcStateChangesInBlockResponse"
                     }
                 }
             },
@@ -6280,7 +6280,7 @@
                         "$ref": "#/components/schemas/ExpChangesBlockMethodNameHelperEnum"
                     },
                     "params": {
-                        "$ref": "#/components/schemas/RpcClientConfigRequest"
+                        "$ref": "#/components/schemas/RpcStateChangesInBlockByTypeResponse"
                     }
                 }
             },
@@ -6304,7 +6304,7 @@
                         "$ref": "#/components/schemas/ExpGenesisMethodNameHelperEnum"
                     },
                     "params": {
-                        "$ref": "#/components/schemas/RpcClientConfigRequest"
+                        "$ref": "#/components/schemas/GenesisConfig"
                     }
                 }
             },
@@ -6328,7 +6328,7 @@
                         "$ref": "#/components/schemas/ExpGongestionMethodNameHelperEnum"
                     },
                     "params": {
-                        "$ref": "#/components/schemas/RpcClientConfigRequest"
+                        "$ref": "#/components/schemas/RpcCongestionLevelResponse"
                     }
                 }
             },
@@ -6352,7 +6352,7 @@
                         "$ref": "#/components/schemas/ExpLightClientBlockProofMethodNameHelperEnum"
                     },
                     "params": {
-                        "$ref": "#/components/schemas/RpcClientConfigRequest"
+                        "$ref": "#/components/schemas/RpcLightClientBlockProofResponse"
                     }
                 }
             },
@@ -6376,7 +6376,7 @@
                         "$ref": "#/components/schemas/ExpLightClientProofMethodNameHelperEnum"
                     },
                     "params": {
-                        "$ref": "#/components/schemas/RpcClientConfigRequest"
+                        "$ref": "#/components/schemas/RpcLightClientExecutionProofResponse"
                     }
                 }
             },
@@ -6400,7 +6400,7 @@
                         "$ref": "#/components/schemas/ExpProtocolConfigMethodNameHelperEnum"
                     },
                     "params": {
-                        "$ref": "#/components/schemas/RpcClientConfigRequest"
+                        "$ref": "#/components/schemas/RpcProtocolConfigResponse"
                     }
                 }
             },
@@ -6424,7 +6424,7 @@
                         "$ref": "#/components/schemas/ExpReceiptMethodNameHelperEnum"
                     },
                     "params": {
-                        "$ref": "#/components/schemas/RpcClientConfigRequest"
+                        "$ref": "#/components/schemas/RpcReceiptResponse"
                     }
                 }
             },
@@ -6448,7 +6448,7 @@
                         "$ref": "#/components/schemas/ExpTxStatusMethodNameHelperEnum"
                     },
                     "params": {
-                        "$ref": "#/components/schemas/RpcClientConfigRequest"
+                        "$ref": "#/components/schemas/RpcTransactionResponse"
                     }
                 }
             },

@@ -10290,7 +10290,7 @@ pub mod types {
     ///      "$ref": "#/components/schemas/ExpChangeMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///      "$ref": "#/components/schemas/RpcStateChangesInBlockResponse"
     ///    }
     ///  }
     ///}
@@ -10301,7 +10301,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpChangeMethodNameHelperEnum,
-        pub params: RpcClientConfigRequest,
+        pub params: RpcStateChangesInBlockResponse,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpChangeMethodNameHelperEnum>
@@ -10337,7 +10337,7 @@ pub mod types {
     ///      "$ref": "#/components/schemas/ExpChangesBlockMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///      "$ref": "#/components/schemas/RpcStateChangesInBlockByTypeResponse"
     ///    }
     ///  }
     ///}
@@ -10348,7 +10348,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpChangesBlockMethodNameHelperEnum,
-        pub params: RpcClientConfigRequest,
+        pub params: RpcStateChangesInBlockByTypeResponse,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpChangesBlockMethodNameHelperEnum>
@@ -10384,7 +10384,7 @@ pub mod types {
     ///      "$ref": "#/components/schemas/ExpGenesisMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///      "$ref": "#/components/schemas/GenesisConfig"
     ///    }
     ///  }
     ///}
@@ -10395,7 +10395,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpGenesisMethodNameHelperEnum,
-        pub params: RpcClientConfigRequest,
+        pub params: GenesisConfig,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpGenesisMethodNameHelperEnum>
@@ -10431,7 +10431,7 @@ pub mod types {
     ///      "$ref": "#/components/schemas/ExpGongestionMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///      "$ref": "#/components/schemas/RpcCongestionLevelResponse"
     ///    }
     ///  }
     ///}
@@ -10442,7 +10442,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpGongestionMethodNameHelperEnum,
-        pub params: RpcClientConfigRequest,
+        pub params: RpcCongestionLevelResponse,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpGongestionMethodNameHelperEnum>
@@ -10480,7 +10480,7 @@ pub mod types {
     /// "#/components/schemas/ExpLightClientBlockProofMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///      "$ref": "#/components/schemas/RpcLightClientBlockProofResponse"
     ///    }
     ///  }
     ///}
@@ -10491,7 +10491,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpLightClientBlockProofMethodNameHelperEnum,
-        pub params: RpcClientConfigRequest,
+        pub params: RpcLightClientBlockProofResponse,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpLightClientBlockProofMethodNameHelperEnum>
@@ -10528,7 +10528,7 @@ pub mod types {
     /// "#/components/schemas/ExpLightClientProofMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///      "$ref": "#/components/schemas/RpcLightClientExecutionProofResponse"
     ///    }
     ///  }
     ///}
@@ -10539,7 +10539,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpLightClientProofMethodNameHelperEnum,
-        pub params: RpcClientConfigRequest,
+        pub params: RpcLightClientExecutionProofResponse,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpLightClientProofMethodNameHelperEnum>
@@ -10576,7 +10576,7 @@ pub mod types {
     /// "#/components/schemas/ExpProtocolConfigMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///      "$ref": "#/components/schemas/RpcProtocolConfigResponse"
     ///    }
     ///  }
     ///}
@@ -10587,7 +10587,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpProtocolConfigMethodNameHelperEnum,
-        pub params: RpcClientConfigRequest,
+        pub params: RpcProtocolConfigResponse,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpProtocolConfigMethodNameHelperEnum>
@@ -10623,7 +10623,7 @@ pub mod types {
     ///      "$ref": "#/components/schemas/ExpReceiptMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///      "$ref": "#/components/schemas/RpcReceiptResponse"
     ///    }
     ///  }
     ///}
@@ -10634,7 +10634,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpReceiptMethodNameHelperEnum,
-        pub params: RpcClientConfigRequest,
+        pub params: RpcReceiptResponse,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpReceiptMethodNameHelperEnum>
@@ -10670,7 +10670,7 @@ pub mod types {
     ///      "$ref": "#/components/schemas/ExpTxStatusMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///      "$ref": "#/components/schemas/RpcTransactionResponse"
     ///    }
     ///  }
     ///}
@@ -10681,7 +10681,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpTxStatusMethodNameHelperEnum,
-        pub params: RpcClientConfigRequest,
+        pub params: RpcTransactionResponse,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpTxStatusMethodNameHelperEnum>
