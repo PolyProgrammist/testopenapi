@@ -526,6 +526,40 @@ pub mod types {
         }
     }
 
+    ///AccountWithPublicKey
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_id",
+    ///    "public_key"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "public_key": {
+    ///      "$ref": "#/components/schemas/PublicKey"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct AccountWithPublicKey {
+        pub account_id: AccountId,
+        pub public_key: PublicKey,
+    }
+
+    impl ::std::convert::From<&AccountWithPublicKey> for AccountWithPublicKey {
+        fn from(value: &AccountWithPublicKey) -> Self {
+            value.clone()
+        }
+    }
+
     ///Action
     ///
     /// <details><summary>JSON schema</summary>
@@ -8472,6 +8506,50 @@ pub mod types {
         }
     }
 
+    ///GenesisConfigRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object"
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(transparent)]
+    pub struct GenesisConfigRequest(
+        pub ::serde_json::Map<::std::string::String, ::serde_json::Value>,
+    );
+    impl ::std::ops::Deref for GenesisConfigRequest {
+        type Target = ::serde_json::Map<::std::string::String, ::serde_json::Value>;
+        fn deref(&self) -> &::serde_json::Map<::std::string::String, ::serde_json::Value> {
+            &self.0
+        }
+    }
+
+    impl ::std::convert::From<GenesisConfigRequest>
+        for ::serde_json::Map<::std::string::String, ::serde_json::Value>
+    {
+        fn from(value: GenesisConfigRequest) -> Self {
+            value.0
+        }
+    }
+
+    impl ::std::convert::From<&GenesisConfigRequest> for GenesisConfigRequest {
+        fn from(value: &GenesisConfigRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<::serde_json::Map<::std::string::String, ::serde_json::Value>>
+        for GenesisConfigRequest
+    {
+        fn from(value: ::serde_json::Map<::std::string::String, ::serde_json::Value>) -> Self {
+            Self(value)
+        }
+    }
+
     ///GlobalContractData
     ///
     /// <details><summary>JSON schema</summary>
@@ -10290,7 +10368,7 @@ pub mod types {
     ///      "$ref": "#/components/schemas/ExpChangeMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcStateChangesInBlockResponse"
+    ///      "$ref": "#/components/schemas/RpcStateChangesInBlockRequest"
     ///    }
     ///  }
     ///}
@@ -10301,7 +10379,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpChangeMethodNameHelperEnum,
-        pub params: RpcStateChangesInBlockResponse,
+        pub params: RpcStateChangesInBlockRequest,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpChangeMethodNameHelperEnum>
@@ -10337,7 +10415,7 @@ pub mod types {
     ///      "$ref": "#/components/schemas/ExpChangesBlockMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcStateChangesInBlockByTypeResponse"
+    ///      "$ref": "#/components/schemas/RpcStateChangesInBlockByTypeRequest"
     ///    }
     ///  }
     ///}
@@ -10348,7 +10426,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpChangesBlockMethodNameHelperEnum,
-        pub params: RpcStateChangesInBlockByTypeResponse,
+        pub params: RpcStateChangesInBlockByTypeRequest,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpChangesBlockMethodNameHelperEnum>
@@ -10384,7 +10462,7 @@ pub mod types {
     ///      "$ref": "#/components/schemas/ExpGenesisMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/GenesisConfig"
+    ///      "$ref": "#/components/schemas/GenesisConfigRequest"
     ///    }
     ///  }
     ///}
@@ -10395,7 +10473,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpGenesisMethodNameHelperEnum,
-        pub params: GenesisConfig,
+        pub params: GenesisConfigRequest,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpGenesisMethodNameHelperEnum>
@@ -10431,7 +10509,7 @@ pub mod types {
     ///      "$ref": "#/components/schemas/ExpGongestionMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcCongestionLevelResponse"
+    ///      "$ref": "#/components/schemas/RpcCongestionLevelRequest"
     ///    }
     ///  }
     ///}
@@ -10442,7 +10520,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpGongestionMethodNameHelperEnum,
-        pub params: RpcCongestionLevelResponse,
+        pub params: RpcCongestionLevelRequest,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpGongestionMethodNameHelperEnum>
@@ -10480,7 +10558,7 @@ pub mod types {
     /// "#/components/schemas/ExpLightClientBlockProofMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcLightClientBlockProofResponse"
+    ///      "$ref": "#/components/schemas/RpcLightClientBlockProofRequest"
     ///    }
     ///  }
     ///}
@@ -10491,7 +10569,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpLightClientBlockProofMethodNameHelperEnum,
-        pub params: RpcLightClientBlockProofResponse,
+        pub params: RpcLightClientBlockProofRequest,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpLightClientBlockProofMethodNameHelperEnum>
@@ -10528,7 +10606,7 @@ pub mod types {
     /// "#/components/schemas/ExpLightClientProofMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcLightClientExecutionProofResponse"
+    ///      "$ref": "#/components/schemas/RpcLightClientExecutionProofRequest"
     ///    }
     ///  }
     ///}
@@ -10539,7 +10617,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpLightClientProofMethodNameHelperEnum,
-        pub params: RpcLightClientExecutionProofResponse,
+        pub params: RpcLightClientExecutionProofRequest,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpLightClientProofMethodNameHelperEnum>
@@ -10576,7 +10654,7 @@ pub mod types {
     /// "#/components/schemas/ExpProtocolConfigMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcProtocolConfigResponse"
+    ///      "$ref": "#/components/schemas/RpcProtocolConfigRequest"
     ///    }
     ///  }
     ///}
@@ -10587,7 +10665,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpProtocolConfigMethodNameHelperEnum,
-        pub params: RpcProtocolConfigResponse,
+        pub params: RpcProtocolConfigRequest,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpProtocolConfigMethodNameHelperEnum>
@@ -10623,7 +10701,7 @@ pub mod types {
     ///      "$ref": "#/components/schemas/ExpReceiptMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcReceiptResponse"
+    ///      "$ref": "#/components/schemas/RpcReceiptRequest"
     ///    }
     ///  }
     ///}
@@ -10634,7 +10712,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpReceiptMethodNameHelperEnum,
-        pub params: RpcReceiptResponse,
+        pub params: RpcReceiptRequest,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpReceiptMethodNameHelperEnum>
@@ -10670,7 +10748,7 @@ pub mod types {
     ///      "$ref": "#/components/schemas/ExpTxStatusMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcTransactionResponse"
+    ///      "$ref": "#/components/schemas/RpcTransactionStatusRequest"
     ///    }
     ///  }
     ///}
@@ -10681,7 +10759,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpTxStatusMethodNameHelperEnum,
-        pub params: RpcTransactionResponse,
+        pub params: RpcTransactionStatusRequest,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpTxStatusMethodNameHelperEnum>
@@ -15774,6 +15852,62 @@ pub mod types {
         }
     }
 
+    ///RpcCongestionLevelRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "block_id",
+    ///        "shard_id"
+    ///      ],
+    ///      "properties": {
+    ///        "block_id": {
+    ///          "$ref": "#/components/schemas/BlockId"
+    ///        },
+    ///        "shard_id": {
+    ///          "$ref": "#/components/schemas/ShardId"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "chunk_id"
+    ///      ],
+    ///      "properties": {
+    ///        "chunk_id": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        }
+    ///      }
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum RpcCongestionLevelRequest {
+        Variant0 {
+            block_id: BlockId,
+            shard_id: ShardId,
+        },
+        Variant1 {
+            chunk_id: CryptoHash,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for RpcCongestionLevelRequest {
+        fn from(value: &RpcCongestionLevelRequest) -> Self {
+            value.clone()
+        }
+    }
+
     ///RpcCongestionLevelResponse
     ///
     /// <details><summary>JSON schema</summary>
@@ -16071,6 +16205,40 @@ pub mod types {
 
     impl ::std::convert::From<&RpcKnownProducer> for RpcKnownProducer {
         fn from(value: &RpcKnownProducer) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcLightClientBlockProofRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "block_hash",
+    ///    "light_client_head"
+    ///  ],
+    ///  "properties": {
+    ///    "block_hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "light_client_head": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcLightClientBlockProofRequest {
+        pub block_hash: CryptoHash,
+        pub light_client_head: CryptoHash,
+    }
+
+    impl ::std::convert::From<&RpcLightClientBlockProofRequest> for RpcLightClientBlockProofRequest {
+        fn from(value: &RpcLightClientBlockProofRequest) -> Self {
             value.clone()
         }
     }
@@ -16715,6 +16883,88 @@ pub mod types {
         }
     }
 
+    ///RpcProtocolConfigRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "oneOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "block_id"
+    ///      ],
+    ///      "properties": {
+    ///        "block_id": {
+    ///          "$ref": "#/components/schemas/BlockId"
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "finality"
+    ///      ],
+    ///      "properties": {
+    ///        "finality": {
+    ///          "$ref": "#/components/schemas/Finality"
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "sync_checkpoint"
+    ///      ],
+    ///      "properties": {
+    ///        "sync_checkpoint": {
+    ///          "$ref": "#/components/schemas/SyncCheckpoint"
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub enum RpcProtocolConfigRequest {
+        #[serde(rename = "block_id")]
+        BlockId(BlockId),
+        #[serde(rename = "finality")]
+        Finality(Finality),
+        #[serde(rename = "sync_checkpoint")]
+        SyncCheckpoint(SyncCheckpoint),
+    }
+
+    impl ::std::convert::From<&Self> for RpcProtocolConfigRequest {
+        fn from(value: &RpcProtocolConfigRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<BlockId> for RpcProtocolConfigRequest {
+        fn from(value: BlockId) -> Self {
+            Self::BlockId(value)
+        }
+    }
+
+    impl ::std::convert::From<Finality> for RpcProtocolConfigRequest {
+        fn from(value: Finality) -> Self {
+            Self::Finality(value)
+        }
+    }
+
+    impl ::std::convert::From<SyncCheckpoint> for RpcProtocolConfigRequest {
+        fn from(value: SyncCheckpoint) -> Self {
+            Self::SyncCheckpoint(value)
+        }
+    }
+
     ///RpcProtocolConfigResponse
     ///
     /// <details><summary>JSON schema</summary>
@@ -17092,6 +17342,35 @@ pub mod types {
         }
     }
 
+    ///RpcReceiptRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "receipt_id"
+    ///  ],
+    ///  "properties": {
+    ///    "receipt_id": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcReceiptRequest {
+        pub receipt_id: CryptoHash,
+    }
+
+    impl ::std::convert::From<&RpcReceiptRequest> for RpcReceiptRequest {
+        fn from(value: &RpcReceiptRequest) -> Self {
+            value.clone()
+        }
+    }
+
     ///RpcReceiptResponse
     ///
     /// <details><summary>JSON schema</summary>
@@ -17263,6 +17542,93 @@ pub mod types {
         }
     }
 
+    ///It is a [serializable view] of [`StateChangesRequest`].
+    ///
+    ///[serializable view]: ./index.html [`StateChangesRequest`]: ../types/struct.StateChangesRequest.html
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "It is a [serializable view] of
+    /// [`StateChangesRequest`].\n\n[serializable view]: ./index.html
+    /// [`StateChangesRequest`]: ../types/struct.StateChangesRequest.html",
+    ///  "type": "object",
+    ///  "oneOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "block_id"
+    ///      ],
+    ///      "properties": {
+    ///        "block_id": {
+    ///          "$ref": "#/components/schemas/BlockId"
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "finality"
+    ///      ],
+    ///      "properties": {
+    ///        "finality": {
+    ///          "$ref": "#/components/schemas/Finality"
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "sync_checkpoint"
+    ///      ],
+    ///      "properties": {
+    ///        "sync_checkpoint": {
+    ///          "$ref": "#/components/schemas/SyncCheckpoint"
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub enum RpcStateChangesInBlockByTypeRequest {
+        #[serde(rename = "block_id")]
+        BlockId(BlockId),
+        #[serde(rename = "finality")]
+        Finality(Finality),
+        #[serde(rename = "sync_checkpoint")]
+        SyncCheckpoint(SyncCheckpoint),
+    }
+
+    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequest {
+        fn from(value: &RpcStateChangesInBlockByTypeRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<BlockId> for RpcStateChangesInBlockByTypeRequest {
+        fn from(value: BlockId) -> Self {
+            Self::BlockId(value)
+        }
+    }
+
+    impl ::std::convert::From<Finality> for RpcStateChangesInBlockByTypeRequest {
+        fn from(value: Finality) -> Self {
+            Self::Finality(value)
+        }
+    }
+
+    impl ::std::convert::From<SyncCheckpoint> for RpcStateChangesInBlockByTypeRequest {
+        fn from(value: SyncCheckpoint) -> Self {
+            Self::SyncCheckpoint(value)
+        }
+    }
+
     ///RpcStateChangesInBlockByTypeResponse
     ///
     /// <details><summary>JSON schema</summary>
@@ -17299,6 +17665,88 @@ pub mod types {
     {
         fn from(value: &RpcStateChangesInBlockByTypeResponse) -> Self {
             value.clone()
+        }
+    }
+
+    ///RpcStateChangesInBlockRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "oneOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "block_id"
+    ///      ],
+    ///      "properties": {
+    ///        "block_id": {
+    ///          "$ref": "#/components/schemas/BlockId"
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "finality"
+    ///      ],
+    ///      "properties": {
+    ///        "finality": {
+    ///          "$ref": "#/components/schemas/Finality"
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "sync_checkpoint"
+    ///      ],
+    ///      "properties": {
+    ///        "sync_checkpoint": {
+    ///          "$ref": "#/components/schemas/SyncCheckpoint"
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub enum RpcStateChangesInBlockRequest {
+        #[serde(rename = "block_id")]
+        BlockId(BlockId),
+        #[serde(rename = "finality")]
+        Finality(Finality),
+        #[serde(rename = "sync_checkpoint")]
+        SyncCheckpoint(SyncCheckpoint),
+    }
+
+    impl ::std::convert::From<&Self> for RpcStateChangesInBlockRequest {
+        fn from(value: &RpcStateChangesInBlockRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<BlockId> for RpcStateChangesInBlockRequest {
+        fn from(value: BlockId) -> Self {
+            Self::BlockId(value)
+        }
+    }
+
+    impl ::std::convert::From<Finality> for RpcStateChangesInBlockRequest {
+        fn from(value: Finality) -> Self {
+            Self::Finality(value)
+        }
+    }
+
+    impl ::std::convert::From<SyncCheckpoint> for RpcStateChangesInBlockRequest {
+        fn from(value: SyncCheckpoint) -> Self {
+            Self::SyncCheckpoint(value)
         }
     }
 

@@ -1,6 +1,6 @@
 use schemars::JsonSchema;
 use serde::{self, Deserialize, Serialize};
-use near_jsonrpc_primitives::errors::{RpcRequestValidationErrorKind};
+use near_jsonrpc_primitives::{errors::RpcRequestValidationErrorKind, types::changes::RpcStateChangesInBlockRequest};
 use okapi::openapi3::{OpenApi, SchemaObject};
 
 #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
@@ -192,7 +192,7 @@ use near_jsonrpc_primitives::types::{
         RpcValidatorRequest, RpcValidatorResponse, RpcValidatorsOrderedResponse
     },
     light_client::{
-        RpcLightClientExecutionProofRequest, RpcLightClientNextBlockRequest, RpcLightClientExecutionProofResponse, RpcLightClientNextBlockResponse, RpcLightClientBlockProofResponse
+        RpcLightClientExecutionProofRequest, RpcLightClientNextBlockRequest, RpcLightClientExecutionProofResponse, RpcLightClientNextBlockResponse, RpcLightClientBlockProofResponse, RpcLightClientBlockProofRequest
     },
     network_info::{
         RpcNetworkInfoResponse
@@ -204,19 +204,19 @@ use near_jsonrpc_primitives::types::{
         RpcStateChangesInBlockByTypeRequest, RpcStateChangesInBlockResponse, RpcStateChangesInBlockByTypeResponse
     },
     congestion::{
-        RpcCongestionLevelResponse
+        RpcCongestionLevelResponse, RpcCongestionLevelRequest
     },
     config::{
-        RpcProtocolConfigResponse
+        RpcProtocolConfigResponse, RpcProtocolConfigRequest
     },
     receipts::{
-        RpcReceiptResponse
+        RpcReceiptResponse, RpcReceiptRequest
     },
     maintenance::{
-        RpcMaintenanceWindowsResponse
+        RpcMaintenanceWindowsResponse, RpcMaintenanceWindowsRequest
     },
     split_storage::{
-        RpcSplitStorageInfoResponse
+        RpcSplitStorageInfoResponse, RpcSplitStorageInfoRequest
     }    
 };
 
@@ -250,6 +250,9 @@ struct RpcNetworkInfoRequest;
 #[derive(JsonSchema)]
 struct RpcClientConfigRequest;
 
+#[derive(JsonSchema)]
+struct GenesisConfigRequest;
+
 generate_method_name_helper!(BlockMethodNameHelperEnum, RpcBlockRequest, "block");
 generate_method_name_helper!(BroadCastTxAsyncMethodNameHelperEnum, RpcSendTransactionRequest, "broadcast_tx_async");
 generate_method_name_helper!(BroadCastTxCommitMethodNameHelperEnum, RpcSendTransactionRequest, "broadcast_tx_commit");
@@ -265,18 +268,18 @@ generate_method_name_helper!(TxMethodNameHelperEnum, RpcTransactionStatusRequest
 generate_method_name_helper!(ValidatorsMethodNameHelperEnum, RpcValidatorRequest, "validators");
 generate_method_name_helper!(ClientConfigMethodNameHelperEnum, RpcClientConfigRequest, "client_config");
 
-generate_method_name_helper!(ExpChangeMethodNameHelperEnum, RpcStateChangesInBlockResponse, "EXPERIMENTAL_changes");
-generate_method_name_helper!(ExpChangesBlockMethodNameHelperEnum, RpcStateChangesInBlockByTypeResponse, "EXPERIMENTAL_changes_in_block");
-generate_method_name_helper!(ExpGongestionMethodNameHelperEnum, RpcCongestionLevelResponse, "EXPERIMENTAL_congestion_level");
-generate_method_name_helper!(ExpGenesisMethodNameHelperEnum, GenesisConfig, "EXPERIMENTAL_genesis_config");
-generate_method_name_helper!(ExpLightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofResponse, "EXPERIMENTAL_light_client_proof");
-generate_method_name_helper!(ExpLightClientBlockProofMethodNameHelperEnum, RpcLightClientBlockProofResponse, "EXPERIMENTAL_light_client_block_proof");
-generate_method_name_helper!(ExpProtocolConfigMethodNameHelperEnum, RpcProtocolConfigResponse, "EXPERIMENTAL_protocol_config");
-generate_method_name_helper!(ExpReceiptMethodNameHelperEnum, RpcReceiptResponse, "EXPERIMENTAL_receipt");
-generate_method_name_helper!(ExpTxStatusMethodNameHelperEnum, RpcTransactionResponse, "EXPERIMENTAL_tx_status");
+generate_method_name_helper!(ExpChangeMethodNameHelperEnum, RpcStateChangesInBlockRequest, "EXPERIMENTAL_changes");
+generate_method_name_helper!(ExpChangesBlockMethodNameHelperEnum, RpcStateChangesInBlockByTypeRequest, "EXPERIMENTAL_changes_in_block");
+generate_method_name_helper!(ExpGongestionMethodNameHelperEnum, RpcCongestionLevelRequest, "EXPERIMENTAL_congestion_level");
+generate_method_name_helper!(ExpGenesisMethodNameHelperEnum, GenesisConfigRequest, "EXPERIMENTAL_genesis_config");
+generate_method_name_helper!(ExpLightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofRequest, "EXPERIMENTAL_light_client_proof");
+generate_method_name_helper!(ExpLightClientBlockProofMethodNameHelperEnum, RpcLightClientBlockProofRequest, "EXPERIMENTAL_light_client_block_proof");
+generate_method_name_helper!(ExpProtocolConfigMethodNameHelperEnum, RpcProtocolConfigRequest, "EXPERIMENTAL_protocol_config");
+generate_method_name_helper!(ExpReceiptMethodNameHelperEnum, RpcReceiptRequest, "EXPERIMENTAL_receipt");
+generate_method_name_helper!(ExpTxStatusMethodNameHelperEnum, RpcTransactionStatusRequest, "EXPERIMENTAL_tx_status");
 generate_method_name_helper!(ExpValidatorsMethodNameHelperEnum, RpcClientConfigRequest, "EXPERIMENTAL_validators_ordered");
-generate_method_name_helper!(ExpMaintenanceWindoesMethodNameHelperEnum, RpcMaintenanceWindowsResponse, "EXPERIMENTAL_maintenance_windows");
-generate_method_name_helper!(ExpSplitStorageInfoMethodNameHelperEnum, RpcSplitStorageInfoResponse, "EXPERIMENTAL_split_storage_info");
+generate_method_name_helper!(ExpMaintenanceWindoesMethodNameHelperEnum, RpcMaintenanceWindowsRequest, "EXPERIMENTAL_maintenance_windows");
+generate_method_name_helper!(ExpSplitStorageInfoMethodNameHelperEnum, RpcSplitStorageInfoRequest, "EXPERIMENTAL_split_storage_info");
 
 
 fn main() {
