@@ -33,10 +33,22 @@ iterate_nested_json_for_loop(spec)
 
 if 'JsonRpcResponse_for_Array_of_Tuple_of_uint64_and_uint64_and_RpcError' in spec['components']['schemas']:
     spec['components']['schemas']['JsonRpcResponse_for_Array_of_Tuple_of_uint64_and_uint64_and_RpcError']['anyOf'][0]['properties']['result']['items']['items'] = {
-                                            "type": "integer",
-                                            "format": "uint64",
-                                            "minimum": 0.0
-                                        }
+        "type": "object",
+        "properties": {
+            "start": {
+                "type": "integer",
+                "format": "uint64",
+                "minimum": 0.0
+            },
+            "finish": {
+                "type": "integer",
+                "format": "uint64",
+                "minimum": 0.0
+            }   
+        }
+        
+    }
+   
 
 
 f = open(filename, 'w')

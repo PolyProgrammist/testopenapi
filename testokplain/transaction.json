@@ -6839,9 +6839,19 @@
                                 "items": {
                                     "type": "array",
                                     "items": {
-                                        "type": "integer",
-                                        "format": "uint64",
-                                        "minimum": 0.0
+                                        "type": "object",
+                                        "properties": {
+                                            "start": {
+                                                "type": "integer",
+                                                "format": "uint64",
+                                                "minimum": 0.0
+                                            },
+                                            "finish": {
+                                                "type": "integer",
+                                                "format": "uint64",
+                                                "minimum": 0.0
+                                            }
+                                        }
                                     },
                                     "maxItems": 2,
                                     "minItems": 2

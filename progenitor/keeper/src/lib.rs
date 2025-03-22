@@ -11518,9 +11518,19 @@ pub mod types {
     ///          "items": {
     ///            "type": "array",
     ///            "items": {
-    ///              "type": "integer",
-    ///              "format": "uint64",
-    ///              "minimum": 0.0
+    ///              "type": "object",
+    ///              "properties": {
+    ///                "finish": {
+    ///                  "type": "integer",
+    ///                  "format": "uint64",
+    ///                  "minimum": 0.0
+    ///                },
+    ///                "start": {
+    ///                  "type": "integer",
+    ///                  "format": "uint64",
+    ///                  "minimum": 0.0
+    ///                }
+    ///              }
     ///            },
     ///            "maxItems": 2,
     ///            "minItems": 2
@@ -11572,7 +11582,10 @@ pub mod types {
         Variant0 {
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
-            result: ::std::vec::Vec<[u64; 2usize]>,
+            result: ::std::vec::Vec<
+                [JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcErrorVariant0ResultItemItem;
+                    2usize],
+            >,
         },
         Variant1 {
             id: ::std::string::String,
@@ -11589,6 +11602,59 @@ pub mod types {
     impl ::std::convert::From<&Self> for JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcError {
         fn from(value: &JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcError) -> Self {
             value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcErrorVariant0ResultItemItem
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "properties": {
+    ///    "finish": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "start": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcErrorVariant0ResultItemItem {
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub finish: ::std::option::Option<u64>,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub start: ::std::option::Option<u64>,
+    }
+
+    impl
+        ::std::convert::From<
+            &JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcErrorVariant0ResultItemItem,
+        > for JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcErrorVariant0ResultItemItem
+    {
+        fn from(
+            value : & JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcErrorVariant0ResultItemItem,
+        ) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::default::Default
+        for JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcErrorVariant0ResultItemItem
+    {
+        fn default() -> Self {
+            Self {
+                finish: Default::default(),
+                start: Default::default(),
+            }
         }
     }
 
