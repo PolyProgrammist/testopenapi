@@ -248,6 +248,33 @@
                 }
             }
         },
+        "/EXPERIMENTAL_split_storage_info": {
+            "post": {
+                "operationId": "EXPERIMENTAL_split_storage_info",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_ExpSplitStorageInfoMethodNameHelperEnum"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonRpcResponse_for_RpcSplitStorageInfoResponse_and_RpcError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/EXPERIMENTAL_tx_status": {
             "post": {
                 "operationId": "EXPERIMENTAL_tx_status",
@@ -3666,6 +3693,12 @@
                     "EXPERIMENTAL_receipt"
                 ]
             },
+            "ExpSplitStorageInfoMethodNameHelperEnum": {
+                "type": "string",
+                "enum": [
+                    "EXPERIMENTAL_split_storage_info"
+                ]
+            },
             "ExpTxStatusMethodNameHelperEnum": {
                 "type": "string",
                 "enum": [
@@ -6503,6 +6536,30 @@
                     }
                 }
             },
+            "JsonRpcRequest_for_ExpSplitStorageInfoMethodNameHelperEnum": {
+                "title": "JsonRpcRequest_for_ExpSplitStorageInfoMethodNameHelperEnum",
+                "type": "object",
+                "required": [
+                    "id",
+                    "jsonrpc",
+                    "method",
+                    "params"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "$ref": "#/components/schemas/ExpSplitStorageInfoMethodNameHelperEnum"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcSplitStorageInfoRequest"
+                    }
+                }
+            },
             "JsonRpcRequest_for_ExpTxStatusMethodNameHelperEnum": {
                 "title": "JsonRpcRequest_for_ExpTxStatusMethodNameHelperEnum",
                 "type": "object",
@@ -7455,6 +7512,57 @@
                         "properties": {
                             "result": {
                                 "$ref": "#/components/schemas/RpcReceiptResponse"
+                            }
+                        }
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "tmp"
+                        ],
+                        "properties": {
+                            "tmp": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        }
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "error"
+                        ],
+                        "properties": {
+                            "error": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        }
+                    }
+                ],
+                "required": [
+                    "id",
+                    "jsonrpc"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    }
+                }
+            },
+            "JsonRpcResponse_for_RpcSplitStorageInfoResponse_and_RpcError": {
+                "title": "JsonRpcResponse_for_RpcSplitStorageInfoResponse_and_RpcError",
+                "type": "object",
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "required": [
+                            "result"
+                        ],
+                        "properties": {
+                            "result": {
+                                "$ref": "#/components/schemas/RpcSplitStorageInfoResponse"
                             }
                         }
                     },
@@ -9938,6 +10046,37 @@
                                 "$ref": "#/components/schemas/TxExecutionStatus"
                             }
                         ]
+                    }
+                }
+            },
+            "RpcSplitStorageInfoRequest": {
+                "type": "object"
+            },
+            "RpcSplitStorageInfoResponse": {
+                "description": "Contains the split storage information.",
+                "type": "object",
+                "properties": {
+                    "cold_head_height": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0.0,
+                        "nullable": true
+                    },
+                    "final_head_height": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0.0,
+                        "nullable": true
+                    },
+                    "head_height": {
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0.0,
+                        "nullable": true
+                    },
+                    "hot_db_kind": {
+                        "type": "string",
+                        "nullable": true
                     }
                 }
             },

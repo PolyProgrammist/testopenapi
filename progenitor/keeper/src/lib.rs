@@ -6146,6 +6146,85 @@ pub mod types {
         }
     }
 
+    ///ExpSplitStorageInfoMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_split_storage_info"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum ExpSplitStorageInfoMethodNameHelperEnum {
+        #[serde(rename = "EXPERIMENTAL_split_storage_info")]
+        ExperimentalSplitStorageInfo,
+    }
+
+    impl ::std::convert::From<&Self> for ExpSplitStorageInfoMethodNameHelperEnum {
+        fn from(value: &ExpSplitStorageInfoMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for ExpSplitStorageInfoMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalSplitStorageInfo => write!(f, "EXPERIMENTAL_split_storage_info"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for ExpSplitStorageInfoMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_split_storage_info" => Ok(Self::ExperimentalSplitStorageInfo),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for ExpSplitStorageInfoMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for ExpSplitStorageInfoMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for ExpSplitStorageInfoMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
     ///ExpTxStatusMethodNameHelperEnum
     ///
     /// <details><summary>JSON schema</summary>
@@ -10853,6 +10932,54 @@ pub mod types {
         }
     }
 
+    ///JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_ExpSplitStorageInfoMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref":
+    /// "#/components/schemas/ExpSplitStorageInfoMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcSplitStorageInfoRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: ExpSplitStorageInfoMethodNameHelperEnum,
+        pub params: RpcSplitStorageInfoRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnum>
+        for JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
     ///JsonRpcRequestForExpTxStatusMethodNameHelperEnum
     ///
     /// <details><summary>JSON schema</summary>
@@ -12562,6 +12689,91 @@ pub mod types {
 
     impl ::std::convert::From<&Self> for JsonRpcResponseForRpcReceiptResponseAndRpcError {
         fn from(value: &JsonRpcResponseForRpcReceiptResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForRpcSplitStorageInfoResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_RpcSplitStorageInfoResponse_and_RpcError"
+    /// ,
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/RpcSplitStorageInfoResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcSplitStorageInfoResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcSplitStorageInfoResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcSplitStorageInfoResponseAndRpcError {
+        fn from(value: &JsonRpcResponseForRpcSplitStorageInfoResponseAndRpcError) -> Self {
             value.clone()
         }
     }
@@ -17792,6 +18004,122 @@ pub mod types {
     impl ::std::convert::From<&RpcSendTransactionRequest> for RpcSendTransactionRequest {
         fn from(value: &RpcSendTransactionRequest) -> Self {
             value.clone()
+        }
+    }
+
+    ///RpcSplitStorageInfoRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object"
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(transparent)]
+    pub struct RpcSplitStorageInfoRequest(
+        pub ::serde_json::Map<::std::string::String, ::serde_json::Value>,
+    );
+    impl ::std::ops::Deref for RpcSplitStorageInfoRequest {
+        type Target = ::serde_json::Map<::std::string::String, ::serde_json::Value>;
+        fn deref(&self) -> &::serde_json::Map<::std::string::String, ::serde_json::Value> {
+            &self.0
+        }
+    }
+
+    impl ::std::convert::From<RpcSplitStorageInfoRequest>
+        for ::serde_json::Map<::std::string::String, ::serde_json::Value>
+    {
+        fn from(value: RpcSplitStorageInfoRequest) -> Self {
+            value.0
+        }
+    }
+
+    impl ::std::convert::From<&RpcSplitStorageInfoRequest> for RpcSplitStorageInfoRequest {
+        fn from(value: &RpcSplitStorageInfoRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<::serde_json::Map<::std::string::String, ::serde_json::Value>>
+        for RpcSplitStorageInfoRequest
+    {
+        fn from(value: ::serde_json::Map<::std::string::String, ::serde_json::Value>) -> Self {
+            Self(value)
+        }
+    }
+
+    ///Contains the split storage information.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Contains the split storage information.",
+    ///  "type": "object",
+    ///  "properties": {
+    ///    "cold_head_height": {
+    ///      "type": [
+    ///        "integer",
+    ///        "null"
+    ///      ],
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "final_head_height": {
+    ///      "type": [
+    ///        "integer",
+    ///        "null"
+    ///      ],
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "head_height": {
+    ///      "type": [
+    ///        "integer",
+    ///        "null"
+    ///      ],
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "hot_db_kind": {
+    ///      "type": [
+    ///        "string",
+    ///        "null"
+    ///      ]
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcSplitStorageInfoResponse {
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub cold_head_height: ::std::option::Option<u64>,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub final_head_height: ::std::option::Option<u64>,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub head_height: ::std::option::Option<u64>,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub hot_db_kind: ::std::option::Option<::std::string::String>,
+    }
+
+    impl ::std::convert::From<&RpcSplitStorageInfoResponse> for RpcSplitStorageInfoResponse {
+        fn from(value: &RpcSplitStorageInfoResponse) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::default::Default for RpcSplitStorageInfoResponse {
+        fn default() -> Self {
+            Self {
+                cold_head_height: Default::default(),
+                final_head_height: Default::default(),
+                head_height: Default::default(),
+                hot_db_kind: Default::default(),
+            }
         }
     }
 
@@ -25416,6 +25744,33 @@ impl Client {
         body: &'a types::JsonRpcRequestForExpReceiptMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcReceiptResponseAndRpcError>, Error<()>>
     {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/EXPERIMENTAL_split_storage_info`
+    pub async fn experimental_split_storage_info<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnum,
+    ) -> Result<
+        ResponseValue<types::JsonRpcResponseForRpcSplitStorageInfoResponseAndRpcError>,
+        Error<()>,
+    > {
         let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
