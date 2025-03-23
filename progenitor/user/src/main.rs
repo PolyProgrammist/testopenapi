@@ -2,8 +2,8 @@ use keeper::Client;
 use serde_json::json;
 use std::error::Error;
 
-const NEAR_RPC_URL: &str = "https://archival-rpc.mainnet.near.org";
-// const NEAR_RPC_URL: &str = "http://localhost:3030/";
+// const NEAR_RPC_URL: &str = "https://archival-rpc.mainnet.near.org";
+const NEAR_RPC_URL: &str = "http://localhost:3030/";
 
 async fn print_transaction() -> Result<(), Box<dyn Error>> {
     // 
@@ -14,7 +14,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let transaction_hash = "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1TczCrhZEcG8U"; // Replace with your TX hash
     let sender_account_id = "miraclx.near"; // Replace with sender's account
 
-    let client = Client::new(NEAR_RPC_URL);
+    // let client = Client::new(NEAR_RPC_URL);
 
     let payloadTx = keeper::types::JsonRpcRequestForTxMethodNameHelperEnum {
         id: String::from("dontcare"),
@@ -46,14 +46,49 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
-    let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client.block(&payloadBlock).await?.into_inner();
-    println!("block: {:#?}", block);
+    let payloadGasPrice = keeper::types::JsonRpcRequestForGasPriceMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::GasPriceMethodNameHelperEnum::GasPrice,
+        params: keeper::types::RpcGasPriceRequest {
+            block_id: None
+        }
+    };
 
-    let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client.tx(&payloadTx).await?.into_inner();
-    println!("tx: {:#?}", tx);
+    // let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client.block(&payloadBlock).await?.into_inner();
+    // // println!("block: {:#?}", block);
 
-    let chunk: keeper::types::JsonRpcResponseForRpcChunkResponseAndRpcError = client.chunk(&payloadChunk).await?.into_inner();
-    println!("chunk: {:#?}", chunk);
+    // let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client.tx(&payloadTx).await?.into_inner();
+    // // println!("tx: {:#?}", tx);
+
+    // let chunk: keeper::types::JsonRpcResponseForRpcChunkResponseAndRpcError = client.chunk(&payloadChunk).await?.into_inner();
+    // // println!("chunk: {:#?}", chunk);
+
+    // let gas_price: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client.gas_price(&payloadGasPrice).await?.into_inner();
+    // // println!("gas_price: {:#?}", gas_price);
+
+    // Construct the correct JSON-RPC request
+    let request_body = json!({
+        "jsonrpc": "2.0",
+        "id": "dontcare",
+        "method": "gas_price",
+        "params": [null]  // Pass block hash inside an array
+    });
+
+    let client_my = reqwest::Client::new();
+    // Send the request to the NEAR RPC endpoint
+    let response = client_my
+        .post("https://127.0.0.1:3030/")  // Make sure URL is correct
+        .header("Content-Type", "application/json") // Explicitly setting the JSON header
+        .json(&request_body)
+        .send()
+        .await?;
+
+    // Parse the response as JSON
+    let response_json: serde_json::Value = response.json().await?;
+    
+    // Print the actual response
+    println!("{:#?}", response_json);
 
     Ok(())
 }
@@ -73,3 +108,36 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     Ok(())
 }
+
+
+// use reqwest::Client;
+// use serde_json::json;
+
+// #[tokio::main]
+// async fn main() -> Result<(), reqwest::Error> {
+//     let client = Client::new();
+
+//     // JSON-RPC тело запроса
+//     let request_body = json!({
+//         "jsonrpc": "2.0",
+//         "id": "dontcare",
+//         "method": "gas_price",
+//         "params": [null]  // Последний блок
+//     });
+
+//     // Отправка запроса на локальный RPC
+//     let response = client
+//         .post("http://127.0.0.1:3030")
+//         .header("Content-Type", "application/json")
+//         .json(&request_body)
+//         .send()
+//         .await?;
+
+//     // Парсим ответ в JSON
+//     let response_json: serde_json::Value = response.json().await?;
+
+//     // Выводим ответ сервера
+//     println!("{:#?}", response_json);
+
+//     Ok(())
+// }

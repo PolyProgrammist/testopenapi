@@ -26241,6 +26241,8 @@ impl Client {
             )
             .json(&body)
             .build()?;
+        println!("request: {:?}", serde_json::to_value(&body));
+
         let result = self.client.execute(request).await;
         let response = result?;
         match response.status().as_u16() {
@@ -26316,6 +26318,9 @@ impl Client {
             )
             .json(&body)
             .build()?;
+        
+        println!("request: {:?}", serde_json::to_value(&body));
+
         let result = self.client.execute(request).await;
         let response = result?;
         match response.status().as_u16() {
@@ -26366,6 +26371,7 @@ impl Client {
             )
             .json(&body)
             .build()?;
+        println!("request: {:?}", serde_json::to_value(&body));
         let result = self.client.execute(request).await;
         let response = result?;
         match response.status().as_u16() {
