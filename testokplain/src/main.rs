@@ -293,7 +293,7 @@ fn main() {
     add_spec_for_path::<BlockMethodNameHelperEnum, RpcBlockResponse>(&mut all_schemas, &mut all_paths, "block".to_string());
     add_spec_for_path::<BroadCastTxAsyncMethodNameHelperEnum, RpcBlockResponse>(&mut all_schemas, &mut all_paths, "broadcast_tx_async".to_string());
     add_spec_for_path::<BroadCastTxCommitMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "broadcast_tx_commit".to_string());
-    add_spec_for_path::<BlockMethodNameHelperEnum, RpcBlockResponse>(&mut all_schemas, &mut all_paths, "chunk".to_string());
+    add_spec_for_path::<ChunkMethodNameHelperEnum, RpcChunkResponse>(&mut all_schemas, &mut all_paths, "chunk".to_string());
     add_spec_for_path::<GasPriceMethodNameHelperEnum, RpcGasPriceResponse>(&mut all_schemas, &mut all_paths, "gas_price".to_string());
     add_spec_for_path::<TxMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "tx".to_string());
     add_spec_for_path::<HealthMethodNameHelperEnum, RpcHealthResponse>(&mut all_schemas, &mut all_paths, "health".to_string());

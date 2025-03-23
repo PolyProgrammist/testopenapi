@@ -36,11 +36,24 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         })
     };
 
+    let payloadChunk = keeper::types::JsonRpcRequestForChunkMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::ChunkMethodNameHelperEnum::Chunk,
+        params: keeper::types::RpcChunkRequest::Variant0{
+            block_id: keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()),
+            shard_id: keeper::types::ShardId(0)
+        }
+    };
+
     let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client.block(&payloadBlock).await?.into_inner();
-    println!("hey answer is - block: {:#?}", block);
+    println!("block: {:#?}", block);
 
     let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client.tx(&payloadTx).await?.into_inner();
-    println!("hey answer is - tx: {:#?}", tx);
+    println!("tx: {:#?}", tx);
+
+    let chunk: keeper::types::JsonRpcResponseForRpcChunkResponseAndRpcError = client.chunk(&payloadChunk).await?.into_inner();
+    println!("chunk: {:#?}", chunk);
 
     Ok(())
 }

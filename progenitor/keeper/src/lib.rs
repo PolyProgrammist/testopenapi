@@ -3656,6 +3656,85 @@ pub mod types {
         }
     }
 
+    ///ChunkMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "chunk"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum ChunkMethodNameHelperEnum {
+        #[serde(rename = "chunk")]
+        Chunk,
+    }
+
+    impl ::std::convert::From<&Self> for ChunkMethodNameHelperEnum {
+        fn from(value: &ChunkMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for ChunkMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::Chunk => write!(f, "chunk"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for ChunkMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "chunk" => Ok(Self::Chunk),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for ChunkMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for ChunkMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for ChunkMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
     ///ClientConfigMethodNameHelperEnum
     ///
     /// <details><summary>JSON schema</summary>
@@ -10456,6 +10535,53 @@ pub mod types {
         }
     }
 
+    ///JsonRpcRequestForChunkMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_ChunkMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/ChunkMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcChunkRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForChunkMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: ChunkMethodNameHelperEnum,
+        pub params: RpcChunkRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForChunkMethodNameHelperEnum>
+        for JsonRpcRequestForChunkMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForChunkMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
     ///JsonRpcRequestForClientConfigMethodNameHelperEnum
     ///
     /// <details><summary>JSON schema</summary>
@@ -11910,6 +12036,90 @@ pub mod types {
 
     impl ::std::convert::From<&Self> for JsonRpcResponseForRpcBlockResponseAndRpcError {
         fn from(value: &JsonRpcResponseForRpcBlockResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForRpcChunkResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_RpcChunkResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/RpcChunkResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcChunkResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcChunkResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcChunkResponseAndRpcError {
+        fn from(value: &JsonRpcResponseForRpcChunkResponseAndRpcError) -> Self {
             value.clone()
         }
     }
@@ -15690,6 +15900,112 @@ pub mod types {
 
     impl ::std::convert::From<&RpcBlockResponse> for RpcBlockResponse {
         fn from(value: &RpcBlockResponse) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcChunkRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "block_id",
+    ///        "shard_id"
+    ///      ],
+    ///      "properties": {
+    ///        "block_id": {
+    ///          "$ref": "#/components/schemas/BlockId"
+    ///        },
+    ///        "shard_id": {
+    ///          "$ref": "#/components/schemas/ShardId"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "chunk_id"
+    ///      ],
+    ///      "properties": {
+    ///        "chunk_id": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        }
+    ///      }
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum RpcChunkRequest {
+        Variant0 {
+            block_id: BlockId,
+            shard_id: ShardId,
+        },
+        Variant1 {
+            chunk_id: CryptoHash,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for RpcChunkRequest {
+        fn from(value: &RpcChunkRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcChunkResponse
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "author",
+    ///    "header",
+    ///    "receipts",
+    ///    "transactions"
+    ///  ],
+    ///  "properties": {
+    ///    "author": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "header": {
+    ///      "$ref": "#/components/schemas/ChunkHeaderView"
+    ///    },
+    ///    "receipts": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/ReceiptView"
+    ///      }
+    ///    },
+    ///    "transactions": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/SignedTransactionView"
+    ///      }
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcChunkResponse {
+        pub author: AccountId,
+        pub header: ChunkHeaderView,
+        pub receipts: ::std::vec::Vec<ReceiptView>,
+        pub transactions: ::std::vec::Vec<SignedTransactionView>,
+    }
+
+    impl ::std::convert::From<&RpcChunkResponse> for RpcChunkResponse {
+        fn from(value: &RpcChunkResponse) -> Self {
             value.clone()
         }
     }
@@ -25986,8 +26302,8 @@ impl Client {
     ///Sends a `POST` request to `/chunk`
     pub async fn chunk<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForBlockMethodNameHelperEnum,
-    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcBlockResponseAndRpcError>, Error<()>>
+        body: &'a types::JsonRpcRequestForChunkMethodNameHelperEnum,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcChunkResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
