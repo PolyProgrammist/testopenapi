@@ -171,7 +171,9 @@ fn whole_spec(all_schemas: SchemasMap, all_paths: PathsMap) -> OpenApi {
 
 //// ---- implement for all requests ----- 
 
-
+use near_primitives::types::{
+    MaybeBlockId
+};
 use near_jsonrpc_primitives::types::{
     transactions::{
         RpcTransactionResponse, RpcTransactionStatusRequest, RpcSendTransactionRequest

@@ -10,6 +10,7 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1.0.139"
 serde_yaml = "0.9"
 near-jsonrpc-primitives = { path = "../../nearcore/chain/jsonrpc-primitives", features = ["full"] }
+near-primitives = { path = "../../nearcore/core/primitives" }
 near-time = { path = "../../nearcore/core/time", features = ["clock"] }
 near-chain-configs = { path = "../../nearcore/core/chain-configs" }
 
