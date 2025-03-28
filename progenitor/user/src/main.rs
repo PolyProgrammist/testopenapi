@@ -56,6 +56,13 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
+    let payloadHealth = keeper::types::JsonRpcRequestForHealthMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::HealthMethodNameHelperEnum::Health,
+        params: keeper::types::RpcHealthRequest(serde_json::Map::new())
+    };
+
     let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     println!("block: {:#?}", block);
 
@@ -68,12 +75,14 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let gas_price: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client_local.gas_price(&payloadGasPrice).await?.into_inner();
     println!("gas_price: {:#?}", gas_price);
 
+    let health: keeper::types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError = client_remote.health(&payloadHealth).await?.into_inner();
+    println!("health: {:#?}", health);
+
     Ok(())
 }
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn Error>> {
-    
     let txprinted = print_transaction().await;
     match txprinted {
         Ok(..) => {

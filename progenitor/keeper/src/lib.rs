@@ -11956,6 +11956,99 @@ pub mod types {
         }
     }
 
+    ///JsonRpcResponseForNullableRpcHealthResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_Nullable_RpcHealthResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "properties": {
+    ///        "result": {
+    ///          "oneOf": [
+    ///            {
+    ///              "type": "null"
+    ///            },
+    ///            {
+    ///              "allOf": [
+    ///                {
+    ///                  "$ref": "#/components/schemas/RpcHealthResponse"
+    ///                }
+    ///              ]
+    ///            }
+    ///          ]
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForNullableRpcHealthResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+            result: ::std::option::Option<RpcHealthResponse>,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForNullableRpcHealthResponseAndRpcError {
+        fn from(value: &JsonRpcResponseForNullableRpcHealthResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
     ///JsonRpcResponseForRpcBlockResponseAndRpcError
     ///
     /// <details><summary>JSON schema</summary>
@@ -12372,90 +12465,6 @@ pub mod types {
 
     impl ::std::convert::From<&Self> for JsonRpcResponseForRpcGasPriceResponseAndRpcError {
         fn from(value: &JsonRpcResponseForRpcGasPriceResponseAndRpcError) -> Self {
-            value.clone()
-        }
-    }
-
-    ///JsonRpcResponseForRpcHealthResponseAndRpcError
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "JsonRpcResponse_for_RpcHealthResponse_and_RpcError",
-    ///  "type": "object",
-    ///  "anyOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "result"
-    ///      ],
-    ///      "properties": {
-    ///        "result": {
-    ///          "$ref": "#/components/schemas/RpcHealthResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "error"
-    ///      ],
-    ///      "properties": {
-    ///        "error": {
-    ///          "$ref": "#/components/schemas/RpcError"
-    ///        }
-    ///      }
-    ///    }
-    ///  ],
-    ///  "required": [
-    ///    "id",
-    ///    "jsonrpc"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "jsonrpc": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    #[serde(untagged)]
-    pub enum JsonRpcResponseForRpcHealthResponseAndRpcError {
-        Variant0 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            result: RpcHealthResponse,
-        },
-        Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
-            error: RpcError,
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-        },
-    }
-
-    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcHealthResponseAndRpcError {
-        fn from(value: &JsonRpcResponseForRpcHealthResponseAndRpcError) -> Self {
             value.clone()
         }
     }
@@ -26378,8 +26387,10 @@ impl Client {
     pub async fn health<'a>(
         &'a self,
         body: &'a types::JsonRpcRequestForHealthMethodNameHelperEnum,
-    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcHealthResponseAndRpcError>, Error<()>>
-    {
+    ) -> Result<
+        ResponseValue<types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError>,
+        Error<()>,
+    > {
         let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self

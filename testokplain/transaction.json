@@ -510,7 +510,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/JsonRpcResponse_for_RpcHealthResponse_and_RpcError"
+                                    "$ref": "#/components/schemas/JsonRpcResponse_for_Nullable_RpcHealthResponse_and_RpcError"
                                 }
                             }
                         }
@@ -7030,6 +7030,59 @@
                     }
                 }
             },
+            "JsonRpcResponse_for_Nullable_RpcHealthResponse_and_RpcError": {
+                "title": "JsonRpcResponse_for_Nullable_RpcHealthResponse_and_RpcError",
+                "type": "object",
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "result": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/RpcHealthResponse"
+                                    }
+                                ],
+                                "nullable": true
+                            }
+                        }
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "tmp"
+                        ],
+                        "properties": {
+                            "tmp": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        }
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "error"
+                        ],
+                        "properties": {
+                            "error": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        }
+                    }
+                ],
+                "required": [
+                    "id",
+                    "jsonrpc"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    }
+                }
+            },
             "JsonRpcResponse_for_RpcBlockResponse_and_RpcError": {
                 "title": "JsonRpcResponse_for_RpcBlockResponse_and_RpcError",
                 "type": "object",
@@ -7246,57 +7299,6 @@
                         "properties": {
                             "result": {
                                 "$ref": "#/components/schemas/RpcGasPriceResponse"
-                            }
-                        }
-                    },
-                    {
-                        "type": "object",
-                        "required": [
-                            "tmp"
-                        ],
-                        "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        }
-                    },
-                    {
-                        "type": "object",
-                        "required": [
-                            "error"
-                        ],
-                        "properties": {
-                            "error": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        }
-                    }
-                ],
-                "required": [
-                    "id",
-                    "jsonrpc"
-                ],
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    }
-                }
-            },
-            "JsonRpcResponse_for_RpcHealthResponse_and_RpcError": {
-                "title": "JsonRpcResponse_for_RpcHealthResponse_and_RpcError",
-                "type": "object",
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "required": [
-                            "result"
-                        ],
-                        "properties": {
-                            "result": {
-                                "$ref": "#/components/schemas/RpcHealthResponse"
                             }
                         }
                     },
