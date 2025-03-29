@@ -63,10 +63,20 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         params: keeper::types::RpcHealthRequest(serde_json::Map::new())
     };
 
-    let payloadBroadcast = keeper::types::JsonRpcRequestForBroadCastTxCommitMethodNameHelperEnum {
+    let payloadBroadcastCommit = keeper::types::JsonRpcRequestForBroadCastTxCommitMethodNameHelperEnum {
         id: String::from("dontcare"),
         jsonrpc: String::from("2.0"),
         method: keeper::types::BroadCastTxCommitMethodNameHelperEnum::BroadcastTxCommit,
+        params: keeper::types::RpcSendTransactionRequest {
+            signed_tx_base64: "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string(),
+            wait_until: keeper::types::TxExecutionStatus::Executed
+        }
+    };
+
+    let payloadBroadcastAsync = keeper::types::JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::BroadCastTxAsyncMethodNameHelperEnum::BroadcastTxAsync,
         params: keeper::types::RpcSendTransactionRequest {
             signed_tx_base64: "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string(),
             wait_until: keeper::types::TxExecutionStatus::Executed
@@ -88,8 +98,11 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let health: keeper::types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError = client_remote.health(&payloadHealth).await?.into_inner();
     println!("health: {:#?}", health);
 
-    let broadcast_commit: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.broadcast_tx_commit(&payloadBroadcast).await?.into_inner();
+    let broadcast_commit: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.broadcast_tx_commit(&payloadBroadcastCommit).await?.into_inner();
     println!("broadcast_commit: {:#?}", broadcast_commit);
+    
+    let broadcast_async: keeper::types::JsonRpcResponseForCryptoHashAndRpcError = client_remote.broadcast_tx_async(&payloadBroadcastAsync).await?.into_inner();
+    println!("broadcast_commit: {:#?}", broadcast_async);
 
     Ok(())
 }

@@ -283,10 +283,6 @@ generate_method_name_helper!(ExpSplitStorageInfoMethodNameHelperEnum, RpcSplitSt
 
 
 fn main() {
-
-    // let x = X<"block"> {
-    // }
-
     let mut all_schemas = SchemasMap::new();
     let mut all_paths = PathsMap::new();
 
