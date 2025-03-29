@@ -171,9 +171,7 @@ fn whole_spec(all_schemas: SchemasMap, all_paths: PathsMap) -> OpenApi {
 
 //// ---- implement for all requests ----- 
 
-use near_primitives::types::{
-    MaybeBlockId
-};
+use near_primitives::{hash::CryptoHash, types::MaybeBlockId};
 use near_jsonrpc_primitives::types::{
     transactions::{
         RpcTransactionResponse, RpcTransactionStatusRequest, RpcSendTransactionRequest
@@ -293,7 +291,7 @@ fn main() {
     let mut all_paths = PathsMap::new();
 
     add_spec_for_path::<BlockMethodNameHelperEnum, RpcBlockResponse>(&mut all_schemas, &mut all_paths, "block".to_string());
-    add_spec_for_path::<BroadCastTxAsyncMethodNameHelperEnum, RpcBlockResponse>(&mut all_schemas, &mut all_paths, "broadcast_tx_async".to_string());
+    add_spec_for_path::<BroadCastTxAsyncMethodNameHelperEnum, CryptoHash>(&mut all_schemas, &mut all_paths, "broadcast_tx_async".to_string());
     add_spec_for_path::<BroadCastTxCommitMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "broadcast_tx_commit".to_string());
     add_spec_for_path::<ChunkMethodNameHelperEnum, RpcChunkResponse>(&mut all_schemas, &mut all_paths, "chunk".to_string());
     add_spec_for_path::<GasPriceMethodNameHelperEnum, RpcGasPriceResponse>(&mut all_schemas, &mut all_paths, "gas_price".to_string());

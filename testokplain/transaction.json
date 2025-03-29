@@ -375,7 +375,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/JsonRpcResponse_for_RpcBlockResponse_and_RpcError"
+                                    "$ref": "#/components/schemas/JsonRpcResponse_for_CryptoHash_and_RpcError"
                                 }
                             }
                         }
@@ -6940,6 +6940,57 @@
                                 "items": {
                                     "$ref": "#/components/schemas/ValidatorStakeView"
                                 }
+                            }
+                        }
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "tmp"
+                        ],
+                        "properties": {
+                            "tmp": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        }
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "error"
+                        ],
+                        "properties": {
+                            "error": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        }
+                    }
+                ],
+                "required": [
+                    "id",
+                    "jsonrpc"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    }
+                }
+            },
+            "JsonRpcResponse_for_CryptoHash_and_RpcError": {
+                "title": "JsonRpcResponse_for_CryptoHash_and_RpcError",
+                "type": "object",
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "required": [
+                            "result"
+                        ],
+                        "properties": {
+                            "result": {
+                                "$ref": "#/components/schemas/CryptoHash"
                             }
                         }
                     },
