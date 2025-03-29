@@ -17198,13 +17198,12 @@ pub mod types {
     /// ```json
     ///{
     ///  "type": "object",
-    ///  "oneOf": [
+    ///  "anyOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
     ///        "sender_id",
-    ///        "transaction_hash",
-    ///        "type"
+    ///        "transaction_hash"
     ///      ],
     ///      "properties": {
     ///        "sender_id": {
@@ -17212,12 +17211,6 @@ pub mod types {
     ///        },
     ///        "transaction_hash": {
     ///          "$ref": "#/components/schemas/CryptoHash"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "transaction"
-    ///          ]
     ///        }
     ///      }
     ///    },
@@ -17225,8 +17218,7 @@ pub mod types {
     ///      "type": "object",
     ///      "required": [
     ///        "receipt_id",
-    ///        "receiver_id",
-    ///        "type"
+    ///        "receiver_id"
     ///      ],
     ///      "properties": {
     ///        "receipt_id": {
@@ -17234,22 +17226,20 @@ pub mod types {
     ///        },
     ///        "receiver_id": {
     ///          "$ref": "#/components/schemas/AccountId"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "receipt"
-    ///          ]
     ///        }
     ///      }
     ///    }
     ///  ],
     ///  "required": [
-    ///    "light_client_head"
+    ///    "light_client_head",
+    ///    "type"
     ///  ],
     ///  "properties": {
     ///    "light_client_head": {
     ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "type": {
+    ///      "$ref": "#/components/schemas/TypeTransactionOrReceiptId"
     ///    }
     ///  }
     ///}
@@ -17258,204 +17248,24 @@ pub mod types {
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(untagged)]
     pub enum RpcLightClientExecutionProofRequest {
-        Variant0(RpcLightClientExecutionProofRequestVariant0),
-        Variant1(RpcLightClientExecutionProofRequestVariant1),
+        Variant0 {
+            light_client_head: CryptoHash,
+            sender_id: AccountId,
+            transaction_hash: CryptoHash,
+            #[serde(rename = "type")]
+            type_: TypeTransactionOrReceiptId,
+        },
+        Variant1 {
+            light_client_head: CryptoHash,
+            receipt_id: CryptoHash,
+            receiver_id: AccountId,
+            #[serde(rename = "type")]
+            type_: TypeTransactionOrReceiptId,
+        },
     }
 
     impl ::std::convert::From<&Self> for RpcLightClientExecutionProofRequest {
         fn from(value: &RpcLightClientExecutionProofRequest) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::convert::From<RpcLightClientExecutionProofRequestVariant0>
-        for RpcLightClientExecutionProofRequest
-    {
-        fn from(value: RpcLightClientExecutionProofRequestVariant0) -> Self {
-            Self::Variant0(value)
-        }
-    }
-
-    impl ::std::convert::From<RpcLightClientExecutionProofRequestVariant1>
-        for RpcLightClientExecutionProofRequest
-    {
-        fn from(value: RpcLightClientExecutionProofRequestVariant1) -> Self {
-            Self::Variant1(value)
-        }
-    }
-
-    ///RpcLightClientExecutionProofRequestVariant0
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "allOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "light_client_head"
-    ///      ],
-    ///      "properties": {
-    ///        "light_client_head": {
-    ///          "$ref": "#/components/schemas/CryptoHash"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "sender_id",
-    ///        "transaction_hash",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "sender_id": {
-    ///          "$ref": "#/components/schemas/AccountId"
-    ///        },
-    ///        "transaction_hash": {
-    ///          "$ref": "#/components/schemas/CryptoHash"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "transaction"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "receipt_id",
-    ///          "receiver_id",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "receipt_id": {
-    ///            "$ref": "#/components/schemas/CryptoHash"
-    ///          },
-    ///          "receiver_id": {
-    ///            "$ref": "#/components/schemas/AccountId"
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "receipt"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    #[serde(deny_unknown_fields)]
-    pub enum RpcLightClientExecutionProofRequestVariant0 {}
-    impl ::std::convert::From<&Self> for RpcLightClientExecutionProofRequestVariant0 {
-        fn from(value: &RpcLightClientExecutionProofRequestVariant0) -> Self {
-            value.clone()
-        }
-    }
-
-    ///RpcLightClientExecutionProofRequestVariant1
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "allOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "light_client_head"
-    ///      ],
-    ///      "properties": {
-    ///        "light_client_head": {
-    ///          "$ref": "#/components/schemas/CryptoHash"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "receipt_id",
-    ///        "receiver_id",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "receipt_id": {
-    ///          "$ref": "#/components/schemas/CryptoHash"
-    ///        },
-    ///        "receiver_id": {
-    ///          "$ref": "#/components/schemas/AccountId"
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "receipt"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "sender_id",
-    ///          "transaction_hash",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "sender_id": {
-    ///            "$ref": "#/components/schemas/AccountId"
-    ///          },
-    ///          "transaction_hash": {
-    ///            "$ref": "#/components/schemas/CryptoHash"
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "transaction"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    #[serde(deny_unknown_fields)]
-    pub enum RpcLightClientExecutionProofRequestVariant1 {}
-    impl ::std::convert::From<&Self> for RpcLightClientExecutionProofRequestVariant1 {
-        fn from(value: &RpcLightClientExecutionProofRequestVariant1) -> Self {
             value.clone()
         }
     }
@@ -24866,6 +24676,90 @@ pub mod types {
     }
 
     impl ::std::convert::TryFrom<::std::string::String> for TxMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///TypeTransactionOrReceiptId
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "transaction",
+    ///    "receipt"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum TypeTransactionOrReceiptId {
+        #[serde(rename = "transaction")]
+        Transaction,
+        #[serde(rename = "receipt")]
+        Receipt,
+    }
+
+    impl ::std::convert::From<&Self> for TypeTransactionOrReceiptId {
+        fn from(value: &TypeTransactionOrReceiptId) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for TypeTransactionOrReceiptId {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::Transaction => write!(f, "transaction"),
+                Self::Receipt => write!(f, "receipt"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for TypeTransactionOrReceiptId {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "transaction" => Ok(Self::Transaction),
+                "receipt" => Ok(Self::Receipt),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for TypeTransactionOrReceiptId {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for TypeTransactionOrReceiptId {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for TypeTransactionOrReceiptId {
         type Error = self::error::ConversionError;
         fn try_from(
             value: ::std::string::String,

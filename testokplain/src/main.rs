@@ -19,6 +19,29 @@ pub enum NameRpcErrorKind {
     InternalError,
 }
 
+#[derive(serde::Serialize, serde::Deserialize, schemars::JsonSchema, Clone, Debug)]
+#[serde(rename_all = "snake_case")]
+pub enum TypeTransactionOrReceiptId {
+    Transaction,
+    Receipt,
+}
+
+#[derive(serde::Serialize, serde::Deserialize, schemars::JsonSchema, Clone, Debug)]
+#[serde(untagged)]
+pub enum TransactionOrReceiptId {
+    Transaction { transaction_hash: CryptoHash, sender_id: near_primitives::types::AccountId },
+    Receipt { receipt_id: CryptoHash, receiver_id: near_primitives::types::AccountId },
+}
+
+#[derive(Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
+pub struct RpcLightClientExecutionProofRequest {
+    #[serde(flatten)]
+    pub id: TransactionOrReceiptId,
+    #[serde(rename="type")]
+    pub thetype: TypeTransactionOrReceiptId,
+    pub light_client_head: near_primitives::hash::CryptoHash,
+}
+
 #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
 pub struct RpcError {
     pub name: Option<NameRpcErrorKind>,
@@ -192,7 +215,7 @@ use near_jsonrpc_primitives::types::{
         RpcValidatorRequest, RpcValidatorResponse, RpcValidatorsOrderedResponse
     },
     light_client::{
-        RpcLightClientExecutionProofRequest, RpcLightClientNextBlockRequest, RpcLightClientExecutionProofResponse, RpcLightClientNextBlockResponse, RpcLightClientBlockProofResponse, RpcLightClientBlockProofRequest
+        RpcLightClientNextBlockRequest, RpcLightClientExecutionProofResponse, RpcLightClientNextBlockResponse, RpcLightClientBlockProofResponse, RpcLightClientBlockProofRequest
     },
     network_info::{
         RpcNetworkInfoResponse

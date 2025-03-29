@@ -12,6 +12,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let transaction_hash = "6zpAGJMsPAcTRm7vuD4V6tgevx7suVwXTQ56DRgfZ5ft";
 
     let transaction_hash = "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1TczCrhZEcG8U"; // Replace with your TX hash
+    let block_hash = "8jvfhbzGnCcYjkCrnqnzDr8bXBbFLUXaoVt6jsRNB1pU";
     let sender_account_id = "miraclx.near"; // Replace with sender's account
 
     let client_remote = Client::new(NEAR_RPC_URL_REMOTE);
@@ -83,6 +84,18 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
+    let payloadLightClientExecutionProof = keeper::types::JsonRpcRequestForLightClientProofMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::LightClientProofMethodNameHelperEnum::LightClientProof,
+        params: keeper::types::RpcLightClientExecutionProofRequest::Variant0 {
+            light_client_head: transaction_hash.parse().unwrap(),
+            sender_id: sender_account_id.parse().unwrap(),
+            transaction_hash: transaction_hash.parse().unwrap(),
+            type_: keeper::types::TypeTransactionOrReceiptId::Transaction,
+        }
+    };
+
     let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     println!("block: {:#?}", block);
 
@@ -102,7 +115,10 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     println!("broadcast_commit: {:#?}", broadcast_commit);
     
     let broadcast_async: keeper::types::JsonRpcResponseForCryptoHashAndRpcError = client_remote.broadcast_tx_async(&payloadBroadcastAsync).await?.into_inner();
-    println!("broadcast_commit: {:#?}", broadcast_async);
+    println!("broadcast_async: {:#?}", broadcast_async);
+
+    let light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.light_client_proof(&payloadLightClientExecutionProof).await?.into_inner();
+    println!("light_client_execution_proof: {:#?}", light_client_execution_proof);
 
     Ok(())
 }

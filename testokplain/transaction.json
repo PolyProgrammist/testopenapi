@@ -9626,13 +9626,12 @@
             },
             "RpcLightClientExecutionProofRequest": {
                 "type": "object",
-                "oneOf": [
+                "anyOf": [
                     {
                         "type": "object",
                         "required": [
                             "sender_id",
-                            "transaction_hash",
-                            "type"
+                            "transaction_hash"
                         ],
                         "properties": {
                             "sender_id": {
@@ -9640,12 +9639,6 @@
                             },
                             "transaction_hash": {
                                 "$ref": "#/components/schemas/CryptoHash"
-                            },
-                            "type": {
-                                "type": "string",
-                                "enum": [
-                                    "transaction"
-                                ]
                             }
                         }
                     },
@@ -9653,8 +9646,7 @@
                         "type": "object",
                         "required": [
                             "receipt_id",
-                            "receiver_id",
-                            "type"
+                            "receiver_id"
                         ],
                         "properties": {
                             "receipt_id": {
@@ -9662,22 +9654,20 @@
                             },
                             "receiver_id": {
                                 "$ref": "#/components/schemas/AccountId"
-                            },
-                            "type": {
-                                "type": "string",
-                                "enum": [
-                                    "receipt"
-                                ]
                             }
                         }
                     }
                 ],
                 "required": [
-                    "light_client_head"
+                    "light_client_head",
+                    "type"
                 ],
                 "properties": {
                     "light_client_head": {
                         "$ref": "#/components/schemas/CryptoHash"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/TypeTransactionOrReceiptId"
                     }
                 }
             },
@@ -11986,6 +11976,13 @@
                 "type": "string",
                 "enum": [
                     "tx"
+                ]
+            },
+            "TypeTransactionOrReceiptId": {
+                "type": "string",
+                "enum": [
+                    "transaction",
+                    "receipt"
                 ]
             },
             "UseGlobalContractAction": {
