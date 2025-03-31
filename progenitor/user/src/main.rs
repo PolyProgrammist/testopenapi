@@ -96,6 +96,15 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
+    let x = keeper::types::JsonRpcRequestForNextLightClientBlockMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::NextLightClientBlockMethodNameHelperEnum::NextLightClientBlock,
+        params: keeper::types::RpcLightClientNextBlockRequest {
+            last_block_hash: "Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap(),
+        }
+    };
+
     let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     println!("block: {:#?}", block);
 
@@ -119,6 +128,9 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
 
     let light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.light_client_proof(&payloadLightClientExecutionProof).await?.into_inner();
     println!("light_client_execution_proof: {:#?}", light_client_execution_proof);
+
+    let next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError = client_remote.next_light_client_block(&x).await?.into_inner();
+    println!("next_light_client_block: {:#?}", next_light_client_block);
 
     Ok(())
 }
