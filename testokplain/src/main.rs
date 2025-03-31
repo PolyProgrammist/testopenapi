@@ -337,7 +337,6 @@ fn main() {
     add_spec_for_path::<ExpMaintenanceWindoesMethodNameHelperEnum, RpcMaintenanceWindowsResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_maintenance_windows".to_string());
     add_spec_for_path::<ExpSplitStorageInfoMethodNameHelperEnum, RpcSplitStorageInfoResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_split_storage_info".to_string());
 
-
     let path_schema = whole_spec(all_schemas, all_paths);
     
     let spec_json = serde_json::to_string_pretty(&path_schema).unwrap();

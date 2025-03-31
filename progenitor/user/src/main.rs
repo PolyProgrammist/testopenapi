@@ -122,6 +122,13 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
+    let payloadStatus = keeper::types::JsonRpcRequestForStatusMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::StatusMethodNameHelperEnum::Status,
+        params: keeper::types::RpcStatusRequest(serde_json::Map::new())
+    };
+
     let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     println!("block: {:#?}", block);
 
@@ -131,6 +138,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let chunk: keeper::types::JsonRpcResponseForRpcChunkResponseAndRpcError = client_remote.chunk(&payloadChunk).await?.into_inner();
     println!("chunk: {:#?}", chunk);
 
+    // local as currently accepts only array, fixed in new version
     let gas_price: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client_local.gas_price(&payloadGasPrice).await?.into_inner();
     println!("gas_price: {:#?}", gas_price);
 
@@ -154,6 +162,10 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
 
     let send_tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.send_tx(&payloadSendTx).await?.into_inner();
     println!("send_tx: {:#?}", send_tx);
+
+    // local as ".version.commit" introduced recently: https://github.com/near/nearcore/pull/12722/files
+    let status = client_local.status(&payloadStatus).await?;
+    println!("status: {:#?}", status);
 
     Ok(())
 }
