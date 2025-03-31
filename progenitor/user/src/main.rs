@@ -129,6 +129,13 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         params: keeper::types::RpcStatusRequest(serde_json::Map::new())
     };
 
+    let payloadValidators = keeper::types::JsonRpcRequestForValidatorsMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::ValidatorsMethodNameHelperEnum::Validators,
+        params: keeper::types::RpcValidatorRequest::Latest
+    };
+
     let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     println!("block: {:#?}", block);
 
@@ -166,6 +173,9 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     // local as ".version.commit" introduced recently: https://github.com/near/nearcore/pull/12722/files
     let status = client_local.status(&payloadStatus).await?;
     println!("status: {:#?}", status);
+
+    let validators: keeper::types::JsonRpcResponseForRpcValidatorResponseAndRpcError = client_remote.validators(&payloadValidators).await?.into_inner();
+    println!("validators: {:#?}", validators);
 
     Ok(())
 }
