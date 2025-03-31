@@ -112,6 +112,16 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         params: keeper::types::RpcNetworkInfoRequest(serde_json::Map::new())
     };
 
+    let payloadSendTx = keeper::types::JsonRpcRequestForSendTxMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::SendTxMethodNameHelperEnum::SendTx,
+        params: keeper::types::RpcSendTransactionRequest {
+            signed_tx_base64: "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string(),
+            wait_until: keeper::types::TxExecutionStatus::Executed
+        }
+    };
+
     let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     println!("block: {:#?}", block);
 
@@ -141,6 +151,9 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
 
     let network_info: keeper::types::JsonRpcResponseForRpcNetworkInfoResponseAndRpcError = client_remote.network_info(&payloadNetworkInfo).await?.into_inner();
     println!("network_info: {:#?}", network_info);
+
+    let send_tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.send_tx(&payloadSendTx).await?.into_inner();
+    println!("send_tx: {:#?}", send_tx);
 
     Ok(())
 }
