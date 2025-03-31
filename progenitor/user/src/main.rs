@@ -96,13 +96,20 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
-    let x = keeper::types::JsonRpcRequestForNextLightClientBlockMethodNameHelperEnum {
+    let payloadNextLightClientBlock = keeper::types::JsonRpcRequestForNextLightClientBlockMethodNameHelperEnum {
         id: String::from("dontcare"),
         jsonrpc: String::from("2.0"),
         method: keeper::types::NextLightClientBlockMethodNameHelperEnum::NextLightClientBlock,
         params: keeper::types::RpcLightClientNextBlockRequest {
             last_block_hash: "Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap(),
         }
+    };
+
+    let payloadNetworkInfo = keeper::types::JsonRpcRequestForNetworkInfoMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::NetworkInfoMethodNameHelperEnum::NetworkInfo,
+        params: keeper::types::RpcNetworkInfoRequest(serde_json::Map::new())
     };
 
     let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
@@ -129,8 +136,11 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.light_client_proof(&payloadLightClientExecutionProof).await?.into_inner();
     println!("light_client_execution_proof: {:#?}", light_client_execution_proof);
 
-    let next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError = client_remote.next_light_client_block(&x).await?.into_inner();
+    let next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError = client_remote.next_light_client_block(&payloadNextLightClientBlock).await?.into_inner();
     println!("next_light_client_block: {:#?}", next_light_client_block);
+
+    let network_info: keeper::types::JsonRpcResponseForRpcNetworkInfoResponseAndRpcError = client_remote.network_info(&payloadNetworkInfo).await?.into_inner();
+    println!("network_info: {:#?}", network_info);
 
     Ok(())
 }
