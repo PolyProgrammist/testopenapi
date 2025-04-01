@@ -5015,15 +5015,15 @@ pub mod types {
     ///{
     ///  "type": "object",
     ///  "required": [
-    ///    "nanoseconds",
-    ///    "seconds"
+    ///    "nanos",
+    ///    "secs"
     ///  ],
     ///  "properties": {
-    ///    "nanoseconds": {
+    ///    "nanos": {
     ///      "type": "integer",
     ///      "format": "int32"
     ///    },
-    ///    "seconds": {
+    ///    "secs": {
     ///      "type": "integer",
     ///      "format": "int64"
     ///    }
@@ -5033,8 +5033,8 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct DurationSchemeProvider {
-        pub nanoseconds: i32,
-        pub seconds: i64,
+        pub nanos: i32,
+        pub secs: i64,
     }
 
     impl ::std::convert::From<&DurationSchemeProvider> for DurationSchemeProvider {
@@ -8227,8 +8227,8 @@ pub mod types {
     ///    "gc_step_period": {
     ///      "description": "How often gc should be run",
     ///      "default": {
-    ///        "nanoseconds": 0,
-    ///        "seconds": 1
+    ///        "nanos": 0,
+    ///        "secs": 1
     ///      },
     ///      "allOf": [
     ///        {
@@ -16230,11 +16230,25 @@ pub mod types {
     ///    },
     ///    "block_production_tracking_delay": {
     ///      "description": "Duration to check for producing / skipping block.",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "catchup_step_period": {
     ///      "description": "Time between check to perform catchup.",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "chain_id": {
     ///      "description": "Chain id for status.",
@@ -16262,7 +16276,14 @@ pub mod types {
     ///    },
     ///    "chunk_request_retry_period": {
     ///      "description": "Time between checking to re-request chunks.",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "client_background_migration_threads": {
     ///      "description": "Number of threads to execute background migration
@@ -16273,7 +16294,14 @@ pub mod types {
     ///    },
     ///    "doomslug_step_period": {
     ///      "description": "Time between running doomslug timer.",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "enable_multiline_logging": {
     ///      "type": "boolean"
@@ -16322,21 +16350,49 @@ pub mod types {
     ///    },
     ///    "header_sync_initial_timeout": {
     ///      "description": "How much time to wait after initial header sync",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "header_sync_progress_timeout": {
     ///      "description": "How much time to wait after some progress is made
     /// in header sync",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "header_sync_stall_ban_timeout": {
     ///      "description": "How much time to wait before banning a peer in
     /// header sync if sync is too slow",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "log_summary_period": {
     ///      "description": "Period between logging summary information.",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "log_summary_style": {
     ///      "description": "Enable coloring of the logs",
@@ -16349,11 +16405,25 @@ pub mod types {
     ///    "max_block_production_delay": {
     ///      "description": "Maximum wait for approvals before producing
     /// block.",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "max_block_wait_delay": {
     ///      "description": "Maximum duration before skipping given height.",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "max_gas_burnt_view": {
     ///      "description": "Max burnt gas per view method.  If present,
@@ -16369,7 +16439,14 @@ pub mod types {
     ///    },
     ///    "min_block_production_delay": {
     ///      "description": "Minimum duration before producing block.",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "min_num_peers": {
     ///      "description": "Minimum number of peers to start syncing.",
@@ -16388,7 +16465,9 @@ pub mod types {
     /// OrphanStateWitnessPool.\n\nWe keep only orphan witnesses which are
     /// smaller than this size. This limits the maximum memory usage of
     /// OrphanStateWitnessPool.",
-    ///      "type": "string"
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
     ///    },
     ///    "orphan_state_witness_pool_size": {
     ///      "description": "OrphanStateWitnessPool keeps instances of
@@ -16461,26 +16540,61 @@ pub mod types {
     ///    "state_sync_external_backoff": {
     ///      "description": "Additional waiting period after a failed request to
     /// external storage",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "state_sync_external_timeout": {
     ///      "description": "How long to wait for a response from centralized
     /// state sync",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "state_sync_p2p_timeout": {
     ///      "description": "How long to wait for a response from p2p state
     /// sync",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "state_sync_retry_backoff": {
     ///      "description": "How long to wait after a failed state sync
     /// request",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "sync_check_period": {
     ///      "description": "How often to check that we are not out of sync.",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "sync_height_threshold": {
     ///      "description": "Sync height threshold: below this difference in
@@ -16498,7 +16612,14 @@ pub mod types {
     ///    },
     ///    "sync_step_period": {
     ///      "description": "While syncing, how long to check for each step.",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "tracked_accounts": {
     ///      "description": "Accounts that this client tracks.",
@@ -16565,7 +16686,14 @@ pub mod types {
     ///    "ttl_account_id_router": {
     ///      "description": "Time to persist Accounts Id in the router without
     /// removing them.",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "tx_routing_height_horizon": {
     ///      "description": "If the node is not a chunk producer within that
@@ -16591,7 +16719,14 @@ pub mod types {
     ///    "view_client_throttle_period": {
     ///      "description": "Number of seconds between state requests for view
     /// client.",
-    ///      "type": "string"
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "uint64",
+    ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    }
     ///  }
     ///}
@@ -16606,9 +16741,9 @@ pub mod types {
         ///Behind this horizon header fetch kicks in.
         pub block_header_fetch_horizon: u64,
         ///Duration to check for producing / skipping block.
-        pub block_production_tracking_delay: ::std::string::String,
+        pub block_production_tracking_delay: [u64; 2usize],
         ///Time between check to perform catchup.
-        pub catchup_step_period: ::std::string::String,
+        pub catchup_step_period: [u64; 2usize],
         ///Chain id for status.
         pub chain_id: ::std::string::String,
         ///Optional config for the Chunk Distribution Network feature. If set
@@ -16619,11 +16754,11 @@ pub mod types {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub chunk_distribution_network: ::std::option::Option<ChunkDistributionNetworkConfig>,
         ///Time between checking to re-request chunks.
-        pub chunk_request_retry_period: ::std::string::String,
+        pub chunk_request_retry_period: [u64; 2usize],
         ///Number of threads to execute background migration work in client.
         pub client_background_migration_threads: u32,
         ///Time between running doomslug timer.
-        pub doomslug_step_period: ::std::string::String,
+        pub doomslug_step_period: [u64; 2usize],
         pub enable_multiline_logging: bool,
         ///Re-export storage layer statistics as prometheus metrics.
         pub enable_statistics_export: bool,
@@ -16639,20 +16774,20 @@ pub mod types {
         /// sync
         pub header_sync_expected_height_per_second: u64,
         ///How much time to wait after initial header sync
-        pub header_sync_initial_timeout: ::std::string::String,
+        pub header_sync_initial_timeout: [u64; 2usize],
         ///How much time to wait after some progress is made in header sync
-        pub header_sync_progress_timeout: ::std::string::String,
+        pub header_sync_progress_timeout: [u64; 2usize],
         ///How much time to wait before banning a peer in header sync if sync
         /// is too slow
-        pub header_sync_stall_ban_timeout: ::std::string::String,
+        pub header_sync_stall_ban_timeout: [u64; 2usize],
         ///Period between logging summary information.
-        pub log_summary_period: ::std::string::String,
+        pub log_summary_period: [u64; 2usize],
         ///Enable coloring of the logs
         pub log_summary_style: LogSummaryStyle,
         ///Maximum wait for approvals before producing block.
-        pub max_block_production_delay: ::std::string::String,
+        pub max_block_production_delay: [u64; 2usize],
         ///Maximum duration before skipping given height.
-        pub max_block_wait_delay: ::std::string::String,
+        pub max_block_wait_delay: [u64; 2usize],
         ///Max burnt gas per view method.  If present, overrides value stored
         /// in genesis file.  The value only affects the RPCs without
         /// influencing the protocol thus changing it per-node doesn’t affect
@@ -16660,7 +16795,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub max_gas_burnt_view: ::std::option::Option<u64>,
         ///Minimum duration before producing block.
-        pub min_block_production_delay: ::std::string::String,
+        pub min_block_production_delay: [u64; 2usize],
         ///Minimum number of peers to start syncing.
         pub min_num_peers: u32,
         ///Number of block producer seats
@@ -16669,7 +16804,7 @@ pub mod types {
         ///
         ///We keep only orphan witnesses which are smaller than this size. This
         /// limits the maximum memory usage of OrphanStateWitnessPool.
-        pub orphan_state_witness_max_size: ::std::string::String,
+        pub orphan_state_witness_max_size: u64,
         ///OrphanStateWitnessPool keeps instances of ChunkStateWitness which
         /// can't be processed because the previous block isn't available. The
         /// witnesses wait in the pool until the required block appears. This
@@ -16709,22 +16844,22 @@ pub mod types {
         /// do Block Sync instead of State Sync.
         pub state_sync_enabled: bool,
         ///Additional waiting period after a failed request to external storage
-        pub state_sync_external_backoff: ::std::string::String,
+        pub state_sync_external_backoff: [u64; 2usize],
         ///How long to wait for a response from centralized state sync
-        pub state_sync_external_timeout: ::std::string::String,
+        pub state_sync_external_timeout: [u64; 2usize],
         ///How long to wait for a response from p2p state sync
-        pub state_sync_p2p_timeout: ::std::string::String,
+        pub state_sync_p2p_timeout: [u64; 2usize],
         ///How long to wait after a failed state sync request
-        pub state_sync_retry_backoff: ::std::string::String,
+        pub state_sync_retry_backoff: [u64; 2usize],
         ///How often to check that we are not out of sync.
-        pub sync_check_period: ::std::string::String,
+        pub sync_check_period: [u64; 2usize],
         ///Sync height threshold: below this difference in height don't start
         /// syncing.
         pub sync_height_threshold: u64,
         ///Maximum number of block requests to send to peers to sync
         pub sync_max_block_requests: u32,
         ///While syncing, how long to check for each step.
-        pub sync_step_period: ::std::string::String,
+        pub sync_step_period: [u64; 2usize],
         ///Accounts that this client tracks.
         pub tracked_accounts: ::std::vec::Vec<AccountId>,
         ///Track shards that should be tracked by given validator.
@@ -16745,7 +16880,7 @@ pub mod types {
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub trie_viewer_state_size_limit: ::std::option::Option<u64>,
         ///Time to persist Accounts Id in the router without removing them.
-        pub ttl_account_id_router: ::std::string::String,
+        pub ttl_account_id_router: [u64; 2usize],
         ///If the node is not a chunk producer within that many blocks, then
         /// route to upcoming chunk producers.
         pub tx_routing_height_horizon: u64,
@@ -16754,7 +16889,7 @@ pub mod types {
         ///Number of threads for ViewClientActor pool.
         pub view_client_threads: u32,
         ///Number of seconds between state requests for view client.
-        pub view_client_throttle_period: ::std::string::String,
+        pub view_client_throttle_period: [u64; 2usize],
     }
 
     impl ::std::convert::From<&RpcClientConfigResponse> for RpcClientConfigResponse {
@@ -25772,8 +25907,8 @@ pub mod types {
 
         pub(super) fn gc_config_gc_step_period() -> super::DurationSchemeProvider {
             super::DurationSchemeProvider {
-                nanoseconds: 0_i32,
-                seconds: 1_i64,
+                nanos: 0_i32,
+                secs: 1_i64,
             }
         }
 

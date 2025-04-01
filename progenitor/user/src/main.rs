@@ -1,6 +1,8 @@
 use keeper::Client;
 use serde_json::json;
 use std::error::Error;
+use std::fs::File;
+use std::io::BufReader;
 
 const NEAR_RPC_URL_REMOTE: &str = "https://archival-rpc.mainnet.near.org";
 const NEAR_RPC_URL_LOCAL: &str = "http://localhost:3030";
@@ -136,46 +138,64 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         params: keeper::types::RpcValidatorRequest::Latest
     };
 
-    let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
-    println!("block: {:#?}", block);
+    let payloadClientConfig = keeper::types::JsonRpcRequestForClientConfigMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::ClientConfigMethodNameHelperEnum::ClientConfig,
+        params: keeper::types::RpcClientConfigRequest(serde_json::Map::new())
+    };
 
-    let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.tx(&payloadTx).await?.into_inner();
-    println!("tx: {:#?}", tx);
+    // let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
+    // println!("block: {:#?}", block);
 
-    let chunk: keeper::types::JsonRpcResponseForRpcChunkResponseAndRpcError = client_remote.chunk(&payloadChunk).await?.into_inner();
-    println!("chunk: {:#?}", chunk);
+    // let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.tx(&payloadTx).await?.into_inner();
+    // println!("tx: {:#?}", tx);
 
-    // local as currently accepts only array, fixed in new version
-    let gas_price: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client_local.gas_price(&payloadGasPrice).await?.into_inner();
-    println!("gas_price: {:#?}", gas_price);
+    // let chunk: keeper::types::JsonRpcResponseForRpcChunkResponseAndRpcError = client_remote.chunk(&payloadChunk).await?.into_inner();
+    // println!("chunk: {:#?}", chunk);
 
-    let health: keeper::types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError = client_remote.health(&payloadHealth).await?.into_inner();
-    println!("health: {:#?}", health);
+    // // local as currently accepts only array, fixed in new version
+    // let gas_price: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client_local.gas_price(&payloadGasPrice).await?.into_inner();
+    // println!("gas_price: {:#?}", gas_price);
 
-    let broadcast_commit: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.broadcast_tx_commit(&payloadBroadcastCommit).await?.into_inner();
-    println!("broadcast_commit: {:#?}", broadcast_commit);
+    // let health: keeper::types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError = client_remote.health(&payloadHealth).await?.into_inner();
+    // println!("health: {:#?}", health);
+
+    // let broadcast_commit: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.broadcast_tx_commit(&payloadBroadcastCommit).await?.into_inner();
+    // println!("broadcast_commit: {:#?}", broadcast_commit);
     
-    let broadcast_async: keeper::types::JsonRpcResponseForCryptoHashAndRpcError = client_remote.broadcast_tx_async(&payloadBroadcastAsync).await?.into_inner();
-    println!("broadcast_async: {:#?}", broadcast_async);
+    // let broadcast_async: keeper::types::JsonRpcResponseForCryptoHashAndRpcError = client_remote.broadcast_tx_async(&payloadBroadcastAsync).await?.into_inner();
+    // println!("broadcast_async: {:#?}", broadcast_async);
 
-    let light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.light_client_proof(&payloadLightClientExecutionProof).await?.into_inner();
-    println!("light_client_execution_proof: {:#?}", light_client_execution_proof);
+    // let light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.light_client_proof(&payloadLightClientExecutionProof).await?.into_inner();
+    // println!("light_client_execution_proof: {:#?}", light_client_execution_proof);
 
-    let next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError = client_remote.next_light_client_block(&payloadNextLightClientBlock).await?.into_inner();
-    println!("next_light_client_block: {:#?}", next_light_client_block);
+    // let next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError = client_remote.next_light_client_block(&payloadNextLightClientBlock).await?.into_inner();
+    // println!("next_light_client_block: {:#?}", next_light_client_block);
 
-    let network_info: keeper::types::JsonRpcResponseForRpcNetworkInfoResponseAndRpcError = client_remote.network_info(&payloadNetworkInfo).await?.into_inner();
-    println!("network_info: {:#?}", network_info);
+    // let network_info: keeper::types::JsonRpcResponseForRpcNetworkInfoResponseAndRpcError = client_remote.network_info(&payloadNetworkInfo).await?.into_inner();
+    // println!("network_info: {:#?}", network_info);
 
-    let send_tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.send_tx(&payloadSendTx).await?.into_inner();
-    println!("send_tx: {:#?}", send_tx);
+    // let send_tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.send_tx(&payloadSendTx).await?.into_inner();
+    // println!("send_tx: {:#?}", send_tx);
 
-    // local as ".version.commit" introduced recently: https://github.com/near/nearcore/pull/12722/files
-    let status = client_local.status(&payloadStatus).await?;
-    println!("status: {:#?}", status);
+    // // local as ".version.commit" introduced recently: https://github.com/near/nearcore/pull/12722/files
+    // let status = client_local.status(&payloadStatus).await?;
+    // println!("status: {:#?}", status);
 
-    let validators: keeper::types::JsonRpcResponseForRpcValidatorResponseAndRpcError = client_remote.validators(&payloadValidators).await?.into_inner();
-    println!("validators: {:#?}", validators);
+    // let validators: keeper::types::JsonRpcResponseForRpcValidatorResponseAndRpcError = client_remote.validators(&payloadValidators).await?.into_inner();
+    // println!("validators: {:#?}", validators);
+
+    let path = "tmp.json";
+    let file = File::open(path)?;
+    let reader = BufReader::new(file);
+    
+    // Parse the JSON directly into the desired type
+    // let config: keeper::types::JsonRpcResponseForRpcClientConfigResponseAndRpcError = serde_json::from_reader(reader)?;
+    // let onlyresharding: keeper::types::RpcClientConfigResponseOnlyResharding = serde_json::from_reader(reader)?;
+
+    let client_config: keeper::types::JsonRpcResponseForRpcClientConfigResponseAndRpcError = client_local.client_config(&payloadClientConfig).await?.into_inner();
+    println!("client_config: {:#?}", client_config);
 
     Ok(())
 }

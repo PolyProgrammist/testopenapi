@@ -3429,15 +3429,15 @@
             "DurationSchemeProvider": {
                 "type": "object",
                 "required": [
-                    "nanoseconds",
-                    "seconds"
+                    "nanos",
+                    "secs"
                 ],
                 "properties": {
-                    "nanoseconds": {
+                    "nanos": {
                         "type": "integer",
                         "format": "int32"
                     },
-                    "seconds": {
+                    "secs": {
                         "type": "integer",
                         "format": "int64"
                     }
@@ -4773,8 +4773,8 @@
                     "gc_step_period": {
                         "description": "How often gc should be run",
                         "default": {
-                            "nanoseconds": 0,
-                            "seconds": 1
+                            "nanos": 0,
+                            "secs": 1
                         },
                         "allOf": [
                             {
@@ -9170,11 +9170,25 @@
                     },
                     "block_production_tracking_delay": {
                         "description": "Duration to check for producing / skipping block.",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "catchup_step_period": {
                         "description": "Time between check to perform catchup.",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "chain_id": {
                         "description": "Chain id for status.",
@@ -9191,7 +9205,14 @@
                     },
                     "chunk_request_retry_period": {
                         "description": "Time between checking to re-request chunks.",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "client_background_migration_threads": {
                         "description": "Number of threads to execute background migration work in client.",
@@ -9201,7 +9222,14 @@
                     },
                     "doomslug_step_period": {
                         "description": "Time between running doomslug timer.",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "enable_multiline_logging": {
                         "type": "boolean"
@@ -9248,19 +9276,47 @@
                     },
                     "header_sync_initial_timeout": {
                         "description": "How much time to wait after initial header sync",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "header_sync_progress_timeout": {
                         "description": "How much time to wait after some progress is made in header sync",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "header_sync_stall_ban_timeout": {
                         "description": "How much time to wait before banning a peer in header sync if sync is too slow",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "log_summary_period": {
                         "description": "Period between logging summary information.",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "log_summary_style": {
                         "description": "Enable coloring of the logs",
@@ -9272,11 +9328,25 @@
                     },
                     "max_block_production_delay": {
                         "description": "Maximum wait for approvals before producing block.",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "max_block_wait_delay": {
                         "description": "Maximum duration before skipping given height.",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "max_gas_burnt_view": {
                         "description": "Max burnt gas per view method.  If present, overrides value stored in genesis file.  The value only affects the RPCs without influencing the protocol thus changing it per-node doesn\u2019t affect the blockchain.",
@@ -9287,7 +9357,14 @@
                     },
                     "min_block_production_delay": {
                         "description": "Minimum duration before producing block.",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "min_num_peers": {
                         "description": "Minimum number of peers to start syncing.",
@@ -9303,7 +9380,9 @@
                     },
                     "orphan_state_witness_max_size": {
                         "description": "Maximum size of state witnesses in the OrphanStateWitnessPool.\n\nWe keep only orphan witnesses which are smaller than this size. This limits the maximum memory usage of OrphanStateWitnessPool.",
-                        "type": "string"
+                        "type": "integer",
+                        "format": "uint64",
+                        "minimum": 0.0
                     },
                     "orphan_state_witness_pool_size": {
                         "description": "OrphanStateWitnessPool keeps instances of ChunkStateWitness which can't be processed because the previous block isn't available. The witnesses wait in the pool until the required block appears. This variable controls how many witnesses can be stored in the pool.",
@@ -9353,23 +9432,58 @@
                     },
                     "state_sync_external_backoff": {
                         "description": "Additional waiting period after a failed request to external storage",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "state_sync_external_timeout": {
                         "description": "How long to wait for a response from centralized state sync",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "state_sync_p2p_timeout": {
                         "description": "How long to wait for a response from p2p state sync",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "state_sync_retry_backoff": {
                         "description": "How long to wait after a failed state sync request",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "sync_check_period": {
                         "description": "How often to check that we are not out of sync.",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "sync_height_threshold": {
                         "description": "Sync height threshold: below this difference in height don't start syncing.",
@@ -9385,7 +9499,14 @@
                     },
                     "sync_step_period": {
                         "description": "While syncing, how long to check for each step.",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "tracked_accounts": {
                         "description": "Accounts that this client tracks.",
@@ -9436,7 +9557,14 @@
                     },
                     "ttl_account_id_router": {
                         "description": "Time to persist Accounts Id in the router without removing them.",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     },
                     "tx_routing_height_horizon": {
                         "description": "If the node is not a chunk producer within that many blocks, then route to upcoming chunk producers.",
@@ -9460,7 +9588,14 @@
                     },
                     "view_client_throttle_period": {
                         "description": "Number of seconds between state requests for view client.",
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "uint64",
+                            "minimum": 0.0
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
                     }
                 }
             },
