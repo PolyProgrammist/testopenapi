@@ -4,13 +4,12 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-schemars = "0.8"  # For JsonSchema derive
-okapi = { version = "0.7.0" } # OpenAPI generation
-serde = { version = "1", features = ["derive"] }
+schemars = "1.0.0-alpha.17"
 serde_json = "1.0.139"
+okapi = { path = "../okapi/okapi" } # OpenAPI generation
+serde = { version = "1", features = ["derive"] }
 serde_yaml = "0.9"
 near-jsonrpc-primitives = { path = "../../nearcore/chain/jsonrpc-primitives", features = ["full"] }
 near-primitives = { path = "../../nearcore/core/primitives" }
 near-time = { path = "../../nearcore/core/time", features = ["clock"] }
 near-chain-configs = { path = "../../nearcore/core/chain-configs" }
-

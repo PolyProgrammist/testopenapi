@@ -3,6 +3,7 @@ use serde_json::json;
 use std::error::Error;
 use std::fs::File;
 use std::io::BufReader;
+use std::io::Read;
 
 const NEAR_RPC_URL_REMOTE: &str = "https://archival-rpc.mainnet.near.org";
 const NEAR_RPC_URL_LOCAL: &str = "http://localhost:3030";
@@ -20,16 +21,16 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let client_remote = Client::new(NEAR_RPC_URL_REMOTE);
     let client_local = Client::new(NEAR_RPC_URL_LOCAL);
 
-    let payloadTx = keeper::types::JsonRpcRequestForTxMethodNameHelperEnum {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::TxMethodNameHelperEnum::Tx,
-        params: keeper::types::RpcTransactionStatusRequest::Variant1 {
-            tx_hash: transaction_hash.parse().unwrap(),
-            sender_account_id: sender_account_id.parse().unwrap(),
-            wait_until: keeper::types::TxExecutionStatus::None,
-        }
-    };
+    // let payloadTx = keeper::types::JsonRpcRequestForTxMethodNameHelperEnum {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::TxMethodNameHelperEnum::Tx,
+    //     params: keeper::types::RpcTransactionStatusRequest::Variant1 {
+    //         tx_hash: transaction_hash.parse().unwrap(),
+    //         sender_account_id: sender_account_id.parse().unwrap(),
+    //         wait_until: keeper::types::TxExecutionStatus::None,
+    //     }
+    // };
 
     let payloadBlock = keeper::types::JsonRpcRequestForBlockMethodNameHelperEnum {
         id: String::from("dontcare"),
@@ -40,154 +41,183 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         })
     };
 
-    let payloadChunk = keeper::types::JsonRpcRequestForChunkMethodNameHelperEnum {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::ChunkMethodNameHelperEnum::Chunk,
-        params: keeper::types::RpcChunkRequest::Variant0{
-            block_id: keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()),
-            shard_id: keeper::types::ShardId(0)
-        }
-    };
+    // let payloadChunk = keeper::types::JsonRpcRequestForChunkMethodNameHelperEnum {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::ChunkMethodNameHelperEnum::Chunk,
+    //     params: keeper::types::RpcChunkRequest::Variant0{
+    //         block_id: keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()),
+    //         shard_id: keeper::types::ShardId(0)
+    //     }
+    // };
 
-    let payloadGasPrice = keeper::types::JsonRpcRequestForGasPriceMethodNameHelperEnum {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::GasPriceMethodNameHelperEnum::GasPrice,
-        params: keeper::types::RpcGasPriceRequest {
-            block_id: Some(keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()))
-        }
-    };
+    // let payloadGasPrice = keeper::types::JsonRpcRequestForGasPriceMethodNameHelperEnum {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::GasPriceMethodNameHelperEnum::GasPrice,
+    //     params: keeper::types::RpcGasPriceRequest {
+    //         block_id: Some(keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()))
+    //     }
+    // };
 
-    let payloadHealth = keeper::types::JsonRpcRequestForHealthMethodNameHelperEnum {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::HealthMethodNameHelperEnum::Health,
-        params: keeper::types::RpcHealthRequest(serde_json::Map::new())
-    };
+    // let payloadHealth = keeper::types::JsonRpcRequestForHealthMethodNameHelperEnum {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::HealthMethodNameHelperEnum::Health,
+    //     params: keeper::types::RpcHealthRequest(serde_json::Map::new())
+    // };
 
-    let payloadBroadcastCommit = keeper::types::JsonRpcRequestForBroadCastTxCommitMethodNameHelperEnum {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::BroadCastTxCommitMethodNameHelperEnum::BroadcastTxCommit,
-        params: keeper::types::RpcSendTransactionRequest {
-            signed_tx_base64: "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string(),
-            wait_until: keeper::types::TxExecutionStatus::Executed
-        }
-    };
+    // let payloadBroadcastCommit = keeper::types::JsonRpcRequestForBroadCastTxCommitMethodNameHelperEnum {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::BroadCastTxCommitMethodNameHelperEnum::BroadcastTxCommit,
+    //     params: keeper::types::RpcSendTransactionRequest {
+    //         signed_tx_base64: "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string(),
+    //         wait_until: keeper::types::TxExecutionStatus::Executed
+    //     }
+    // };
 
-    let payloadBroadcastAsync = keeper::types::JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::BroadCastTxAsyncMethodNameHelperEnum::BroadcastTxAsync,
-        params: keeper::types::RpcSendTransactionRequest {
-            signed_tx_base64: "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string(),
-            wait_until: keeper::types::TxExecutionStatus::Executed
-        }
-    };
+    // let payloadBroadcastAsync = keeper::types::JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::BroadCastTxAsyncMethodNameHelperEnum::BroadcastTxAsync,
+    //     params: keeper::types::RpcSendTransactionRequest {
+    //         signed_tx_base64: "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string(),
+    //         wait_until: keeper::types::TxExecutionStatus::Executed
+    //     }
+    // };
 
-    let payloadLightClientExecutionProof = keeper::types::JsonRpcRequestForLightClientProofMethodNameHelperEnum {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::LightClientProofMethodNameHelperEnum::LightClientProof,
-        params: keeper::types::RpcLightClientExecutionProofRequest::Variant0 {
-            light_client_head: transaction_hash.parse().unwrap(),
-            sender_id: sender_account_id.parse().unwrap(),
-            transaction_hash: transaction_hash.parse().unwrap(),
-            type_: keeper::types::TypeTransactionOrReceiptId::Transaction,
-        }
-    };
+    // let payloadLightClientExecutionProof = keeper::types::JsonRpcRequestForLightClientProofMethodNameHelperEnum {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::LightClientProofMethodNameHelperEnum::LightClientProof,
+    //     params: keeper::types::RpcLightClientExecutionProofRequest::Variant0 {
+    //         light_client_head: transaction_hash.parse().unwrap(),
+    //         sender_id: sender_account_id.parse().unwrap(),
+    //         transaction_hash: transaction_hash.parse().unwrap(),
+    //         type_: keeper::types::TypeTransactionOrReceiptId::Transaction,
+    //     }
+    // };
 
-    let payloadNextLightClientBlock = keeper::types::JsonRpcRequestForNextLightClientBlockMethodNameHelperEnum {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::NextLightClientBlockMethodNameHelperEnum::NextLightClientBlock,
-        params: keeper::types::RpcLightClientNextBlockRequest {
-            last_block_hash: "Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap(),
-        }
-    };
+    // let payloadNextLightClientBlock = keeper::types::JsonRpcRequestForNextLightClientBlockMethodNameHelperEnum {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::NextLightClientBlockMethodNameHelperEnum::NextLightClientBlock,
+    //     params: keeper::types::RpcLightClientNextBlockRequest {
+    //         last_block_hash: "Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap(),
+    //     }
+    // };
 
-    let payloadNetworkInfo = keeper::types::JsonRpcRequestForNetworkInfoMethodNameHelperEnum {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::NetworkInfoMethodNameHelperEnum::NetworkInfo,
-        params: keeper::types::RpcNetworkInfoRequest(serde_json::Map::new())
-    };
+    // let payloadNetworkInfo = keeper::types::JsonRpcRequestForNetworkInfoMethodNameHelperEnum {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::NetworkInfoMethodNameHelperEnum::NetworkInfo,
+    //     params: keeper::types::RpcNetworkInfoRequest(serde_json::Map::new())
+    // };
 
-    let payloadSendTx = keeper::types::JsonRpcRequestForSendTxMethodNameHelperEnum {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::SendTxMethodNameHelperEnum::SendTx,
-        params: keeper::types::RpcSendTransactionRequest {
-            signed_tx_base64: "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string(),
-            wait_until: keeper::types::TxExecutionStatus::Executed
-        }
-    };
+    // let payloadSendTx = keeper::types::JsonRpcRequestForSendTxMethodNameHelperEnum {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::SendTxMethodNameHelperEnum::SendTx,
+    //     params: keeper::types::RpcSendTransactionRequest {
+    //         signed_tx_base64: "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string(),
+    //         wait_until: keeper::types::TxExecutionStatus::Executed
+    //     }
+    // };
 
-    let payloadStatus = keeper::types::JsonRpcRequestForStatusMethodNameHelperEnum {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::StatusMethodNameHelperEnum::Status,
-        params: keeper::types::RpcStatusRequest(serde_json::Map::new())
-    };
+    // let payloadStatus = keeper::types::JsonRpcRequestForStatusMethodNameHelperEnum {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::StatusMethodNameHelperEnum::Status,
+    //     params: keeper::types::RpcStatusRequest(serde_json::Map::new())
+    // };
 
-    let payloadValidators = keeper::types::JsonRpcRequestForValidatorsMethodNameHelperEnum {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::ValidatorsMethodNameHelperEnum::Validators,
-        params: keeper::types::RpcValidatorRequest::Latest
-    };
+    // let payloadValidators = keeper::types::JsonRpcRequestForValidatorsMethodNameHelperEnum {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::ValidatorsMethodNameHelperEnum::Validators,
+    //     params: keeper::types::RpcValidatorRequest::Latest
+    // };
 
-    let payloadClientConfig = keeper::types::JsonRpcRequestForClientConfigMethodNameHelperEnum {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::ClientConfigMethodNameHelperEnum::ClientConfig,
-        params: keeper::types::RpcClientConfigRequest(serde_json::Map::new())
-    };
+    // let payloadClientConfig = keeper::types::JsonRpcRequestForClientConfigMethodNameHelperEnum {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::ClientConfigMethodNameHelperEnum::ClientConfig,
+    //     params: keeper::types::RpcClientConfigRequest(serde_json::Map::new())
+    // };
+
+    // let payloadStateChanges = keeper::types::JsonRpcRequestForExpChangeMethodNameHelperEnum {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::ExpChangeMethodNameHelperEnum::ExperimentalChanges,
+    //     params: keeper::types::RpcStateChangesInBlockByTypeRequest::BlockId(keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()))
+    // };
 
     let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     println!("block: {:#?}", block);
 
-    let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.tx(&payloadTx).await?.into_inner();
-    println!("tx: {:#?}", tx);
+    // let mut file = std::fs::File::open("tmp.json").expect("Unable to open file");
 
-    let chunk: keeper::types::JsonRpcResponseForRpcChunkResponseAndRpcError = client_remote.chunk(&payloadChunk).await?.into_inner();
-    println!("chunk: {:#?}", chunk);
+    // Create a string buffer to store the file contents
+    // let mut json_data = String::new();
 
-    // local as currently accepts only array, fixed in new version
-    let gas_price: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client_local.gas_price(&payloadGasPrice).await?.into_inner();
-    println!("gas_price: {:#?}", gas_price);
+    // // Read the contents of the file into the string
+    // file.read_to_string(&mut json_data).expect("Unable to read file");
 
-    let health: keeper::types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError = client_remote.health(&payloadHealth).await?.into_inner();
-    println!("health: {:#?}", health);
+    // // Parse the JSON string into a `Value` object
+    // let json_value: serde_json::Value = serde_json::from_str(&json_data)?;
 
-    let broadcast_commit: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.broadcast_tx_commit(&payloadBroadcastCommit).await?.into_inner();
-    println!("broadcast_commit: {:#?}", broadcast_commit);
+    // println!("hello, json_value: {:#?}", json_value);
+
+    // // Convert the `Value` into a specific type (in this case, `Person`)
+    // // let person: keeper::types::RpcBlockResponse = serde_json::from_value(json_value)?;
+
+    // // Print the person struct
+    // println!("{:?}", person);
+
+    // let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.tx(&payloadTx).await?.into_inner();
+    // println!("tx: {:#?}", tx);
+
+    // let chunk: keeper::types::JsonRpcResponseForRpcChunkResponseAndRpcError = client_remote.chunk(&payloadChunk).await?.into_inner();
+    // println!("chunk: {:#?}", chunk);
+
+    // // local as currently accepts only array, fixed in new version
+    // let gas_price: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client_local.gas_price(&payloadGasPrice).await?.into_inner();
+    // println!("gas_price: {:#?}", gas_price);
+
+    // let health: keeper::types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError = client_remote.health(&payloadHealth).await?.into_inner();
+    // println!("health: {:#?}", health);
+
+    // let broadcast_commit: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.broadcast_tx_commit(&payloadBroadcastCommit).await?.into_inner();
+    // println!("broadcast_commit: {:#?}", broadcast_commit);
     
-    let broadcast_async: keeper::types::JsonRpcResponseForCryptoHashAndRpcError = client_remote.broadcast_tx_async(&payloadBroadcastAsync).await?.into_inner();
-    println!("broadcast_async: {:#?}", broadcast_async);
+    // let broadcast_async: keeper::types::JsonRpcResponseForCryptoHashAndRpcError = client_remote.broadcast_tx_async(&payloadBroadcastAsync).await?.into_inner();
+    // println!("broadcast_async: {:#?}", broadcast_async);
 
-    let light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.light_client_proof(&payloadLightClientExecutionProof).await?.into_inner();
-    println!("light_client_execution_proof: {:#?}", light_client_execution_proof);
+    // let light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.light_client_proof(&payloadLightClientExecutionProof).await?.into_inner();
+    // println!("light_client_execution_proof: {:#?}", light_client_execution_proof);
 
-    let next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError = client_remote.next_light_client_block(&payloadNextLightClientBlock).await?.into_inner();
-    println!("next_light_client_block: {:#?}", next_light_client_block);
+    // let next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError = client_remote.next_light_client_block(&payloadNextLightClientBlock).await?.into_inner();
+    // println!("next_light_client_block: {:#?}", next_light_client_block);
 
-    let network_info: keeper::types::JsonRpcResponseForRpcNetworkInfoResponseAndRpcError = client_remote.network_info(&payloadNetworkInfo).await?.into_inner();
-    println!("network_info: {:#?}", network_info);
+    // let network_info: keeper::types::JsonRpcResponseForRpcNetworkInfoResponseAndRpcError = client_remote.network_info(&payloadNetworkInfo).await?.into_inner();
+    // println!("network_info: {:#?}", network_info);
 
-    let send_tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.send_tx(&payloadSendTx).await?.into_inner();
-    println!("send_tx: {:#?}", send_tx);
+    // let send_tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.send_tx(&payloadSendTx).await?.into_inner();
+    // println!("send_tx: {:#?}", send_tx);
 
-    // local as ".version.commit" introduced recently: https://github.com/near/nearcore/pull/12722/files
-    let status = client_local.status(&payloadStatus).await?;
-    println!("status: {:#?}", status);
+    // // local as ".version.commit" introduced recently: https://github.com/near/nearcore/pull/12722/files
+    // let status = client_local.status(&payloadStatus).await?;
+    // println!("status: {:#?}", status);
 
-    let validators: keeper::types::JsonRpcResponseForRpcValidatorResponseAndRpcError = client_remote.validators(&payloadValidators).await?.into_inner();
-    println!("validators: {:#?}", validators);
+    // let validators: keeper::types::JsonRpcResponseForRpcValidatorResponseAndRpcError = client_remote.validators(&payloadValidators).await?.into_inner();
+    // println!("validators: {:#?}", validators);
 
-    let client_config: keeper::types::JsonRpcResponseForRpcClientConfigResponseAndRpcError = client_local.client_config(&payloadClientConfig).await?.into_inner();
-    println!("client_config: {:#?}", client_config);
+    // let client_config: keeper::types::JsonRpcResponseForRpcClientConfigResponseAndRpcError = client_local.client_config(&payloadClientConfig).await?.into_inner();
+    // println!("client_config: {:#?}", client_config);
+
+    // let experimental_changes: keeper::types::JsonRpcResponseForRpcStateChangesInBlockResponseAndRpcError = client_local.experimental_changes(&payloadStateChanges).await?.into_inner();
+    // println!("experimental_changes: {:#?}", experimental_changes);
 
     Ok(())
 }

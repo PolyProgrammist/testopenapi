@@ -1,0 +1,180 @@
+{
+    "$schema": "https://spec.openapis.org/oas/3.0/schema/2021-09-28#/definitions/Schema",
+    "anyOf": [
+        {
+            "properties": {
+                "result": {
+                    "$ref": "#/components/schemas/RpcSplitStorageInfoResponse"
+                }
+            },
+            "required": [
+                "result"
+            ],
+            "type": "object"
+        },
+        {
+            "properties": {
+                "tmp": {
+                    "$ref": "#/components/schemas/RpcError"
+                }
+            },
+            "required": [
+                "tmp"
+            ],
+            "type": "object"
+        },
+        {
+            "properties": {
+                "error": {
+                    "$ref": "#/components/schemas/RpcError"
+                }
+            },
+            "required": [
+                "error"
+            ],
+            "type": "object"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "CauseRpcErrorKind": {
+                "anyOf": [
+                    {
+                        "$ref": "#/components/schemas/RpcRequestValidationErrorKind"
+                    },
+                    true,
+                    true
+                ]
+            },
+            "NameRpcErrorKind": {
+                "enum": [
+                    "REQUEST_VALIDATION_ERROR",
+                    "HANDLER_ERROR",
+                    "INTERNAL_ERROR"
+                ],
+                "type": "string"
+            },
+            "RpcError": {
+                "properties": {
+                    "cause": {
+                        "$ref": "#/components/schemas/CauseRpcErrorKind",
+                        "nullable": true
+                    },
+                    "code": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "data": {
+                        "nullable": true
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "$ref": "#/components/schemas/NameRpcErrorKind",
+                        "nullable": true
+                    }
+                },
+                "required": [
+                    "code",
+                    "message"
+                ],
+                "type": "object"
+            },
+            "RpcRequestValidationErrorKind": {
+                "oneOf": [
+                    {
+                        "properties": {
+                            "info": {
+                                "properties": {
+                                    "method_name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "method_name"
+                                ],
+                                "type": "object"
+                            },
+                            "name": {
+                                "const": "METHOD_NOT_FOUND",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "info"
+                        ],
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "info": {
+                                "properties": {
+                                    "error_message": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "error_message"
+                                ],
+                                "type": "object"
+                            },
+                            "name": {
+                                "const": "PARSE_ERROR",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "info"
+                        ],
+                        "type": "object"
+                    }
+                ]
+            },
+            "RpcSplitStorageInfoResponse": {
+                "description": "Contains the split storage information.",
+                "properties": {
+                    "cold_head_height": {
+                        "format": "uint64",
+                        "minimum": 0,
+                        "nullable": true,
+                        "type": "integer"
+                    },
+                    "final_head_height": {
+                        "format": "uint64",
+                        "minimum": 0,
+                        "nullable": true,
+                        "type": "integer"
+                    },
+                    "head_height": {
+                        "format": "uint64",
+                        "minimum": 0,
+                        "nullable": true,
+                        "type": "integer"
+                    },
+                    "hot_db_kind": {
+                        "nullable": true,
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "jsonrpc": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "jsonrpc",
+        "id"
+    ],
+    "title": "JsonRpcResponse_for_RpcSplitStorageInfoResponse_and_RpcError",
+    "type": "object"
+}
