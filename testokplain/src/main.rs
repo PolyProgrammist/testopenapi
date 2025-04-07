@@ -298,7 +298,7 @@ generate_method_name_helper!(BroadCastTxAsyncMethodNameHelperEnum, RpcSendTransa
 generate_method_name_helper!(BroadCastTxCommitMethodNameHelperEnum, RpcSendTransactionRequest, "broadcast_tx_commit");
 generate_method_name_helper!(ChunkMethodNameHelperEnum, RpcChunkRequest, "chunk");
 generate_method_name_helper!(GasPriceMethodNameHelperEnum, RpcGasPriceRequest, "gas_price");
-// generate_method_name_helper!(HealthMethodNameHelperEnum, RpcHealthRequest, "health");
+generate_method_name_helper!(HealthMethodNameHelperEnum, RpcHealthRequest, "health");
 // generate_method_name_helper!(LightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofRequest, "light_client_proof");
 // generate_method_name_helper!(NextLightClientBlockMethodNameHelperEnum, RpcLightClientNextBlockRequest, "next_light_client_block");
 // generate_method_name_helper!(NetworkInfoMethodNameHelperEnum, RpcNetworkInfoRequest, "network_info");
@@ -331,8 +331,8 @@ fn main() {
     add_spec_for_path::<BroadCastTxCommitMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "broadcast_tx_commit".to_string());
     add_spec_for_path::<ChunkMethodNameHelperEnum, RpcChunkResponse>(&mut all_schemas, &mut all_paths, "chunk".to_string());
     add_spec_for_path::<GasPriceMethodNameHelperEnum, RpcGasPriceResponse>(&mut all_schemas, &mut all_paths, "gas_price".to_string());
+    add_spec_for_path::<HealthMethodNameHelperEnum, Option<RpcHealthResponse>>(&mut all_schemas, &mut all_paths, "health".to_string());
     // add_spec_for_path::<TxMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "tx".to_string());
-    // add_spec_for_path::<HealthMethodNameHelperEnum, Option<RpcHealthResponse>>(&mut all_schemas, &mut all_paths, "health".to_string());
     // add_spec_for_path::<LightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "light_client_proof".to_string());
     // add_spec_for_path::<NextLightClientBlockMethodNameHelperEnum, RpcLightClientNextBlockResponse>(&mut all_schemas, &mut all_paths, "next_light_client_block".to_string());
     // add_spec_for_path::<NetworkInfoMethodNameHelperEnum, RpcNetworkInfoResponse>(&mut all_schemas, &mut all_paths, "network_info".to_string());

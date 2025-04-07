@@ -80,12 +80,12 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
-    // let payloadHealth = keeper::types::JsonRpcRequestForHealthMethodNameHelperEnum {
-    //     id: String::from("dontcare"),
-    //     jsonrpc: String::from("2.0"),
-    //     method: keeper::types::HealthMethodNameHelperEnum::Health,
-    //     params: keeper::types::RpcHealthRequest(serde_json::Map::new())
-    // };
+    let payloadHealth = keeper::types::JsonRpcRequestForHealthMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::HealthMethodNameHelperEnum::Health,
+        params: keeper::types::RpcHealthRequest(serde_json::Map::new())
+    };
 
 
     // let payloadLightClientExecutionProof = keeper::types::JsonRpcRequestForLightClientProofMethodNameHelperEnum {
@@ -170,12 +170,11 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let gas_price: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client_local.gas_price(&payloadGasPrice).await?.into_inner();
     println!("gas_price: {:#?}", gas_price);
 
+    let health: keeper::types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError = client_remote.health(&payloadHealth).await?.into_inner();
+    println!("health: {:#?}", health);
+
     // let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.tx(&payloadTx).await?.into_inner();
     // println!("tx: {:#?}", tx);
-
-
-    // let health: keeper::types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError = client_remote.health(&payloadHealth).await?.into_inner();
-    // println!("health: {:#?}", health);
 
 
     // let light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.light_client_proof(&payloadLightClientExecutionProof).await?.into_inner();

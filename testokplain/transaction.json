@@ -139,6 +139,33 @@
                     }
                 }
             }
+        },
+        "/health": {
+            "post": {
+                "operationId": "health",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_HealthMethodNameHelperEnum"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonRpcResponse_for_Nullable_RpcHealthResponse_and_RpcError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -2625,6 +2652,12 @@
                     }
                 ]
             },
+            "HealthMethodNameHelperEnum": {
+                "enum": [
+                    "health"
+                ],
+                "type": "string"
+            },
             "HostError": {
                 "oneOf": [
                     {
@@ -3797,6 +3830,30 @@
                 "title": "JsonRpcRequest_for_GasPriceMethodNameHelperEnum",
                 "type": "object"
             },
+            "JsonRpcRequest_for_HealthMethodNameHelperEnum": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "$ref": "#/components/schemas/HealthMethodNameHelperEnum"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcHealthRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_HealthMethodNameHelperEnum",
+                "type": "object"
+            },
             "JsonRpcResponse_for_CryptoHash_and_RpcError": {
                 "anyOf": [
                     {
@@ -3846,6 +3903,59 @@
                     "id"
                 ],
                 "title": "JsonRpcResponse_for_CryptoHash_and_RpcError",
+                "type": "object"
+            },
+            "JsonRpcResponse_for_Nullable_RpcHealthResponse_and_RpcError": {
+                "anyOf": [
+                    {
+                        "properties": {
+                            "result": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/RpcHealthResponse"
+                                    }
+                                ],
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "tmp": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        },
+                        "required": [
+                            "tmp"
+                        ],
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "error": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        },
+                        "required": [
+                            "error"
+                        ],
+                        "type": "object"
+                    }
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id"
+                ],
+                "title": "JsonRpcResponse_for_Nullable_RpcHealthResponse_and_RpcError",
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcBlockResponse_and_RpcError": {
@@ -4695,6 +4805,12 @@
                 "required": [
                     "gas_price"
                 ],
+                "type": "object"
+            },
+            "RpcHealthRequest": {
+                "type": "object"
+            },
+            "RpcHealthResponse": {
                 "type": "object"
             },
             "RpcRequestValidationErrorKind": {
