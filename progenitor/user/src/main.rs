@@ -61,15 +61,15 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
-    // let payloadChunk = keeper::types::JsonRpcRequestForChunkMethodNameHelperEnum {
-    //     id: String::from("dontcare"),
-    //     jsonrpc: String::from("2.0"),
-    //     method: keeper::types::ChunkMethodNameHelperEnum::Chunk,
-    //     params: keeper::types::RpcChunkRequest::Variant0{
-    //         block_id: keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()),
-    //         shard_id: keeper::types::ShardId(0)
-    //     }
-    // };
+    let payloadChunk = keeper::types::JsonRpcRequestForChunkMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::ChunkMethodNameHelperEnum::Chunk,
+        params: keeper::types::RpcChunkRequest::Variant0{
+            block_id: keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()),
+            shard_id: keeper::types::ShardId(0)
+        }
+    };
 
     // let payloadGasPrice = keeper::types::JsonRpcRequestForGasPriceMethodNameHelperEnum {
     //     id: String::from("dontcare"),
@@ -163,12 +163,13 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let broadcast_commit: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.broadcast_tx_commit(&payloadBroadcastCommit).await?.into_inner();
     println!("broadcast_commit: {:#?}", broadcast_commit);
     
+    let chunk: keeper::types::JsonRpcResponseForRpcChunkResponseAndRpcError = client_remote.chunk(&payloadChunk).await?.into_inner();
+    println!("chunk: {:#?}", chunk);
 
     // let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.tx(&payloadTx).await?.into_inner();
     // println!("tx: {:#?}", tx);
 
-    // let chunk: keeper::types::JsonRpcResponseForRpcChunkResponseAndRpcError = client_remote.chunk(&payloadChunk).await?.into_inner();
-    // println!("chunk: {:#?}", chunk);
+
 
     // // local as currently accepts only array, fixed in new version
     // let gas_price: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client_local.gas_price(&payloadGasPrice).await?.into_inner();

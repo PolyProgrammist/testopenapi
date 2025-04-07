@@ -85,6 +85,33 @@
                     }
                 }
             }
+        },
+        "/chunk": {
+            "post": {
+                "operationId": "chunk",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_ChunkMethodNameHelperEnum"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonRpcResponse_for_RpcChunkResponse_and_RpcError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -1847,6 +1874,12 @@
                     "signature"
                 ],
                 "type": "object"
+            },
+            "ChunkMethodNameHelperEnum": {
+                "enum": [
+                    "chunk"
+                ],
+                "type": "string"
             },
             "CompilationError": {
                 "oneOf": [
@@ -3683,6 +3716,30 @@
                 "title": "JsonRpcRequest_for_BroadCastTxCommitMethodNameHelperEnum",
                 "type": "object"
             },
+            "JsonRpcRequest_for_ChunkMethodNameHelperEnum": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "$ref": "#/components/schemas/ChunkMethodNameHelperEnum"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcChunkRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_ChunkMethodNameHelperEnum",
+                "type": "object"
+            },
             "JsonRpcResponse_for_CryptoHash_and_RpcError": {
                 "anyOf": [
                     {
@@ -3783,6 +3840,57 @@
                     "id"
                 ],
                 "title": "JsonRpcResponse_for_RpcBlockResponse_and_RpcError",
+                "type": "object"
+            },
+            "JsonRpcResponse_for_RpcChunkResponse_and_RpcError": {
+                "anyOf": [
+                    {
+                        "properties": {
+                            "result": {
+                                "$ref": "#/components/schemas/RpcChunkResponse"
+                            }
+                        },
+                        "required": [
+                            "result"
+                        ],
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "tmp": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        },
+                        "required": [
+                            "tmp"
+                        ],
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "error": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        },
+                        "required": [
+                            "error"
+                        ],
+                        "type": "object"
+                    }
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id"
+                ],
+                "title": "JsonRpcResponse_for_RpcChunkResponse_and_RpcError",
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcTransactionResponse_and_RpcError": {
@@ -4371,6 +4479,66 @@
                     "author",
                     "header",
                     "chunks"
+                ],
+                "type": "object"
+            },
+            "RpcChunkRequest": {
+                "anyOf": [
+                    {
+                        "properties": {
+                            "block_id": {
+                                "$ref": "#/components/schemas/BlockId"
+                            },
+                            "shard_id": {
+                                "$ref": "#/components/schemas/ShardId"
+                            }
+                        },
+                        "required": [
+                            "block_id",
+                            "shard_id"
+                        ],
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "chunk_id": {
+                                "$ref": "#/components/schemas/CryptoHash"
+                            }
+                        },
+                        "required": [
+                            "chunk_id"
+                        ],
+                        "type": "object"
+                    }
+                ],
+                "type": "object"
+            },
+            "RpcChunkResponse": {
+                "properties": {
+                    "author": {
+                        "$ref": "#/components/schemas/AccountId"
+                    },
+                    "header": {
+                        "$ref": "#/components/schemas/ChunkHeaderView"
+                    },
+                    "receipts": {
+                        "items": {
+                            "$ref": "#/components/schemas/ReceiptView"
+                        },
+                        "type": "array"
+                    },
+                    "transactions": {
+                        "items": {
+                            "$ref": "#/components/schemas/SignedTransactionView"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "author",
+                    "header",
+                    "transactions",
+                    "receipts"
                 ],
                 "type": "object"
             },
