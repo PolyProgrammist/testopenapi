@@ -99,59 +99,59 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
-    // let payloadNextLightClientBlock = keeper::types::JsonRpcRequestForNextLightClientBlockMethodNameHelperEnum {
-    //     id: String::from("dontcare"),
-    //     jsonrpc: String::from("2.0"),
-    //     method: keeper::types::NextLightClientBlockMethodNameHelperEnum::NextLightClientBlock,
-    //     params: keeper::types::RpcLightClientNextBlockRequest {
-    //         last_block_hash: "Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap(),
-    //     }
-    // };
+    let payloadNextLightClientBlock = keeper::types::JsonRpcRequestForNextLightClientBlockMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::NextLightClientBlockMethodNameHelperEnum::NextLightClientBlock,
+        params: keeper::types::RpcLightClientNextBlockRequest {
+            last_block_hash: "Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap(),
+        }
+    };
 
-    // let payloadNetworkInfo = keeper::types::JsonRpcRequestForNetworkInfoMethodNameHelperEnum {
-    //     id: String::from("dontcare"),
-    //     jsonrpc: String::from("2.0"),
-    //     method: keeper::types::NetworkInfoMethodNameHelperEnum::NetworkInfo,
-    //     params: keeper::types::RpcNetworkInfoRequest(serde_json::Map::new())
-    // };
+    let payloadNetworkInfo = keeper::types::JsonRpcRequestForNetworkInfoMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::NetworkInfoMethodNameHelperEnum::NetworkInfo,
+        params: keeper::types::RpcNetworkInfoRequest(serde_json::Map::new())
+    };
 
-    // let payloadSendTx = keeper::types::JsonRpcRequestForSendTxMethodNameHelperEnum {
-    //     id: String::from("dontcare"),
-    //     jsonrpc: String::from("2.0"),
-    //     method: keeper::types::SendTxMethodNameHelperEnum::SendTx,
-    //     params: keeper::types::RpcSendTransactionRequest {
-    //         signed_tx_base64: "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string(),
-    //         wait_until: keeper::types::TxExecutionStatus::Executed
-    //     }
-    // };
+    let payloadSendTx = keeper::types::JsonRpcRequestForSendTxMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::SendTxMethodNameHelperEnum::SendTx,
+        params: keeper::types::RpcSendTransactionRequest {
+            signed_tx_base64: "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string(),
+            wait_until: Some(keeper::types::TxExecutionStatus::Executed)
+        }
+    };
 
-    // let payloadStatus = keeper::types::JsonRpcRequestForStatusMethodNameHelperEnum {
-    //     id: String::from("dontcare"),
-    //     jsonrpc: String::from("2.0"),
-    //     method: keeper::types::StatusMethodNameHelperEnum::Status,
-    //     params: keeper::types::RpcStatusRequest(serde_json::Map::new())
-    // };
+    let payloadStatus = keeper::types::JsonRpcRequestForStatusMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::StatusMethodNameHelperEnum::Status,
+        params: keeper::types::RpcStatusRequest(serde_json::Map::new())
+    };
 
-    // let payloadValidators = keeper::types::JsonRpcRequestForValidatorsMethodNameHelperEnum {
-    //     id: String::from("dontcare"),
-    //     jsonrpc: String::from("2.0"),
-    //     method: keeper::types::ValidatorsMethodNameHelperEnum::Validators,
-    //     params: keeper::types::RpcValidatorRequest::Latest
-    // };
+    let payloadValidators = keeper::types::JsonRpcRequestForValidatorsMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::ValidatorsMethodNameHelperEnum::Validators,
+        params: keeper::types::RpcValidatorRequest::Latest
+    };
 
-    // let payloadClientConfig = keeper::types::JsonRpcRequestForClientConfigMethodNameHelperEnum {
-    //     id: String::from("dontcare"),
-    //     jsonrpc: String::from("2.0"),
-    //     method: keeper::types::ClientConfigMethodNameHelperEnum::ClientConfig,
-    //     params: keeper::types::RpcClientConfigRequest(serde_json::Map::new())
-    // };
+    let payloadClientConfig = keeper::types::JsonRpcRequestForClientConfigMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::ClientConfigMethodNameHelperEnum::ClientConfig,
+        params: keeper::types::RpcClientConfigRequest(serde_json::Map::new())
+    };
 
-    // let payloadStateChanges = keeper::types::JsonRpcRequestForExpChangeMethodNameHelperEnum {
-    //     id: String::from("dontcare"),
-    //     jsonrpc: String::from("2.0"),
-    //     method: keeper::types::ExpChangeMethodNameHelperEnum::ExperimentalChanges,
-    //     params: keeper::types::RpcStateChangesInBlockByTypeRequest::BlockId(keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()))
-    // };
+    let payloadStateChanges = keeper::types::JsonRpcRequestForExpChangeMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::ExpChangeMethodNameHelperEnum::ExperimentalChanges,
+        params: keeper::types::RpcStateChangesInBlockRequest::BlockId(keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()))
+    };
 
     let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     println!("block: {:#?}", block);
