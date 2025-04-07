@@ -4482,6 +4482,85 @@ pub mod types {
         }
     }
 
+    ///GasPriceMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "gas_price"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum GasPriceMethodNameHelperEnum {
+        #[serde(rename = "gas_price")]
+        GasPrice,
+    }
+
+    impl ::std::convert::From<&Self> for GasPriceMethodNameHelperEnum {
+        fn from(value: &GasPriceMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for GasPriceMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::GasPrice => write!(f, "gas_price"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for GasPriceMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "gas_price" => Ok(Self::GasPrice),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for GasPriceMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for GasPriceMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for GasPriceMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
     ///GlobalContractData
     ///
     /// <details><summary>JSON schema</summary>
@@ -6189,6 +6268,53 @@ pub mod types {
         }
     }
 
+    ///JsonRpcRequestForGasPriceMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_GasPriceMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/GasPriceMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcGasPriceRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForGasPriceMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: GasPriceMethodNameHelperEnum,
+        pub params: RpcGasPriceRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForGasPriceMethodNameHelperEnum>
+        for JsonRpcRequestForGasPriceMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForGasPriceMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
     ///JsonRpcResponseForCryptoHashAndRpcError
     ///
     /// <details><summary>JSON schema</summary>
@@ -6437,6 +6563,90 @@ pub mod types {
 
     impl ::std::convert::From<&Self> for JsonRpcResponseForRpcChunkResponseAndRpcError {
         fn from(value: &JsonRpcResponseForRpcChunkResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForRpcGasPriceResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_RpcGasPriceResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/RpcGasPriceResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcGasPriceResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcGasPriceResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForRpcGasPriceResponseAndRpcError {
+        fn from(value: &JsonRpcResponseForRpcGasPriceResponseAndRpcError) -> Self {
             value.clone()
         }
     }
@@ -7883,6 +8093,70 @@ pub mod types {
         }
     }
 
+    ///RpcGasPriceRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "properties": {
+    ///    "block_id": {
+    ///      "$ref": "#/components/schemas/BlockId"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcGasPriceRequest {
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub block_id: ::std::option::Option<BlockId>,
+    }
+
+    impl ::std::convert::From<&RpcGasPriceRequest> for RpcGasPriceRequest {
+        fn from(value: &RpcGasPriceRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::default::Default for RpcGasPriceRequest {
+        fn default() -> Self {
+            Self {
+                block_id: Default::default(),
+            }
+        }
+    }
+
+    ///RpcGasPriceResponse
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "gas_price"
+    ///  ],
+    ///  "properties": {
+    ///    "gas_price": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcGasPriceResponse {
+        pub gas_price: ::std::string::String,
+    }
+
+    impl ::std::convert::From<&RpcGasPriceResponse> for RpcGasPriceResponse {
+        fn from(value: &RpcGasPriceResponse) -> Self {
+            value.clone()
+        }
+    }
+
     ///RpcRequestValidationErrorKind
     ///
     /// <details><summary>JSON schema</summary>
@@ -9283,6 +9557,31 @@ impl Client {
         &'a self,
         body: &'a types::JsonRpcRequestForChunkMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcChunkResponseAndRpcError>, Error<()>>
+    {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/gas_price`
+    pub async fn gas_price<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForGasPriceMethodNameHelperEnum,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForRpcGasPriceResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]

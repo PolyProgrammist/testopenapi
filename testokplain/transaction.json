@@ -112,6 +112,33 @@
                     }
                 }
             }
+        },
+        "/gas_price": {
+            "post": {
+                "operationId": "gas_price",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_GasPriceMethodNameHelperEnum"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonRpcResponse_for_RpcGasPriceResponse_and_RpcError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -2531,6 +2558,12 @@
                 ],
                 "type": "object"
             },
+            "GasPriceMethodNameHelperEnum": {
+                "enum": [
+                    "gas_price"
+                ],
+                "type": "string"
+            },
             "GlobalContractData": {
                 "properties": {
                     "code": {
@@ -3740,6 +3773,30 @@
                 "title": "JsonRpcRequest_for_ChunkMethodNameHelperEnum",
                 "type": "object"
             },
+            "JsonRpcRequest_for_GasPriceMethodNameHelperEnum": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "$ref": "#/components/schemas/GasPriceMethodNameHelperEnum"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcGasPriceRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_GasPriceMethodNameHelperEnum",
+                "type": "object"
+            },
             "JsonRpcResponse_for_CryptoHash_and_RpcError": {
                 "anyOf": [
                     {
@@ -3891,6 +3948,57 @@
                     "id"
                 ],
                 "title": "JsonRpcResponse_for_RpcChunkResponse_and_RpcError",
+                "type": "object"
+            },
+            "JsonRpcResponse_for_RpcGasPriceResponse_and_RpcError": {
+                "anyOf": [
+                    {
+                        "properties": {
+                            "result": {
+                                "$ref": "#/components/schemas/RpcGasPriceResponse"
+                            }
+                        },
+                        "required": [
+                            "result"
+                        ],
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "tmp": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        },
+                        "required": [
+                            "tmp"
+                        ],
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "error": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        },
+                        "required": [
+                            "error"
+                        ],
+                        "type": "object"
+                    }
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id"
+                ],
+                "title": "JsonRpcResponse_for_RpcGasPriceResponse_and_RpcError",
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcTransactionResponse_and_RpcError": {
@@ -4566,6 +4674,26 @@
                 "required": [
                     "code",
                     "message"
+                ],
+                "type": "object"
+            },
+            "RpcGasPriceRequest": {
+                "properties": {
+                    "block_id": {
+                        "$ref": "#/components/schemas/BlockId",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "RpcGasPriceResponse": {
+                "properties": {
+                    "gas_price": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "gas_price"
                 ],
                 "type": "object"
             },

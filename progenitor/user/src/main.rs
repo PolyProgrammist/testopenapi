@@ -71,14 +71,14 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
-    // let payloadGasPrice = keeper::types::JsonRpcRequestForGasPriceMethodNameHelperEnum {
-    //     id: String::from("dontcare"),
-    //     jsonrpc: String::from("2.0"),
-    //     method: keeper::types::GasPriceMethodNameHelperEnum::GasPrice,
-    //     params: keeper::types::RpcGasPriceRequest {
-    //         block_id: Some(keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()))
-    //     }
-    // };
+    let payloadGasPrice = keeper::types::JsonRpcRequestForGasPriceMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::GasPriceMethodNameHelperEnum::GasPrice,
+        params: keeper::types::RpcGasPriceRequest {
+            block_id: Some(keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()))
+        }
+    };
 
     // let payloadHealth = keeper::types::JsonRpcRequestForHealthMethodNameHelperEnum {
     //     id: String::from("dontcare"),
@@ -166,14 +166,13 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let chunk: keeper::types::JsonRpcResponseForRpcChunkResponseAndRpcError = client_remote.chunk(&payloadChunk).await?.into_inner();
     println!("chunk: {:#?}", chunk);
 
+    // local as currently accepts only array, fixed in new version
+    let gas_price: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client_local.gas_price(&payloadGasPrice).await?.into_inner();
+    println!("gas_price: {:#?}", gas_price);
+
     // let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.tx(&payloadTx).await?.into_inner();
     // println!("tx: {:#?}", tx);
 
-
-
-    // // local as currently accepts only array, fixed in new version
-    // let gas_price: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client_local.gas_price(&payloadGasPrice).await?.into_inner();
-    // println!("gas_price: {:#?}", gas_price);
 
     // let health: keeper::types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError = client_remote.health(&payloadHealth).await?.into_inner();
     // println!("health: {:#?}", health);
