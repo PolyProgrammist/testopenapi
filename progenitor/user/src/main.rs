@@ -41,6 +41,16 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         })
     };
 
+    let payloadBroadcastAsync = keeper::types::JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::BroadCastTxAsyncMethodNameHelperEnum::BroadcastTxAsync,
+        params: keeper::types::RpcSendTransactionRequest {
+            signed_tx_base64: "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string(),
+            wait_until: Some(keeper::types::TxExecutionStatus::Executed)
+        }
+    };
+
     // let payloadChunk = keeper::types::JsonRpcRequestForChunkMethodNameHelperEnum {
     //     id: String::from("dontcare"),
     //     jsonrpc: String::from("2.0"),
@@ -71,16 +81,6 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     //     id: String::from("dontcare"),
     //     jsonrpc: String::from("2.0"),
     //     method: keeper::types::BroadCastTxCommitMethodNameHelperEnum::BroadcastTxCommit,
-    //     params: keeper::types::RpcSendTransactionRequest {
-    //         signed_tx_base64: "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string(),
-    //         wait_until: keeper::types::TxExecutionStatus::Executed
-    //     }
-    // };
-
-    // let payloadBroadcastAsync = keeper::types::JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum {
-    //     id: String::from("dontcare"),
-    //     jsonrpc: String::from("2.0"),
-    //     method: keeper::types::BroadCastTxAsyncMethodNameHelperEnum::BroadcastTxAsync,
     //     params: keeper::types::RpcSendTransactionRequest {
     //         signed_tx_base64: "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string(),
     //         wait_until: keeper::types::TxExecutionStatus::Executed
@@ -156,24 +156,9 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     println!("block: {:#?}", block);
 
-    // let mut file = std::fs::File::open("tmp.json").expect("Unable to open file");
+    let broadcast_async: keeper::types::JsonRpcResponseForCryptoHashAndRpcError = client_remote.broadcast_tx_async(&payloadBroadcastAsync).await?.into_inner();
+    println!("broadcast_async: {:#?}", broadcast_async);
 
-    // Create a string buffer to store the file contents
-    // let mut json_data = String::new();
-
-    // // Read the contents of the file into the string
-    // file.read_to_string(&mut json_data).expect("Unable to read file");
-
-    // // Parse the JSON string into a `Value` object
-    // let json_value: serde_json::Value = serde_json::from_str(&json_data)?;
-
-    // println!("hello, json_value: {:#?}", json_value);
-
-    // // Convert the `Value` into a specific type (in this case, `Person`)
-    // // let person: keeper::types::RpcBlockResponse = serde_json::from_value(json_value)?;
-
-    // // Print the person struct
-    // println!("{:?}", person);
 
     // let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.tx(&payloadTx).await?.into_inner();
     // println!("tx: {:#?}", tx);
@@ -191,9 +176,6 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     // let broadcast_commit: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.broadcast_tx_commit(&payloadBroadcastCommit).await?.into_inner();
     // println!("broadcast_commit: {:#?}", broadcast_commit);
     
-    // let broadcast_async: keeper::types::JsonRpcResponseForCryptoHashAndRpcError = client_remote.broadcast_tx_async(&payloadBroadcastAsync).await?.into_inner();
-    // println!("broadcast_async: {:#?}", broadcast_async);
-
     // let light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.light_client_proof(&payloadLightClientExecutionProof).await?.into_inner();
     // println!("light_client_execution_proof: {:#?}", light_client_execution_proof);
 

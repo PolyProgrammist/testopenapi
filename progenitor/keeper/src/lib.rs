@@ -708,6 +708,85 @@ pub mod types {
         }
     }
 
+    ///BroadCastTxAsyncMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "broadcast_tx_async"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum BroadCastTxAsyncMethodNameHelperEnum {
+        #[serde(rename = "broadcast_tx_async")]
+        BroadcastTxAsync,
+    }
+
+    impl ::std::convert::From<&Self> for BroadCastTxAsyncMethodNameHelperEnum {
+        fn from(value: &BroadCastTxAsyncMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for BroadCastTxAsyncMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::BroadcastTxAsync => write!(f, "broadcast_tx_async"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for BroadCastTxAsyncMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "broadcast_tx_async" => Ok(Self::BroadcastTxAsync),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for BroadCastTxAsyncMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for BroadCastTxAsyncMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for BroadCastTxAsyncMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
     ///CauseRpcErrorKind
     ///
     /// <details><summary>JSON schema</summary>
@@ -1149,6 +1228,137 @@ pub mod types {
         }
     }
 
+    ///JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_BroadCastTxAsyncMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/BroadCastTxAsyncMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcSendTransactionRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: BroadCastTxAsyncMethodNameHelperEnum,
+        pub params: RpcSendTransactionRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum>
+        for JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcResponseForCryptoHashAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_CryptoHash_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForCryptoHashAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: CryptoHash,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcResponseForCryptoHashAndRpcError {
+        fn from(value: &JsonRpcResponseForCryptoHashAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
     ///JsonRpcResponseForRpcBlockResponseAndRpcError
     ///
     /// <details><summary>JSON schema</summary>
@@ -1578,7 +1788,10 @@ pub mod types {
     ///          }
     ///        },
     ///        "name": {
-    ///          "type": "string"
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "METHOD_NOT_FOUND"
+    ///          ]
     ///        }
     ///      }
     ///    },
@@ -1601,7 +1814,10 @@ pub mod types {
     ///          }
     ///        },
     ///        "name": {
-    ///          "type": "string"
+    ///          "type": "string",
+    ///          "enum": [
+    ///            "PARSE_ERROR"
+    ///          ]
     ///        }
     ///      }
     ///    }
@@ -1610,15 +1826,13 @@ pub mod types {
     /// ```
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    #[serde(untagged)]
+    #[serde(tag = "name", content = "info")]
     pub enum RpcRequestValidationErrorKind {
-        Variant0 {
-            info: RpcRequestValidationErrorKindVariant0Info,
-            name: ::std::string::String,
-        },
-        Variant1 {
-            info: RpcRequestValidationErrorKindVariant1Info,
-            name: ::std::string::String,
+        #[serde(rename = "METHOD_NOT_FOUND")]
+        MethodNotFound { method_name: ::std::string::String },
+        #[serde(rename = "PARSE_ERROR")]
+        ParseError {
+            error_message: ::std::string::String,
         },
     }
 
@@ -1628,7 +1842,7 @@ pub mod types {
         }
     }
 
-    ///RpcRequestValidationErrorKindVariant0Info
+    ///RpcSendTransactionRequest
     ///
     /// <details><summary>JSON schema</summary>
     ///
@@ -1636,56 +1850,28 @@ pub mod types {
     ///{
     ///  "type": "object",
     ///  "required": [
-    ///    "method_name"
+    ///    "signed_tx_base64"
     ///  ],
     ///  "properties": {
-    ///    "method_name": {
+    ///    "signed_tx_base64": {
     ///      "type": "string"
+    ///    },
+    ///    "wait_until": {
+    ///      "$ref": "#/components/schemas/TxExecutionStatus"
     ///    }
     ///  }
     ///}
     /// ```
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct RpcRequestValidationErrorKindVariant0Info {
-        pub method_name: ::std::string::String,
+    pub struct RpcSendTransactionRequest {
+        pub signed_tx_base64: ::std::string::String,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub wait_until: ::std::option::Option<TxExecutionStatus>,
     }
 
-    impl ::std::convert::From<&RpcRequestValidationErrorKindVariant0Info>
-        for RpcRequestValidationErrorKindVariant0Info
-    {
-        fn from(value: &RpcRequestValidationErrorKindVariant0Info) -> Self {
-            value.clone()
-        }
-    }
-
-    ///RpcRequestValidationErrorKindVariant1Info
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "error_message"
-    ///  ],
-    ///  "properties": {
-    ///    "error_message": {
-    ///      "type": "string"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct RpcRequestValidationErrorKindVariant1Info {
-        pub error_message: ::std::string::String,
-    }
-
-    impl ::std::convert::From<&RpcRequestValidationErrorKindVariant1Info>
-        for RpcRequestValidationErrorKindVariant1Info
-    {
-        fn from(value: &RpcRequestValidationErrorKindVariant1Info) -> Self {
+    impl ::std::convert::From<&RpcSendTransactionRequest> for RpcSendTransactionRequest {
+        fn from(value: &RpcSendTransactionRequest) -> Self {
             value.clone()
         }
     }
@@ -1957,6 +2143,165 @@ pub mod types {
         }
     }
 
+    ///TxExecutionStatus
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "oneOf": [
+    ///    {
+    ///      "description": "Transaction is waiting to be included into the
+    /// block",
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "NONE"
+    ///      ]
+    ///    },
+    ///    {
+    ///      "description": "Transaction is included into the block. The block
+    /// may be not finalized yet",
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "INCLUDED"
+    ///      ]
+    ///    },
+    ///    {
+    ///      "description": "Transaction is included into the block +\n All non-refund transaction receipts finished their execution.\n The corresponding blocks for tx and each receipt may be not finalized yet",
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "EXECUTED_OPTIMISTIC"
+    ///      ]
+    ///    },
+    ///    {
+    ///      "description": "Transaction is included into finalized block",
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "INCLUDED_FINAL"
+    ///      ]
+    ///    },
+    ///    {
+    ///      "description": "Transaction is included into finalized block +\n
+    /// All non-refund transaction receipts finished their execution.\n The
+    /// corresponding blocks for each receipt may be not finalized yet",
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "EXECUTED"
+    ///      ]
+    ///    },
+    ///    {
+    ///      "description": "Transaction is included into finalized block +\n
+    /// Execution of all transaction receipts is finalized, including refund
+    /// receipts",
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "FINAL"
+    ///      ]
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum TxExecutionStatus {
+        ///Transaction is waiting to be included into the block
+        #[serde(rename = "NONE")]
+        None,
+        ///Transaction is included into the block. The block may be not
+        /// finalized yet
+        #[serde(rename = "INCLUDED")]
+        Included,
+        ///Transaction is included into the block +
+        /// All non-refund transaction receipts finished their execution.
+        /// The corresponding blocks for tx and each receipt may be not
+        /// finalized yet
+        #[serde(rename = "EXECUTED_OPTIMISTIC")]
+        ExecutedOptimistic,
+        ///Transaction is included into finalized block
+        #[serde(rename = "INCLUDED_FINAL")]
+        IncludedFinal,
+        ///Transaction is included into finalized block +
+        /// All non-refund transaction receipts finished their execution.
+        /// The corresponding blocks for each receipt may be not finalized yet
+        #[serde(rename = "EXECUTED")]
+        Executed,
+        ///Transaction is included into finalized block +
+        /// Execution of all transaction receipts is finalized, including refund
+        /// receipts
+        #[serde(rename = "FINAL")]
+        Final,
+    }
+
+    impl ::std::convert::From<&Self> for TxExecutionStatus {
+        fn from(value: &TxExecutionStatus) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for TxExecutionStatus {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::None => write!(f, "NONE"),
+                Self::Included => write!(f, "INCLUDED"),
+                Self::ExecutedOptimistic => write!(f, "EXECUTED_OPTIMISTIC"),
+                Self::IncludedFinal => write!(f, "INCLUDED_FINAL"),
+                Self::Executed => write!(f, "EXECUTED"),
+                Self::Final => write!(f, "FINAL"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for TxExecutionStatus {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "NONE" => Ok(Self::None),
+                "INCLUDED" => Ok(Self::Included),
+                "EXECUTED_OPTIMISTIC" => Ok(Self::ExecutedOptimistic),
+                "INCLUDED_FINAL" => Ok(Self::IncludedFinal),
+                "EXECUTED" => Ok(Self::Executed),
+                "FINAL" => Ok(Self::Final),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for TxExecutionStatus {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for TxExecutionStatus {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for TxExecutionStatus {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
     ///ValidatorStakeView
     ///
     /// <details><summary>JSON schema</summary>
@@ -2108,6 +2453,30 @@ impl Client {
         body: &'a types::JsonRpcRequestForBlockMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcBlockResponseAndRpcError>, Error<()>>
     {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/broadcast_tx_async`
+    pub async fn broadcast_tx_async<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum,
+    ) -> Result<ResponseValue<types::JsonRpcResponseForCryptoHashAndRpcError>, Error<()>> {
         let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self

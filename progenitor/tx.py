@@ -2,14 +2,21 @@ import json
 import re
 
 def iterate_nested_json_for_loop(json_obj):
-    if 'allOf' in json_obj and '$ref' in json_obj['allOf'][0] and json_obj['allOf'][0]['$ref'] == "#/components/schemas/Rational32SchemaProvider" and 'default' in json_obj and not isinstance(json_obj['default'], dict):
-        json_obj['default'] = {
-            'denom': json_obj['default'][0],
-            'numer': json_obj['default'][1]
-        }
-    for key, value in json_obj.items():
-        if isinstance(value, dict):
+    if isinstance(json_obj, dict):
+        if 'allOf' in json_obj and '$ref' in json_obj['allOf'][0] and json_obj['allOf'][0]['$ref'] == "#/components/schemas/Rational32SchemaProvider" and 'default' in json_obj and not isinstance(json_obj['default'], dict):
+            json_obj['default'] = {
+                'denom': json_obj['default'][0],
+                'numer': json_obj['default'][1]
+            }
+        if 'const' in json_obj:
+            t = json_obj['const']
+            del json_obj['const']
+            json_obj['enum'] = [t]
+        for key, value in json_obj.items():
             iterate_nested_json_for_loop(value)
+    if isinstance(json_obj, list):
+        for item in json_obj:
+            iterate_nested_json_for_loop(item)
 
 filename = '../testokplain/transaction.json'
 f = open(filename)

@@ -31,6 +31,33 @@
                     }
                 }
             }
+        },
+        "/broadcast_tx_async": {
+            "post": {
+                "operationId": "broadcast_tx_async",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_BroadCastTxAsyncMethodNameHelperEnum"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonRpcResponse_for_CryptoHash_and_RpcError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -310,6 +337,12 @@
                 ],
                 "type": "string"
             },
+            "BroadCastTxAsyncMethodNameHelperEnum": {
+                "enum": [
+                    "broadcast_tx_async"
+                ],
+                "type": "string"
+            },
             "CauseRpcErrorKind": {
                 "anyOf": [
                     {
@@ -484,6 +517,81 @@
                 "title": "JsonRpcRequest_for_BlockMethodNameHelperEnum",
                 "type": "object"
             },
+            "JsonRpcRequest_for_BroadCastTxAsyncMethodNameHelperEnum": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "$ref": "#/components/schemas/BroadCastTxAsyncMethodNameHelperEnum"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcSendTransactionRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_BroadCastTxAsyncMethodNameHelperEnum",
+                "type": "object"
+            },
+            "JsonRpcResponse_for_CryptoHash_and_RpcError": {
+                "anyOf": [
+                    {
+                        "properties": {
+                            "result": {
+                                "$ref": "#/components/schemas/CryptoHash"
+                            }
+                        },
+                        "required": [
+                            "result"
+                        ],
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "tmp": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        },
+                        "required": [
+                            "tmp"
+                        ],
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "error": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        },
+                        "required": [
+                            "error"
+                        ],
+                        "type": "object"
+                    }
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id"
+                ],
+                "title": "JsonRpcResponse_for_CryptoHash_and_RpcError",
+                "type": "object"
+            },
             "JsonRpcResponse_for_RpcBlockResponse_and_RpcError": {
                 "anyOf": [
                     {
@@ -649,8 +757,10 @@
                                 "type": "object"
                             },
                             "name": {
-                                "const": "METHOD_NOT_FOUND",
-                                "type": "string"
+                                "type": "string",
+                                "enum": [
+                                    "METHOD_NOT_FOUND"
+                                ]
                             }
                         },
                         "required": [
@@ -673,8 +783,10 @@
                                 "type": "object"
                             },
                             "name": {
-                                "const": "PARSE_ERROR",
-                                "type": "string"
+                                "type": "string",
+                                "enum": [
+                                    "PARSE_ERROR"
+                                ]
                             }
                         },
                         "required": [
@@ -684,6 +796,21 @@
                         "type": "object"
                     }
                 ]
+            },
+            "RpcSendTransactionRequest": {
+                "properties": {
+                    "signed_tx_base64": {
+                        "type": "string"
+                    },
+                    "wait_until": {
+                        "$ref": "#/components/schemas/TxExecutionStatus",
+                        "default": "EXECUTED_OPTIMISTIC"
+                    }
+                },
+                "required": [
+                    "signed_tx_base64"
+                ],
+                "type": "object"
             },
             "ShardId": {
                 "description": "The shard identifier. It may be an arbitrary number - it does not need to be\n a number in the range 0..NUM_SHARDS. The shard ids do not need to be\n sequential or contiguous.\n\n The shard id is wrapped in a new type to prevent the old pattern of using\n indices in range 0..NUM_SHARDS and casting to ShardId. Once the transition\n if fully complete it potentially may be simplified to a regular type alias.",
@@ -716,14 +843,62 @@
                 ],
                 "type": "string"
             },
+            "TxExecutionStatus": {
+                "oneOf": [
+                    {
+                        "description": "Transaction is waiting to be included into the block",
+                        "type": "string",
+                        "enum": [
+                            "NONE"
+                        ]
+                    },
+                    {
+                        "description": "Transaction is included into the block. The block may be not finalized yet",
+                        "type": "string",
+                        "enum": [
+                            "INCLUDED"
+                        ]
+                    },
+                    {
+                        "description": "Transaction is included into the block +\n All non-refund transaction receipts finished their execution.\n The corresponding blocks for tx and each receipt may be not finalized yet",
+                        "type": "string",
+                        "enum": [
+                            "EXECUTED_OPTIMISTIC"
+                        ]
+                    },
+                    {
+                        "description": "Transaction is included into finalized block",
+                        "type": "string",
+                        "enum": [
+                            "INCLUDED_FINAL"
+                        ]
+                    },
+                    {
+                        "description": "Transaction is included into finalized block +\n All non-refund transaction receipts finished their execution.\n The corresponding blocks for each receipt may be not finalized yet",
+                        "type": "string",
+                        "enum": [
+                            "EXECUTED"
+                        ]
+                    },
+                    {
+                        "description": "Transaction is included into finalized block +\n Execution of all transaction receipts is finalized, including refund receipts",
+                        "type": "string",
+                        "enum": [
+                            "FINAL"
+                        ]
+                    }
+                ]
+            },
             "ValidatorStakeView": {
                 "oneOf": [
                     {
                         "$ref": "#/components/schemas/ValidatorStakeViewV1",
                         "properties": {
                             "validator_stake_struct_version": {
-                                "const": "V1",
-                                "type": "string"
+                                "type": "string",
+                                "enum": [
+                                    "V1"
+                                ]
                             }
                         },
                         "required": [

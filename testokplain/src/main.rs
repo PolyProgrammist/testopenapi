@@ -3,6 +3,7 @@ use serde::{self, Deserialize, Serialize};
 use near_jsonrpc_primitives::{errors::RpcRequestValidationErrorKind, types::changes::RpcStateChangesInBlockRequest};
 use okapi::openapi3::{OpenApi, SchemaObject};
 use serde_json::json;
+use near_primitives::views::TxExecutionStatus;
 
 #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
 #[serde(untagged)]
@@ -89,11 +90,10 @@ type PathsMap = okapi::Map::<String, okapi::openapi3::PathItem>;
 
 fn schemas_map<T: JsonSchema>() -> SchemasMap {
     let settings = schemars::gen::SchemaSettings::openapi3();
-    let generator = schemars::gen::SchemaGenerator::new(settings);
+    let mut generator = schemars::gen::SchemaGenerator::new(settings);
 
-    let root_schema = generator.into_root_schema_for::<T>();
+    let root_schema = generator.clone().into_root_schema_for::<T>();
 
-    // println!("Root schema: {:?}", root_schema.as_value().to_string());
     let the_schema = root_schema.as_value();
 
     let mut result: SchemasMap = the_schema.get("components").unwrap().get("schemas").unwrap().clone(); //root_schema.definitions.into_iter().map(|(k, v)| (k, v.into())).collect();
@@ -294,7 +294,7 @@ struct RpcClientConfigRequest;
 struct GenesisConfigRequest;
 
 generate_method_name_helper!(BlockMethodNameHelperEnum, RpcBlockRequest, "block");
-// generate_method_name_helper!(BroadCastTxAsyncMethodNameHelperEnum, RpcSendTransactionRequest, "broadcast_tx_async");
+generate_method_name_helper!(BroadCastTxAsyncMethodNameHelperEnum, RpcSendTransactionRequest, "broadcast_tx_async");
 // generate_method_name_helper!(BroadCastTxCommitMethodNameHelperEnum, RpcSendTransactionRequest, "broadcast_tx_commit");
 // generate_method_name_helper!(ChunkMethodNameHelperEnum, RpcChunkRequest, "chunk");
 // generate_method_name_helper!(GasPriceMethodNameHelperEnum, RpcGasPriceRequest, "gas_price");
@@ -327,7 +327,7 @@ fn main() {
     let mut all_paths = PathsMap::new();
 
     add_spec_for_path::<BlockMethodNameHelperEnum, RpcBlockResponse>(&mut all_schemas, &mut all_paths, "block".to_string());
-    // add_spec_for_path::<BroadCastTxAsyncMethodNameHelperEnum, CryptoHash>(&mut all_schemas, &mut all_paths, "broadcast_tx_async".to_string());
+    add_spec_for_path::<BroadCastTxAsyncMethodNameHelperEnum, CryptoHash>(&mut all_schemas, &mut all_paths, "broadcast_tx_async".to_string());
     // add_spec_for_path::<BroadCastTxCommitMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "broadcast_tx_commit".to_string());
     // add_spec_for_path::<ChunkMethodNameHelperEnum, RpcChunkResponse>(&mut all_schemas, &mut all_paths, "chunk".to_string());
     // add_spec_for_path::<GasPriceMethodNameHelperEnum, RpcGasPriceResponse>(&mut all_schemas, &mut all_paths, "gas_price".to_string());
