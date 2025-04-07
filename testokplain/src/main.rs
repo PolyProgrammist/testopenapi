@@ -300,26 +300,26 @@ generate_method_name_helper!(ChunkMethodNameHelperEnum, RpcChunkRequest, "chunk"
 generate_method_name_helper!(GasPriceMethodNameHelperEnum, RpcGasPriceRequest, "gas_price");
 generate_method_name_helper!(HealthMethodNameHelperEnum, RpcHealthRequest, "health");
 generate_method_name_helper!(LightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofRequest, "light_client_proof");
-// generate_method_name_helper!(NextLightClientBlockMethodNameHelperEnum, RpcLightClientNextBlockRequest, "next_light_client_block");
-// generate_method_name_helper!(NetworkInfoMethodNameHelperEnum, RpcNetworkInfoRequest, "network_info");
-// generate_method_name_helper!(SendTxMethodNameHelperEnum, RpcSendTransactionRequest, "send_tx");
-// generate_method_name_helper!(StatusMethodNameHelperEnum, RpcStatusRequest, "status");
-// generate_method_name_helper!(TxMethodNameHelperEnum, RpcTransactionStatusRequest, "tx");
-// generate_method_name_helper!(ValidatorsMethodNameHelperEnum, RpcValidatorRequest, "validators");
-// generate_method_name_helper!(ClientConfigMethodNameHelperEnum, RpcClientConfigRequest, "client_config");
+generate_method_name_helper!(NextLightClientBlockMethodNameHelperEnum, RpcLightClientNextBlockRequest, "next_light_client_block");
+generate_method_name_helper!(NetworkInfoMethodNameHelperEnum, RpcNetworkInfoRequest, "network_info");
+generate_method_name_helper!(SendTxMethodNameHelperEnum, RpcSendTransactionRequest, "send_tx");
+generate_method_name_helper!(StatusMethodNameHelperEnum, RpcStatusRequest, "status");
+generate_method_name_helper!(TxMethodNameHelperEnum, RpcTransactionStatusRequest, "tx");
+generate_method_name_helper!(ValidatorsMethodNameHelperEnum, RpcValidatorRequest, "validators");
+generate_method_name_helper!(ClientConfigMethodNameHelperEnum, RpcClientConfigRequest, "client_config");
 
-// generate_method_name_helper!(ExpChangeMethodNameHelperEnum, RpcStateChangesInBlockRequest, "EXPERIMENTAL_changes");
-// generate_method_name_helper!(ExpChangesBlockMethodNameHelperEnum, RpcStateChangesInBlockByTypeRequest, "EXPERIMENTAL_changes_in_block");
-// generate_method_name_helper!(ExpGongestionMethodNameHelperEnum, RpcCongestionLevelRequest, "EXPERIMENTAL_congestion_level");
-// generate_method_name_helper!(ExpGenesisMethodNameHelperEnum, GenesisConfigRequest, "EXPERIMENTAL_genesis_config");
-// generate_method_name_helper!(ExpLightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofRequest, "EXPERIMENTAL_light_client_proof");
-// generate_method_name_helper!(ExpLightClientBlockProofMethodNameHelperEnum, RpcLightClientBlockProofRequest, "EXPERIMENTAL_light_client_block_proof");
-// generate_method_name_helper!(ExpProtocolConfigMethodNameHelperEnum, RpcProtocolConfigRequest, "EXPERIMENTAL_protocol_config");
-// generate_method_name_helper!(ExpReceiptMethodNameHelperEnum, RpcReceiptRequest, "EXPERIMENTAL_receipt");
-// generate_method_name_helper!(ExpTxStatusMethodNameHelperEnum, RpcTransactionStatusRequest, "EXPERIMENTAL_tx_status");
-// generate_method_name_helper!(ExpValidatorsMethodNameHelperEnum, RpcClientConfigRequest, "EXPERIMENTAL_validators_ordered");
-// generate_method_name_helper!(ExpMaintenanceWindoesMethodNameHelperEnum, RpcMaintenanceWindowsRequest, "EXPERIMENTAL_maintenance_windows");
-// generate_method_name_helper!(ExpSplitStorageInfoMethodNameHelperEnum, RpcSplitStorageInfoRequest, "EXPERIMENTAL_split_storage_info");
+generate_method_name_helper!(ExpChangeMethodNameHelperEnum, RpcStateChangesInBlockRequest, "EXPERIMENTAL_changes");
+generate_method_name_helper!(ExpChangesBlockMethodNameHelperEnum, RpcStateChangesInBlockByTypeRequest, "EXPERIMENTAL_changes_in_block");
+generate_method_name_helper!(ExpGongestionMethodNameHelperEnum, RpcCongestionLevelRequest, "EXPERIMENTAL_congestion_level");
+generate_method_name_helper!(ExpGenesisMethodNameHelperEnum, GenesisConfigRequest, "EXPERIMENTAL_genesis_config");
+generate_method_name_helper!(ExpLightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofRequest, "EXPERIMENTAL_light_client_proof");
+generate_method_name_helper!(ExpLightClientBlockProofMethodNameHelperEnum, RpcLightClientBlockProofRequest, "EXPERIMENTAL_light_client_block_proof");
+generate_method_name_helper!(ExpProtocolConfigMethodNameHelperEnum, RpcProtocolConfigRequest, "EXPERIMENTAL_protocol_config");
+generate_method_name_helper!(ExpReceiptMethodNameHelperEnum, RpcReceiptRequest, "EXPERIMENTAL_receipt");
+generate_method_name_helper!(ExpTxStatusMethodNameHelperEnum, RpcTransactionStatusRequest, "EXPERIMENTAL_tx_status");
+generate_method_name_helper!(ExpValidatorsMethodNameHelperEnum, RpcClientConfigRequest, "EXPERIMENTAL_validators_ordered");
+generate_method_name_helper!(ExpMaintenanceWindoesMethodNameHelperEnum, RpcMaintenanceWindowsRequest, "EXPERIMENTAL_maintenance_windows");
+generate_method_name_helper!(ExpSplitStorageInfoMethodNameHelperEnum, RpcSplitStorageInfoRequest, "EXPERIMENTAL_split_storage_info");
 
 
 fn main() {
@@ -333,26 +333,26 @@ fn main() {
     add_spec_for_path::<GasPriceMethodNameHelperEnum, RpcGasPriceResponse>(&mut all_schemas, &mut all_paths, "gas_price".to_string());
     add_spec_for_path::<HealthMethodNameHelperEnum, Option<RpcHealthResponse>>(&mut all_schemas, &mut all_paths, "health".to_string());
     add_spec_for_path::<LightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "light_client_proof".to_string());
-    // add_spec_for_path::<NextLightClientBlockMethodNameHelperEnum, RpcLightClientNextBlockResponse>(&mut all_schemas, &mut all_paths, "next_light_client_block".to_string());
-    // add_spec_for_path::<NetworkInfoMethodNameHelperEnum, RpcNetworkInfoResponse>(&mut all_schemas, &mut all_paths, "network_info".to_string());
-    // add_spec_for_path::<SendTxMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "send_tx".to_string());
-    // add_spec_for_path::<StatusMethodNameHelperEnum, RpcStatusResponse>(&mut all_schemas, &mut all_paths, "status".to_string());
-    // add_spec_for_path::<TxMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "tx".to_string());
-    // add_spec_for_path::<ValidatorsMethodNameHelperEnum, RpcValidatorResponse>(&mut all_schemas, &mut all_paths, "validators".to_string());
-    // add_spec_for_path::<ClientConfigMethodNameHelperEnum, RpcClientConfigResponse>(&mut all_schemas, &mut all_paths, "client_config".to_string());
+    add_spec_for_path::<NextLightClientBlockMethodNameHelperEnum, RpcLightClientNextBlockResponse>(&mut all_schemas, &mut all_paths, "next_light_client_block".to_string());
+    add_spec_for_path::<NetworkInfoMethodNameHelperEnum, RpcNetworkInfoResponse>(&mut all_schemas, &mut all_paths, "network_info".to_string());
+    add_spec_for_path::<SendTxMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "send_tx".to_string());
+    add_spec_for_path::<StatusMethodNameHelperEnum, RpcStatusResponse>(&mut all_schemas, &mut all_paths, "status".to_string());
+    add_spec_for_path::<TxMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "tx".to_string());
+    add_spec_for_path::<ValidatorsMethodNameHelperEnum, RpcValidatorResponse>(&mut all_schemas, &mut all_paths, "validators".to_string());
+    add_spec_for_path::<ClientConfigMethodNameHelperEnum, RpcClientConfigResponse>(&mut all_schemas, &mut all_paths, "client_config".to_string());
 
-    // add_spec_for_path::<ExpChangeMethodNameHelperEnum, RpcStateChangesInBlockResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes".to_string());
-    // add_spec_for_path::<ExpChangesBlockMethodNameHelperEnum, RpcStateChangesInBlockByTypeResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes_in_block".to_string());
-    // add_spec_for_path::<ExpGongestionMethodNameHelperEnum, RpcCongestionLevelResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_congestion_level".to_string());
-    // add_spec_for_path::<ExpGenesisMethodNameHelperEnum, GenesisConfig>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_genesis_config".to_string());
-    // add_spec_for_path::<ExpLightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_proof".to_string());
-    // add_spec_for_path::<ExpLightClientBlockProofMethodNameHelperEnum, RpcLightClientBlockProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_block_proof".to_string());
-    // add_spec_for_path::<ExpProtocolConfigMethodNameHelperEnum, RpcProtocolConfigResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_protocol_config".to_string());
-    // add_spec_for_path::<ExpReceiptMethodNameHelperEnum, RpcReceiptResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_receipt".to_string());
-    // add_spec_for_path::<ExpTxStatusMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_tx_status".to_string());
-    // add_spec_for_path::<ExpValidatorsMethodNameHelperEnum, RpcValidatorsOrderedResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_validators_ordered".to_string());
-    // add_spec_for_path::<ExpMaintenanceWindoesMethodNameHelperEnum, RpcMaintenanceWindowsResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_maintenance_windows".to_string());
-    // add_spec_for_path::<ExpSplitStorageInfoMethodNameHelperEnum, RpcSplitStorageInfoResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_split_storage_info".to_string());
+    add_spec_for_path::<ExpChangeMethodNameHelperEnum, RpcStateChangesInBlockResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes".to_string());
+    add_spec_for_path::<ExpChangesBlockMethodNameHelperEnum, RpcStateChangesInBlockByTypeResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes_in_block".to_string());
+    add_spec_for_path::<ExpGongestionMethodNameHelperEnum, RpcCongestionLevelResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_congestion_level".to_string());
+    add_spec_for_path::<ExpGenesisMethodNameHelperEnum, GenesisConfig>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_genesis_config".to_string());
+    add_spec_for_path::<ExpLightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_proof".to_string());
+    add_spec_for_path::<ExpLightClientBlockProofMethodNameHelperEnum, RpcLightClientBlockProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_block_proof".to_string());
+    add_spec_for_path::<ExpProtocolConfigMethodNameHelperEnum, RpcProtocolConfigResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_protocol_config".to_string());
+    add_spec_for_path::<ExpReceiptMethodNameHelperEnum, RpcReceiptResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_receipt".to_string());
+    add_spec_for_path::<ExpTxStatusMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_tx_status".to_string());
+    add_spec_for_path::<ExpValidatorsMethodNameHelperEnum, RpcValidatorsOrderedResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_validators_ordered".to_string());
+    add_spec_for_path::<ExpMaintenanceWindoesMethodNameHelperEnum, RpcMaintenanceWindowsResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_maintenance_windows".to_string());
+    add_spec_for_path::<ExpSplitStorageInfoMethodNameHelperEnum, RpcSplitStorageInfoResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_split_storage_info".to_string());
 
     let path_schema = whole_spec(all_schemas, all_paths);
     
