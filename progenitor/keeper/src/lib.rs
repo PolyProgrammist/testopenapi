@@ -16899,7 +16899,18 @@ pub mod types {
     ///    "approvals_after_next": {
     ///      "type": "array",
     ///      "items": {
-    ///        "$ref": "#/components/schemas/Signature"
+    ///        "oneOf": [
+    ///          {
+    ///            "type": "null"
+    ///          },
+    ///          {
+    ///            "allOf": [
+    ///              {
+    ///                "$ref": "#/components/schemas/Signature"
+    ///              }
+    ///            ]
+    ///          }
+    ///        ]
     ///      }
     ///    },
     ///    "inner_lite": {
@@ -16930,7 +16941,7 @@ pub mod types {
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct RpcLightClientNextBlockResponse {
         #[serde(default, skip_serializing_if = "::std::vec::Vec::is_empty")]
-        pub approvals_after_next: ::std::vec::Vec<Signature>,
+        pub approvals_after_next: ::std::vec::Vec<::std::option::Option<Signature>>,
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub inner_lite: ::std::option::Option<BlockHeaderInnerLiteView>,
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]

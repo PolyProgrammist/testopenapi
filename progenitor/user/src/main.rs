@@ -175,8 +175,12 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.light_client_proof(&payloadLightClientExecutionProof).await?.into_inner();
     println!("light_client_execution_proof: {:#?}", light_client_execution_proof);
 
-    // let next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError = client_remote.next_light_client_block(&payloadNextLightClientBlock).await?.into_inner();
-    // println!("next_light_client_block: {:#?}", next_light_client_block);
+    let next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError = client_remote.next_light_client_block(&payloadNextLightClientBlock).await?.into_inner();
+    println!("next_light_client_block: {:#?}", next_light_client_block);
+
+    // let file = File::open("tmp.json")?;
+    // let reader = BufReader::new(file);
+    // let person: keeper::types::RpcLightClientNextBlockResponse = serde_json::from_reader(reader)?;
 
     // let network_info: keeper::types::JsonRpcResponseForRpcNetworkInfoResponseAndRpcError = client_remote.network_info(&payloadNetworkInfo).await?.into_inner();
     // println!("network_info: {:#?}", network_info);

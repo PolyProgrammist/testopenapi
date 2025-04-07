@@ -9562,7 +9562,11 @@
                 "properties": {
                     "approvals_after_next": {
                         "items": {
-                            "$ref": "#/components/schemas/Signature",
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/Signature"
+                                }
+                            ],
                             "nullable": true
                         },
                         "type": "array"

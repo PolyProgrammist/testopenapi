@@ -47,6 +47,15 @@ spec['components']['schemas']['BlockHeaderView']['properties']['approvals']['ite
     "nullable": True
 }
 
+spec['components']['schemas']['RpcLightClientNextBlockResponse']['properties']['approvals_after_next']['items'] = {
+    "allOf": [
+        {
+            "$ref": "#/components/schemas/Signature"
+        }
+    ],
+    "nullable": True
+}
+
 spec['components']['schemas']['CauseRpcErrorKind'] = {
     "anyOf": [
         {
