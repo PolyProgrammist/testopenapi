@@ -31,6 +31,25 @@ f.close()
 
 iterate_nested_json_for_loop(spec)
 
+spec['components']['schemas']['BlockHeaderView']['properties']['approvals']['items'] = {
+    "allOf": [
+        {
+            "$ref": "#/components/schemas/Signature"
+        }
+    ],
+    "nullable": True
+}
+
+spec['components']['schemas']['CauseRpcErrorKind'] = {
+    "anyOf": [
+        {
+            "$ref": "#/components/schemas/RpcRequestValidationErrorKind"
+        },
+        {},
+        {}
+    ]
+}
+
 if 'JsonRpcResponse_for_Array_of_Tuple_of_uint64_and_uint64_and_RpcError' in spec['components']['schemas']:
     spec['components']['schemas']['JsonRpcResponse_for_Array_of_Tuple_of_uint64_and_uint64_and_RpcError']['anyOf'][0]['properties']['result']['items']['items'] = {
         "type": "object",
