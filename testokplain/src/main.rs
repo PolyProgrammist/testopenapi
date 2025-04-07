@@ -299,7 +299,7 @@ generate_method_name_helper!(BroadCastTxCommitMethodNameHelperEnum, RpcSendTrans
 generate_method_name_helper!(ChunkMethodNameHelperEnum, RpcChunkRequest, "chunk");
 generate_method_name_helper!(GasPriceMethodNameHelperEnum, RpcGasPriceRequest, "gas_price");
 generate_method_name_helper!(HealthMethodNameHelperEnum, RpcHealthRequest, "health");
-// generate_method_name_helper!(LightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofRequest, "light_client_proof");
+generate_method_name_helper!(LightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofRequest, "light_client_proof");
 // generate_method_name_helper!(NextLightClientBlockMethodNameHelperEnum, RpcLightClientNextBlockRequest, "next_light_client_block");
 // generate_method_name_helper!(NetworkInfoMethodNameHelperEnum, RpcNetworkInfoRequest, "network_info");
 // generate_method_name_helper!(SendTxMethodNameHelperEnum, RpcSendTransactionRequest, "send_tx");
@@ -332,12 +332,12 @@ fn main() {
     add_spec_for_path::<ChunkMethodNameHelperEnum, RpcChunkResponse>(&mut all_schemas, &mut all_paths, "chunk".to_string());
     add_spec_for_path::<GasPriceMethodNameHelperEnum, RpcGasPriceResponse>(&mut all_schemas, &mut all_paths, "gas_price".to_string());
     add_spec_for_path::<HealthMethodNameHelperEnum, Option<RpcHealthResponse>>(&mut all_schemas, &mut all_paths, "health".to_string());
-    // add_spec_for_path::<TxMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "tx".to_string());
-    // add_spec_for_path::<LightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "light_client_proof".to_string());
+    add_spec_for_path::<LightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "light_client_proof".to_string());
     // add_spec_for_path::<NextLightClientBlockMethodNameHelperEnum, RpcLightClientNextBlockResponse>(&mut all_schemas, &mut all_paths, "next_light_client_block".to_string());
     // add_spec_for_path::<NetworkInfoMethodNameHelperEnum, RpcNetworkInfoResponse>(&mut all_schemas, &mut all_paths, "network_info".to_string());
     // add_spec_for_path::<SendTxMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "send_tx".to_string());
     // add_spec_for_path::<StatusMethodNameHelperEnum, RpcStatusResponse>(&mut all_schemas, &mut all_paths, "status".to_string());
+    // add_spec_for_path::<TxMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "tx".to_string());
     // add_spec_for_path::<ValidatorsMethodNameHelperEnum, RpcValidatorResponse>(&mut all_schemas, &mut all_paths, "validators".to_string());
     // add_spec_for_path::<ClientConfigMethodNameHelperEnum, RpcClientConfigResponse>(&mut all_schemas, &mut all_paths, "client_config".to_string());
 

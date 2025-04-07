@@ -2179,6 +2179,81 @@ pub mod types {
         }
     }
 
+    ///BlockHeaderInnerLiteView
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "block_merkle_root",
+    ///    "epoch_id",
+    ///    "height",
+    ///    "next_bp_hash",
+    ///    "next_epoch_id",
+    ///    "outcome_root",
+    ///    "prev_state_root",
+    ///    "timestamp",
+    ///    "timestamp_nanosec"
+    ///  ],
+    ///  "properties": {
+    ///    "block_merkle_root": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "epoch_id": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "height": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "next_bp_hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "next_epoch_id": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "outcome_root": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "prev_state_root": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "timestamp": {
+    ///      "description": "Legacy json number. Should not be used.",
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "timestamp_nanosec": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct BlockHeaderInnerLiteView {
+        pub block_merkle_root: CryptoHash,
+        pub epoch_id: CryptoHash,
+        pub height: u64,
+        pub next_bp_hash: CryptoHash,
+        pub next_epoch_id: CryptoHash,
+        pub outcome_root: CryptoHash,
+        pub prev_state_root: CryptoHash,
+        ///Legacy json number. Should not be used.
+        pub timestamp: u64,
+        pub timestamp_nanosec: ::std::string::String,
+    }
+
+    impl ::std::convert::From<&BlockHeaderInnerLiteView> for BlockHeaderInnerLiteView {
+        fn from(value: &BlockHeaderInnerLiteView) -> Self {
+            value.clone()
+        }
+    }
+
     ///BlockHeaderView
     ///
     /// <details><summary>JSON schema</summary>
@@ -6441,6 +6516,53 @@ pub mod types {
         }
     }
 
+    ///JsonRpcRequestForLightClientProofMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_LightClientProofMethodNameHelperEnum",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "$ref": "#/components/schemas/LightClientProofMethodNameHelperEnum"
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcLightClientExecutionProofRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForLightClientProofMethodNameHelperEnum {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: LightClientProofMethodNameHelperEnum,
+        pub params: RpcLightClientExecutionProofRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForLightClientProofMethodNameHelperEnum>
+        for JsonRpcRequestForLightClientProofMethodNameHelperEnum
+    {
+        fn from(value: &JsonRpcRequestForLightClientProofMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
     ///JsonRpcResponseForCryptoHashAndRpcError
     ///
     /// <details><summary>JSON schema</summary>
@@ -6870,6 +6992,93 @@ pub mod types {
         }
     }
 
+    ///JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcResponse_for_RpcLightClientExecutionProofResponse_and_RpcError",
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
+    ///      "properties": {
+    ///        "result": {
+    ///          "$ref":
+    /// "#/components/schemas/RpcLightClientExecutionProofResponse"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "tmp"
+    ///      ],
+    ///      "properties": {
+    ///        "tmp": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "error"
+    ///      ],
+    ///      "properties": {
+    ///        "error": {
+    ///          "$ref": "#/components/schemas/RpcError"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError {
+        Variant0 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            result: RpcLightClientExecutionProofResponse,
+        },
+        Variant1 {
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+            tmp: RpcError,
+        },
+        Variant2 {
+            error: RpcError,
+            id: ::std::string::String,
+            jsonrpc: ::std::string::String,
+        },
+    }
+
+    impl ::std::convert::From<&Self>
+        for JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError
+    {
+        fn from(value: &JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError) -> Self {
+            value.clone()
+        }
+    }
+
     ///JsonRpcResponseForRpcTransactionResponseAndRpcError
     ///
     /// <details><summary>JSON schema</summary>
@@ -6951,6 +7160,124 @@ pub mod types {
     impl ::std::convert::From<&Self> for JsonRpcResponseForRpcTransactionResponseAndRpcError {
         fn from(value: &JsonRpcResponseForRpcTransactionResponseAndRpcError) -> Self {
             value.clone()
+        }
+    }
+
+    ///LightClientBlockLiteView
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "inner_lite",
+    ///    "inner_rest_hash",
+    ///    "prev_block_hash"
+    ///  ],
+    ///  "properties": {
+    ///    "inner_lite": {
+    ///      "$ref": "#/components/schemas/BlockHeaderInnerLiteView"
+    ///    },
+    ///    "inner_rest_hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "prev_block_hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct LightClientBlockLiteView {
+        pub inner_lite: BlockHeaderInnerLiteView,
+        pub inner_rest_hash: CryptoHash,
+        pub prev_block_hash: CryptoHash,
+    }
+
+    impl ::std::convert::From<&LightClientBlockLiteView> for LightClientBlockLiteView {
+        fn from(value: &LightClientBlockLiteView) -> Self {
+            value.clone()
+        }
+    }
+
+    ///LightClientProofMethodNameHelperEnum
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "light_client_proof"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum LightClientProofMethodNameHelperEnum {
+        #[serde(rename = "light_client_proof")]
+        LightClientProof,
+    }
+
+    impl ::std::convert::From<&Self> for LightClientProofMethodNameHelperEnum {
+        fn from(value: &LightClientProofMethodNameHelperEnum) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for LightClientProofMethodNameHelperEnum {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::LightClientProof => write!(f, "light_client_proof"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for LightClientProofMethodNameHelperEnum {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "light_client_proof" => Ok(Self::LightClientProof),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for LightClientProofMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for LightClientProofMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for LightClientProofMethodNameHelperEnum {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
         }
     }
 
@@ -8460,6 +8787,137 @@ pub mod types {
         }
     }
 
+    ///RpcLightClientExecutionProofRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "anyOf": [
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "sender_id",
+    ///        "transaction_hash"
+    ///      ],
+    ///      "properties": {
+    ///        "sender_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        },
+    ///        "transaction_hash": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "receipt_id",
+    ///        "receiver_id"
+    ///      ],
+    ///      "properties": {
+    ///        "receipt_id": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        },
+    ///        "receiver_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        }
+    ///      }
+    ///    }
+    ///  ],
+    ///  "required": [
+    ///    "light_client_head",
+    ///    "type"
+    ///  ],
+    ///  "properties": {
+    ///    "light_client_head": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "type": {
+    ///      "$ref": "#/components/schemas/TypeTransactionOrReceiptId"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(untagged)]
+    pub enum RpcLightClientExecutionProofRequest {
+        Variant0 {
+            light_client_head: CryptoHash,
+            sender_id: AccountId,
+            transaction_hash: CryptoHash,
+            #[serde(rename = "type")]
+            type_: TypeTransactionOrReceiptId,
+        },
+        Variant1 {
+            light_client_head: CryptoHash,
+            receipt_id: CryptoHash,
+            receiver_id: AccountId,
+            #[serde(rename = "type")]
+            type_: TypeTransactionOrReceiptId,
+        },
+    }
+
+    impl ::std::convert::From<&Self> for RpcLightClientExecutionProofRequest {
+        fn from(value: &RpcLightClientExecutionProofRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    ///RpcLightClientExecutionProofResponse
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "block_header_lite",
+    ///    "block_proof",
+    ///    "outcome_proof",
+    ///    "outcome_root_proof"
+    ///  ],
+    ///  "properties": {
+    ///    "block_header_lite": {
+    ///      "$ref": "#/components/schemas/LightClientBlockLiteView"
+    ///    },
+    ///    "block_proof": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/MerklePathItem"
+    ///      }
+    ///    },
+    ///    "outcome_proof": {
+    ///      "$ref": "#/components/schemas/ExecutionOutcomeWithIdView"
+    ///    },
+    ///    "outcome_root_proof": {
+    ///      "type": "array",
+    ///      "items": {
+    ///        "$ref": "#/components/schemas/MerklePathItem"
+    ///      }
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcLightClientExecutionProofResponse {
+        pub block_header_lite: LightClientBlockLiteView,
+        pub block_proof: ::std::vec::Vec<MerklePathItem>,
+        pub outcome_proof: ExecutionOutcomeWithIdView,
+        pub outcome_root_proof: ::std::vec::Vec<MerklePathItem>,
+    }
+
+    impl ::std::convert::From<&RpcLightClientExecutionProofResponse>
+        for RpcLightClientExecutionProofResponse
+    {
+        fn from(value: &RpcLightClientExecutionProofResponse) -> Self {
+            value.clone()
+        }
+    }
+
     ///RpcRequestValidationErrorKind
     ///
     /// <details><summary>JSON schema</summary>
@@ -9431,6 +9889,90 @@ pub mod types {
         }
     }
 
+    ///TypeTransactionOrReceiptId
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "transaction",
+    ///    "receipt"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum TypeTransactionOrReceiptId {
+        #[serde(rename = "transaction")]
+        Transaction,
+        #[serde(rename = "receipt")]
+        Receipt,
+    }
+
+    impl ::std::convert::From<&Self> for TypeTransactionOrReceiptId {
+        fn from(value: &TypeTransactionOrReceiptId) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for TypeTransactionOrReceiptId {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::Transaction => write!(f, "transaction"),
+                Self::Receipt => write!(f, "receipt"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for TypeTransactionOrReceiptId {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "transaction" => Ok(Self::Transaction),
+                "receipt" => Ok(Self::Receipt),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for TypeTransactionOrReceiptId {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for TypeTransactionOrReceiptId {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for TypeTransactionOrReceiptId {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
     ///Use global contract action
     ///
     /// <details><summary>JSON schema</summary>
@@ -9911,6 +10453,33 @@ impl Client {
         body: &'a types::JsonRpcRequestForHealthMethodNameHelperEnum,
     ) -> Result<
         ResponseValue<types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError>,
+        Error<()>,
+    > {
+        let url = format!("{}/", self.baseurl,);
+        #[allow(unused_mut)]
+        let mut request = self
+            .client
+            .post(url)
+            .header(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            )
+            .json(&body)
+            .build()?;
+        let result = self.client.execute(request).await;
+        let response = result?;
+        match response.status().as_u16() {
+            200u16 => ResponseValue::from_response(response).await,
+            _ => Err(Error::UnexpectedResponse(response)),
+        }
+    }
+
+    ///Sends a `POST` request to `/light_client_proof`
+    pub async fn light_client_proof<'a>(
+        &'a self,
+        body: &'a types::JsonRpcRequestForLightClientProofMethodNameHelperEnum,
+    ) -> Result<
+        ResponseValue<types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError>,
         Error<()>,
     > {
         let url = format!("{}/", self.baseurl,);

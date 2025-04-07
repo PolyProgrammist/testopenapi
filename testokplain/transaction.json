@@ -166,6 +166,33 @@
                     }
                 }
             }
+        },
+        "/light_client_proof": {
+            "post": {
+                "operationId": "light_client_proof",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_LightClientProofMethodNameHelperEnum"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/JsonRpcResponse_for_RpcLightClientExecutionProofResponse_and_RpcError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -1605,6 +1632,54 @@
                 ],
                 "type": "object"
             },
+            "BlockHeaderInnerLiteView": {
+                "properties": {
+                    "block_merkle_root": {
+                        "$ref": "#/components/schemas/CryptoHash"
+                    },
+                    "epoch_id": {
+                        "$ref": "#/components/schemas/CryptoHash"
+                    },
+                    "height": {
+                        "format": "uint64",
+                        "minimum": 0,
+                        "type": "integer"
+                    },
+                    "next_bp_hash": {
+                        "$ref": "#/components/schemas/CryptoHash"
+                    },
+                    "next_epoch_id": {
+                        "$ref": "#/components/schemas/CryptoHash"
+                    },
+                    "outcome_root": {
+                        "$ref": "#/components/schemas/CryptoHash"
+                    },
+                    "prev_state_root": {
+                        "$ref": "#/components/schemas/CryptoHash"
+                    },
+                    "timestamp": {
+                        "description": "Legacy json number. Should not be used.",
+                        "format": "uint64",
+                        "minimum": 0,
+                        "type": "integer"
+                    },
+                    "timestamp_nanosec": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "height",
+                    "epoch_id",
+                    "next_epoch_id",
+                    "prev_state_root",
+                    "outcome_root",
+                    "timestamp",
+                    "timestamp_nanosec",
+                    "next_bp_hash",
+                    "block_merkle_root"
+                ],
+                "type": "object"
+            },
             "BlockHeaderView": {
                 "properties": {
                     "approvals": {
@@ -2207,7 +2282,6 @@
                     "metadata": {
                         "$ref": "#/components/schemas/ExecutionMetadataView",
                         "default": {
-                            "gas_profile": null,
                             "version": 1
                         },
                         "description": "Execution metadata, versioned"
@@ -3854,6 +3928,30 @@
                 "title": "JsonRpcRequest_for_HealthMethodNameHelperEnum",
                 "type": "object"
             },
+            "JsonRpcRequest_for_LightClientProofMethodNameHelperEnum": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "$ref": "#/components/schemas/LightClientProofMethodNameHelperEnum"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcLightClientExecutionProofRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_LightClientProofMethodNameHelperEnum",
+                "type": "object"
+            },
             "JsonRpcResponse_for_CryptoHash_and_RpcError": {
                 "anyOf": [
                     {
@@ -4111,6 +4209,57 @@
                 "title": "JsonRpcResponse_for_RpcGasPriceResponse_and_RpcError",
                 "type": "object"
             },
+            "JsonRpcResponse_for_RpcLightClientExecutionProofResponse_and_RpcError": {
+                "anyOf": [
+                    {
+                        "properties": {
+                            "result": {
+                                "$ref": "#/components/schemas/RpcLightClientExecutionProofResponse"
+                            }
+                        },
+                        "required": [
+                            "result"
+                        ],
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "tmp": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        },
+                        "required": [
+                            "tmp"
+                        ],
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "error": {
+                                "$ref": "#/components/schemas/RpcError"
+                            }
+                        },
+                        "required": [
+                            "error"
+                        ],
+                        "type": "object"
+                    }
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id"
+                ],
+                "title": "JsonRpcResponse_for_RpcLightClientExecutionProofResponse_and_RpcError",
+                "type": "object"
+            },
             "JsonRpcResponse_for_RpcTransactionResponse_and_RpcError": {
                 "anyOf": [
                     {
@@ -4161,6 +4310,31 @@
                 ],
                 "title": "JsonRpcResponse_for_RpcTransactionResponse_and_RpcError",
                 "type": "object"
+            },
+            "LightClientBlockLiteView": {
+                "properties": {
+                    "inner_lite": {
+                        "$ref": "#/components/schemas/BlockHeaderInnerLiteView"
+                    },
+                    "inner_rest_hash": {
+                        "$ref": "#/components/schemas/CryptoHash"
+                    },
+                    "prev_block_hash": {
+                        "$ref": "#/components/schemas/CryptoHash"
+                    }
+                },
+                "required": [
+                    "prev_block_hash",
+                    "inner_rest_hash",
+                    "inner_lite"
+                ],
+                "type": "object"
+            },
+            "LightClientProofMethodNameHelperEnum": {
+                "enum": [
+                    "light_client_proof"
+                ],
+                "type": "string"
             },
             "MerklePathItem": {
                 "properties": {
@@ -4813,6 +4987,82 @@
             "RpcHealthResponse": {
                 "type": "object"
             },
+            "RpcLightClientExecutionProofRequest": {
+                "anyOf": [
+                    {
+                        "properties": {
+                            "sender_id": {
+                                "$ref": "#/components/schemas/AccountId"
+                            },
+                            "transaction_hash": {
+                                "$ref": "#/components/schemas/CryptoHash"
+                            }
+                        },
+                        "required": [
+                            "transaction_hash",
+                            "sender_id"
+                        ],
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "receipt_id": {
+                                "$ref": "#/components/schemas/CryptoHash"
+                            },
+                            "receiver_id": {
+                                "$ref": "#/components/schemas/AccountId"
+                            }
+                        },
+                        "required": [
+                            "receipt_id",
+                            "receiver_id"
+                        ],
+                        "type": "object"
+                    }
+                ],
+                "properties": {
+                    "light_client_head": {
+                        "$ref": "#/components/schemas/CryptoHash"
+                    },
+                    "type": {
+                        "$ref": "#/components/schemas/TypeTransactionOrReceiptId"
+                    }
+                },
+                "required": [
+                    "type",
+                    "light_client_head"
+                ],
+                "type": "object"
+            },
+            "RpcLightClientExecutionProofResponse": {
+                "properties": {
+                    "block_header_lite": {
+                        "$ref": "#/components/schemas/LightClientBlockLiteView"
+                    },
+                    "block_proof": {
+                        "items": {
+                            "$ref": "#/components/schemas/MerklePathItem"
+                        },
+                        "type": "array"
+                    },
+                    "outcome_proof": {
+                        "$ref": "#/components/schemas/ExecutionOutcomeWithIdView"
+                    },
+                    "outcome_root_proof": {
+                        "items": {
+                            "$ref": "#/components/schemas/MerklePathItem"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "outcome_proof",
+                    "outcome_root_proof",
+                    "block_header_lite",
+                    "block_proof"
+                ],
+                "type": "object"
+            },
             "RpcRequestValidationErrorKind": {
                 "oneOf": [
                     {
@@ -5178,6 +5428,13 @@
                         ]
                     }
                 ]
+            },
+            "TypeTransactionOrReceiptId": {
+                "enum": [
+                    "transaction",
+                    "receipt"
+                ],
+                "type": "string"
             },
             "UseGlobalContractAction": {
                 "description": "Use global contract action",

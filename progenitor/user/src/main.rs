@@ -87,18 +87,17 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         params: keeper::types::RpcHealthRequest(serde_json::Map::new())
     };
 
-
-    // let payloadLightClientExecutionProof = keeper::types::JsonRpcRequestForLightClientProofMethodNameHelperEnum {
-    //     id: String::from("dontcare"),
-    //     jsonrpc: String::from("2.0"),
-    //     method: keeper::types::LightClientProofMethodNameHelperEnum::LightClientProof,
-    //     params: keeper::types::RpcLightClientExecutionProofRequest::Variant0 {
-    //         light_client_head: transaction_hash.parse().unwrap(),
-    //         sender_id: sender_account_id.parse().unwrap(),
-    //         transaction_hash: transaction_hash.parse().unwrap(),
-    //         type_: keeper::types::TypeTransactionOrReceiptId::Transaction,
-    //     }
-    // };
+    let payloadLightClientExecutionProof = keeper::types::JsonRpcRequestForLightClientProofMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::LightClientProofMethodNameHelperEnum::LightClientProof,
+        params: keeper::types::RpcLightClientExecutionProofRequest::Variant0 {
+            light_client_head: transaction_hash.parse().unwrap(),
+            sender_id: sender_account_id.parse().unwrap(),
+            transaction_hash: transaction_hash.parse().unwrap(),
+            type_: keeper::types::TypeTransactionOrReceiptId::Transaction,
+        }
+    };
 
     // let payloadNextLightClientBlock = keeper::types::JsonRpcRequestForNextLightClientBlockMethodNameHelperEnum {
     //     id: String::from("dontcare"),
@@ -173,12 +172,8 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let health: keeper::types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError = client_remote.health(&payloadHealth).await?.into_inner();
     println!("health: {:#?}", health);
 
-    // let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.tx(&payloadTx).await?.into_inner();
-    // println!("tx: {:#?}", tx);
-
-
-    // let light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.light_client_proof(&payloadLightClientExecutionProof).await?.into_inner();
-    // println!("light_client_execution_proof: {:#?}", light_client_execution_proof);
+    let light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.light_client_proof(&payloadLightClientExecutionProof).await?.into_inner();
+    println!("light_client_execution_proof: {:#?}", light_client_execution_proof);
 
     // let next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError = client_remote.next_light_client_block(&payloadNextLightClientBlock).await?.into_inner();
     // println!("next_light_client_block: {:#?}", next_light_client_block);
@@ -188,6 +183,9 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
 
     // let send_tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.send_tx(&payloadSendTx).await?.into_inner();
     // println!("send_tx: {:#?}", send_tx);
+
+    // let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.tx(&payloadTx).await?.into_inner();
+    // println!("tx: {:#?}", tx);
 
     // // local as ".version.commit" introduced recently: https://github.com/near/nearcore/pull/12722/files
     // let status = client_local.status(&payloadStatus).await?;
