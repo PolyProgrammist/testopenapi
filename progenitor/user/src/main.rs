@@ -239,6 +239,15 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
+    let payloadMaintenanceWindows = keeper::types::JsonRpcRequestForExpMaintenanceWindoesMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::ExpMaintenanceWindoesMethodNameHelperEnum::ExperimentalMaintenanceWindows,
+        params: keeper::types::RpcMaintenanceWindowsRequest {
+            account_id: sender_account_id.parse().unwrap(),
+        }
+    };
+
     // let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     // println!("block: {:#?}", block);
 
@@ -310,8 +319,12 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     // let experimental_tx_status: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.experimental_tx_status(&payloadExpTxStatus).await?.into_inner();
     // println!("experimental_tx_status: {:#?}", experimental_tx_status);
 
-    let experimental_validators: keeper::types::JsonRpcResponseForArrayOfValidatorStakeViewAndRpcError = client_remote.experimental_validators_ordered(&payloadValidators).await?.into_inner();
-    println!("experimental_validators: {:#?}", experimental_validators);
+    // let experimental_validators: keeper::types::JsonRpcResponseForArrayOfValidatorStakeViewAndRpcError = client_remote.experimental_validators_ordered(&payloadValidators).await?.into_inner();
+    // println!("experimental_validators: {:#?}", experimental_validators);
+
+    // local as changed from tuple to struct
+    let experimental_maintenance_windows: keeper::types::JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError = client_local.experimental_maintenance_windows(&payloadMaintenanceWindows).await?.into_inner();
+    println!("experimental_maintenance_windows: {:#?}", experimental_maintenance_windows);
 
     // let file = File::open("tmp.json")?;
     // let reader = BufReader::new(file);

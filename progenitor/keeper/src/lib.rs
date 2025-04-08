@@ -11175,13 +11175,13 @@ pub mod types {
         }
     }
 
-    ///JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcError
+    ///JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "title": "JsonRpcResponse_for_Array_of_Tuple_of_uint64_and_uint64_and_RpcError",
+    ///  "title": "JsonRpcResponse_for_Array_of_MaintenanceWindow_and_RpcError",
     ///  "type": "object",
     ///  "anyOf": [
     ///    {
@@ -11193,24 +11193,7 @@ pub mod types {
     ///        "result": {
     ///          "type": "array",
     ///          "items": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "type": "object",
-    ///              "properties": {
-    ///                "finish": {
-    ///                  "type": "integer",
-    ///                  "format": "uint64",
-    ///                  "minimum": 0.0
-    ///                },
-    ///                "start": {
-    ///                  "type": "integer",
-    ///                  "format": "uint64",
-    ///                  "minimum": 0.0
-    ///                }
-    ///              }
-    ///            },
-    ///            "maxItems": 2,
-    ///            "minItems": 2
+    ///            "$ref": "#/components/schemas/MaintenanceWindow"
     ///          }
     ///        }
     ///      }
@@ -11255,14 +11238,11 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(untagged)]
-    pub enum JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcError {
+    pub enum JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError {
         Variant0 {
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
-            result: ::std::vec::Vec<
-                [JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcErrorVariant0ResultItemItem;
-                    2usize],
-            >,
+            result: ::std::vec::Vec<MaintenanceWindow>,
         },
         Variant1 {
             id: ::std::string::String,
@@ -11276,62 +11256,9 @@ pub mod types {
         },
     }
 
-    impl ::std::convert::From<&Self> for JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcError {
-        fn from(value: &JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcError) -> Self {
+    impl ::std::convert::From<&Self> for JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError {
+        fn from(value: &JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError) -> Self {
             value.clone()
-        }
-    }
-
-    ///JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcErrorVariant0ResultItemItem
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "properties": {
-    ///    "finish": {
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    },
-    ///    "start": {
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcErrorVariant0ResultItemItem {
-        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
-        pub finish: ::std::option::Option<u64>,
-        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
-        pub start: ::std::option::Option<u64>,
-    }
-
-    impl
-        ::std::convert::From<
-            &JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcErrorVariant0ResultItemItem,
-        > for JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcErrorVariant0ResultItemItem
-    {
-        fn from(
-            value : & JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcErrorVariant0ResultItemItem,
-        ) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::default::Default
-        for JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcErrorVariant0ResultItemItem
-    {
-        fn default() -> Self {
-            Self {
-                finish: Default::default(),
-                start: Default::default(),
-            }
         }
     }
 
@@ -13719,6 +13646,44 @@ pub mod types {
             value: ::std::string::String,
         ) -> ::std::result::Result<Self, self::error::ConversionError> {
             value.parse()
+        }
+    }
+
+    ///MaintenanceWindow
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "finish",
+    ///    "start"
+    ///  ],
+    ///  "properties": {
+    ///    "finish": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "start": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct MaintenanceWindow {
+        pub finish: u64,
+        pub start: u64,
+    }
+
+    impl ::std::convert::From<&MaintenanceWindow> for MaintenanceWindow {
+        fn from(value: &MaintenanceWindow) -> Self {
+            value.clone()
         }
     }
 
@@ -24623,7 +24588,7 @@ impl Client {
         &'a self,
         body: &'a types::JsonRpcRequestForExpMaintenanceWindoesMethodNameHelperEnum,
     ) -> Result<
-        ResponseValue<types::JsonRpcResponseForArrayOfTupleOfUint64AndUint64AndRpcError>,
+        ResponseValue<types::JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError>,
         Error<()>,
     > {
         let url = format!("{}/", self.baseurl,);

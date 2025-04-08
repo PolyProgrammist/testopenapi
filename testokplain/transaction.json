@@ -186,7 +186,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/JsonRpcResponse_for_Array_of_Tuple_of_uint64_and_uint64_and_RpcError"
+                                    "$ref": "#/components/schemas/JsonRpcResponse_for_Array_of_MaintenanceWindow_and_RpcError"
                                 }
                             }
                         }
@@ -6629,30 +6629,13 @@
                 "title": "JsonRpcRequest_for_ValidatorsMethodNameHelperEnum",
                 "type": "object"
             },
-            "JsonRpcResponse_for_Array_of_Tuple_of_uint64_and_uint64_and_RpcError": {
+            "JsonRpcResponse_for_Array_of_MaintenanceWindow_and_RpcError": {
                 "anyOf": [
                     {
                         "properties": {
                             "result": {
                                 "items": {
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "start": {
-                                                "type": "integer",
-                                                "format": "uint64",
-                                                "minimum": 0.0
-                                            },
-                                            "finish": {
-                                                "type": "integer",
-                                                "format": "uint64",
-                                                "minimum": 0.0
-                                            }
-                                        }
-                                    },
-                                    "maxItems": 2,
-                                    "minItems": 2,
-                                    "type": "array"
+                                    "$ref": "#/components/schemas/MaintenanceWindow"
                                 },
                                 "type": "array"
                             }
@@ -6697,7 +6680,7 @@
                     "jsonrpc",
                     "id"
                 ],
-                "title": "JsonRpcResponse_for_Array_of_Tuple_of_uint64_and_uint64_and_RpcError",
+                "title": "JsonRpcResponse_for_Array_of_MaintenanceWindow_and_RpcError",
                 "type": "object"
             },
             "JsonRpcResponse_for_Array_of_ValidatorStakeView_and_RpcError": {
@@ -8047,6 +8030,25 @@
                     "colored"
                 ],
                 "type": "string"
+            },
+            "MaintenanceWindow": {
+                "properties": {
+                    "finish": {
+                        "format": "uint64",
+                        "minimum": 0,
+                        "type": "integer"
+                    },
+                    "start": {
+                        "format": "uint64",
+                        "minimum": 0,
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "start",
+                    "finish"
+                ],
+                "type": "object"
             },
             "MerklePathItem": {
                 "properties": {
