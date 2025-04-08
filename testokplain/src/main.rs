@@ -161,6 +161,15 @@ struct JsonRpcRequest<S: MethodNameTrait> {
     method: S::S,
 }
 
+#[derive(Clone, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
+pub struct MaintenanceWindow {
+    pub start: near_primitives::types::BlockHeight,
+    pub finish: near_primitives::types::BlockHeight,
+}
+
+pub type RpcMaintenanceWindowsResponse =
+    Vec<MaintenanceWindow>;
+
 type SchemasMap = serde_json::Value; //okapi::Map::<String, okapi::openapi3::SchemaObject>;
 type PathsMap = okapi::Map::<String, okapi::openapi3::PathItem>;
 
@@ -330,7 +339,7 @@ use near_jsonrpc_primitives::types::{
         RpcReceiptResponse, RpcReceiptRequest
     },
     maintenance::{
-        RpcMaintenanceWindowsResponse, RpcMaintenanceWindowsRequest
+        RpcMaintenanceWindowsRequest
     },
     split_storage::{
         RpcSplitStorageInfoResponse, RpcSplitStorageInfoRequest, 

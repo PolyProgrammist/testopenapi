@@ -60,12 +60,21 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
-    let payloadGasPrice = keeper::types::JsonRpcRequestForGasPriceMethodNameHelperEnum {
+    let payloadGasPriceWithBlock = keeper::types::JsonRpcRequestForGasPriceMethodNameHelperEnum {
         id: String::from("dontcare"),
         jsonrpc: String::from("2.0"),
         method: keeper::types::GasPriceMethodNameHelperEnum::GasPrice,
         params: keeper::types::RpcGasPriceRequest {
             block_id: Some(keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()))
+        }
+    };
+
+    let payloadGasPriceWithoutBlock = keeper::types::JsonRpcRequestForGasPriceMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::GasPriceMethodNameHelperEnum::GasPrice,
+        params: keeper::types::RpcGasPriceRequest {
+            block_id: None
         }
     };
 
@@ -268,8 +277,11 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     println!("chunk: {:#?}", chunk);
 
     // local as currently accepts only array, fixed in new version
-    let gas_price: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client_local.gas_price(&payloadGasPrice).await?.into_inner();
-    println!("gas_price: {:#?}", gas_price);
+    let gas_price_with_block: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client_local.gas_price(&payloadGasPriceWithBlock).await?.into_inner();
+    println!("gas_price_with_block: {:#?}", gas_price_with_block);
+
+    let gas_price_without_block: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client_local.gas_price(&payloadGasPriceWithoutBlock).await?.into_inner();
+    println!("gas_price_without_block: {:#?}", gas_price_without_block);
 
     let health: keeper::types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError = client_remote.health(&payloadHealth).await?.into_inner();
     println!("health: {:#?}", health);
