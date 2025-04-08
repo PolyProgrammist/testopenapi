@@ -248,6 +248,13 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
+    let payloadSplitStorage = keeper::types::JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::ExpSplitStorageInfoMethodNameHelperEnum::ExperimentalSplitStorageInfo,
+        params: keeper::types::RpcSplitStorageInfoRequest(serde_json::Map::new())
+    };
+
     // let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     // println!("block: {:#?}", block);
 
@@ -323,8 +330,11 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     // println!("experimental_validators: {:#?}", experimental_validators);
 
     // local as changed from tuple to struct
-    let experimental_maintenance_windows: keeper::types::JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError = client_local.experimental_maintenance_windows(&payloadMaintenanceWindows).await?.into_inner();
-    println!("experimental_maintenance_windows: {:#?}", experimental_maintenance_windows);
+    // let experimental_maintenance_windows: keeper::types::JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError = client_local.experimental_maintenance_windows(&payloadMaintenanceWindows).await?.into_inner();
+    // println!("experimental_maintenance_windows: {:#?}", experimental_maintenance_windows);
+
+    let experimental_split_storage: keeper::types::JsonRpcResponseForRpcSplitStorageInfoResponseAndRpcError = client_remote.experimental_split_storage_info(&payloadSplitStorage).await?.into_inner();
+    println!("experimental_split_storage: {:#?}", experimental_split_storage);
 
     // let file = File::open("tmp.json")?;
     // let reader = BufReader::new(file);
