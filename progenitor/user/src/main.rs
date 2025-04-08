@@ -174,6 +174,13 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
+    let payloadGenesisConfig = keeper::types::JsonRpcRequestForExpGenesisMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::ExpGenesisMethodNameHelperEnum::ExperimentalGenesisConfig,
+        params: keeper::types::GenesisConfigRequest(serde_json::Map::new())
+    };
+
     // let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     // println!("block: {:#?}", block);
 
@@ -226,6 +233,9 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
 
     let congestion_level: keeper::types::JsonRpcResponseForRpcCongestionLevelResponseAndRpcError = client_remote.experimental_congestion_level(&payloadCongestionLevel).await?.into_inner();
     println!("congestion_level: {:#?}", congestion_level);
+
+    let genesis_config: keeper::types::JsonRpcResponseForGenesisConfigAndRpcError = client_remote.experimental_genesis_config(&payloadGenesisConfig).await?.into_inner();
+    println!("genesis_config: {:#?}", genesis_config);
 
     // let file = File::open("tmp.json")?;
     // let reader = BufReader::new(file);
