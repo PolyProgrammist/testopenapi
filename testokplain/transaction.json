@@ -10071,11 +10071,9 @@
                 "type": "object"
             },
             "RpcStateChangesInBlockByTypeRequest": {
-                "description": "It is a [serializable view] of [`StateChangesRequest`].\n\n [serializable view]: ./index.html\n [`StateChangesRequest`]: ../types/struct.StateChangesRequest.html",
-                "type": "object",
-                "oneOf": [
+                "allOf": [
                     {
-                        "allOf": [
+                        "oneOf": [
                             {
                                 "properties": {
                                     "block_id": {
@@ -10087,6 +10085,32 @@
                                 ],
                                 "type": "object"
                             },
+                            {
+                                "properties": {
+                                    "finality": {
+                                        "$ref": "#/components/schemas/Finality"
+                                    }
+                                },
+                                "required": [
+                                    "finality"
+                                ],
+                                "type": "object"
+                            },
+                            {
+                                "properties": {
+                                    "sync_checkpoint": {
+                                        "$ref": "#/components/schemas/SyncCheckpoint"
+                                    }
+                                },
+                                "required": [
+                                    "sync_checkpoint"
+                                ],
+                                "type": "object"
+                            }
+                        ]
+                    },
+                    {
+                        "oneOf": [
                             {
                                 "properties": {
                                     "account_ids": {
@@ -10105,21 +10129,6 @@
                                 "required": [
                                     "changes_type",
                                     "account_ids"
-                                ],
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "properties": {
-                                    "block_id": {
-                                        "$ref": "#/components/schemas/BlockId"
-                                    }
-                                },
-                                "required": [
-                                    "block_id"
                                 ],
                                 "type": "object"
                             },
@@ -10143,21 +10152,6 @@
                                     "keys"
                                 ],
                                 "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "properties": {
-                                    "block_id": {
-                                        "$ref": "#/components/schemas/BlockId"
-                                    }
-                                },
-                                "required": [
-                                    "block_id"
-                                ],
-                                "type": "object"
                             },
                             {
                                 "properties": {
@@ -10179,21 +10173,6 @@
                                     "account_ids"
                                 ],
                                 "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "properties": {
-                                    "block_id": {
-                                        "$ref": "#/components/schemas/BlockId"
-                                    }
-                                },
-                                "required": [
-                                    "block_id"
-                                ],
-                                "type": "object"
                             },
                             {
                                 "properties": {
@@ -10213,389 +10192,6 @@
                                 "required": [
                                     "changes_type",
                                     "account_ids"
-                                ],
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "properties": {
-                                    "block_id": {
-                                        "$ref": "#/components/schemas/BlockId"
-                                    }
-                                },
-                                "required": [
-                                    "block_id"
-                                ],
-                                "type": "object"
-                            },
-                            {
-                                "properties": {
-                                    "account_ids": {
-                                        "items": {
-                                            "$ref": "#/components/schemas/AccountId"
-                                        },
-                                        "type": "array"
-                                    },
-                                    "changes_type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "data_changes"
-                                        ]
-                                    },
-                                    "key_prefix_base64": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "changes_type",
-                                    "account_ids",
-                                    "key_prefix_base64"
-                                ],
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "properties": {
-                                    "finality": {
-                                        "$ref": "#/components/schemas/Finality"
-                                    }
-                                },
-                                "required": [
-                                    "finality"
-                                ],
-                                "type": "object"
-                            },
-                            {
-                                "properties": {
-                                    "account_ids": {
-                                        "items": {
-                                            "$ref": "#/components/schemas/AccountId"
-                                        },
-                                        "type": "array"
-                                    },
-                                    "changes_type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "account_changes"
-                                        ]
-                                    }
-                                },
-                                "required": [
-                                    "changes_type",
-                                    "account_ids"
-                                ],
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "properties": {
-                                    "finality": {
-                                        "$ref": "#/components/schemas/Finality"
-                                    }
-                                },
-                                "required": [
-                                    "finality"
-                                ],
-                                "type": "object"
-                            },
-                            {
-                                "properties": {
-                                    "changes_type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "single_access_key_changes"
-                                        ]
-                                    },
-                                    "keys": {
-                                        "items": {
-                                            "$ref": "#/components/schemas/AccountWithPublicKey"
-                                        },
-                                        "type": "array"
-                                    }
-                                },
-                                "required": [
-                                    "changes_type",
-                                    "keys"
-                                ],
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "properties": {
-                                    "finality": {
-                                        "$ref": "#/components/schemas/Finality"
-                                    }
-                                },
-                                "required": [
-                                    "finality"
-                                ],
-                                "type": "object"
-                            },
-                            {
-                                "properties": {
-                                    "account_ids": {
-                                        "items": {
-                                            "$ref": "#/components/schemas/AccountId"
-                                        },
-                                        "type": "array"
-                                    },
-                                    "changes_type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "all_access_key_changes"
-                                        ]
-                                    }
-                                },
-                                "required": [
-                                    "changes_type",
-                                    "account_ids"
-                                ],
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "properties": {
-                                    "finality": {
-                                        "$ref": "#/components/schemas/Finality"
-                                    }
-                                },
-                                "required": [
-                                    "finality"
-                                ],
-                                "type": "object"
-                            },
-                            {
-                                "properties": {
-                                    "account_ids": {
-                                        "items": {
-                                            "$ref": "#/components/schemas/AccountId"
-                                        },
-                                        "type": "array"
-                                    },
-                                    "changes_type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "contract_code_changes"
-                                        ]
-                                    }
-                                },
-                                "required": [
-                                    "changes_type",
-                                    "account_ids"
-                                ],
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "properties": {
-                                    "finality": {
-                                        "$ref": "#/components/schemas/Finality"
-                                    }
-                                },
-                                "required": [
-                                    "finality"
-                                ],
-                                "type": "object"
-                            },
-                            {
-                                "properties": {
-                                    "account_ids": {
-                                        "items": {
-                                            "$ref": "#/components/schemas/AccountId"
-                                        },
-                                        "type": "array"
-                                    },
-                                    "changes_type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "data_changes"
-                                        ]
-                                    },
-                                    "key_prefix_base64": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "changes_type",
-                                    "account_ids",
-                                    "key_prefix_base64"
-                                ],
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "properties": {
-                                    "sync_checkpoint": {
-                                        "$ref": "#/components/schemas/SyncCheckpoint"
-                                    }
-                                },
-                                "required": [
-                                    "sync_checkpoint"
-                                ],
-                                "type": "object"
-                            },
-                            {
-                                "properties": {
-                                    "account_ids": {
-                                        "items": {
-                                            "$ref": "#/components/schemas/AccountId"
-                                        },
-                                        "type": "array"
-                                    },
-                                    "changes_type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "account_changes"
-                                        ]
-                                    }
-                                },
-                                "required": [
-                                    "changes_type",
-                                    "account_ids"
-                                ],
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "properties": {
-                                    "sync_checkpoint": {
-                                        "$ref": "#/components/schemas/SyncCheckpoint"
-                                    }
-                                },
-                                "required": [
-                                    "sync_checkpoint"
-                                ],
-                                "type": "object"
-                            },
-                            {
-                                "properties": {
-                                    "changes_type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "single_access_key_changes"
-                                        ]
-                                    },
-                                    "keys": {
-                                        "items": {
-                                            "$ref": "#/components/schemas/AccountWithPublicKey"
-                                        },
-                                        "type": "array"
-                                    }
-                                },
-                                "required": [
-                                    "changes_type",
-                                    "keys"
-                                ],
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "properties": {
-                                    "sync_checkpoint": {
-                                        "$ref": "#/components/schemas/SyncCheckpoint"
-                                    }
-                                },
-                                "required": [
-                                    "sync_checkpoint"
-                                ],
-                                "type": "object"
-                            },
-                            {
-                                "properties": {
-                                    "account_ids": {
-                                        "items": {
-                                            "$ref": "#/components/schemas/AccountId"
-                                        },
-                                        "type": "array"
-                                    },
-                                    "changes_type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "all_access_key_changes"
-                                        ]
-                                    }
-                                },
-                                "required": [
-                                    "changes_type",
-                                    "account_ids"
-                                ],
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "properties": {
-                                    "sync_checkpoint": {
-                                        "$ref": "#/components/schemas/SyncCheckpoint"
-                                    }
-                                },
-                                "required": [
-                                    "sync_checkpoint"
-                                ],
-                                "type": "object"
-                            },
-                            {
-                                "properties": {
-                                    "account_ids": {
-                                        "items": {
-                                            "$ref": "#/components/schemas/AccountId"
-                                        },
-                                        "type": "array"
-                                    },
-                                    "changes_type": {
-                                        "type": "string",
-                                        "enum": [
-                                            "contract_code_changes"
-                                        ]
-                                    }
-                                },
-                                "required": [
-                                    "changes_type",
-                                    "account_ids"
-                                ],
-                                "type": "object"
-                            }
-                        ]
-                    },
-                    {
-                        "allOf": [
-                            {
-                                "properties": {
-                                    "sync_checkpoint": {
-                                        "$ref": "#/components/schemas/SyncCheckpoint"
-                                    }
-                                },
-                                "required": [
-                                    "sync_checkpoint"
                                 ],
                                 "type": "object"
                             },
@@ -10626,7 +10222,9 @@
                             }
                         ]
                     }
-                ]
+                ],
+                "description": "It is a [serializable view] of [`StateChangesRequest`].\n\n [serializable view]: ./index.html\n [`StateChangesRequest`]: ../types/struct.StateChangesRequest.html",
+                "type": "object"
             },
             "RpcStateChangesInBlockByTypeResponse": {
                 "properties": {

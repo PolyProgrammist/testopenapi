@@ -201,9 +201,12 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     // let client_config: keeper::types::JsonRpcResponseForRpcClientConfigResponseAndRpcError = client_local.client_config(&payloadClientConfig).await?.into_inner();
     // println!("client_config: {:#?}", client_config);
 
-    let experimental_changes: keeper::types::JsonRpcResponseForRpcStateChangesInBlockResponseAndRpcError = client_remote.experimental_changes(&payloadStateChanges).await?.into_inner();
-    println!("experimental_changes: {:#?}", experimental_changes);
+    // let experimental_changes: keeper::types::JsonRpcResponseForRpcStateChangesInBlockResponseAndRpcError = client_remote.experimental_changes(&payloadStateChanges).await?.into_inner();
+    // println!("experimental_changes: {:#?}", experimental_changes);
 
+    let file = File::open("tmp.json")?;
+    let reader = BufReader::new(file);
+    let changes: keeper::types::RpcStateChangesInBlockResponse = serde_json::from_reader(reader)?;
     Ok(())
 }
 

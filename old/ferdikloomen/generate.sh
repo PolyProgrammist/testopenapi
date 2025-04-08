@@ -1,1 +1,1 @@
-npx openapi -i ./kek.yaml -o gen   
+npx openapi -i ../../testokplain/transaction.json -o gen   
