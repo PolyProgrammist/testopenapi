@@ -210,6 +210,15 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         params: keeper::types::RpcProtocolConfigRequest::BlockId(keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()))
     };
 
+    let payloadReceipt = keeper::types::JsonRpcRequestForExpReceiptMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::ExpReceiptMethodNameHelperEnum::ExperimentalReceipt,
+        params: keeper::types::RpcReceiptRequest {
+            receipt_id: "GVpXUxpyo715x7fcvFuzJMJ1zimU1vCJggVwMyGAM6oH".parse().unwrap(),
+        }
+    };
+
     // let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     // println!("block: {:#?}", block);
 
@@ -272,8 +281,11 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     // let experimental_next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientBlockProofResponseAndRpcError = client_remote.experimental_light_client_block_proof(&payloadExpLightClientBlock).await?.into_inner();
     // println!("experimental_next_light_client_block: {:#?}", experimental_next_light_client_block);
 
-    let experimental_protocol_config: keeper::types::JsonRpcResponseForRpcProtocolConfigResponseAndRpcError = client_remote.experimental_protocol_config(&payloadProtocolConfig).await?.into_inner();
-    println!("experimental_protocol_config: {:#?}", experimental_protocol_config);
+    // let experimental_protocol_config: keeper::types::JsonRpcResponseForRpcProtocolConfigResponseAndRpcError = client_remote.experimental_protocol_config(&payloadProtocolConfig).await?.into_inner();
+    // println!("experimental_protocol_config: {:#?}", experimental_protocol_config);
+
+    let experimental_receipt: keeper::types::JsonRpcResponseForRpcReceiptResponseAndRpcError = client_remote.experimental_receipt(&payloadReceipt).await?.into_inner();
+    println!("experimental_receipt: {:#?}", experimental_receipt);
 
     // let file = File::open("tmp.json")?;
     // let reader = BufReader::new(file);
