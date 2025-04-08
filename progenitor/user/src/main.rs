@@ -342,7 +342,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     println!("experimental_validators: {:#?}", experimental_validators);
 
     // local as changed from tuple to struct
-    let experimental_maintenance_windows: keeper::types::JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError = client_local.experimental_maintenance_windows(&payloadMaintenanceWindows).await?.into_inner();
+    let experimental_maintenance_windows: keeper::types::JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError = client_remote.experimental_maintenance_windows(&payloadMaintenanceWindows).await?.into_inner();
     println!("experimental_maintenance_windows: {:#?}", experimental_maintenance_windows);
 
     let experimental_split_storage: keeper::types::JsonRpcResponseForRpcSplitStorageInfoResponseAndRpcError = client_remote.experimental_split_storage_info(&payloadSplitStorage).await?.into_inner();
