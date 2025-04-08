@@ -181,6 +181,28 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         params: keeper::types::GenesisConfigRequest(serde_json::Map::new())
     };
 
+    let payloadExpLightClientExecutionProof = keeper::types::JsonRpcRequestForExpLightClientProofMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::ExpLightClientProofMethodNameHelperEnum::ExperimentalLightClientProof,
+        params: keeper::types::RpcLightClientExecutionProofRequest::Variant0 {
+            light_client_head: transaction_hash.parse().unwrap(),
+            sender_id: sender_account_id.parse().unwrap(),
+            transaction_hash: transaction_hash.parse().unwrap(),
+            type_: keeper::types::TypeTransactionOrReceiptId::Transaction,
+        }
+    };
+
+    let payloadExpLightClientBlock = keeper::types::JsonRpcRequestForExpLightClientBlockProofMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::ExpLightClientBlockProofMethodNameHelperEnum::ExperimentalLightClientBlockProof,
+        params: keeper::types::RpcLightClientBlockProofRequest {
+            block_hash: "Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap(),
+            light_client_head: "Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap(),
+        }
+    };
+
     // let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     // println!("block: {:#?}", block);
 
@@ -231,11 +253,18 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     // let experimental_changes_in_block: keeper::types::JsonRpcResponseForRpcStateChangesInBlockByTypeResponseAndRpcError = client_remote.experimental_changes_in_block(&payloadChangesInBlock).await?.into_inner();
     // println!("experimental_changes_in_block: {:#?}", experimental_changes_in_block);
 
-    let congestion_level: keeper::types::JsonRpcResponseForRpcCongestionLevelResponseAndRpcError = client_remote.experimental_congestion_level(&payloadCongestionLevel).await?.into_inner();
-    println!("congestion_level: {:#?}", congestion_level);
+    // let congestion_level: keeper::types::JsonRpcResponseForRpcCongestionLevelResponseAndRpcError = client_remote.experimental_congestion_level(&payloadCongestionLevel).await?.into_inner();
+    // println!("congestion_level: {:#?}", congestion_level);
 
-    let genesis_config: keeper::types::JsonRpcResponseForGenesisConfigAndRpcError = client_remote.experimental_genesis_config(&payloadGenesisConfig).await?.into_inner();
-    println!("genesis_config: {:#?}", genesis_config);
+    // let genesis_config: keeper::types::JsonRpcResponseForGenesisConfigAndRpcError = client_remote.experimental_genesis_config(&payloadGenesisConfig).await?.into_inner();
+    // println!("genesis_config: {:#?}", genesis_config);
+
+    // let experimental_light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.experimental_light_client_proof(&payloadExpLightClientExecutionProof).await?.into_inner();
+    // println!("experimental_light_client_execution_proof: {:#?}", experimental_light_client_execution_proof);
+
+    let experimental_next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientBlockProofResponseAndRpcError = client_remote.experimental_light_client_block_proof(&payloadExpLightClientBlock).await?.into_inner();
+    println!("experimental_next_light_client_block: {:#?}", experimental_next_light_client_block);
+
 
     // let file = File::open("tmp.json")?;
     // let reader = BufReader::new(file);
