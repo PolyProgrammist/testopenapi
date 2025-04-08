@@ -3,7 +3,7 @@ import re
 import itertools
 
 def reconstructAllOfOneOf(schema):
-    return
+    # return
     print('reconstructing allOf to oneOf. only for testing with progenitor')
     all_of = schema["allOf"]
     

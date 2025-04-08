@@ -13,3 +13,5 @@ near-jsonrpc-primitives = { path = "../../nearcore/chain/jsonrpc-primitives", fe
 near-primitives = { path = "../../nearcore/core/primitives" }
 near-time = { path = "../../nearcore/core/time", features = ["clock"] }
 near-chain-configs = { path = "../../nearcore/core/chain-configs" }
+serde_with = { version = "3.0", features = ["base64"] }
+near-crypto = "0.29.2"

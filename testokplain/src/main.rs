@@ -4,6 +4,82 @@ use near_jsonrpc_primitives::{errors::RpcRequestValidationErrorKind, types::chan
 use okapi::openapi3::{OpenApi, SchemaObject};
 use serde_json::json;
 use near_primitives::views::TxExecutionStatus;
+use serde_with::serde_as;
+use serde_with::base64::Base64;
+
+
+#[derive(Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
+pub struct RpcStateChangesInBlockResponse {
+    pub block_hash: near_primitives::hash::CryptoHash,
+    pub changes: Vec<StateChangeWithCauseView>,
+}
+
+#[derive(Clone, Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
+pub struct StateChangeWithCauseView {
+    pub cause: near_primitives::views::StateChangeCauseView,
+    #[serde(rename = "type")]
+    pub value: StateChangeValueViewType,
+    pub change: StateChangeValueViewContent,
+}
+
+#[derive(Clone, Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum StateChangeValueViewType {
+    AccountUpdate,
+    AccountDeletion,
+    AccessKeyUpdate,
+    DataUpdate,
+    DataDeletion,
+    ContractCodeUpdate,
+    ContractCodeDeletion,
+}
+
+#[serde_as]
+#[derive(Clone, Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
+#[serde(untagged)]
+pub enum StateChangeValueViewContent {
+    AccountUpdate {
+        account_id: near_primitives::types::AccountId,
+        #[serde(flatten)]
+        account: near_primitives::views::AccountView,
+    },
+    AccountDeletion {
+        account_id: near_primitives::types::AccountId,
+    },
+    AccessKeyUpdate {
+        account_id: near_primitives::types::AccountId,
+        #[schemars(with = "String")]
+        public_key: near_crypto::PublicKey,
+        access_key: near_primitives::views::AccessKeyView,
+    },
+    AccessKeyDeletion {
+        account_id: near_primitives::types::AccountId,
+        #[schemars(with = "String")]
+        public_key: near_crypto::PublicKey,
+    },
+    DataUpdate {
+        account_id: near_primitives::types::AccountId,
+        #[serde(rename = "key_base64")]
+        key: near_primitives::types::StoreKey,
+        #[serde(rename = "value_base64")]
+        value: near_primitives::types::StoreValue,
+    },
+    DataDeletion {
+        account_id: near_primitives::types::AccountId,
+        #[serde(rename = "key_base64")]
+        key: near_primitives::types::StoreKey,
+    },
+    ContractCodeUpdate {
+        account_id: near_primitives::types::AccountId,
+        #[serde(rename = "code_base64")]
+        #[serde_as(as = "Base64")]
+        #[schemars(with = "String")]
+        code: Vec<u8>,
+    },
+    ContractCodeDeletion {
+        account_id: near_primitives::types::AccountId,
+    },
+}
 
 #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
 #[serde(untagged)]
@@ -212,6 +288,7 @@ fn whole_spec(all_schemas: SchemasMap, all_paths: PathsMap) -> OpenApi {
 // // //// ---- implement for all requests ----- 
 
 use near_primitives::{hash::CryptoHash, types::MaybeBlockId};
+// use near_jsonrpc_primitives::errors::RpcError;
 use near_jsonrpc_primitives::types::{
     transactions::{
         RpcTransactionResponse, RpcTransactionStatusRequest, RpcSendTransactionRequest
@@ -241,7 +318,7 @@ use near_jsonrpc_primitives::types::{
         RpcClientConfigResponse
     },
     changes::{
-        RpcStateChangesInBlockByTypeRequest, RpcStateChangesInBlockResponse, RpcStateChangesInBlockByTypeResponse
+        RpcStateChangesInBlockByTypeRequest, RpcStateChangesInBlockByTypeResponse
     },
     congestion::{
         RpcCongestionLevelResponse, RpcCongestionLevelRequest
@@ -256,8 +333,8 @@ use near_jsonrpc_primitives::types::{
         RpcMaintenanceWindowsResponse, RpcMaintenanceWindowsRequest
     },
     split_storage::{
-        RpcSplitStorageInfoResponse, RpcSplitStorageInfoRequest
-    }    
+        RpcSplitStorageInfoResponse, RpcSplitStorageInfoRequest, 
+    },
 };
 
 use near_chain_configs::GenesisConfig;

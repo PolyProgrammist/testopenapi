@@ -21595,6 +21595,673 @@ pub mod types {
         }
     }
 
+    ///StateChangeValueViewContent
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "anyOf": [
+    ///    {
+    ///      "description": "A view of the account",
+    ///      "type": "object",
+    ///      "required": [
+    ///        "account_id",
+    ///        "amount",
+    ///        "code_hash",
+    ///        "locked",
+    ///        "storage_usage"
+    ///      ],
+    ///      "properties": {
+    ///        "account_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        },
+    ///        "amount": {
+    ///          "type": "string"
+    ///        },
+    ///        "code_hash": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        },
+    ///        "global_contract_account_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        },
+    ///        "global_contract_hash": {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        },
+    ///        "locked": {
+    ///          "type": "string"
+    ///        },
+    ///        "storage_paid_at": {
+    ///          "description": "TODO(2271): deprecated.",
+    ///          "default": 0,
+    ///          "type": "integer",
+    ///          "format": "uint64",
+    ///          "minimum": 0.0
+    ///        },
+    ///        "storage_usage": {
+    ///          "type": "integer",
+    ///          "format": "uint64",
+    ///          "minimum": 0.0
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "account_id"
+    ///      ],
+    ///      "properties": {
+    ///        "account_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "access_key",
+    ///        "account_id",
+    ///        "public_key"
+    ///      ],
+    ///      "properties": {
+    ///        "access_key": {
+    ///          "$ref": "#/components/schemas/AccessKeyView"
+    ///        },
+    ///        "account_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        },
+    ///        "public_key": {
+    ///          "type": "string"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "account_id",
+    ///        "public_key"
+    ///      ],
+    ///      "properties": {
+    ///        "account_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        },
+    ///        "public_key": {
+    ///          "type": "string"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "account_id",
+    ///        "key_base64",
+    ///        "value_base64"
+    ///      ],
+    ///      "properties": {
+    ///        "account_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        },
+    ///        "key_base64": {
+    ///          "type": "string"
+    ///        },
+    ///        "value_base64": {
+    ///          "type": "string"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "account_id",
+    ///        "key_base64"
+    ///      ],
+    ///      "properties": {
+    ///        "account_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        },
+    ///        "key_base64": {
+    ///          "type": "string"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "account_id",
+    ///        "code_base64"
+    ///      ],
+    ///      "properties": {
+    ///        "account_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        },
+    ///        "code_base64": {
+    ///          "type": "string"
+    ///        }
+    ///      }
+    ///    },
+    ///    {
+    ///      "type": "object",
+    ///      "required": [
+    ///        "account_id"
+    ///      ],
+    ///      "properties": {
+    ///        "account_id": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        }
+    ///      }
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct StateChangeValueViewContent {
+        #[serde(
+            flatten,
+            default,
+            skip_serializing_if = "::std::option::Option::is_none"
+        )]
+        pub subtype_0: ::std::option::Option<StateChangeValueViewContentSubtype0>,
+        #[serde(
+            flatten,
+            default,
+            skip_serializing_if = "::std::option::Option::is_none"
+        )]
+        pub subtype_1: ::std::option::Option<StateChangeValueViewContentSubtype1>,
+        #[serde(
+            flatten,
+            default,
+            skip_serializing_if = "::std::option::Option::is_none"
+        )]
+        pub subtype_2: ::std::option::Option<StateChangeValueViewContentSubtype2>,
+        #[serde(
+            flatten,
+            default,
+            skip_serializing_if = "::std::option::Option::is_none"
+        )]
+        pub subtype_3: ::std::option::Option<StateChangeValueViewContentSubtype3>,
+        #[serde(
+            flatten,
+            default,
+            skip_serializing_if = "::std::option::Option::is_none"
+        )]
+        pub subtype_4: ::std::option::Option<StateChangeValueViewContentSubtype4>,
+        #[serde(
+            flatten,
+            default,
+            skip_serializing_if = "::std::option::Option::is_none"
+        )]
+        pub subtype_5: ::std::option::Option<StateChangeValueViewContentSubtype5>,
+        #[serde(
+            flatten,
+            default,
+            skip_serializing_if = "::std::option::Option::is_none"
+        )]
+        pub subtype_6: ::std::option::Option<StateChangeValueViewContentSubtype6>,
+        #[serde(
+            flatten,
+            default,
+            skip_serializing_if = "::std::option::Option::is_none"
+        )]
+        pub subtype_7: ::std::option::Option<StateChangeValueViewContentSubtype7>,
+    }
+
+    impl ::std::convert::From<&StateChangeValueViewContent> for StateChangeValueViewContent {
+        fn from(value: &StateChangeValueViewContent) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::default::Default for StateChangeValueViewContent {
+        fn default() -> Self {
+            Self {
+                subtype_0: Default::default(),
+                subtype_1: Default::default(),
+                subtype_2: Default::default(),
+                subtype_3: Default::default(),
+                subtype_4: Default::default(),
+                subtype_5: Default::default(),
+                subtype_6: Default::default(),
+                subtype_7: Default::default(),
+            }
+        }
+    }
+
+    ///A view of the account
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "A view of the account",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_id",
+    ///    "amount",
+    ///    "code_hash",
+    ///    "locked",
+    ///    "storage_usage"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "amount": {
+    ///      "type": "string"
+    ///    },
+    ///    "code_hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "global_contract_account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "global_contract_hash": {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    },
+    ///    "locked": {
+    ///      "type": "string"
+    ///    },
+    ///    "storage_paid_at": {
+    ///      "description": "TODO(2271): deprecated.",
+    ///      "default": 0,
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "storage_usage": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct StateChangeValueViewContentSubtype0 {
+        pub account_id: AccountId,
+        pub amount: ::std::string::String,
+        pub code_hash: CryptoHash,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub global_contract_account_id: ::std::option::Option<AccountId>,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub global_contract_hash: ::std::option::Option<CryptoHash>,
+        pub locked: ::std::string::String,
+        ///TODO(2271): deprecated.
+        #[serde(default)]
+        pub storage_paid_at: u64,
+        pub storage_usage: u64,
+    }
+
+    impl ::std::convert::From<&StateChangeValueViewContentSubtype0>
+        for StateChangeValueViewContentSubtype0
+    {
+        fn from(value: &StateChangeValueViewContentSubtype0) -> Self {
+            value.clone()
+        }
+    }
+
+    ///StateChangeValueViewContentSubtype1
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_id"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct StateChangeValueViewContentSubtype1 {
+        pub account_id: AccountId,
+    }
+
+    impl ::std::convert::From<&StateChangeValueViewContentSubtype1>
+        for StateChangeValueViewContentSubtype1
+    {
+        fn from(value: &StateChangeValueViewContentSubtype1) -> Self {
+            value.clone()
+        }
+    }
+
+    ///StateChangeValueViewContentSubtype2
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "access_key",
+    ///    "account_id",
+    ///    "public_key"
+    ///  ],
+    ///  "properties": {
+    ///    "access_key": {
+    ///      "$ref": "#/components/schemas/AccessKeyView"
+    ///    },
+    ///    "account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "public_key": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct StateChangeValueViewContentSubtype2 {
+        pub access_key: AccessKeyView,
+        pub account_id: AccountId,
+        pub public_key: ::std::string::String,
+    }
+
+    impl ::std::convert::From<&StateChangeValueViewContentSubtype2>
+        for StateChangeValueViewContentSubtype2
+    {
+        fn from(value: &StateChangeValueViewContentSubtype2) -> Self {
+            value.clone()
+        }
+    }
+
+    ///StateChangeValueViewContentSubtype3
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_id",
+    ///    "public_key"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "public_key": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct StateChangeValueViewContentSubtype3 {
+        pub account_id: AccountId,
+        pub public_key: ::std::string::String,
+    }
+
+    impl ::std::convert::From<&StateChangeValueViewContentSubtype3>
+        for StateChangeValueViewContentSubtype3
+    {
+        fn from(value: &StateChangeValueViewContentSubtype3) -> Self {
+            value.clone()
+        }
+    }
+
+    ///StateChangeValueViewContentSubtype4
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_id",
+    ///    "key_base64",
+    ///    "value_base64"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "key_base64": {
+    ///      "type": "string"
+    ///    },
+    ///    "value_base64": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct StateChangeValueViewContentSubtype4 {
+        pub account_id: AccountId,
+        pub key_base64: ::std::string::String,
+        pub value_base64: ::std::string::String,
+    }
+
+    impl ::std::convert::From<&StateChangeValueViewContentSubtype4>
+        for StateChangeValueViewContentSubtype4
+    {
+        fn from(value: &StateChangeValueViewContentSubtype4) -> Self {
+            value.clone()
+        }
+    }
+
+    ///StateChangeValueViewContentSubtype5
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_id",
+    ///    "key_base64"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "key_base64": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct StateChangeValueViewContentSubtype5 {
+        pub account_id: AccountId,
+        pub key_base64: ::std::string::String,
+    }
+
+    impl ::std::convert::From<&StateChangeValueViewContentSubtype5>
+        for StateChangeValueViewContentSubtype5
+    {
+        fn from(value: &StateChangeValueViewContentSubtype5) -> Self {
+            value.clone()
+        }
+    }
+
+    ///StateChangeValueViewContentSubtype6
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_id",
+    ///    "code_base64"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    },
+    ///    "code_base64": {
+    ///      "type": "string"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct StateChangeValueViewContentSubtype6 {
+        pub account_id: AccountId,
+        pub code_base64: ::std::string::String,
+    }
+
+    impl ::std::convert::From<&StateChangeValueViewContentSubtype6>
+        for StateChangeValueViewContentSubtype6
+    {
+        fn from(value: &StateChangeValueViewContentSubtype6) -> Self {
+            value.clone()
+        }
+    }
+
+    ///StateChangeValueViewContentSubtype7
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "account_id"
+    ///  ],
+    ///  "properties": {
+    ///    "account_id": {
+    ///      "$ref": "#/components/schemas/AccountId"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct StateChangeValueViewContentSubtype7 {
+        pub account_id: AccountId,
+    }
+
+    impl ::std::convert::From<&StateChangeValueViewContentSubtype7>
+        for StateChangeValueViewContentSubtype7
+    {
+        fn from(value: &StateChangeValueViewContentSubtype7) -> Self {
+            value.clone()
+        }
+    }
+
+    ///StateChangeValueViewType
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "account_update",
+    ///    "account_deletion",
+    ///    "access_key_update",
+    ///    "data_update",
+    ///    "data_deletion",
+    ///    "contract_code_update",
+    ///    "contract_code_deletion"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum StateChangeValueViewType {
+        #[serde(rename = "account_update")]
+        AccountUpdate,
+        #[serde(rename = "account_deletion")]
+        AccountDeletion,
+        #[serde(rename = "access_key_update")]
+        AccessKeyUpdate,
+        #[serde(rename = "data_update")]
+        DataUpdate,
+        #[serde(rename = "data_deletion")]
+        DataDeletion,
+        #[serde(rename = "contract_code_update")]
+        ContractCodeUpdate,
+        #[serde(rename = "contract_code_deletion")]
+        ContractCodeDeletion,
+    }
+
+    impl ::std::convert::From<&Self> for StateChangeValueViewType {
+        fn from(value: &StateChangeValueViewType) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for StateChangeValueViewType {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::AccountUpdate => write!(f, "account_update"),
+                Self::AccountDeletion => write!(f, "account_deletion"),
+                Self::AccessKeyUpdate => write!(f, "access_key_update"),
+                Self::DataUpdate => write!(f, "data_update"),
+                Self::DataDeletion => write!(f, "data_deletion"),
+                Self::ContractCodeUpdate => write!(f, "contract_code_update"),
+                Self::ContractCodeDeletion => write!(f, "contract_code_deletion"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for StateChangeValueViewType {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "account_update" => Ok(Self::AccountUpdate),
+                "account_deletion" => Ok(Self::AccountDeletion),
+                "access_key_update" => Ok(Self::AccessKeyUpdate),
+                "data_update" => Ok(Self::DataUpdate),
+                "data_deletion" => Ok(Self::DataDeletion),
+                "contract_code_update" => Ok(Self::ContractCodeUpdate),
+                "contract_code_deletion" => Ok(Self::ContractCodeDeletion),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for StateChangeValueViewType {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for StateChangeValueViewType {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for StateChangeValueViewType {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
     ///StateChangeWithCauseView
     ///
     /// <details><summary>JSON schema</summary>
@@ -21602,2942 +22269,35 @@ pub mod types {
     /// ```json
     ///{
     ///  "type": "object",
-    ///  "oneOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "change",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "change": {
-    ///          "description": "A view of the account",
-    ///          "type": "object",
-    ///          "required": [
-    ///            "account_id",
-    ///            "amount",
-    ///            "code_hash",
-    ///            "locked",
-    ///            "storage_usage"
-    ///          ],
-    ///          "properties": {
-    ///            "account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            },
-    ///            "amount": {
-    ///              "type": "string"
-    ///            },
-    ///            "code_hash": {
-    ///              "$ref": "#/components/schemas/CryptoHash"
-    ///            },
-    ///            "global_contract_account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            },
-    ///            "global_contract_hash": {
-    ///              "$ref": "#/components/schemas/CryptoHash"
-    ///            },
-    ///            "locked": {
-    ///              "type": "string"
-    ///            },
-    ///            "storage_paid_at": {
-    ///              "description": "TODO(2271): deprecated.",
-    ///              "default": 0,
-    ///              "type": "integer",
-    ///              "format": "uint64",
-    ///              "minimum": 0.0
-    ///            },
-    ///            "storage_usage": {
-    ///              "type": "integer",
-    ///              "format": "uint64",
-    ///              "minimum": 0.0
-    ///            }
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "account_update"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "change",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "change": {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "account_id"
-    ///          ],
-    ///          "properties": {
-    ///            "account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "account_deletion"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "change",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "change": {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "access_key",
-    ///            "account_id",
-    ///            "public_key"
-    ///          ],
-    ///          "properties": {
-    ///            "access_key": {
-    ///              "$ref": "#/components/schemas/AccessKeyView"
-    ///            },
-    ///            "account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            },
-    ///            "public_key": {
-    ///              "$ref": "#/components/schemas/PublicKey"
-    ///            }
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "access_key_update"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "change",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "change": {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "account_id",
-    ///            "public_key"
-    ///          ],
-    ///          "properties": {
-    ///            "account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            },
-    ///            "public_key": {
-    ///              "$ref": "#/components/schemas/PublicKey"
-    ///            }
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "access_key_deletion"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "change",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "change": {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "account_id",
-    ///            "key_base64",
-    ///            "value_base64"
-    ///          ],
-    ///          "properties": {
-    ///            "account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            },
-    ///            "key_base64": {
-    ///              "type": "string"
-    ///            },
-    ///            "value_base64": {
-    ///              "type": "string"
-    ///            }
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "data_update"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "change",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "change": {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "account_id",
-    ///            "key_base64"
-    ///          ],
-    ///          "properties": {
-    ///            "account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            },
-    ///            "key_base64": {
-    ///              "type": "string"
-    ///            }
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "data_deletion"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "change",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "change": {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "account_id",
-    ///            "code_base64"
-    ///          ],
-    ///          "properties": {
-    ///            "account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            },
-    ///            "code_base64": {
-    ///              "type": "string"
-    ///            }
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "contract_code_update"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "change",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "change": {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "account_id"
-    ///          ],
-    ///          "properties": {
-    ///            "account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "contract_code_deletion"
-    ///          ]
-    ///        }
-    ///      }
-    ///    }
-    ///  ],
     ///  "required": [
-    ///    "cause"
+    ///    "cause",
+    ///    "change",
+    ///    "type"
     ///  ],
     ///  "properties": {
     ///    "cause": {
     ///      "$ref": "#/components/schemas/StateChangeCauseView"
+    ///    },
+    ///    "change": {
+    ///      "$ref": "#/components/schemas/StateChangeValueViewContent"
+    ///    },
+    ///    "type": {
+    ///      "$ref": "#/components/schemas/StateChangeValueViewType"
     ///    }
     ///  }
     ///}
     /// ```
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    #[serde(untagged)]
-    pub enum StateChangeWithCauseView {
-        Variant0(StateChangeWithCauseViewVariant0),
-        Variant1(StateChangeWithCauseViewVariant1),
-        Variant2(StateChangeWithCauseViewVariant2),
-        Variant3(StateChangeWithCauseViewVariant3),
-        Variant4(StateChangeWithCauseViewVariant4),
-        Variant5(StateChangeWithCauseViewVariant5),
-        Variant6(StateChangeWithCauseViewVariant6),
-        Variant7(StateChangeWithCauseViewVariant7),
+    pub struct StateChangeWithCauseView {
+        pub cause: StateChangeCauseView,
+        pub change: StateChangeValueViewContent,
+        #[serde(rename = "type")]
+        pub type_: StateChangeValueViewType,
     }
 
-    impl ::std::convert::From<&Self> for StateChangeWithCauseView {
+    impl ::std::convert::From<&StateChangeWithCauseView> for StateChangeWithCauseView {
         fn from(value: &StateChangeWithCauseView) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::convert::From<StateChangeWithCauseViewVariant0> for StateChangeWithCauseView {
-        fn from(value: StateChangeWithCauseViewVariant0) -> Self {
-            Self::Variant0(value)
-        }
-    }
-
-    impl ::std::convert::From<StateChangeWithCauseViewVariant1> for StateChangeWithCauseView {
-        fn from(value: StateChangeWithCauseViewVariant1) -> Self {
-            Self::Variant1(value)
-        }
-    }
-
-    impl ::std::convert::From<StateChangeWithCauseViewVariant2> for StateChangeWithCauseView {
-        fn from(value: StateChangeWithCauseViewVariant2) -> Self {
-            Self::Variant2(value)
-        }
-    }
-
-    impl ::std::convert::From<StateChangeWithCauseViewVariant3> for StateChangeWithCauseView {
-        fn from(value: StateChangeWithCauseViewVariant3) -> Self {
-            Self::Variant3(value)
-        }
-    }
-
-    impl ::std::convert::From<StateChangeWithCauseViewVariant4> for StateChangeWithCauseView {
-        fn from(value: StateChangeWithCauseViewVariant4) -> Self {
-            Self::Variant4(value)
-        }
-    }
-
-    impl ::std::convert::From<StateChangeWithCauseViewVariant5> for StateChangeWithCauseView {
-        fn from(value: StateChangeWithCauseViewVariant5) -> Self {
-            Self::Variant5(value)
-        }
-    }
-
-    impl ::std::convert::From<StateChangeWithCauseViewVariant6> for StateChangeWithCauseView {
-        fn from(value: StateChangeWithCauseViewVariant6) -> Self {
-            Self::Variant6(value)
-        }
-    }
-
-    impl ::std::convert::From<StateChangeWithCauseViewVariant7> for StateChangeWithCauseView {
-        fn from(value: StateChangeWithCauseViewVariant7) -> Self {
-            Self::Variant7(value)
-        }
-    }
-
-    ///StateChangeWithCauseViewVariant0
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "allOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "cause"
-    ///      ],
-    ///      "properties": {
-    ///        "cause": {
-    ///          "$ref": "#/components/schemas/StateChangeCauseView"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "change",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "change": {
-    ///          "description": "A view of the account",
-    ///          "type": "object",
-    ///          "required": [
-    ///            "account_id",
-    ///            "amount",
-    ///            "code_hash",
-    ///            "locked",
-    ///            "storage_usage"
-    ///          ],
-    ///          "properties": {
-    ///            "account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            },
-    ///            "amount": {
-    ///              "type": "string"
-    ///            },
-    ///            "code_hash": {
-    ///              "$ref": "#/components/schemas/CryptoHash"
-    ///            },
-    ///            "global_contract_account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            },
-    ///            "global_contract_hash": {
-    ///              "$ref": "#/components/schemas/CryptoHash"
-    ///            },
-    ///            "locked": {
-    ///              "type": "string"
-    ///            },
-    ///            "storage_paid_at": {
-    ///              "description": "TODO(2271): deprecated.",
-    ///              "default": 0,
-    ///              "type": "integer",
-    ///              "format": "uint64",
-    ///              "minimum": 0.0
-    ///            },
-    ///            "storage_usage": {
-    ///              "type": "integer",
-    ///              "format": "uint64",
-    ///              "minimum": 0.0
-    ///            }
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "account_update"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "access_key",
-    ///              "account_id",
-    ///              "public_key"
-    ///            ],
-    ///            "properties": {
-    ///              "access_key": {
-    ///                "$ref": "#/components/schemas/AccessKeyView"
-    ///              },
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "public_key": {
-    ///                "$ref": "#/components/schemas/PublicKey"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "access_key_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "public_key"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "public_key": {
-    ///                "$ref": "#/components/schemas/PublicKey"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "access_key_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "key_base64",
-    ///              "value_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "key_base64": {
-    ///                "type": "string"
-    ///              },
-    ///              "value_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "key_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "key_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "code_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "code_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    #[serde(deny_unknown_fields)]
-    pub enum StateChangeWithCauseViewVariant0 {}
-    impl ::std::convert::From<&Self> for StateChangeWithCauseViewVariant0 {
-        fn from(value: &StateChangeWithCauseViewVariant0) -> Self {
-            value.clone()
-        }
-    }
-
-    ///StateChangeWithCauseViewVariant1
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "allOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "cause"
-    ///      ],
-    ///      "properties": {
-    ///        "cause": {
-    ///          "$ref": "#/components/schemas/StateChangeCauseView"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "change",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "change": {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "account_id"
-    ///          ],
-    ///          "properties": {
-    ///            "account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "account_deletion"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "description": "A view of the account",
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "amount",
-    ///              "code_hash",
-    ///              "locked",
-    ///              "storage_usage"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "amount": {
-    ///                "type": "string"
-    ///              },
-    ///              "code_hash": {
-    ///                "$ref": "#/components/schemas/CryptoHash"
-    ///              },
-    ///              "global_contract_account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "global_contract_hash": {
-    ///                "$ref": "#/components/schemas/CryptoHash"
-    ///              },
-    ///              "locked": {
-    ///                "type": "string"
-    ///              },
-    ///              "storage_paid_at": {
-    ///                "description": "TODO(2271): deprecated.",
-    ///                "default": 0,
-    ///                "type": "integer",
-    ///                "format": "uint64",
-    ///                "minimum": 0.0
-    ///              },
-    ///              "storage_usage": {
-    ///                "type": "integer",
-    ///                "format": "uint64",
-    ///                "minimum": 0.0
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "access_key",
-    ///              "account_id",
-    ///              "public_key"
-    ///            ],
-    ///            "properties": {
-    ///              "access_key": {
-    ///                "$ref": "#/components/schemas/AccessKeyView"
-    ///              },
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "public_key": {
-    ///                "$ref": "#/components/schemas/PublicKey"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "access_key_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "public_key"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "public_key": {
-    ///                "$ref": "#/components/schemas/PublicKey"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "access_key_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "key_base64",
-    ///              "value_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "key_base64": {
-    ///                "type": "string"
-    ///              },
-    ///              "value_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "key_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "key_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "code_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "code_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    #[serde(deny_unknown_fields)]
-    pub enum StateChangeWithCauseViewVariant1 {}
-    impl ::std::convert::From<&Self> for StateChangeWithCauseViewVariant1 {
-        fn from(value: &StateChangeWithCauseViewVariant1) -> Self {
-            value.clone()
-        }
-    }
-
-    ///StateChangeWithCauseViewVariant2
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "allOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "cause"
-    ///      ],
-    ///      "properties": {
-    ///        "cause": {
-    ///          "$ref": "#/components/schemas/StateChangeCauseView"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "change",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "change": {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "access_key",
-    ///            "account_id",
-    ///            "public_key"
-    ///          ],
-    ///          "properties": {
-    ///            "access_key": {
-    ///              "$ref": "#/components/schemas/AccessKeyView"
-    ///            },
-    ///            "account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            },
-    ///            "public_key": {
-    ///              "$ref": "#/components/schemas/PublicKey"
-    ///            }
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "access_key_update"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "description": "A view of the account",
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "amount",
-    ///              "code_hash",
-    ///              "locked",
-    ///              "storage_usage"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "amount": {
-    ///                "type": "string"
-    ///              },
-    ///              "code_hash": {
-    ///                "$ref": "#/components/schemas/CryptoHash"
-    ///              },
-    ///              "global_contract_account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "global_contract_hash": {
-    ///                "$ref": "#/components/schemas/CryptoHash"
-    ///              },
-    ///              "locked": {
-    ///                "type": "string"
-    ///              },
-    ///              "storage_paid_at": {
-    ///                "description": "TODO(2271): deprecated.",
-    ///                "default": 0,
-    ///                "type": "integer",
-    ///                "format": "uint64",
-    ///                "minimum": 0.0
-    ///              },
-    ///              "storage_usage": {
-    ///                "type": "integer",
-    ///                "format": "uint64",
-    ///                "minimum": 0.0
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "public_key"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "public_key": {
-    ///                "$ref": "#/components/schemas/PublicKey"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "access_key_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "key_base64",
-    ///              "value_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "key_base64": {
-    ///                "type": "string"
-    ///              },
-    ///              "value_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "key_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "key_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "code_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "code_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    #[serde(deny_unknown_fields)]
-    pub enum StateChangeWithCauseViewVariant2 {}
-    impl ::std::convert::From<&Self> for StateChangeWithCauseViewVariant2 {
-        fn from(value: &StateChangeWithCauseViewVariant2) -> Self {
-            value.clone()
-        }
-    }
-
-    ///StateChangeWithCauseViewVariant3
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "allOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "cause"
-    ///      ],
-    ///      "properties": {
-    ///        "cause": {
-    ///          "$ref": "#/components/schemas/StateChangeCauseView"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "change",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "change": {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "account_id",
-    ///            "public_key"
-    ///          ],
-    ///          "properties": {
-    ///            "account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            },
-    ///            "public_key": {
-    ///              "$ref": "#/components/schemas/PublicKey"
-    ///            }
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "access_key_deletion"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "description": "A view of the account",
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "amount",
-    ///              "code_hash",
-    ///              "locked",
-    ///              "storage_usage"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "amount": {
-    ///                "type": "string"
-    ///              },
-    ///              "code_hash": {
-    ///                "$ref": "#/components/schemas/CryptoHash"
-    ///              },
-    ///              "global_contract_account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "global_contract_hash": {
-    ///                "$ref": "#/components/schemas/CryptoHash"
-    ///              },
-    ///              "locked": {
-    ///                "type": "string"
-    ///              },
-    ///              "storage_paid_at": {
-    ///                "description": "TODO(2271): deprecated.",
-    ///                "default": 0,
-    ///                "type": "integer",
-    ///                "format": "uint64",
-    ///                "minimum": 0.0
-    ///              },
-    ///              "storage_usage": {
-    ///                "type": "integer",
-    ///                "format": "uint64",
-    ///                "minimum": 0.0
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "access_key",
-    ///              "account_id",
-    ///              "public_key"
-    ///            ],
-    ///            "properties": {
-    ///              "access_key": {
-    ///                "$ref": "#/components/schemas/AccessKeyView"
-    ///              },
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "public_key": {
-    ///                "$ref": "#/components/schemas/PublicKey"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "access_key_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "key_base64",
-    ///              "value_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "key_base64": {
-    ///                "type": "string"
-    ///              },
-    ///              "value_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "key_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "key_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "code_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "code_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    #[serde(deny_unknown_fields)]
-    pub enum StateChangeWithCauseViewVariant3 {}
-    impl ::std::convert::From<&Self> for StateChangeWithCauseViewVariant3 {
-        fn from(value: &StateChangeWithCauseViewVariant3) -> Self {
-            value.clone()
-        }
-    }
-
-    ///StateChangeWithCauseViewVariant4
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "allOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "cause"
-    ///      ],
-    ///      "properties": {
-    ///        "cause": {
-    ///          "$ref": "#/components/schemas/StateChangeCauseView"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "change",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "change": {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "account_id",
-    ///            "key_base64",
-    ///            "value_base64"
-    ///          ],
-    ///          "properties": {
-    ///            "account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            },
-    ///            "key_base64": {
-    ///              "type": "string"
-    ///            },
-    ///            "value_base64": {
-    ///              "type": "string"
-    ///            }
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "data_update"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "description": "A view of the account",
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "amount",
-    ///              "code_hash",
-    ///              "locked",
-    ///              "storage_usage"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "amount": {
-    ///                "type": "string"
-    ///              },
-    ///              "code_hash": {
-    ///                "$ref": "#/components/schemas/CryptoHash"
-    ///              },
-    ///              "global_contract_account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "global_contract_hash": {
-    ///                "$ref": "#/components/schemas/CryptoHash"
-    ///              },
-    ///              "locked": {
-    ///                "type": "string"
-    ///              },
-    ///              "storage_paid_at": {
-    ///                "description": "TODO(2271): deprecated.",
-    ///                "default": 0,
-    ///                "type": "integer",
-    ///                "format": "uint64",
-    ///                "minimum": 0.0
-    ///              },
-    ///              "storage_usage": {
-    ///                "type": "integer",
-    ///                "format": "uint64",
-    ///                "minimum": 0.0
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "access_key",
-    ///              "account_id",
-    ///              "public_key"
-    ///            ],
-    ///            "properties": {
-    ///              "access_key": {
-    ///                "$ref": "#/components/schemas/AccessKeyView"
-    ///              },
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "public_key": {
-    ///                "$ref": "#/components/schemas/PublicKey"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "access_key_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "public_key"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "public_key": {
-    ///                "$ref": "#/components/schemas/PublicKey"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "access_key_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "key_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "key_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "code_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "code_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    #[serde(deny_unknown_fields)]
-    pub enum StateChangeWithCauseViewVariant4 {}
-    impl ::std::convert::From<&Self> for StateChangeWithCauseViewVariant4 {
-        fn from(value: &StateChangeWithCauseViewVariant4) -> Self {
-            value.clone()
-        }
-    }
-
-    ///StateChangeWithCauseViewVariant5
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "allOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "cause"
-    ///      ],
-    ///      "properties": {
-    ///        "cause": {
-    ///          "$ref": "#/components/schemas/StateChangeCauseView"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "change",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "change": {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "account_id",
-    ///            "key_base64"
-    ///          ],
-    ///          "properties": {
-    ///            "account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            },
-    ///            "key_base64": {
-    ///              "type": "string"
-    ///            }
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "data_deletion"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "description": "A view of the account",
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "amount",
-    ///              "code_hash",
-    ///              "locked",
-    ///              "storage_usage"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "amount": {
-    ///                "type": "string"
-    ///              },
-    ///              "code_hash": {
-    ///                "$ref": "#/components/schemas/CryptoHash"
-    ///              },
-    ///              "global_contract_account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "global_contract_hash": {
-    ///                "$ref": "#/components/schemas/CryptoHash"
-    ///              },
-    ///              "locked": {
-    ///                "type": "string"
-    ///              },
-    ///              "storage_paid_at": {
-    ///                "description": "TODO(2271): deprecated.",
-    ///                "default": 0,
-    ///                "type": "integer",
-    ///                "format": "uint64",
-    ///                "minimum": 0.0
-    ///              },
-    ///              "storage_usage": {
-    ///                "type": "integer",
-    ///                "format": "uint64",
-    ///                "minimum": 0.0
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "access_key",
-    ///              "account_id",
-    ///              "public_key"
-    ///            ],
-    ///            "properties": {
-    ///              "access_key": {
-    ///                "$ref": "#/components/schemas/AccessKeyView"
-    ///              },
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "public_key": {
-    ///                "$ref": "#/components/schemas/PublicKey"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "access_key_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "public_key"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "public_key": {
-    ///                "$ref": "#/components/schemas/PublicKey"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "access_key_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "key_base64",
-    ///              "value_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "key_base64": {
-    ///                "type": "string"
-    ///              },
-    ///              "value_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "code_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "code_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    #[serde(deny_unknown_fields)]
-    pub enum StateChangeWithCauseViewVariant5 {}
-    impl ::std::convert::From<&Self> for StateChangeWithCauseViewVariant5 {
-        fn from(value: &StateChangeWithCauseViewVariant5) -> Self {
-            value.clone()
-        }
-    }
-
-    ///StateChangeWithCauseViewVariant6
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "allOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "cause"
-    ///      ],
-    ///      "properties": {
-    ///        "cause": {
-    ///          "$ref": "#/components/schemas/StateChangeCauseView"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "change",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "change": {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "account_id",
-    ///            "code_base64"
-    ///          ],
-    ///          "properties": {
-    ///            "account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            },
-    ///            "code_base64": {
-    ///              "type": "string"
-    ///            }
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "contract_code_update"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "description": "A view of the account",
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "amount",
-    ///              "code_hash",
-    ///              "locked",
-    ///              "storage_usage"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "amount": {
-    ///                "type": "string"
-    ///              },
-    ///              "code_hash": {
-    ///                "$ref": "#/components/schemas/CryptoHash"
-    ///              },
-    ///              "global_contract_account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "global_contract_hash": {
-    ///                "$ref": "#/components/schemas/CryptoHash"
-    ///              },
-    ///              "locked": {
-    ///                "type": "string"
-    ///              },
-    ///              "storage_paid_at": {
-    ///                "description": "TODO(2271): deprecated.",
-    ///                "default": 0,
-    ///                "type": "integer",
-    ///                "format": "uint64",
-    ///                "minimum": 0.0
-    ///              },
-    ///              "storage_usage": {
-    ///                "type": "integer",
-    ///                "format": "uint64",
-    ///                "minimum": 0.0
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "access_key",
-    ///              "account_id",
-    ///              "public_key"
-    ///            ],
-    ///            "properties": {
-    ///              "access_key": {
-    ///                "$ref": "#/components/schemas/AccessKeyView"
-    ///              },
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "public_key": {
-    ///                "$ref": "#/components/schemas/PublicKey"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "access_key_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "public_key"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "public_key": {
-    ///                "$ref": "#/components/schemas/PublicKey"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "access_key_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "key_base64",
-    ///              "value_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "key_base64": {
-    ///                "type": "string"
-    ///              },
-    ///              "value_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "key_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "key_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    #[serde(deny_unknown_fields)]
-    pub enum StateChangeWithCauseViewVariant6 {}
-    impl ::std::convert::From<&Self> for StateChangeWithCauseViewVariant6 {
-        fn from(value: &StateChangeWithCauseViewVariant6) -> Self {
-            value.clone()
-        }
-    }
-
-    ///StateChangeWithCauseViewVariant7
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "allOf": [
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "cause"
-    ///      ],
-    ///      "properties": {
-    ///        "cause": {
-    ///          "$ref": "#/components/schemas/StateChangeCauseView"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "change",
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "change": {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "account_id"
-    ///          ],
-    ///          "properties": {
-    ///            "account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          }
-    ///        },
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "contract_code_deletion"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "description": "A view of the account",
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "amount",
-    ///              "code_hash",
-    ///              "locked",
-    ///              "storage_usage"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "amount": {
-    ///                "type": "string"
-    ///              },
-    ///              "code_hash": {
-    ///                "$ref": "#/components/schemas/CryptoHash"
-    ///              },
-    ///              "global_contract_account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "global_contract_hash": {
-    ///                "$ref": "#/components/schemas/CryptoHash"
-    ///              },
-    ///              "locked": {
-    ///                "type": "string"
-    ///              },
-    ///              "storage_paid_at": {
-    ///                "description": "TODO(2271): deprecated.",
-    ///                "default": 0,
-    ///                "type": "integer",
-    ///                "format": "uint64",
-    ///                "minimum": 0.0
-    ///              },
-    ///              "storage_usage": {
-    ///                "type": "integer",
-    ///                "format": "uint64",
-    ///                "minimum": 0.0
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "access_key",
-    ///              "account_id",
-    ///              "public_key"
-    ///            ],
-    ///            "properties": {
-    ///              "access_key": {
-    ///                "$ref": "#/components/schemas/AccessKeyView"
-    ///              },
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "public_key": {
-    ///                "$ref": "#/components/schemas/PublicKey"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "access_key_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "public_key"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "public_key": {
-    ///                "$ref": "#/components/schemas/PublicKey"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "access_key_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "key_base64",
-    ///              "value_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "key_base64": {
-    ///                "type": "string"
-    ///              },
-    ///              "value_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "key_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "key_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_deletion"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "change",
-    ///          "type"
-    ///        ],
-    ///        "properties": {
-    ///          "change": {
-    ///            "type": "object",
-    ///            "required": [
-    ///              "account_id",
-    ///              "code_base64"
-    ///            ],
-    ///            "properties": {
-    ///              "account_id": {
-    ///                "$ref": "#/components/schemas/AccountId"
-    ///              },
-    ///              "code_base64": {
-    ///                "type": "string"
-    ///              }
-    ///            }
-    ///          },
-    ///          "type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_update"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    }
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    #[serde(deny_unknown_fields)]
-    pub enum StateChangeWithCauseViewVariant7 {}
-    impl ::std::convert::From<&Self> for StateChangeWithCauseViewVariant7 {
-        fn from(value: &StateChangeWithCauseViewVariant7) -> Self {
             value.clone()
         }
     }
