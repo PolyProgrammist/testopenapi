@@ -219,6 +219,17 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
+    let payloadExpTxStatus = keeper::types::JsonRpcRequestForExpTxStatusMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::ExpTxStatusMethodNameHelperEnum::ExperimentalTxStatus,
+        params: keeper::types::RpcTransactionStatusRequest::Variant1 {
+            tx_hash: transaction_hash.parse().unwrap(),
+            sender_account_id: sender_account_id.parse().unwrap(),
+            wait_until: Some(keeper::types::TxExecutionStatus::None),
+        }
+    };
+
     // let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     // println!("block: {:#?}", block);
 
@@ -284,8 +295,11 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     // let experimental_protocol_config: keeper::types::JsonRpcResponseForRpcProtocolConfigResponseAndRpcError = client_remote.experimental_protocol_config(&payloadProtocolConfig).await?.into_inner();
     // println!("experimental_protocol_config: {:#?}", experimental_protocol_config);
 
-    let experimental_receipt: keeper::types::JsonRpcResponseForRpcReceiptResponseAndRpcError = client_remote.experimental_receipt(&payloadReceipt).await?.into_inner();
-    println!("experimental_receipt: {:#?}", experimental_receipt);
+    // let experimental_receipt: keeper::types::JsonRpcResponseForRpcReceiptResponseAndRpcError = client_remote.experimental_receipt(&payloadReceipt).await?.into_inner();
+    // println!("experimental_receipt: {:#?}", experimental_receipt);
+
+    let experimental_tx_status: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.experimental_tx_status(&payloadExpTxStatus).await?.into_inner();
+    println!("experimental_tx_status: {:#?}", experimental_tx_status);
 
     // let file = File::open("tmp.json")?;
     // let reader = BufReader::new(file);
