@@ -308,8 +308,8 @@ generate_method_name_helper!(TxMethodNameHelperEnum, RpcTransactionStatusRequest
 generate_method_name_helper!(ValidatorsMethodNameHelperEnum, RpcValidatorRequest, "validators");
 generate_method_name_helper!(ClientConfigMethodNameHelperEnum, RpcClientConfigRequest, "client_config");
 
-generate_method_name_helper!(ExpChangeMethodNameHelperEnum, RpcStateChangesInBlockRequest, "EXPERIMENTAL_changes");
-generate_method_name_helper!(ExpChangesBlockMethodNameHelperEnum, RpcStateChangesInBlockByTypeRequest, "EXPERIMENTAL_changes_in_block");
+generate_method_name_helper!(ExpChangeMethodNameHelperEnum, RpcStateChangesInBlockByTypeRequest, "EXPERIMENTAL_changes");
+generate_method_name_helper!(ExpChangesBlockMethodNameHelperEnum, RpcStateChangesInBlockRequest, "EXPERIMENTAL_changes_in_block");
 generate_method_name_helper!(ExpGongestionMethodNameHelperEnum, RpcCongestionLevelRequest, "EXPERIMENTAL_congestion_level");
 generate_method_name_helper!(ExpGenesisMethodNameHelperEnum, GenesisConfigRequest, "EXPERIMENTAL_genesis_config");
 generate_method_name_helper!(ExpLightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofRequest, "EXPERIMENTAL_light_client_proof");

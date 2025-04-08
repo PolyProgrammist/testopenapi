@@ -10205,7 +10205,7 @@ pub mod types {
     ///      "$ref": "#/components/schemas/ExpChangeMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcStateChangesInBlockRequest"
+    ///      "$ref": "#/components/schemas/RpcStateChangesInBlockByTypeRequest"
     ///    }
     ///  }
     ///}
@@ -10216,7 +10216,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpChangeMethodNameHelperEnum,
-        pub params: RpcStateChangesInBlockRequest,
+        pub params: RpcStateChangesInBlockByTypeRequest,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpChangeMethodNameHelperEnum>
@@ -10252,7 +10252,7 @@ pub mod types {
     ///      "$ref": "#/components/schemas/ExpChangesBlockMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcStateChangesInBlockByTypeRequest"
+    ///      "$ref": "#/components/schemas/RpcStateChangesInBlockRequest"
     ///    }
     ///  }
     ///}
@@ -10263,7 +10263,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpChangesBlockMethodNameHelperEnum,
-        pub params: RpcStateChangesInBlockByTypeRequest,
+        pub params: RpcStateChangesInBlockRequest,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpChangesBlockMethodNameHelperEnum>
@@ -17871,9 +17871,9 @@ pub mod types {
     /// [`StateChangesRequest`].\n\n [serializable view]: ./index.html\n
     /// [`StateChangesRequest`]: ../types/struct.StateChangesRequest.html",
     ///  "type": "object",
-    ///  "allOf": [
+    ///  "oneOf": [
     ///    {
-    ///      "oneOf": [
+    ///      "allOf": [
     ///        {
     ///          "type": "object",
     ///          "required": [
@@ -17885,32 +17885,6 @@ pub mod types {
     ///            }
     ///          }
     ///        },
-    ///        {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "finality"
-    ///          ],
-    ///          "properties": {
-    ///            "finality": {
-    ///              "$ref": "#/components/schemas/Finality"
-    ///            }
-    ///          }
-    ///        },
-    ///        {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "sync_checkpoint"
-    ///          ],
-    ///          "properties": {
-    ///            "sync_checkpoint": {
-    ///              "$ref": "#/components/schemas/SyncCheckpoint"
-    ///            }
-    ///          }
-    ///        }
-    ///      ]
-    ///    },
-    ///    {
-    ///      "oneOf": [
     ///        {
     ///          "type": "object",
     ///          "required": [
@@ -17929,6 +17903,21 @@ pub mod types {
     ///              "enum": [
     ///                "account_changes"
     ///              ]
+    ///            }
+    ///          }
+    ///        }
+    ///      ]
+    ///    },
+    ///    {
+    ///      "allOf": [
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "block_id"
+    ///          ],
+    ///          "properties": {
+    ///            "block_id": {
+    ///              "$ref": "#/components/schemas/BlockId"
     ///            }
     ///          }
     ///        },
@@ -17952,6 +17941,21 @@ pub mod types {
     ///              }
     ///            }
     ///          }
+    ///        }
+    ///      ]
+    ///    },
+    ///    {
+    ///      "allOf": [
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "block_id"
+    ///          ],
+    ///          "properties": {
+    ///            "block_id": {
+    ///              "$ref": "#/components/schemas/BlockId"
+    ///            }
+    ///          }
     ///        },
     ///        {
     ///          "type": "object",
@@ -17973,6 +17977,21 @@ pub mod types {
     ///              ]
     ///            }
     ///          }
+    ///        }
+    ///      ]
+    ///    },
+    ///    {
+    ///      "allOf": [
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "block_id"
+    ///          ],
+    ///          "properties": {
+    ///            "block_id": {
+    ///              "$ref": "#/components/schemas/BlockId"
+    ///            }
+    ///          }
     ///        },
     ///        {
     ///          "type": "object",
@@ -17992,6 +18011,389 @@ pub mod types {
     ///              "enum": [
     ///                "contract_code_changes"
     ///              ]
+    ///            }
+    ///          }
+    ///        }
+    ///      ]
+    ///    },
+    ///    {
+    ///      "allOf": [
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "block_id"
+    ///          ],
+    ///          "properties": {
+    ///            "block_id": {
+    ///              "$ref": "#/components/schemas/BlockId"
+    ///            }
+    ///          }
+    ///        },
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_ids",
+    ///            "changes_type",
+    ///            "key_prefix_base64"
+    ///          ],
+    ///          "properties": {
+    ///            "account_ids": {
+    ///              "type": "array",
+    ///              "items": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            },
+    ///            "changes_type": {
+    ///              "type": "string",
+    ///              "enum": [
+    ///                "data_changes"
+    ///              ]
+    ///            },
+    ///            "key_prefix_base64": {
+    ///              "type": "string"
+    ///            }
+    ///          }
+    ///        }
+    ///      ]
+    ///    },
+    ///    {
+    ///      "allOf": [
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "finality"
+    ///          ],
+    ///          "properties": {
+    ///            "finality": {
+    ///              "$ref": "#/components/schemas/Finality"
+    ///            }
+    ///          }
+    ///        },
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_ids",
+    ///            "changes_type"
+    ///          ],
+    ///          "properties": {
+    ///            "account_ids": {
+    ///              "type": "array",
+    ///              "items": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            },
+    ///            "changes_type": {
+    ///              "type": "string",
+    ///              "enum": [
+    ///                "account_changes"
+    ///              ]
+    ///            }
+    ///          }
+    ///        }
+    ///      ]
+    ///    },
+    ///    {
+    ///      "allOf": [
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "finality"
+    ///          ],
+    ///          "properties": {
+    ///            "finality": {
+    ///              "$ref": "#/components/schemas/Finality"
+    ///            }
+    ///          }
+    ///        },
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "changes_type",
+    ///            "keys"
+    ///          ],
+    ///          "properties": {
+    ///            "changes_type": {
+    ///              "type": "string",
+    ///              "enum": [
+    ///                "single_access_key_changes"
+    ///              ]
+    ///            },
+    ///            "keys": {
+    ///              "type": "array",
+    ///              "items": {
+    ///                "$ref": "#/components/schemas/AccountWithPublicKey"
+    ///              }
+    ///            }
+    ///          }
+    ///        }
+    ///      ]
+    ///    },
+    ///    {
+    ///      "allOf": [
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "finality"
+    ///          ],
+    ///          "properties": {
+    ///            "finality": {
+    ///              "$ref": "#/components/schemas/Finality"
+    ///            }
+    ///          }
+    ///        },
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_ids",
+    ///            "changes_type"
+    ///          ],
+    ///          "properties": {
+    ///            "account_ids": {
+    ///              "type": "array",
+    ///              "items": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            },
+    ///            "changes_type": {
+    ///              "type": "string",
+    ///              "enum": [
+    ///                "all_access_key_changes"
+    ///              ]
+    ///            }
+    ///          }
+    ///        }
+    ///      ]
+    ///    },
+    ///    {
+    ///      "allOf": [
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "finality"
+    ///          ],
+    ///          "properties": {
+    ///            "finality": {
+    ///              "$ref": "#/components/schemas/Finality"
+    ///            }
+    ///          }
+    ///        },
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_ids",
+    ///            "changes_type"
+    ///          ],
+    ///          "properties": {
+    ///            "account_ids": {
+    ///              "type": "array",
+    ///              "items": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            },
+    ///            "changes_type": {
+    ///              "type": "string",
+    ///              "enum": [
+    ///                "contract_code_changes"
+    ///              ]
+    ///            }
+    ///          }
+    ///        }
+    ///      ]
+    ///    },
+    ///    {
+    ///      "allOf": [
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "finality"
+    ///          ],
+    ///          "properties": {
+    ///            "finality": {
+    ///              "$ref": "#/components/schemas/Finality"
+    ///            }
+    ///          }
+    ///        },
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_ids",
+    ///            "changes_type",
+    ///            "key_prefix_base64"
+    ///          ],
+    ///          "properties": {
+    ///            "account_ids": {
+    ///              "type": "array",
+    ///              "items": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            },
+    ///            "changes_type": {
+    ///              "type": "string",
+    ///              "enum": [
+    ///                "data_changes"
+    ///              ]
+    ///            },
+    ///            "key_prefix_base64": {
+    ///              "type": "string"
+    ///            }
+    ///          }
+    ///        }
+    ///      ]
+    ///    },
+    ///    {
+    ///      "allOf": [
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "sync_checkpoint"
+    ///          ],
+    ///          "properties": {
+    ///            "sync_checkpoint": {
+    ///              "$ref": "#/components/schemas/SyncCheckpoint"
+    ///            }
+    ///          }
+    ///        },
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_ids",
+    ///            "changes_type"
+    ///          ],
+    ///          "properties": {
+    ///            "account_ids": {
+    ///              "type": "array",
+    ///              "items": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            },
+    ///            "changes_type": {
+    ///              "type": "string",
+    ///              "enum": [
+    ///                "account_changes"
+    ///              ]
+    ///            }
+    ///          }
+    ///        }
+    ///      ]
+    ///    },
+    ///    {
+    ///      "allOf": [
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "sync_checkpoint"
+    ///          ],
+    ///          "properties": {
+    ///            "sync_checkpoint": {
+    ///              "$ref": "#/components/schemas/SyncCheckpoint"
+    ///            }
+    ///          }
+    ///        },
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "changes_type",
+    ///            "keys"
+    ///          ],
+    ///          "properties": {
+    ///            "changes_type": {
+    ///              "type": "string",
+    ///              "enum": [
+    ///                "single_access_key_changes"
+    ///              ]
+    ///            },
+    ///            "keys": {
+    ///              "type": "array",
+    ///              "items": {
+    ///                "$ref": "#/components/schemas/AccountWithPublicKey"
+    ///              }
+    ///            }
+    ///          }
+    ///        }
+    ///      ]
+    ///    },
+    ///    {
+    ///      "allOf": [
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "sync_checkpoint"
+    ///          ],
+    ///          "properties": {
+    ///            "sync_checkpoint": {
+    ///              "$ref": "#/components/schemas/SyncCheckpoint"
+    ///            }
+    ///          }
+    ///        },
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_ids",
+    ///            "changes_type"
+    ///          ],
+    ///          "properties": {
+    ///            "account_ids": {
+    ///              "type": "array",
+    ///              "items": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            },
+    ///            "changes_type": {
+    ///              "type": "string",
+    ///              "enum": [
+    ///                "all_access_key_changes"
+    ///              ]
+    ///            }
+    ///          }
+    ///        }
+    ///      ]
+    ///    },
+    ///    {
+    ///      "allOf": [
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "sync_checkpoint"
+    ///          ],
+    ///          "properties": {
+    ///            "sync_checkpoint": {
+    ///              "$ref": "#/components/schemas/SyncCheckpoint"
+    ///            }
+    ///          }
+    ///        },
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "account_ids",
+    ///            "changes_type"
+    ///          ],
+    ///          "properties": {
+    ///            "account_ids": {
+    ///              "type": "array",
+    ///              "items": {
+    ///                "$ref": "#/components/schemas/AccountId"
+    ///              }
+    ///            },
+    ///            "changes_type": {
+    ///              "type": "string",
+    ///              "enum": [
+    ///                "contract_code_changes"
+    ///              ]
+    ///            }
+    ///          }
+    ///        }
+    ///      ]
+    ///    },
+    ///    {
+    ///      "allOf": [
+    ///        {
+    ///          "type": "object",
+    ///          "required": [
+    ///            "sync_checkpoint"
+    ///          ],
+    ///          "properties": {
+    ///            "sync_checkpoint": {
+    ///              "$ref": "#/components/schemas/SyncCheckpoint"
     ///            }
     ///          }
     ///        },
@@ -18029,11 +18431,84 @@ pub mod types {
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(untagged)]
     pub enum RpcStateChangesInBlockByTypeRequest {
-        Variant0(RpcStateChangesInBlockByTypeRequestVariant0),
-        Variant1(RpcStateChangesInBlockByTypeRequestVariant1),
-        Variant2(RpcStateChangesInBlockByTypeRequestVariant2),
-        Variant3(RpcStateChangesInBlockByTypeRequestVariant3),
-        Variant4(RpcStateChangesInBlockByTypeRequestVariant4),
+        Variant0 {
+            account_ids: ::std::vec::Vec<AccountId>,
+            block_id: BlockId,
+            changes_type: RpcStateChangesInBlockByTypeRequestVariant0ChangesType,
+        },
+        Variant1 {
+            block_id: BlockId,
+            changes_type: RpcStateChangesInBlockByTypeRequestVariant1ChangesType,
+            keys: ::std::vec::Vec<AccountWithPublicKey>,
+        },
+        Variant2 {
+            account_ids: ::std::vec::Vec<AccountId>,
+            block_id: BlockId,
+            changes_type: RpcStateChangesInBlockByTypeRequestVariant2ChangesType,
+        },
+        Variant3 {
+            account_ids: ::std::vec::Vec<AccountId>,
+            block_id: BlockId,
+            changes_type: RpcStateChangesInBlockByTypeRequestVariant3ChangesType,
+        },
+        Variant4 {
+            account_ids: ::std::vec::Vec<AccountId>,
+            block_id: BlockId,
+            changes_type: RpcStateChangesInBlockByTypeRequestVariant4ChangesType,
+            key_prefix_base64: ::std::string::String,
+        },
+        Variant5 {
+            account_ids: ::std::vec::Vec<AccountId>,
+            changes_type: RpcStateChangesInBlockByTypeRequestVariant5ChangesType,
+            finality: Finality,
+        },
+        Variant6 {
+            changes_type: RpcStateChangesInBlockByTypeRequestVariant6ChangesType,
+            finality: Finality,
+            keys: ::std::vec::Vec<AccountWithPublicKey>,
+        },
+        Variant7 {
+            account_ids: ::std::vec::Vec<AccountId>,
+            changes_type: RpcStateChangesInBlockByTypeRequestVariant7ChangesType,
+            finality: Finality,
+        },
+        Variant8 {
+            account_ids: ::std::vec::Vec<AccountId>,
+            changes_type: RpcStateChangesInBlockByTypeRequestVariant8ChangesType,
+            finality: Finality,
+        },
+        Variant9 {
+            account_ids: ::std::vec::Vec<AccountId>,
+            changes_type: RpcStateChangesInBlockByTypeRequestVariant9ChangesType,
+            finality: Finality,
+            key_prefix_base64: ::std::string::String,
+        },
+        Variant10 {
+            account_ids: ::std::vec::Vec<AccountId>,
+            changes_type: RpcStateChangesInBlockByTypeRequestVariant10ChangesType,
+            sync_checkpoint: SyncCheckpoint,
+        },
+        Variant11 {
+            changes_type: RpcStateChangesInBlockByTypeRequestVariant11ChangesType,
+            keys: ::std::vec::Vec<AccountWithPublicKey>,
+            sync_checkpoint: SyncCheckpoint,
+        },
+        Variant12 {
+            account_ids: ::std::vec::Vec<AccountId>,
+            changes_type: RpcStateChangesInBlockByTypeRequestVariant12ChangesType,
+            sync_checkpoint: SyncCheckpoint,
+        },
+        Variant13 {
+            account_ids: ::std::vec::Vec<AccountId>,
+            changes_type: RpcStateChangesInBlockByTypeRequestVariant13ChangesType,
+            sync_checkpoint: SyncCheckpoint,
+        },
+        Variant14 {
+            account_ids: ::std::vec::Vec<AccountId>,
+            changes_type: RpcStateChangesInBlockByTypeRequestVariant14ChangesType,
+            key_prefix_base64: ::std::string::String,
+            sync_checkpoint: SyncCheckpoint,
+        },
     }
 
     impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequest {
@@ -18042,207 +18517,15 @@ pub mod types {
         }
     }
 
-    impl ::std::convert::From<RpcStateChangesInBlockByTypeRequestVariant0>
-        for RpcStateChangesInBlockByTypeRequest
-    {
-        fn from(value: RpcStateChangesInBlockByTypeRequestVariant0) -> Self {
-            Self::Variant0(value)
-        }
-    }
-
-    impl ::std::convert::From<RpcStateChangesInBlockByTypeRequestVariant1>
-        for RpcStateChangesInBlockByTypeRequest
-    {
-        fn from(value: RpcStateChangesInBlockByTypeRequestVariant1) -> Self {
-            Self::Variant1(value)
-        }
-    }
-
-    impl ::std::convert::From<RpcStateChangesInBlockByTypeRequestVariant2>
-        for RpcStateChangesInBlockByTypeRequest
-    {
-        fn from(value: RpcStateChangesInBlockByTypeRequestVariant2) -> Self {
-            Self::Variant2(value)
-        }
-    }
-
-    impl ::std::convert::From<RpcStateChangesInBlockByTypeRequestVariant3>
-        for RpcStateChangesInBlockByTypeRequest
-    {
-        fn from(value: RpcStateChangesInBlockByTypeRequestVariant3) -> Self {
-            Self::Variant3(value)
-        }
-    }
-
-    impl ::std::convert::From<RpcStateChangesInBlockByTypeRequestVariant4>
-        for RpcStateChangesInBlockByTypeRequest
-    {
-        fn from(value: RpcStateChangesInBlockByTypeRequestVariant4) -> Self {
-            Self::Variant4(value)
-        }
-    }
-
-    ///RpcStateChangesInBlockByTypeRequestVariant0
+    ///RpcStateChangesInBlockByTypeRequestVariant0ChangesType
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "allOf": [
-    ///    {
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "block_id"
-    ///          ],
-    ///          "properties": {
-    ///            "block_id": {
-    ///              "$ref": "#/components/schemas/BlockId"
-    ///            }
-    ///          }
-    ///        },
-    ///        {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "finality"
-    ///          ],
-    ///          "properties": {
-    ///            "finality": {
-    ///              "$ref": "#/components/schemas/Finality"
-    ///            }
-    ///          }
-    ///        },
-    ///        {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "sync_checkpoint"
-    ///          ],
-    ///          "properties": {
-    ///            "sync_checkpoint": {
-    ///              "$ref": "#/components/schemas/SyncCheckpoint"
-    ///            }
-    ///          }
-    ///        }
-    ///      ]
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "account_ids",
-    ///        "changes_type"
-    ///      ],
-    ///      "properties": {
-    ///        "account_ids": {
-    ///          "type": "array",
-    ///          "items": {
-    ///            "$ref": "#/components/schemas/AccountId"
-    ///          }
-    ///        },
-    ///        "changes_type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "account_changes"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "changes_type",
-    ///          "keys"
-    ///        ],
-    ///        "properties": {
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "single_access_key_changes"
-    ///            ]
-    ///          },
-    ///          "keys": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountWithPublicKey"
-    ///            }
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "account_ids",
-    ///          "changes_type"
-    ///        ],
-    ///        "properties": {
-    ///          "account_ids": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          },
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "all_access_key_changes"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "account_ids",
-    ///          "changes_type"
-    ///        ],
-    ///        "properties": {
-    ///          "account_ids": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          },
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_changes"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "account_ids",
-    ///          "changes_type",
-    ///          "key_prefix_base64"
-    ///        ],
-    ///        "properties": {
-    ///          "account_ids": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          },
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_changes"
-    ///            ]
-    ///          },
-    ///          "key_prefix_base64": {
-    ///            "type": "string"
-    ///          }
-    ///        }
-    ///      }
-    ///    }
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "account_changes"
     ///  ]
     ///}
     /// ```
@@ -18259,175 +18542,73 @@ pub mod types {
         PartialEq,
         PartialOrd,
     )]
-    #[serde(deny_unknown_fields)]
-    pub enum RpcStateChangesInBlockByTypeRequestVariant0 {}
-    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant0 {
-        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant0) -> Self {
+    pub enum RpcStateChangesInBlockByTypeRequestVariant0ChangesType {
+        #[serde(rename = "account_changes")]
+        AccountChanges,
+    }
+
+    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant0ChangesType {
+        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant0ChangesType) -> Self {
             value.clone()
         }
     }
 
-    ///RpcStateChangesInBlockByTypeRequestVariant1
+    impl ::std::fmt::Display for RpcStateChangesInBlockByTypeRequestVariant0ChangesType {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::AccountChanges => write!(f, "account_changes"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for RpcStateChangesInBlockByTypeRequestVariant0ChangesType {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "account_changes" => Ok(Self::AccountChanges),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for RpcStateChangesInBlockByTypeRequestVariant0ChangesType {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant0ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant0ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///RpcStateChangesInBlockByTypeRequestVariant10ChangesType
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "allOf": [
-    ///    {
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "block_id"
-    ///          ],
-    ///          "properties": {
-    ///            "block_id": {
-    ///              "$ref": "#/components/schemas/BlockId"
-    ///            }
-    ///          }
-    ///        },
-    ///        {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "finality"
-    ///          ],
-    ///          "properties": {
-    ///            "finality": {
-    ///              "$ref": "#/components/schemas/Finality"
-    ///            }
-    ///          }
-    ///        },
-    ///        {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "sync_checkpoint"
-    ///          ],
-    ///          "properties": {
-    ///            "sync_checkpoint": {
-    ///              "$ref": "#/components/schemas/SyncCheckpoint"
-    ///            }
-    ///          }
-    ///        }
-    ///      ]
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "changes_type",
-    ///        "keys"
-    ///      ],
-    ///      "properties": {
-    ///        "changes_type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "single_access_key_changes"
-    ///          ]
-    ///        },
-    ///        "keys": {
-    ///          "type": "array",
-    ///          "items": {
-    ///            "$ref": "#/components/schemas/AccountWithPublicKey"
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "account_ids",
-    ///          "changes_type"
-    ///        ],
-    ///        "properties": {
-    ///          "account_ids": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          },
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_changes"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "account_ids",
-    ///          "changes_type"
-    ///        ],
-    ///        "properties": {
-    ///          "account_ids": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          },
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "all_access_key_changes"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "account_ids",
-    ///          "changes_type"
-    ///        ],
-    ///        "properties": {
-    ///          "account_ids": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          },
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_changes"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "account_ids",
-    ///          "changes_type",
-    ///          "key_prefix_base64"
-    ///        ],
-    ///        "properties": {
-    ///          "account_ids": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          },
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_changes"
-    ///            ]
-    ///          },
-    ///          "key_prefix_base64": {
-    ///            "type": "string"
-    ///          }
-    ///        }
-    ///      }
-    ///    }
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "account_changes"
     ///  ]
     ///}
     /// ```
@@ -18444,175 +18625,73 @@ pub mod types {
         PartialEq,
         PartialOrd,
     )]
-    #[serde(deny_unknown_fields)]
-    pub enum RpcStateChangesInBlockByTypeRequestVariant1 {}
-    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant1 {
-        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant1) -> Self {
+    pub enum RpcStateChangesInBlockByTypeRequestVariant10ChangesType {
+        #[serde(rename = "account_changes")]
+        AccountChanges,
+    }
+
+    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant10ChangesType {
+        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant10ChangesType) -> Self {
             value.clone()
         }
     }
 
-    ///RpcStateChangesInBlockByTypeRequestVariant2
+    impl ::std::fmt::Display for RpcStateChangesInBlockByTypeRequestVariant10ChangesType {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::AccountChanges => write!(f, "account_changes"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for RpcStateChangesInBlockByTypeRequestVariant10ChangesType {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "account_changes" => Ok(Self::AccountChanges),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for RpcStateChangesInBlockByTypeRequestVariant10ChangesType {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant10ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant10ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///RpcStateChangesInBlockByTypeRequestVariant11ChangesType
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "allOf": [
-    ///    {
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "block_id"
-    ///          ],
-    ///          "properties": {
-    ///            "block_id": {
-    ///              "$ref": "#/components/schemas/BlockId"
-    ///            }
-    ///          }
-    ///        },
-    ///        {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "finality"
-    ///          ],
-    ///          "properties": {
-    ///            "finality": {
-    ///              "$ref": "#/components/schemas/Finality"
-    ///            }
-    ///          }
-    ///        },
-    ///        {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "sync_checkpoint"
-    ///          ],
-    ///          "properties": {
-    ///            "sync_checkpoint": {
-    ///              "$ref": "#/components/schemas/SyncCheckpoint"
-    ///            }
-    ///          }
-    ///        }
-    ///      ]
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "account_ids",
-    ///        "changes_type"
-    ///      ],
-    ///      "properties": {
-    ///        "account_ids": {
-    ///          "type": "array",
-    ///          "items": {
-    ///            "$ref": "#/components/schemas/AccountId"
-    ///          }
-    ///        },
-    ///        "changes_type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "all_access_key_changes"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "account_ids",
-    ///          "changes_type"
-    ///        ],
-    ///        "properties": {
-    ///          "account_ids": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          },
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_changes"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "changes_type",
-    ///          "keys"
-    ///        ],
-    ///        "properties": {
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "single_access_key_changes"
-    ///            ]
-    ///          },
-    ///          "keys": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountWithPublicKey"
-    ///            }
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "account_ids",
-    ///          "changes_type"
-    ///        ],
-    ///        "properties": {
-    ///          "account_ids": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          },
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_changes"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "account_ids",
-    ///          "changes_type",
-    ///          "key_prefix_base64"
-    ///        ],
-    ///        "properties": {
-    ///          "account_ids": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          },
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_changes"
-    ///            ]
-    ///          },
-    ///          "key_prefix_base64": {
-    ///            "type": "string"
-    ///          }
-    ///        }
-    ///      }
-    ///    }
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "single_access_key_changes"
     ///  ]
     ///}
     /// ```
@@ -18629,175 +18708,73 @@ pub mod types {
         PartialEq,
         PartialOrd,
     )]
-    #[serde(deny_unknown_fields)]
-    pub enum RpcStateChangesInBlockByTypeRequestVariant2 {}
-    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant2 {
-        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant2) -> Self {
+    pub enum RpcStateChangesInBlockByTypeRequestVariant11ChangesType {
+        #[serde(rename = "single_access_key_changes")]
+        SingleAccessKeyChanges,
+    }
+
+    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant11ChangesType {
+        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant11ChangesType) -> Self {
             value.clone()
         }
     }
 
-    ///RpcStateChangesInBlockByTypeRequestVariant3
+    impl ::std::fmt::Display for RpcStateChangesInBlockByTypeRequestVariant11ChangesType {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::SingleAccessKeyChanges => write!(f, "single_access_key_changes"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for RpcStateChangesInBlockByTypeRequestVariant11ChangesType {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "single_access_key_changes" => Ok(Self::SingleAccessKeyChanges),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for RpcStateChangesInBlockByTypeRequestVariant11ChangesType {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant11ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant11ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///RpcStateChangesInBlockByTypeRequestVariant12ChangesType
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "allOf": [
-    ///    {
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "block_id"
-    ///          ],
-    ///          "properties": {
-    ///            "block_id": {
-    ///              "$ref": "#/components/schemas/BlockId"
-    ///            }
-    ///          }
-    ///        },
-    ///        {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "finality"
-    ///          ],
-    ///          "properties": {
-    ///            "finality": {
-    ///              "$ref": "#/components/schemas/Finality"
-    ///            }
-    ///          }
-    ///        },
-    ///        {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "sync_checkpoint"
-    ///          ],
-    ///          "properties": {
-    ///            "sync_checkpoint": {
-    ///              "$ref": "#/components/schemas/SyncCheckpoint"
-    ///            }
-    ///          }
-    ///        }
-    ///      ]
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "account_ids",
-    ///        "changes_type"
-    ///      ],
-    ///      "properties": {
-    ///        "account_ids": {
-    ///          "type": "array",
-    ///          "items": {
-    ///            "$ref": "#/components/schemas/AccountId"
-    ///          }
-    ///        },
-    ///        "changes_type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "contract_code_changes"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "account_ids",
-    ///          "changes_type"
-    ///        ],
-    ///        "properties": {
-    ///          "account_ids": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          },
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_changes"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "changes_type",
-    ///          "keys"
-    ///        ],
-    ///        "properties": {
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "single_access_key_changes"
-    ///            ]
-    ///          },
-    ///          "keys": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountWithPublicKey"
-    ///            }
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "account_ids",
-    ///          "changes_type"
-    ///        ],
-    ///        "properties": {
-    ///          "account_ids": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          },
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "all_access_key_changes"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "account_ids",
-    ///          "changes_type",
-    ///          "key_prefix_base64"
-    ///        ],
-    ///        "properties": {
-    ///          "account_ids": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          },
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "data_changes"
-    ///            ]
-    ///          },
-    ///          "key_prefix_base64": {
-    ///            "type": "string"
-    ///          }
-    ///        }
-    ///      }
-    ///    }
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "all_access_key_changes"
     ///  ]
     ///}
     /// ```
@@ -18814,175 +18791,73 @@ pub mod types {
         PartialEq,
         PartialOrd,
     )]
-    #[serde(deny_unknown_fields)]
-    pub enum RpcStateChangesInBlockByTypeRequestVariant3 {}
-    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant3 {
-        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant3) -> Self {
+    pub enum RpcStateChangesInBlockByTypeRequestVariant12ChangesType {
+        #[serde(rename = "all_access_key_changes")]
+        AllAccessKeyChanges,
+    }
+
+    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant12ChangesType {
+        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant12ChangesType) -> Self {
             value.clone()
         }
     }
 
-    ///RpcStateChangesInBlockByTypeRequestVariant4
+    impl ::std::fmt::Display for RpcStateChangesInBlockByTypeRequestVariant12ChangesType {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::AllAccessKeyChanges => write!(f, "all_access_key_changes"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for RpcStateChangesInBlockByTypeRequestVariant12ChangesType {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "all_access_key_changes" => Ok(Self::AllAccessKeyChanges),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for RpcStateChangesInBlockByTypeRequestVariant12ChangesType {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant12ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant12ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///RpcStateChangesInBlockByTypeRequestVariant13ChangesType
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "allOf": [
-    ///    {
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "block_id"
-    ///          ],
-    ///          "properties": {
-    ///            "block_id": {
-    ///              "$ref": "#/components/schemas/BlockId"
-    ///            }
-    ///          }
-    ///        },
-    ///        {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "finality"
-    ///          ],
-    ///          "properties": {
-    ///            "finality": {
-    ///              "$ref": "#/components/schemas/Finality"
-    ///            }
-    ///          }
-    ///        },
-    ///        {
-    ///          "type": "object",
-    ///          "required": [
-    ///            "sync_checkpoint"
-    ///          ],
-    ///          "properties": {
-    ///            "sync_checkpoint": {
-    ///              "$ref": "#/components/schemas/SyncCheckpoint"
-    ///            }
-    ///          }
-    ///        }
-    ///      ]
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "account_ids",
-    ///        "changes_type",
-    ///        "key_prefix_base64"
-    ///      ],
-    ///      "properties": {
-    ///        "account_ids": {
-    ///          "type": "array",
-    ///          "items": {
-    ///            "$ref": "#/components/schemas/AccountId"
-    ///          }
-    ///        },
-    ///        "changes_type": {
-    ///          "type": "string",
-    ///          "enum": [
-    ///            "data_changes"
-    ///          ]
-    ///        },
-    ///        "key_prefix_base64": {
-    ///          "type": "string"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "account_ids",
-    ///          "changes_type"
-    ///        ],
-    ///        "properties": {
-    ///          "account_ids": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          },
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "account_changes"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "changes_type",
-    ///          "keys"
-    ///        ],
-    ///        "properties": {
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "single_access_key_changes"
-    ///            ]
-    ///          },
-    ///          "keys": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountWithPublicKey"
-    ///            }
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "account_ids",
-    ///          "changes_type"
-    ///        ],
-    ///        "properties": {
-    ///          "account_ids": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          },
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "all_access_key_changes"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "not": {
-    ///        "type": "object",
-    ///        "required": [
-    ///          "account_ids",
-    ///          "changes_type"
-    ///        ],
-    ///        "properties": {
-    ///          "account_ids": {
-    ///            "type": "array",
-    ///            "items": {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          },
-    ///          "changes_type": {
-    ///            "type": "string",
-    ///            "enum": [
-    ///              "contract_code_changes"
-    ///            ]
-    ///          }
-    ///        }
-    ///      }
-    ///    }
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "contract_code_changes"
     ///  ]
     ///}
     /// ```
@@ -18999,11 +18874,891 @@ pub mod types {
         PartialEq,
         PartialOrd,
     )]
-    #[serde(deny_unknown_fields)]
-    pub enum RpcStateChangesInBlockByTypeRequestVariant4 {}
-    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant4 {
-        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant4) -> Self {
+    pub enum RpcStateChangesInBlockByTypeRequestVariant13ChangesType {
+        #[serde(rename = "contract_code_changes")]
+        ContractCodeChanges,
+    }
+
+    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant13ChangesType {
+        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant13ChangesType) -> Self {
             value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for RpcStateChangesInBlockByTypeRequestVariant13ChangesType {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ContractCodeChanges => write!(f, "contract_code_changes"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for RpcStateChangesInBlockByTypeRequestVariant13ChangesType {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "contract_code_changes" => Ok(Self::ContractCodeChanges),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for RpcStateChangesInBlockByTypeRequestVariant13ChangesType {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant13ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant13ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///RpcStateChangesInBlockByTypeRequestVariant14ChangesType
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "data_changes"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum RpcStateChangesInBlockByTypeRequestVariant14ChangesType {
+        #[serde(rename = "data_changes")]
+        DataChanges,
+    }
+
+    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant14ChangesType {
+        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant14ChangesType) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for RpcStateChangesInBlockByTypeRequestVariant14ChangesType {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::DataChanges => write!(f, "data_changes"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for RpcStateChangesInBlockByTypeRequestVariant14ChangesType {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "data_changes" => Ok(Self::DataChanges),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for RpcStateChangesInBlockByTypeRequestVariant14ChangesType {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant14ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant14ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///RpcStateChangesInBlockByTypeRequestVariant1ChangesType
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "single_access_key_changes"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum RpcStateChangesInBlockByTypeRequestVariant1ChangesType {
+        #[serde(rename = "single_access_key_changes")]
+        SingleAccessKeyChanges,
+    }
+
+    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant1ChangesType {
+        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant1ChangesType) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for RpcStateChangesInBlockByTypeRequestVariant1ChangesType {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::SingleAccessKeyChanges => write!(f, "single_access_key_changes"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for RpcStateChangesInBlockByTypeRequestVariant1ChangesType {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "single_access_key_changes" => Ok(Self::SingleAccessKeyChanges),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for RpcStateChangesInBlockByTypeRequestVariant1ChangesType {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant1ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant1ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///RpcStateChangesInBlockByTypeRequestVariant2ChangesType
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "all_access_key_changes"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum RpcStateChangesInBlockByTypeRequestVariant2ChangesType {
+        #[serde(rename = "all_access_key_changes")]
+        AllAccessKeyChanges,
+    }
+
+    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant2ChangesType {
+        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant2ChangesType) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for RpcStateChangesInBlockByTypeRequestVariant2ChangesType {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::AllAccessKeyChanges => write!(f, "all_access_key_changes"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for RpcStateChangesInBlockByTypeRequestVariant2ChangesType {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "all_access_key_changes" => Ok(Self::AllAccessKeyChanges),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for RpcStateChangesInBlockByTypeRequestVariant2ChangesType {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant2ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant2ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///RpcStateChangesInBlockByTypeRequestVariant3ChangesType
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "contract_code_changes"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum RpcStateChangesInBlockByTypeRequestVariant3ChangesType {
+        #[serde(rename = "contract_code_changes")]
+        ContractCodeChanges,
+    }
+
+    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant3ChangesType {
+        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant3ChangesType) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for RpcStateChangesInBlockByTypeRequestVariant3ChangesType {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ContractCodeChanges => write!(f, "contract_code_changes"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for RpcStateChangesInBlockByTypeRequestVariant3ChangesType {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "contract_code_changes" => Ok(Self::ContractCodeChanges),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for RpcStateChangesInBlockByTypeRequestVariant3ChangesType {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant3ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant3ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///RpcStateChangesInBlockByTypeRequestVariant4ChangesType
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "data_changes"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum RpcStateChangesInBlockByTypeRequestVariant4ChangesType {
+        #[serde(rename = "data_changes")]
+        DataChanges,
+    }
+
+    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant4ChangesType {
+        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant4ChangesType) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for RpcStateChangesInBlockByTypeRequestVariant4ChangesType {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::DataChanges => write!(f, "data_changes"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for RpcStateChangesInBlockByTypeRequestVariant4ChangesType {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "data_changes" => Ok(Self::DataChanges),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for RpcStateChangesInBlockByTypeRequestVariant4ChangesType {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant4ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant4ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///RpcStateChangesInBlockByTypeRequestVariant5ChangesType
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "account_changes"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum RpcStateChangesInBlockByTypeRequestVariant5ChangesType {
+        #[serde(rename = "account_changes")]
+        AccountChanges,
+    }
+
+    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant5ChangesType {
+        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant5ChangesType) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for RpcStateChangesInBlockByTypeRequestVariant5ChangesType {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::AccountChanges => write!(f, "account_changes"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for RpcStateChangesInBlockByTypeRequestVariant5ChangesType {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "account_changes" => Ok(Self::AccountChanges),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for RpcStateChangesInBlockByTypeRequestVariant5ChangesType {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant5ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant5ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///RpcStateChangesInBlockByTypeRequestVariant6ChangesType
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "single_access_key_changes"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum RpcStateChangesInBlockByTypeRequestVariant6ChangesType {
+        #[serde(rename = "single_access_key_changes")]
+        SingleAccessKeyChanges,
+    }
+
+    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant6ChangesType {
+        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant6ChangesType) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for RpcStateChangesInBlockByTypeRequestVariant6ChangesType {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::SingleAccessKeyChanges => write!(f, "single_access_key_changes"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for RpcStateChangesInBlockByTypeRequestVariant6ChangesType {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "single_access_key_changes" => Ok(Self::SingleAccessKeyChanges),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for RpcStateChangesInBlockByTypeRequestVariant6ChangesType {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant6ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant6ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///RpcStateChangesInBlockByTypeRequestVariant7ChangesType
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "all_access_key_changes"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum RpcStateChangesInBlockByTypeRequestVariant7ChangesType {
+        #[serde(rename = "all_access_key_changes")]
+        AllAccessKeyChanges,
+    }
+
+    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant7ChangesType {
+        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant7ChangesType) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for RpcStateChangesInBlockByTypeRequestVariant7ChangesType {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::AllAccessKeyChanges => write!(f, "all_access_key_changes"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for RpcStateChangesInBlockByTypeRequestVariant7ChangesType {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "all_access_key_changes" => Ok(Self::AllAccessKeyChanges),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for RpcStateChangesInBlockByTypeRequestVariant7ChangesType {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant7ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant7ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///RpcStateChangesInBlockByTypeRequestVariant8ChangesType
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "contract_code_changes"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum RpcStateChangesInBlockByTypeRequestVariant8ChangesType {
+        #[serde(rename = "contract_code_changes")]
+        ContractCodeChanges,
+    }
+
+    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant8ChangesType {
+        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant8ChangesType) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for RpcStateChangesInBlockByTypeRequestVariant8ChangesType {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ContractCodeChanges => write!(f, "contract_code_changes"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for RpcStateChangesInBlockByTypeRequestVariant8ChangesType {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "contract_code_changes" => Ok(Self::ContractCodeChanges),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for RpcStateChangesInBlockByTypeRequestVariant8ChangesType {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant8ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant8ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///RpcStateChangesInBlockByTypeRequestVariant9ChangesType
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "data_changes"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum RpcStateChangesInBlockByTypeRequestVariant9ChangesType {
+        #[serde(rename = "data_changes")]
+        DataChanges,
+    }
+
+    impl ::std::convert::From<&Self> for RpcStateChangesInBlockByTypeRequestVariant9ChangesType {
+        fn from(value: &RpcStateChangesInBlockByTypeRequestVariant9ChangesType) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for RpcStateChangesInBlockByTypeRequestVariant9ChangesType {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::DataChanges => write!(f, "data_changes"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for RpcStateChangesInBlockByTypeRequestVariant9ChangesType {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "data_changes" => Ok(Self::DataChanges),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for RpcStateChangesInBlockByTypeRequestVariant9ChangesType {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant9ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for RpcStateChangesInBlockByTypeRequestVariant9ChangesType
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
         }
     }
 
