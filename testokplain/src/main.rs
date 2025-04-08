@@ -335,6 +335,9 @@ use near_jsonrpc_primitives::types::{
     split_storage::{
         RpcSplitStorageInfoResponse, RpcSplitStorageInfoRequest, 
     },
+    validator::{
+        RpcValidatorsOrderedRequest
+    }
 };
 
 use near_chain_configs::GenesisConfig;
@@ -394,7 +397,7 @@ generate_method_name_helper!(ExpLightClientBlockProofMethodNameHelperEnum, RpcLi
 generate_method_name_helper!(ExpProtocolConfigMethodNameHelperEnum, RpcProtocolConfigRequest, "EXPERIMENTAL_protocol_config");
 generate_method_name_helper!(ExpReceiptMethodNameHelperEnum, RpcReceiptRequest, "EXPERIMENTAL_receipt");
 generate_method_name_helper!(ExpTxStatusMethodNameHelperEnum, RpcTransactionStatusRequest, "EXPERIMENTAL_tx_status");
-generate_method_name_helper!(ExpValidatorsMethodNameHelperEnum, RpcClientConfigRequest, "EXPERIMENTAL_validators_ordered");
+generate_method_name_helper!(ExpValidatorsMethodNameHelperEnum, RpcValidatorsOrderedRequest, "EXPERIMENTAL_validators_ordered");
 generate_method_name_helper!(ExpMaintenanceWindoesMethodNameHelperEnum, RpcMaintenanceWindowsRequest, "EXPERIMENTAL_maintenance_windows");
 generate_method_name_helper!(ExpSplitStorageInfoMethodNameHelperEnum, RpcSplitStorageInfoRequest, "EXPERIMENTAL_split_storage_info");
 

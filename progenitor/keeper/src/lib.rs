@@ -10729,7 +10729,7 @@ pub mod types {
     ///      "$ref": "#/components/schemas/ExpValidatorsMethodNameHelperEnum"
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcClientConfigRequest"
+    ///      "$ref": "#/components/schemas/RpcValidatorsOrderedRequest"
     ///    }
     ///  }
     ///}
@@ -10740,7 +10740,7 @@ pub mod types {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
         pub method: ExpValidatorsMethodNameHelperEnum,
-        pub params: RpcClientConfigRequest,
+        pub params: RpcValidatorsOrderedRequest,
     }
 
     impl ::std::convert::From<&JsonRpcRequestForExpValidatorsMethodNameHelperEnum>
@@ -20358,6 +20358,41 @@ pub mod types {
     impl ::std::convert::From<&RpcValidatorResponse> for RpcValidatorResponse {
         fn from(value: &RpcValidatorResponse) -> Self {
             value.clone()
+        }
+    }
+
+    ///RpcValidatorsOrderedRequest
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "properties": {
+    ///    "block_id": {
+    ///      "$ref": "#/components/schemas/BlockId"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RpcValidatorsOrderedRequest {
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub block_id: ::std::option::Option<BlockId>,
+    }
+
+    impl ::std::convert::From<&RpcValidatorsOrderedRequest> for RpcValidatorsOrderedRequest {
+        fn from(value: &RpcValidatorsOrderedRequest) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::default::Default for RpcValidatorsOrderedRequest {
+        fn default() -> Self {
+            Self {
+                block_id: Default::default(),
+            }
         }
     }
 

@@ -230,6 +230,15 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
+    let payloadValidators = keeper::types::JsonRpcRequestForExpValidatorsMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::ExpValidatorsMethodNameHelperEnum::ExperimentalValidatorsOrdered,
+        params: keeper::types::RpcValidatorsOrderedRequest {
+            block_id: None
+        }
+    };
+
     // let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     // println!("block: {:#?}", block);
 
@@ -298,8 +307,11 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     // let experimental_receipt: keeper::types::JsonRpcResponseForRpcReceiptResponseAndRpcError = client_remote.experimental_receipt(&payloadReceipt).await?.into_inner();
     // println!("experimental_receipt: {:#?}", experimental_receipt);
 
-    let experimental_tx_status: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.experimental_tx_status(&payloadExpTxStatus).await?.into_inner();
-    println!("experimental_tx_status: {:#?}", experimental_tx_status);
+    // let experimental_tx_status: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.experimental_tx_status(&payloadExpTxStatus).await?.into_inner();
+    // println!("experimental_tx_status: {:#?}", experimental_tx_status);
+
+    let experimental_validators: keeper::types::JsonRpcResponseForArrayOfValidatorStakeViewAndRpcError = client_remote.experimental_validators_ordered(&payloadValidators).await?.into_inner();
+    println!("experimental_validators: {:#?}", experimental_validators);
 
     // let file = File::open("tmp.json")?;
     // let reader = BufReader::new(file);

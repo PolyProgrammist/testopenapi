@@ -6401,7 +6401,7 @@
                         "$ref": "#/components/schemas/ExpValidatorsMethodNameHelperEnum"
                     },
                     "params": {
-                        "$ref": "#/components/schemas/RpcClientConfigRequest"
+                        "$ref": "#/components/schemas/RpcValidatorsOrderedRequest"
                     }
                 },
                 "required": [
@@ -10939,6 +10939,15 @@
                     "epoch_start_height",
                     "epoch_height"
                 ],
+                "type": "object"
+            },
+            "RpcValidatorsOrderedRequest": {
+                "properties": {
+                    "block_id": {
+                        "$ref": "#/components/schemas/BlockId",
+                        "nullable": true
+                    }
+                },
                 "type": "object"
             },
             "RuntimeConfigView": {
