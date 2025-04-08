@@ -203,6 +203,13 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
+    let payloadProtocolConfig = keeper::types::JsonRpcRequestForExpProtocolConfigMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::ExpProtocolConfigMethodNameHelperEnum::ExperimentalProtocolConfig,
+        params: keeper::types::RpcProtocolConfigRequest::BlockId(keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()))
+    };
+
     // let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     // println!("block: {:#?}", block);
 
@@ -262,9 +269,11 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     // let experimental_light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.experimental_light_client_proof(&payloadExpLightClientExecutionProof).await?.into_inner();
     // println!("experimental_light_client_execution_proof: {:#?}", experimental_light_client_execution_proof);
 
-    let experimental_next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientBlockProofResponseAndRpcError = client_remote.experimental_light_client_block_proof(&payloadExpLightClientBlock).await?.into_inner();
-    println!("experimental_next_light_client_block: {:#?}", experimental_next_light_client_block);
+    // let experimental_next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientBlockProofResponseAndRpcError = client_remote.experimental_light_client_block_proof(&payloadExpLightClientBlock).await?.into_inner();
+    // println!("experimental_next_light_client_block: {:#?}", experimental_next_light_client_block);
 
+    let experimental_protocol_config: keeper::types::JsonRpcResponseForRpcProtocolConfigResponseAndRpcError = client_remote.experimental_protocol_config(&payloadProtocolConfig).await?.into_inner();
+    println!("experimental_protocol_config: {:#?}", experimental_protocol_config);
 
     // let file = File::open("tmp.json")?;
     // let reader = BufReader::new(file);
