@@ -164,6 +164,16 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         params: keeper::types::RpcStateChangesInBlockRequest::BlockId(keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()))
     };
 
+    let payloadCongestionLevel = keeper::types::JsonRpcRequestForExpGongestionMethodNameHelperEnum {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::ExpGongestionMethodNameHelperEnum::ExperimentalCongestionLevel,
+        params: keeper::types::RpcCongestionLevelRequest::Variant0 {
+            block_id: keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()),
+            shard_id: keeper::types::ShardId(0)
+        }
+    };
+
     // let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     // println!("block: {:#?}", block);
 
@@ -211,8 +221,11 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     // let experimental_changes: keeper::types::JsonRpcResponseForRpcStateChangesInBlockResponseAndRpcError = client_remote.experimental_changes(&payloadStateChanges).await?.into_inner();
     // println!("experimental_changes: {:#?}", experimental_changes);
 
-    let experimental_changes_in_block: keeper::types::JsonRpcResponseForRpcStateChangesInBlockByTypeResponseAndRpcError = client_remote.experimental_changes_in_block(&payloadChangesInBlock).await?.into_inner();
-    println!("experimental_changes_in_block: {:#?}", experimental_changes_in_block);
+    // let experimental_changes_in_block: keeper::types::JsonRpcResponseForRpcStateChangesInBlockByTypeResponseAndRpcError = client_remote.experimental_changes_in_block(&payloadChangesInBlock).await?.into_inner();
+    // println!("experimental_changes_in_block: {:#?}", experimental_changes_in_block);
+
+    let congestion_level: keeper::types::JsonRpcResponseForRpcCongestionLevelResponseAndRpcError = client_remote.experimental_congestion_level(&payloadCongestionLevel).await?.into_inner();
+    println!("congestion_level: {:#?}", congestion_level);
 
     // let file = File::open("tmp.json")?;
     // let reader = BufReader::new(file);
