@@ -4,19 +4,16 @@ use std::error::Error;
 use std::fs::File;
 use std::io::BufReader;
 use std::io::Read;
+use keeper::types::CryptoHash;
 
 const NEAR_RPC_URL_REMOTE: &str = "https://archival-rpc.mainnet.near.org";
 const NEAR_RPC_URL_LOCAL: &str = "http://localhost:3030";
 
 async fn print_transaction() -> Result<(), Box<dyn Error>> {
-    // 
-    // let transaction_hash = "7LGhv7GUTUX3th4Dm2AmEHCWV3Z9C2G1SDJUZXGwkJPv"; // Replace with your TX hash
-
-    let transaction_hash = "6zpAGJMsPAcTRm7vuD4V6tgevx7suVwXTQ56DRgfZ5ft";
-
-    let transaction_hash = "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1TczCrhZEcG8U"; // Replace with your TX hash
-    let block_hash = "8jvfhbzGnCcYjkCrnqnzDr8bXBbFLUXaoVt6jsRNB1pU";
-    let sender_account_id = "miraclx.near"; // Replace with sender's account
+    let transaction_hash: CryptoHash = "9FtHUFBQsZ2MG77K3x3MJ9wjX3UT8zE1TczCrhZEcG8U".parse().unwrap(); // Replace with your TX hash
+    let block_hash: CryptoHash = "Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap();
+    let sender_account_id: keeper::types::AccountId = "miraclx.near".parse().unwrap();
+    let signed_tx_base64 = "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string();
 
     let client_remote = Client::new(NEAR_RPC_URL_REMOTE);
     let client_local = Client::new(NEAR_RPC_URL_LOCAL);
@@ -26,7 +23,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         jsonrpc: String::from("2.0"),
         method: keeper::types::BlockMethodNameHelperEnum::Block,
         params: keeper::types::RpcBlockRequest::BlockId({
-            keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap())
+            keeper::types::BlockId::Variant1(block_hash.clone())
         })
     };
 
@@ -35,7 +32,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         jsonrpc: String::from("2.0"),
         method: keeper::types::BroadCastTxAsyncMethodNameHelperEnum::BroadcastTxAsync,
         params: keeper::types::RpcSendTransactionRequest {
-            signed_tx_base64: "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string(),
+            signed_tx_base64: signed_tx_base64.clone(),
             wait_until: Some(keeper::types::TxExecutionStatus::Executed)
         }
     };
@@ -45,7 +42,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         jsonrpc: String::from("2.0"),
         method: keeper::types::BroadCastTxCommitMethodNameHelperEnum::BroadcastTxCommit,
         params: keeper::types::RpcSendTransactionRequest {
-            signed_tx_base64: "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string(),
+            signed_tx_base64: signed_tx_base64.clone(),
             wait_until: Some(keeper::types::TxExecutionStatus::Executed)
         }
     };
@@ -55,7 +52,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         jsonrpc: String::from("2.0"),
         method: keeper::types::ChunkMethodNameHelperEnum::Chunk,
         params: keeper::types::RpcChunkRequest::Variant0{
-            block_id: keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()),
+            block_id: keeper::types::BlockId::Variant1(block_hash.clone()),
             shard_id: keeper::types::ShardId(0)
         }
     };
@@ -65,7 +62,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         jsonrpc: String::from("2.0"),
         method: keeper::types::GasPriceMethodNameHelperEnum::GasPrice,
         params: keeper::types::RpcGasPriceRequest {
-            block_id: Some(keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()))
+            block_id: Some(keeper::types::BlockId::Variant1(block_hash.clone()))
         }
     };
 
@@ -90,9 +87,9 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         jsonrpc: String::from("2.0"),
         method: keeper::types::LightClientProofMethodNameHelperEnum::LightClientProof,
         params: keeper::types::RpcLightClientExecutionProofRequest::Variant0 {
-            light_client_head: "Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap(),
-            sender_id: sender_account_id.parse().unwrap(),
-            transaction_hash: transaction_hash.parse().unwrap(),
+            light_client_head: block_hash.clone(),
+            sender_id: sender_account_id.clone(),
+            transaction_hash: transaction_hash.clone(),
             type_: keeper::types::TypeTransactionOrReceiptId::Transaction,
         }
     };
@@ -102,7 +99,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         jsonrpc: String::from("2.0"),
         method: keeper::types::NextLightClientBlockMethodNameHelperEnum::NextLightClientBlock,
         params: keeper::types::RpcLightClientNextBlockRequest {
-            last_block_hash: "Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap(),
+            last_block_hash: block_hash.clone(),
         }
     };
 
@@ -118,7 +115,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         jsonrpc: String::from("2.0"),
         method: keeper::types::SendTxMethodNameHelperEnum::SendTx,
         params: keeper::types::RpcSendTransactionRequest {
-            signed_tx_base64: "DgAAAHNlbmRlci50ZXN0bmV0AOrmAai64SZOv9e/naX4W15pJx0GAap35wTT1T/DwcbbDwAAAAAAAAAQAAAAcmVjZWl2ZXIudGVzdG5ldNMnL7URB1cxPOu3G8jTqlEwlcasagIbKlAJlF5ywVFLAQAAAAMAAACh7czOG8LTAAAAAAAAAGQcOG03xVSFQFjoagOb4NBBqWhERnnz45LY4+52JgZhm1iQKz7qAdPByrGFDQhQ2Mfga8RlbysuQ8D8LlA6bQE=".to_string(),
+            signed_tx_base64: signed_tx_base64.clone(),
             wait_until: Some(keeper::types::TxExecutionStatus::Executed)
         }
     };
@@ -128,8 +125,8 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         jsonrpc: String::from("2.0"),
         method: keeper::types::TxMethodNameHelperEnum::Tx,
         params: keeper::types::RpcTransactionStatusRequest::Variant1 {
-            tx_hash: transaction_hash.parse().unwrap(),
-            sender_account_id: sender_account_id.parse().unwrap(),
+            tx_hash: transaction_hash.clone(),
+            sender_account_id: sender_account_id.clone(),
             wait_until: Some(keeper::types::TxExecutionStatus::None),
         }
     };
@@ -162,7 +159,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         params: keeper::types::RpcStateChangesInBlockByTypeRequest::Variant0 {
             changes_type: keeper::types::RpcStateChangesInBlockByTypeRequestVariant0ChangesType::AccountChanges,
             account_ids: vec!["token.sweat".parse().unwrap()],
-            block_id: keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()),
+            block_id: keeper::types::BlockId::Variant1(block_hash.clone()),
         }
     };
 
@@ -170,7 +167,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         id: String::from("dontcare"),
         jsonrpc: String::from("2.0"),
         method: keeper::types::ExpChangesBlockMethodNameHelperEnum::ExperimentalChangesInBlock,
-        params: keeper::types::RpcStateChangesInBlockRequest::BlockId(keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()))
+        params: keeper::types::RpcStateChangesInBlockRequest::BlockId(keeper::types::BlockId::Variant1(block_hash.clone()))
     };
 
     let payloadCongestionLevel = keeper::types::JsonRpcRequestForExpGongestionMethodNameHelperEnum {
@@ -178,7 +175,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         jsonrpc: String::from("2.0"),
         method: keeper::types::ExpGongestionMethodNameHelperEnum::ExperimentalCongestionLevel,
         params: keeper::types::RpcCongestionLevelRequest::Variant0 {
-            block_id: keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()),
+            block_id: keeper::types::BlockId::Variant1(block_hash.clone()),
             shard_id: keeper::types::ShardId(0)
         }
     };
@@ -195,9 +192,9 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         jsonrpc: String::from("2.0"),
         method: keeper::types::ExpLightClientProofMethodNameHelperEnum::ExperimentalLightClientProof,
         params: keeper::types::RpcLightClientExecutionProofRequest::Variant0 {
-            light_client_head: "Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap(),
-            sender_id: sender_account_id.parse().unwrap(),
-            transaction_hash: transaction_hash.parse().unwrap(),
+            light_client_head: block_hash.clone(),
+            sender_id: sender_account_id.clone(),
+            transaction_hash: transaction_hash.clone(),
             type_: keeper::types::TypeTransactionOrReceiptId::Transaction,
         }
     };
@@ -207,8 +204,8 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         jsonrpc: String::from("2.0"),
         method: keeper::types::ExpLightClientBlockProofMethodNameHelperEnum::ExperimentalLightClientBlockProof,
         params: keeper::types::RpcLightClientBlockProofRequest {
-            block_hash: "Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap(),
-            light_client_head: "Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap(),
+            block_hash: block_hash.clone(),
+            light_client_head: block_hash.clone(),
         }
     };
 
@@ -216,7 +213,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         id: String::from("dontcare"),
         jsonrpc: String::from("2.0"),
         method: keeper::types::ExpProtocolConfigMethodNameHelperEnum::ExperimentalProtocolConfig,
-        params: keeper::types::RpcProtocolConfigRequest::BlockId(keeper::types::BlockId::Variant1("Dxhrj21NWZYKi3DpCtQNtmhLj5sg6FwVVQCRn3EyLZLF".parse().unwrap()))
+        params: keeper::types::RpcProtocolConfigRequest::BlockId(keeper::types::BlockId::Variant1(block_hash.clone()))
     };
 
     let payloadReceipt = keeper::types::JsonRpcRequestForExpReceiptMethodNameHelperEnum {
@@ -233,8 +230,8 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         jsonrpc: String::from("2.0"),
         method: keeper::types::ExpTxStatusMethodNameHelperEnum::ExperimentalTxStatus,
         params: keeper::types::RpcTransactionStatusRequest::Variant1 {
-            tx_hash: transaction_hash.parse().unwrap(),
-            sender_account_id: sender_account_id.parse().unwrap(),
+            tx_hash: transaction_hash.clone(),
+            sender_account_id: sender_account_id.clone(),
             wait_until: Some(keeper::types::TxExecutionStatus::None),
         }
     };
@@ -253,7 +250,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         jsonrpc: String::from("2.0"),
         method: keeper::types::ExpMaintenanceWindoesMethodNameHelperEnum::ExperimentalMaintenanceWindows,
         params: keeper::types::RpcMaintenanceWindowsRequest {
-            account_id: sender_account_id.parse().unwrap(),
+            account_id: sender_account_id.clone(),
         }
     };
 
@@ -348,9 +345,6 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let experimental_split_storage: keeper::types::JsonRpcResponseForRpcSplitStorageInfoResponseAndRpcError = client_remote.experimental_split_storage_info(&payloadSplitStorage).await?.into_inner();
     println!("the_response experimental_split_storage: {:#?}", experimental_split_storage);
 
-    // let file = File::open("tmp.json")?;
-    // let reader = BufReader::new(file);
-    // let changes: keeper::types::RpcStateChangesInBlockResponse = serde_json::from_reader(reader)?;
     Ok(())
 }
 
@@ -368,14 +362,3 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     Ok(())
 }
-
-
-    // let path = "tmp.json";
-    // let file = File::open(path)?;
-    // let reader = BufReader::new(file);
-    
-    // // Parse the JSON directly into the desired type
-    // // let config: keeper::types::JsonRpcResponseForRpcClientConfigResponseAndRpcError = serde_json::from_reader(reader)?;
-    // // let onlyresharding: keeper::types::RpcClientConfigResponseOnlyResharding = serde_json::from_reader(reader)?;
-
-
