@@ -236,14 +236,14 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     //     }
     // };
 
-    // let payloadExpValidators = keeper::types::JsonRpcRequestForExpValidatorsMethodNameHelperEnum {
-    //     id: String::from("dontcare"),
-    //     jsonrpc: String::from("2.0"),
-    //     method: keeper::types::ExpValidatorsMethodNameHelperEnum::ExperimentalValidatorsOrdered,
-    //     params: keeper::types::RpcValidatorsOrderedRequest {
-    //         block_id: None
-    //     }
-    // };
+    let payloadExpValidators = keeper::types::JsonRpcRequestForRpcValidatorsOrderedRequest {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::JsonRpcRequestForRpcValidatorsOrderedRequestMethod::ExperimentalValidatorsOrdered,
+        params: keeper::types::RpcValidatorsOrderedRequest {
+            block_id: None
+        }
+    };
 
     let payloadMaintenanceWindows = keeper::types::JsonRpcRequestForRpcMaintenanceWindowsRequest {
         id: String::from("dontcare"),
@@ -335,8 +335,8 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     // let experimental_tx_status: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.experimental_tx_status(&payloadExpTxStatus).await?.into_inner();
     // println!("the_response experimental_tx_status: {:#?}", experimental_tx_status);
 
-    // let experimental_validators: keeper::types::JsonRpcResponseForArrayOfValidatorStakeViewAndRpcError = client_remote.experimental_validators_ordered(&payloadExpValidators).await?.into_inner();
-    // println!("the_response experimental_validators: {:#?}", experimental_validators);
+    let experimental_validators: keeper::types::JsonRpcResponseForArrayOfValidatorStakeViewAndRpcError = client_remote.experimental_validators_ordered(&payloadExpValidators).await?.into_inner();
+    println!("the_response experimental_validators: {:#?}", experimental_validators);
 
     // local as changed from tuple to struct
     let experimental_maintenance_windows: keeper::types::JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError = client_remote.experimental_maintenance_windows(&payloadMaintenanceWindows).await?.into_inner();

@@ -407,64 +407,35 @@ struct RpcClientConfigRequest;
 #[derive(JsonSchema)]
 struct GenesisConfigRequest;
 
-generate_method_name_helper!(BlockMethodNameHelperEnum, RpcBlockRequest, "block");
-generate_method_name_helper!(BroadCastTxAsyncMethodNameHelperEnum, RpcSendTransactionRequest, "broadcast_tx_async");
-generate_method_name_helper!(BroadCastTxCommitMethodNameHelperEnum, RpcSendTransactionRequest, "broadcast_tx_commit");
-generate_method_name_helper!(ChunkMethodNameHelperEnum, RpcChunkRequest, "chunk");
-generate_method_name_helper!(GasPriceMethodNameHelperEnum, RpcGasPriceRequest, "gas_price");
-generate_method_name_helper!(HealthMethodNameHelperEnum, RpcHealthRequest, "health");
-generate_method_name_helper!(LightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofRequest, "light_client_proof");
-generate_method_name_helper!(NextLightClientBlockMethodNameHelperEnum, RpcLightClientNextBlockRequest, "next_light_client_block");
-generate_method_name_helper!(NetworkInfoMethodNameHelperEnum, RpcNetworkInfoRequest, "network_info");
-generate_method_name_helper!(SendTxMethodNameHelperEnum, RpcSendTransactionRequest, "send_tx");
-generate_method_name_helper!(StatusMethodNameHelperEnum, RpcStatusRequest, "status");
-generate_method_name_helper!(TxMethodNameHelperEnum, RpcTransactionStatusRequest, "tx");
-generate_method_name_helper!(ValidatorsMethodNameHelperEnum, RpcValidatorRequest, "validators");
-generate_method_name_helper!(ClientConfigMethodNameHelperEnum, RpcClientConfigRequest, "client_config");
-
-generate_method_name_helper!(ExpChangeMethodNameHelperEnum, RpcStateChangesInBlockByTypeRequest, "EXPERIMENTAL_changes");
-generate_method_name_helper!(ExpChangesBlockMethodNameHelperEnum, RpcStateChangesInBlockRequest, "EXPERIMENTAL_changes_in_block");
-generate_method_name_helper!(ExpGongestionMethodNameHelperEnum, RpcCongestionLevelRequest, "EXPERIMENTAL_congestion_level");
-generate_method_name_helper!(ExpGenesisMethodNameHelperEnum, GenesisConfigRequest, "EXPERIMENTAL_genesis_config");
-generate_method_name_helper!(ExpLightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofRequest, "EXPERIMENTAL_light_client_proof");
-generate_method_name_helper!(ExpLightClientBlockProofMethodNameHelperEnum, RpcLightClientBlockProofRequest, "EXPERIMENTAL_light_client_block_proof");
-generate_method_name_helper!(ExpProtocolConfigMethodNameHelperEnum, RpcProtocolConfigRequest, "EXPERIMENTAL_protocol_config");
-generate_method_name_helper!(ExpReceiptMethodNameHelperEnum, RpcReceiptRequest, "EXPERIMENTAL_receipt");
-generate_method_name_helper!(ExpTxStatusMethodNameHelperEnum, RpcTransactionStatusRequest, "EXPERIMENTAL_tx_status");
-generate_method_name_helper!(ExpValidatorsMethodNameHelperEnum, RpcValidatorsOrderedRequest, "EXPERIMENTAL_validators_ordered");
-generate_method_name_helper!(ExpMaintenanceWindoesMethodNameHelperEnum, RpcMaintenanceWindowsRequest, "EXPERIMENTAL_maintenance_windows");
-generate_method_name_helper!(ExpSplitStorageInfoMethodNameHelperEnum, RpcSplitStorageInfoRequest, "EXPERIMENTAL_split_storage_info");
-
-
 fn main() {
     let mut all_schemas = json!({}); //SchemasMap::new();
     let mut all_paths = PathsMap::new();
 
-    // add_spec_for_path::<BlockMethodNameHelperEnum, RpcBlockResponse>(&mut all_schemas, &mut all_paths, "block".to_string());
-    // add_spec_for_path::<BroadCastTxAsyncMethodNameHelperEnum, CryptoHash>(&mut all_schemas, &mut all_paths, "broadcast_tx_async".to_string());
-    // add_spec_for_path::<BroadCastTxCommitMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "broadcast_tx_commit".to_string());
-    // add_spec_for_path::<ChunkMethodNameHelperEnum, RpcChunkResponse>(&mut all_schemas, &mut all_paths, "chunk".to_string());
-    // add_spec_for_path::<GasPriceMethodNameHelperEnum, RpcGasPriceResponse>(&mut all_schemas, &mut all_paths, "gas_price".to_string());
-    // add_spec_for_path::<HealthMethodNameHelperEnum, Option<RpcHealthResponse>>(&mut all_schemas, &mut all_paths, "health".to_string());
-    // add_spec_for_path::<LightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "light_client_proof".to_string());
-    // add_spec_for_path::<NextLightClientBlockMethodNameHelperEnum, RpcLightClientNextBlockResponse>(&mut all_schemas, &mut all_paths, "next_light_client_block".to_string());
-    // add_spec_for_path::<NetworkInfoMethodNameHelperEnum, RpcNetworkInfoResponse>(&mut all_schemas, &mut all_paths, "network_info".to_string());
-    // add_spec_for_path::<SendTxMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "send_tx".to_string());
-    // add_spec_for_path::<StatusMethodNameHelperEnum, RpcStatusResponse>(&mut all_schemas, &mut all_paths, "status".to_string());
-    // add_spec_for_path::<TxMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "tx".to_string());
-    // add_spec_for_path::<ValidatorsMethodNameHelperEnum, RpcValidatorResponse>(&mut all_schemas, &mut all_paths, "validators".to_string());
-    // add_spec_for_path::<ClientConfigMethodNameHelperEnum, RpcClientConfigResponse>(&mut all_schemas, &mut all_paths, "client_config".to_string());
+    add_spec_for_path::<RpcBlockRequest, RpcBlockResponse>(&mut all_schemas, &mut all_paths, "block".to_string());
+    add_spec_for_path::<RpcSendTransactionRequest, CryptoHash>(&mut all_schemas, &mut all_paths, "broadcast_tx_async".to_string());
+    add_spec_for_path::<RpcSendTransactionRequest, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "broadcast_tx_commit".to_string());
+    add_spec_for_path::<RpcChunkRequest, RpcChunkResponse>(&mut all_schemas, &mut all_paths, "chunk".to_string());
+    add_spec_for_path::<RpcGasPriceRequest, RpcGasPriceResponse>(&mut all_schemas, &mut all_paths, "gas_price".to_string());
+    add_spec_for_path::<RpcHealthRequest, Option<RpcHealthResponse>>(&mut all_schemas, &mut all_paths, "health".to_string());
+    add_spec_for_path::<RpcLightClientExecutionProofRequest, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "light_client_proof".to_string());
+    add_spec_for_path::<RpcLightClientNextBlockRequest, RpcLightClientNextBlockResponse>(&mut all_schemas, &mut all_paths, "next_light_client_block".to_string());
+    add_spec_for_path::<RpcNetworkInfoRequest, RpcNetworkInfoResponse>(&mut all_schemas, &mut all_paths, "network_info".to_string());
+    add_spec_for_path::<RpcSendTransactionRequest, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "send_tx".to_string());
+    add_spec_for_path::<RpcStatusRequest, RpcStatusResponse>(&mut all_schemas, &mut all_paths, "status".to_string());
+    add_spec_for_path::<RpcTransactionStatusRequest, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "tx".to_string());
+    add_spec_for_path::<RpcValidatorRequest, RpcValidatorResponse>(&mut all_schemas, &mut all_paths, "validators".to_string());
+    add_spec_for_path::<RpcClientConfigRequest, RpcClientConfigResponse>(&mut all_schemas, &mut all_paths, "client_config".to_string());
 
-    // add_spec_for_path::<ExpChangeMethodNameHelperEnum, RpcStateChangesInBlockResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes".to_string());
-    // add_spec_for_path::<ExpChangesBlockMethodNameHelperEnum, RpcStateChangesInBlockByTypeResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes_in_block".to_string());
-    // add_spec_for_path::<ExpGongestionMethodNameHelperEnum, RpcCongestionLevelResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_congestion_level".to_string());
-    // add_spec_for_path::<ExpGenesisMethodNameHelperEnum, GenesisConfig>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_genesis_config".to_string());
-    // add_spec_for_path::<ExpLightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_proof".to_string());
-    // add_spec_for_path::<ExpLightClientBlockProofMethodNameHelperEnum, RpcLightClientBlockProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_block_proof".to_string());
-    // add_spec_for_path::<ExpProtocolConfigMethodNameHelperEnum, RpcProtocolConfigResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_protocol_config".to_string());
-    // add_spec_for_path::<ExpReceiptMethodNameHelperEnum, RpcReceiptResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_receipt".to_string());
-    // add_spec_for_path::<ExpTxStatusMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_tx_status".to_string());
-    // add_spec_for_path::<ExpValidatorsMethodNameHelperEnum, RpcValidatorsOrderedResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_validators_ordered".to_string());
+    add_spec_for_path::<RpcStateChangesInBlockByTypeRequest, RpcStateChangesInBlockResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes".to_string());
+    add_spec_for_path::<RpcStateChangesInBlockRequest, RpcStateChangesInBlockByTypeResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes_in_block".to_string());
+    add_spec_for_path::<RpcCongestionLevelRequest, RpcCongestionLevelResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_congestion_level".to_string());
+    add_spec_for_path::<GenesisConfigRequest, GenesisConfig>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_genesis_config".to_string());
+    add_spec_for_path::<RpcLightClientExecutionProofRequest, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_proof".to_string());
+    add_spec_for_path::<RpcLightClientBlockProofRequest, RpcLightClientBlockProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_block_proof".to_string());
+    add_spec_for_path::<RpcProtocolConfigRequest, RpcProtocolConfigResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_protocol_config".to_string());
+    add_spec_for_path::<RpcReceiptRequest, RpcReceiptResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_receipt".to_string());
+    add_spec_for_path::<RpcTransactionStatusRequest, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_tx_status".to_string());
+    add_spec_for_path::<RpcValidatorsOrderedRequest, RpcValidatorsOrderedResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_validators_ordered".to_string());
     add_spec_for_path::<RpcMaintenanceWindowsRequest, RpcMaintenanceWindowsResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_maintenance_windows".to_string());
     add_spec_for_path::<RpcSplitStorageInfoRequest, RpcSplitStorageInfoResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_split_storage_info".to_string());
 
