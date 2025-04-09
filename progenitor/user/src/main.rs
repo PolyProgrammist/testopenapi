@@ -317,8 +317,11 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let congestion_level: keeper::types::JsonRpcResponseForRpcCongestionLevelResponseAndRpcError = client_remote.experimental_congestion_level(&payloadCongestionLevel).await?.into_inner();
     println!("the_response congestion_level: {:#?}", congestion_level);
 
-    let genesis_config: keeper::types::JsonRpcResponseForGenesisConfigAndRpcError = client_remote.experimental_genesis_config(&payloadGenesisConfig).await?.into_inner();
-    println!("the_response genesis_config: {:#?}", genesis_config);
+    let genesis_config_local: keeper::types::JsonRpcResponseForGenesisConfigAndRpcError = client_local.experimental_genesis_config(&payloadGenesisConfig).await?.into_inner();
+    println!("the_response genesis_config_local: {:#?}", genesis_config_local);
+
+    let genesis_config_remote: keeper::types::JsonRpcResponseForGenesisConfigAndRpcError = client_remote.experimental_genesis_config(&payloadGenesisConfig).await?.into_inner();
+    println!("the_response genesis_config_remote: {:#?}", genesis_config_remote);
 
     let experimental_light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.experimental_light_client_proof(&payloadExpLightClientExecutionProof).await?.into_inner();
     println!("the_response experimental_light_client_execution_proof: {:#?}", experimental_light_client_execution_proof);

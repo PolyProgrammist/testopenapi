@@ -7,7 +7,6 @@ use near_primitives::views::TxExecutionStatus;
 use serde_with::serde_as;
 use serde_with::base64::Base64;
 
-
 #[derive(Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
 pub struct RpcStateChangesInBlockResponse {
     pub block_hash: near_primitives::hash::CryptoHash,
