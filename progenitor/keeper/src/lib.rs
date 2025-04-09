@@ -8434,146 +8434,13 @@ pub mod types {
         }
     }
 
-    ///JsonRpcRequestForGenesisConfigRequest
+    ///JsonRpcRequestForBlock
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "title": "JsonRpcRequest_for_GenesisConfigRequest",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "jsonrpc",
-    ///    "method",
-    ///    "params"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "jsonrpc": {
-    ///      "type": "string"
-    ///    },
-    ///    "method": {
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "EXPERIMENTAL_genesis_config"
-    ///      ]
-    ///    },
-    ///    "params": {
-    ///      "$ref": "#/components/schemas/GenesisConfigRequest"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForGenesisConfigRequest {
-        pub id: ::std::string::String,
-        pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForGenesisConfigRequestMethod,
-        pub params: GenesisConfigRequest,
-    }
-
-    impl ::std::convert::From<&JsonRpcRequestForGenesisConfigRequest>
-        for JsonRpcRequestForGenesisConfigRequest
-    {
-        fn from(value: &JsonRpcRequestForGenesisConfigRequest) -> Self {
-            value.clone()
-        }
-    }
-
-    ///JsonRpcRequestForGenesisConfigRequestMethod
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "EXPERIMENTAL_genesis_config"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum JsonRpcRequestForGenesisConfigRequestMethod {
-        #[serde(rename = "EXPERIMENTAL_genesis_config")]
-        ExperimentalGenesisConfig,
-    }
-
-    impl ::std::convert::From<&Self> for JsonRpcRequestForGenesisConfigRequestMethod {
-        fn from(value: &JsonRpcRequestForGenesisConfigRequestMethod) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for JsonRpcRequestForGenesisConfigRequestMethod {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::ExperimentalGenesisConfig => write!(f, "EXPERIMENTAL_genesis_config"),
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for JsonRpcRequestForGenesisConfigRequestMethod {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "EXPERIMENTAL_genesis_config" => Ok(Self::ExperimentalGenesisConfig),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForGenesisConfigRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String>
-        for JsonRpcRequestForGenesisConfigRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String>
-        for JsonRpcRequestForGenesisConfigRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    ///JsonRpcRequestForRpcBlockRequest
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "JsonRpcRequest_for_RpcBlockRequest",
+    ///  "title": "JsonRpcRequest_for_block",
     ///  "type": "object",
     ///  "required": [
     ///    "id",
@@ -8602,20 +8469,20 @@ pub mod types {
     /// ```
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcBlockRequest {
+    pub struct JsonRpcRequestForBlock {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcBlockRequestMethod,
+        pub method: JsonRpcRequestForBlockMethod,
         pub params: RpcBlockRequest,
     }
 
-    impl ::std::convert::From<&JsonRpcRequestForRpcBlockRequest> for JsonRpcRequestForRpcBlockRequest {
-        fn from(value: &JsonRpcRequestForRpcBlockRequest) -> Self {
+    impl ::std::convert::From<&JsonRpcRequestForBlock> for JsonRpcRequestForBlock {
+        fn from(value: &JsonRpcRequestForBlock) -> Self {
             value.clone()
         }
     }
 
-    ///JsonRpcRequestForRpcBlockRequestMethod
+    ///JsonRpcRequestForBlockMethod
     ///
     /// <details><summary>JSON schema</summary>
     ///
@@ -8640,18 +8507,18 @@ pub mod types {
         PartialEq,
         PartialOrd,
     )]
-    pub enum JsonRpcRequestForRpcBlockRequestMethod {
+    pub enum JsonRpcRequestForBlockMethod {
         #[serde(rename = "block")]
         Block,
     }
 
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcBlockRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcBlockRequestMethod) -> Self {
+    impl ::std::convert::From<&Self> for JsonRpcRequestForBlockMethod {
+        fn from(value: &JsonRpcRequestForBlockMethod) -> Self {
             value.clone()
         }
     }
 
-    impl ::std::fmt::Display for JsonRpcRequestForRpcBlockRequestMethod {
+    impl ::std::fmt::Display for JsonRpcRequestForBlockMethod {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match *self {
                 Self::Block => write!(f, "block"),
@@ -8659,7 +8526,7 @@ pub mod types {
         }
     }
 
-    impl ::std::str::FromStr for JsonRpcRequestForRpcBlockRequestMethod {
+    impl ::std::str::FromStr for JsonRpcRequestForBlockMethod {
         type Err = self::error::ConversionError;
         fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
             match value {
@@ -8669,14 +8536,14 @@ pub mod types {
         }
     }
 
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcBlockRequestMethod {
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForBlockMethod {
         type Error = self::error::ConversionError;
         fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
             value.parse()
         }
     }
 
-    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForRpcBlockRequestMethod {
+    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForBlockMethod {
         type Error = self::error::ConversionError;
         fn try_from(
             value: &::std::string::String,
@@ -8685,7 +8552,7 @@ pub mod types {
         }
     }
 
-    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForRpcBlockRequestMethod {
+    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForBlockMethod {
         type Error = self::error::ConversionError;
         fn try_from(
             value: ::std::string::String,
@@ -8694,13 +8561,271 @@ pub mod types {
         }
     }
 
-    ///JsonRpcRequestForRpcChunkRequest
+    ///JsonRpcRequestForBroadcastTxAsync
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "title": "JsonRpcRequest_for_RpcChunkRequest",
+    ///  "title": "JsonRpcRequest_for_broadcast_tx_async",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "broadcast_tx_async"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcSendTransactionRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForBroadcastTxAsync {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForBroadcastTxAsyncMethod,
+        pub params: RpcSendTransactionRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForBroadcastTxAsync>
+        for JsonRpcRequestForBroadcastTxAsync
+    {
+        fn from(value: &JsonRpcRequestForBroadcastTxAsync) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForBroadcastTxAsyncMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "broadcast_tx_async"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForBroadcastTxAsyncMethod {
+        #[serde(rename = "broadcast_tx_async")]
+        BroadcastTxAsync,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForBroadcastTxAsyncMethod {
+        fn from(value: &JsonRpcRequestForBroadcastTxAsyncMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForBroadcastTxAsyncMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::BroadcastTxAsync => write!(f, "broadcast_tx_async"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForBroadcastTxAsyncMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "broadcast_tx_async" => Ok(Self::BroadcastTxAsync),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForBroadcastTxAsyncMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForBroadcastTxAsyncMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForBroadcastTxAsyncMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForBroadcastTxCommit
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_broadcast_tx_commit",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "broadcast_tx_commit"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcSendTransactionRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForBroadcastTxCommit {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForBroadcastTxCommitMethod,
+        pub params: RpcSendTransactionRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForBroadcastTxCommit>
+        for JsonRpcRequestForBroadcastTxCommit
+    {
+        fn from(value: &JsonRpcRequestForBroadcastTxCommit) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForBroadcastTxCommitMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "broadcast_tx_commit"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForBroadcastTxCommitMethod {
+        #[serde(rename = "broadcast_tx_commit")]
+        BroadcastTxCommit,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForBroadcastTxCommitMethod {
+        fn from(value: &JsonRpcRequestForBroadcastTxCommitMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForBroadcastTxCommitMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::BroadcastTxCommit => write!(f, "broadcast_tx_commit"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForBroadcastTxCommitMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "broadcast_tx_commit" => Ok(Self::BroadcastTxCommit),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForBroadcastTxCommitMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForBroadcastTxCommitMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForBroadcastTxCommitMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForChunk
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_chunk",
     ///  "type": "object",
     ///  "required": [
     ///    "id",
@@ -8729,20 +8854,20 @@ pub mod types {
     /// ```
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcChunkRequest {
+    pub struct JsonRpcRequestForChunk {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcChunkRequestMethod,
+        pub method: JsonRpcRequestForChunkMethod,
         pub params: RpcChunkRequest,
     }
 
-    impl ::std::convert::From<&JsonRpcRequestForRpcChunkRequest> for JsonRpcRequestForRpcChunkRequest {
-        fn from(value: &JsonRpcRequestForRpcChunkRequest) -> Self {
+    impl ::std::convert::From<&JsonRpcRequestForChunk> for JsonRpcRequestForChunk {
+        fn from(value: &JsonRpcRequestForChunk) -> Self {
             value.clone()
         }
     }
 
-    ///JsonRpcRequestForRpcChunkRequestMethod
+    ///JsonRpcRequestForChunkMethod
     ///
     /// <details><summary>JSON schema</summary>
     ///
@@ -8767,18 +8892,18 @@ pub mod types {
         PartialEq,
         PartialOrd,
     )]
-    pub enum JsonRpcRequestForRpcChunkRequestMethod {
+    pub enum JsonRpcRequestForChunkMethod {
         #[serde(rename = "chunk")]
         Chunk,
     }
 
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcChunkRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcChunkRequestMethod) -> Self {
+    impl ::std::convert::From<&Self> for JsonRpcRequestForChunkMethod {
+        fn from(value: &JsonRpcRequestForChunkMethod) -> Self {
             value.clone()
         }
     }
 
-    impl ::std::fmt::Display for JsonRpcRequestForRpcChunkRequestMethod {
+    impl ::std::fmt::Display for JsonRpcRequestForChunkMethod {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match *self {
                 Self::Chunk => write!(f, "chunk"),
@@ -8786,7 +8911,7 @@ pub mod types {
         }
     }
 
-    impl ::std::str::FromStr for JsonRpcRequestForRpcChunkRequestMethod {
+    impl ::std::str::FromStr for JsonRpcRequestForChunkMethod {
         type Err = self::error::ConversionError;
         fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
             match value {
@@ -8796,14 +8921,14 @@ pub mod types {
         }
     }
 
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcChunkRequestMethod {
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForChunkMethod {
         type Error = self::error::ConversionError;
         fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
             value.parse()
         }
     }
 
-    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForRpcChunkRequestMethod {
+    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForChunkMethod {
         type Error = self::error::ConversionError;
         fn try_from(
             value: &::std::string::String,
@@ -8812,7 +8937,7 @@ pub mod types {
         }
     }
 
-    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForRpcChunkRequestMethod {
+    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForChunkMethod {
         type Error = self::error::ConversionError;
         fn try_from(
             value: ::std::string::String,
@@ -8821,13 +8946,13 @@ pub mod types {
         }
     }
 
-    ///JsonRpcRequestForRpcClientConfigRequest
+    ///JsonRpcRequestForClientConfig
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "title": "JsonRpcRequest_for_RpcClientConfigRequest",
+    ///  "title": "JsonRpcRequest_for_client_config",
     ///  "type": "object",
     ///  "required": [
     ///    "id",
@@ -8856,22 +8981,20 @@ pub mod types {
     /// ```
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcClientConfigRequest {
+    pub struct JsonRpcRequestForClientConfig {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcClientConfigRequestMethod,
+        pub method: JsonRpcRequestForClientConfigMethod,
         pub params: RpcClientConfigRequest,
     }
 
-    impl ::std::convert::From<&JsonRpcRequestForRpcClientConfigRequest>
-        for JsonRpcRequestForRpcClientConfigRequest
-    {
-        fn from(value: &JsonRpcRequestForRpcClientConfigRequest) -> Self {
+    impl ::std::convert::From<&JsonRpcRequestForClientConfig> for JsonRpcRequestForClientConfig {
+        fn from(value: &JsonRpcRequestForClientConfig) -> Self {
             value.clone()
         }
     }
 
-    ///JsonRpcRequestForRpcClientConfigRequestMethod
+    ///JsonRpcRequestForClientConfigMethod
     ///
     /// <details><summary>JSON schema</summary>
     ///
@@ -8896,18 +9019,18 @@ pub mod types {
         PartialEq,
         PartialOrd,
     )]
-    pub enum JsonRpcRequestForRpcClientConfigRequestMethod {
+    pub enum JsonRpcRequestForClientConfigMethod {
         #[serde(rename = "client_config")]
         ClientConfig,
     }
 
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcClientConfigRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcClientConfigRequestMethod) -> Self {
+    impl ::std::convert::From<&Self> for JsonRpcRequestForClientConfigMethod {
+        fn from(value: &JsonRpcRequestForClientConfigMethod) -> Self {
             value.clone()
         }
     }
 
-    impl ::std::fmt::Display for JsonRpcRequestForRpcClientConfigRequestMethod {
+    impl ::std::fmt::Display for JsonRpcRequestForClientConfigMethod {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match *self {
                 Self::ClientConfig => write!(f, "client_config"),
@@ -8915,7 +9038,7 @@ pub mod types {
         }
     }
 
-    impl ::std::str::FromStr for JsonRpcRequestForRpcClientConfigRequestMethod {
+    impl ::std::str::FromStr for JsonRpcRequestForClientConfigMethod {
         type Err = self::error::ConversionError;
         fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
             match value {
@@ -8925,16 +9048,14 @@ pub mod types {
         }
     }
 
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcClientConfigRequestMethod {
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForClientConfigMethod {
         type Error = self::error::ConversionError;
         fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
             value.parse()
         }
     }
 
-    impl ::std::convert::TryFrom<&::std::string::String>
-        for JsonRpcRequestForRpcClientConfigRequestMethod
-    {
+    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForClientConfigMethod {
         type Error = self::error::ConversionError;
         fn try_from(
             value: &::std::string::String,
@@ -8943,9 +9064,7 @@ pub mod types {
         }
     }
 
-    impl ::std::convert::TryFrom<::std::string::String>
-        for JsonRpcRequestForRpcClientConfigRequestMethod
-    {
+    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForClientConfigMethod {
         type Error = self::error::ConversionError;
         fn try_from(
             value: ::std::string::String,
@@ -8954,1603 +9073,13 @@ pub mod types {
         }
     }
 
-    ///JsonRpcRequestForRpcCongestionLevelRequest
+    ///JsonRpcRequestForExperimentalChanges
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "title": "JsonRpcRequest_for_RpcCongestionLevelRequest",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "jsonrpc",
-    ///    "method",
-    ///    "params"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "jsonrpc": {
-    ///      "type": "string"
-    ///    },
-    ///    "method": {
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "EXPERIMENTAL_congestion_level"
-    ///      ]
-    ///    },
-    ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcCongestionLevelRequest"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcCongestionLevelRequest {
-        pub id: ::std::string::String,
-        pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcCongestionLevelRequestMethod,
-        pub params: RpcCongestionLevelRequest,
-    }
-
-    impl ::std::convert::From<&JsonRpcRequestForRpcCongestionLevelRequest>
-        for JsonRpcRequestForRpcCongestionLevelRequest
-    {
-        fn from(value: &JsonRpcRequestForRpcCongestionLevelRequest) -> Self {
-            value.clone()
-        }
-    }
-
-    ///JsonRpcRequestForRpcCongestionLevelRequestMethod
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "EXPERIMENTAL_congestion_level"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum JsonRpcRequestForRpcCongestionLevelRequestMethod {
-        #[serde(rename = "EXPERIMENTAL_congestion_level")]
-        ExperimentalCongestionLevel,
-    }
-
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcCongestionLevelRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcCongestionLevelRequestMethod) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for JsonRpcRequestForRpcCongestionLevelRequestMethod {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::ExperimentalCongestionLevel => write!(f, "EXPERIMENTAL_congestion_level"),
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for JsonRpcRequestForRpcCongestionLevelRequestMethod {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "EXPERIMENTAL_congestion_level" => Ok(Self::ExperimentalCongestionLevel),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcCongestionLevelRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String>
-        for JsonRpcRequestForRpcCongestionLevelRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String>
-        for JsonRpcRequestForRpcCongestionLevelRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    ///JsonRpcRequestForRpcGasPriceRequest
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "JsonRpcRequest_for_RpcGasPriceRequest",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "jsonrpc",
-    ///    "method",
-    ///    "params"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "jsonrpc": {
-    ///      "type": "string"
-    ///    },
-    ///    "method": {
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "gas_price"
-    ///      ]
-    ///    },
-    ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcGasPriceRequest"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcGasPriceRequest {
-        pub id: ::std::string::String,
-        pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcGasPriceRequestMethod,
-        pub params: RpcGasPriceRequest,
-    }
-
-    impl ::std::convert::From<&JsonRpcRequestForRpcGasPriceRequest>
-        for JsonRpcRequestForRpcGasPriceRequest
-    {
-        fn from(value: &JsonRpcRequestForRpcGasPriceRequest) -> Self {
-            value.clone()
-        }
-    }
-
-    ///JsonRpcRequestForRpcGasPriceRequestMethod
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "gas_price"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum JsonRpcRequestForRpcGasPriceRequestMethod {
-        #[serde(rename = "gas_price")]
-        GasPrice,
-    }
-
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcGasPriceRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcGasPriceRequestMethod) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for JsonRpcRequestForRpcGasPriceRequestMethod {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::GasPrice => write!(f, "gas_price"),
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for JsonRpcRequestForRpcGasPriceRequestMethod {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "gas_price" => Ok(Self::GasPrice),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcGasPriceRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForRpcGasPriceRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForRpcGasPriceRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    ///JsonRpcRequestForRpcHealthRequest
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "JsonRpcRequest_for_RpcHealthRequest",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "jsonrpc",
-    ///    "method",
-    ///    "params"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "jsonrpc": {
-    ///      "type": "string"
-    ///    },
-    ///    "method": {
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "health"
-    ///      ]
-    ///    },
-    ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcHealthRequest"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcHealthRequest {
-        pub id: ::std::string::String,
-        pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcHealthRequestMethod,
-        pub params: RpcHealthRequest,
-    }
-
-    impl ::std::convert::From<&JsonRpcRequestForRpcHealthRequest>
-        for JsonRpcRequestForRpcHealthRequest
-    {
-        fn from(value: &JsonRpcRequestForRpcHealthRequest) -> Self {
-            value.clone()
-        }
-    }
-
-    ///JsonRpcRequestForRpcHealthRequestMethod
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "health"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum JsonRpcRequestForRpcHealthRequestMethod {
-        #[serde(rename = "health")]
-        Health,
-    }
-
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcHealthRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcHealthRequestMethod) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for JsonRpcRequestForRpcHealthRequestMethod {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::Health => write!(f, "health"),
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for JsonRpcRequestForRpcHealthRequestMethod {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "health" => Ok(Self::Health),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcHealthRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForRpcHealthRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForRpcHealthRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    ///JsonRpcRequestForRpcLightClientBlockProofRequest
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "JsonRpcRequest_for_RpcLightClientBlockProofRequest",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "jsonrpc",
-    ///    "method",
-    ///    "params"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "jsonrpc": {
-    ///      "type": "string"
-    ///    },
-    ///    "method": {
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "EXPERIMENTAL_light_client_block_proof"
-    ///      ]
-    ///    },
-    ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcLightClientBlockProofRequest"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcLightClientBlockProofRequest {
-        pub id: ::std::string::String,
-        pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcLightClientBlockProofRequestMethod,
-        pub params: RpcLightClientBlockProofRequest,
-    }
-
-    impl ::std::convert::From<&JsonRpcRequestForRpcLightClientBlockProofRequest>
-        for JsonRpcRequestForRpcLightClientBlockProofRequest
-    {
-        fn from(value: &JsonRpcRequestForRpcLightClientBlockProofRequest) -> Self {
-            value.clone()
-        }
-    }
-
-    ///JsonRpcRequestForRpcLightClientBlockProofRequestMethod
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "EXPERIMENTAL_light_client_block_proof"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum JsonRpcRequestForRpcLightClientBlockProofRequestMethod {
-        #[serde(rename = "EXPERIMENTAL_light_client_block_proof")]
-        ExperimentalLightClientBlockProof,
-    }
-
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcLightClientBlockProofRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcLightClientBlockProofRequestMethod) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for JsonRpcRequestForRpcLightClientBlockProofRequestMethod {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::ExperimentalLightClientBlockProof => {
-                    write!(f, "EXPERIMENTAL_light_client_block_proof")
-                }
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for JsonRpcRequestForRpcLightClientBlockProofRequestMethod {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "EXPERIMENTAL_light_client_block_proof" => {
-                    Ok(Self::ExperimentalLightClientBlockProof)
-                }
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcLightClientBlockProofRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String>
-        for JsonRpcRequestForRpcLightClientBlockProofRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String>
-        for JsonRpcRequestForRpcLightClientBlockProofRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    ///JsonRpcRequestForRpcLightClientExecutionProofRequest
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "JsonRpcRequest_for_RpcLightClientExecutionProofRequest",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "jsonrpc",
-    ///    "method",
-    ///    "params"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "jsonrpc": {
-    ///      "type": "string"
-    ///    },
-    ///    "method": {
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "EXPERIMENTAL_light_client_proof"
-    ///      ]
-    ///    },
-    ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcLightClientExecutionProofRequest"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcLightClientExecutionProofRequest {
-        pub id: ::std::string::String,
-        pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcLightClientExecutionProofRequestMethod,
-        pub params: RpcLightClientExecutionProofRequest,
-    }
-
-    impl ::std::convert::From<&JsonRpcRequestForRpcLightClientExecutionProofRequest>
-        for JsonRpcRequestForRpcLightClientExecutionProofRequest
-    {
-        fn from(value: &JsonRpcRequestForRpcLightClientExecutionProofRequest) -> Self {
-            value.clone()
-        }
-    }
-
-    ///JsonRpcRequestForRpcLightClientExecutionProofRequestMethod
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "EXPERIMENTAL_light_client_proof"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum JsonRpcRequestForRpcLightClientExecutionProofRequestMethod {
-        #[serde(rename = "EXPERIMENTAL_light_client_proof")]
-        ExperimentalLightClientProof,
-    }
-
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcLightClientExecutionProofRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcLightClientExecutionProofRequestMethod) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for JsonRpcRequestForRpcLightClientExecutionProofRequestMethod {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::ExperimentalLightClientProof => write!(f, "EXPERIMENTAL_light_client_proof"),
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for JsonRpcRequestForRpcLightClientExecutionProofRequestMethod {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "EXPERIMENTAL_light_client_proof" => Ok(Self::ExperimentalLightClientProof),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcLightClientExecutionProofRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String>
-        for JsonRpcRequestForRpcLightClientExecutionProofRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String>
-        for JsonRpcRequestForRpcLightClientExecutionProofRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    ///JsonRpcRequestForRpcLightClientNextBlockRequest
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "JsonRpcRequest_for_RpcLightClientNextBlockRequest",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "jsonrpc",
-    ///    "method",
-    ///    "params"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "jsonrpc": {
-    ///      "type": "string"
-    ///    },
-    ///    "method": {
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "next_light_client_block"
-    ///      ]
-    ///    },
-    ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcLightClientNextBlockRequest"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcLightClientNextBlockRequest {
-        pub id: ::std::string::String,
-        pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcLightClientNextBlockRequestMethod,
-        pub params: RpcLightClientNextBlockRequest,
-    }
-
-    impl ::std::convert::From<&JsonRpcRequestForRpcLightClientNextBlockRequest>
-        for JsonRpcRequestForRpcLightClientNextBlockRequest
-    {
-        fn from(value: &JsonRpcRequestForRpcLightClientNextBlockRequest) -> Self {
-            value.clone()
-        }
-    }
-
-    ///JsonRpcRequestForRpcLightClientNextBlockRequestMethod
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "next_light_client_block"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum JsonRpcRequestForRpcLightClientNextBlockRequestMethod {
-        #[serde(rename = "next_light_client_block")]
-        NextLightClientBlock,
-    }
-
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcLightClientNextBlockRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcLightClientNextBlockRequestMethod) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for JsonRpcRequestForRpcLightClientNextBlockRequestMethod {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::NextLightClientBlock => write!(f, "next_light_client_block"),
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for JsonRpcRequestForRpcLightClientNextBlockRequestMethod {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "next_light_client_block" => Ok(Self::NextLightClientBlock),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcLightClientNextBlockRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String>
-        for JsonRpcRequestForRpcLightClientNextBlockRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String>
-        for JsonRpcRequestForRpcLightClientNextBlockRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    ///JsonRpcRequestForRpcMaintenanceWindowsRequest
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "JsonRpcRequest_for_RpcMaintenanceWindowsRequest",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "jsonrpc",
-    ///    "method",
-    ///    "params"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "jsonrpc": {
-    ///      "type": "string"
-    ///    },
-    ///    "method": {
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "EXPERIMENTAL_maintenance_windows"
-    ///      ]
-    ///    },
-    ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcMaintenanceWindowsRequest"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcMaintenanceWindowsRequest {
-        pub id: ::std::string::String,
-        pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcMaintenanceWindowsRequestMethod,
-        pub params: RpcMaintenanceWindowsRequest,
-    }
-
-    impl ::std::convert::From<&JsonRpcRequestForRpcMaintenanceWindowsRequest>
-        for JsonRpcRequestForRpcMaintenanceWindowsRequest
-    {
-        fn from(value: &JsonRpcRequestForRpcMaintenanceWindowsRequest) -> Self {
-            value.clone()
-        }
-    }
-
-    ///JsonRpcRequestForRpcMaintenanceWindowsRequestMethod
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "EXPERIMENTAL_maintenance_windows"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum JsonRpcRequestForRpcMaintenanceWindowsRequestMethod {
-        #[serde(rename = "EXPERIMENTAL_maintenance_windows")]
-        ExperimentalMaintenanceWindows,
-    }
-
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcMaintenanceWindowsRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcMaintenanceWindowsRequestMethod) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for JsonRpcRequestForRpcMaintenanceWindowsRequestMethod {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::ExperimentalMaintenanceWindows => {
-                    write!(f, "EXPERIMENTAL_maintenance_windows")
-                }
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for JsonRpcRequestForRpcMaintenanceWindowsRequestMethod {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "EXPERIMENTAL_maintenance_windows" => Ok(Self::ExperimentalMaintenanceWindows),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcMaintenanceWindowsRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String>
-        for JsonRpcRequestForRpcMaintenanceWindowsRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String>
-        for JsonRpcRequestForRpcMaintenanceWindowsRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    ///JsonRpcRequestForRpcNetworkInfoRequest
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "JsonRpcRequest_for_RpcNetworkInfoRequest",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "jsonrpc",
-    ///    "method",
-    ///    "params"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "jsonrpc": {
-    ///      "type": "string"
-    ///    },
-    ///    "method": {
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "network_info"
-    ///      ]
-    ///    },
-    ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcNetworkInfoRequest"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcNetworkInfoRequest {
-        pub id: ::std::string::String,
-        pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcNetworkInfoRequestMethod,
-        pub params: RpcNetworkInfoRequest,
-    }
-
-    impl ::std::convert::From<&JsonRpcRequestForRpcNetworkInfoRequest>
-        for JsonRpcRequestForRpcNetworkInfoRequest
-    {
-        fn from(value: &JsonRpcRequestForRpcNetworkInfoRequest) -> Self {
-            value.clone()
-        }
-    }
-
-    ///JsonRpcRequestForRpcNetworkInfoRequestMethod
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "network_info"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum JsonRpcRequestForRpcNetworkInfoRequestMethod {
-        #[serde(rename = "network_info")]
-        NetworkInfo,
-    }
-
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcNetworkInfoRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcNetworkInfoRequestMethod) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for JsonRpcRequestForRpcNetworkInfoRequestMethod {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::NetworkInfo => write!(f, "network_info"),
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for JsonRpcRequestForRpcNetworkInfoRequestMethod {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "network_info" => Ok(Self::NetworkInfo),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcNetworkInfoRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String>
-        for JsonRpcRequestForRpcNetworkInfoRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String>
-        for JsonRpcRequestForRpcNetworkInfoRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    ///JsonRpcRequestForRpcProtocolConfigRequest
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "JsonRpcRequest_for_RpcProtocolConfigRequest",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "jsonrpc",
-    ///    "method",
-    ///    "params"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "jsonrpc": {
-    ///      "type": "string"
-    ///    },
-    ///    "method": {
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "EXPERIMENTAL_protocol_config"
-    ///      ]
-    ///    },
-    ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcProtocolConfigRequest"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcProtocolConfigRequest {
-        pub id: ::std::string::String,
-        pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcProtocolConfigRequestMethod,
-        pub params: RpcProtocolConfigRequest,
-    }
-
-    impl ::std::convert::From<&JsonRpcRequestForRpcProtocolConfigRequest>
-        for JsonRpcRequestForRpcProtocolConfigRequest
-    {
-        fn from(value: &JsonRpcRequestForRpcProtocolConfigRequest) -> Self {
-            value.clone()
-        }
-    }
-
-    ///JsonRpcRequestForRpcProtocolConfigRequestMethod
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "EXPERIMENTAL_protocol_config"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum JsonRpcRequestForRpcProtocolConfigRequestMethod {
-        #[serde(rename = "EXPERIMENTAL_protocol_config")]
-        ExperimentalProtocolConfig,
-    }
-
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcProtocolConfigRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcProtocolConfigRequestMethod) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for JsonRpcRequestForRpcProtocolConfigRequestMethod {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::ExperimentalProtocolConfig => write!(f, "EXPERIMENTAL_protocol_config"),
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for JsonRpcRequestForRpcProtocolConfigRequestMethod {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "EXPERIMENTAL_protocol_config" => Ok(Self::ExperimentalProtocolConfig),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcProtocolConfigRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String>
-        for JsonRpcRequestForRpcProtocolConfigRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String>
-        for JsonRpcRequestForRpcProtocolConfigRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    ///JsonRpcRequestForRpcReceiptRequest
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "JsonRpcRequest_for_RpcReceiptRequest",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "jsonrpc",
-    ///    "method",
-    ///    "params"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "jsonrpc": {
-    ///      "type": "string"
-    ///    },
-    ///    "method": {
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "EXPERIMENTAL_receipt"
-    ///      ]
-    ///    },
-    ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcReceiptRequest"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcReceiptRequest {
-        pub id: ::std::string::String,
-        pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcReceiptRequestMethod,
-        pub params: RpcReceiptRequest,
-    }
-
-    impl ::std::convert::From<&JsonRpcRequestForRpcReceiptRequest>
-        for JsonRpcRequestForRpcReceiptRequest
-    {
-        fn from(value: &JsonRpcRequestForRpcReceiptRequest) -> Self {
-            value.clone()
-        }
-    }
-
-    ///JsonRpcRequestForRpcReceiptRequestMethod
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "EXPERIMENTAL_receipt"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum JsonRpcRequestForRpcReceiptRequestMethod {
-        #[serde(rename = "EXPERIMENTAL_receipt")]
-        ExperimentalReceipt,
-    }
-
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcReceiptRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcReceiptRequestMethod) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for JsonRpcRequestForRpcReceiptRequestMethod {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::ExperimentalReceipt => write!(f, "EXPERIMENTAL_receipt"),
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for JsonRpcRequestForRpcReceiptRequestMethod {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "EXPERIMENTAL_receipt" => Ok(Self::ExperimentalReceipt),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcReceiptRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForRpcReceiptRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForRpcReceiptRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    ///JsonRpcRequestForRpcSendTransactionRequest
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "JsonRpcRequest_for_RpcSendTransactionRequest",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "jsonrpc",
-    ///    "method",
-    ///    "params"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "jsonrpc": {
-    ///      "type": "string"
-    ///    },
-    ///    "method": {
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "send_tx"
-    ///      ]
-    ///    },
-    ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcSendTransactionRequest"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcSendTransactionRequest {
-        pub id: ::std::string::String,
-        pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcSendTransactionRequestMethod,
-        pub params: RpcSendTransactionRequest,
-    }
-
-    impl ::std::convert::From<&JsonRpcRequestForRpcSendTransactionRequest>
-        for JsonRpcRequestForRpcSendTransactionRequest
-    {
-        fn from(value: &JsonRpcRequestForRpcSendTransactionRequest) -> Self {
-            value.clone()
-        }
-    }
-
-    ///JsonRpcRequestForRpcSendTransactionRequestMethod
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "send_tx"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum JsonRpcRequestForRpcSendTransactionRequestMethod {
-        #[serde(rename = "send_tx")]
-        SendTx,
-    }
-
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcSendTransactionRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcSendTransactionRequestMethod) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for JsonRpcRequestForRpcSendTransactionRequestMethod {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::SendTx => write!(f, "send_tx"),
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for JsonRpcRequestForRpcSendTransactionRequestMethod {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "send_tx" => Ok(Self::SendTx),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcSendTransactionRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String>
-        for JsonRpcRequestForRpcSendTransactionRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String>
-        for JsonRpcRequestForRpcSendTransactionRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    ///JsonRpcRequestForRpcSplitStorageInfoRequest
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "JsonRpcRequest_for_RpcSplitStorageInfoRequest",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "jsonrpc",
-    ///    "method",
-    ///    "params"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "jsonrpc": {
-    ///      "type": "string"
-    ///    },
-    ///    "method": {
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "EXPERIMENTAL_split_storage_info"
-    ///      ]
-    ///    },
-    ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcSplitStorageInfoRequest"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcSplitStorageInfoRequest {
-        pub id: ::std::string::String,
-        pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcSplitStorageInfoRequestMethod,
-        pub params: RpcSplitStorageInfoRequest,
-    }
-
-    impl ::std::convert::From<&JsonRpcRequestForRpcSplitStorageInfoRequest>
-        for JsonRpcRequestForRpcSplitStorageInfoRequest
-    {
-        fn from(value: &JsonRpcRequestForRpcSplitStorageInfoRequest) -> Self {
-            value.clone()
-        }
-    }
-
-    ///JsonRpcRequestForRpcSplitStorageInfoRequestMethod
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "EXPERIMENTAL_split_storage_info"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum JsonRpcRequestForRpcSplitStorageInfoRequestMethod {
-        #[serde(rename = "EXPERIMENTAL_split_storage_info")]
-        ExperimentalSplitStorageInfo,
-    }
-
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcSplitStorageInfoRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcSplitStorageInfoRequestMethod) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for JsonRpcRequestForRpcSplitStorageInfoRequestMethod {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::ExperimentalSplitStorageInfo => write!(f, "EXPERIMENTAL_split_storage_info"),
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for JsonRpcRequestForRpcSplitStorageInfoRequestMethod {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "EXPERIMENTAL_split_storage_info" => Ok(Self::ExperimentalSplitStorageInfo),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcSplitStorageInfoRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String>
-        for JsonRpcRequestForRpcSplitStorageInfoRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String>
-        for JsonRpcRequestForRpcSplitStorageInfoRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    ///JsonRpcRequestForRpcStateChangesInBlockByTypeRequest
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "JsonRpcRequest_for_RpcStateChangesInBlockByTypeRequest",
+    ///  "title": "JsonRpcRequest_for_EXPERIMENTAL_changes",
     ///  "type": "object",
     ///  "required": [
     ///    "id",
@@ -10579,111 +9108,28 @@ pub mod types {
     /// ```
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcStateChangesInBlockByTypeRequest {
+    pub struct JsonRpcRequestForExperimentalChanges {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcStateChangesInBlockByTypeRequestMethod,
+        pub method: JsonRpcRequestForExperimentalChangesMethod,
         pub params: RpcStateChangesInBlockByTypeRequest,
     }
 
-    impl ::std::convert::From<&JsonRpcRequestForRpcStateChangesInBlockByTypeRequest>
-        for JsonRpcRequestForRpcStateChangesInBlockByTypeRequest
+    impl ::std::convert::From<&JsonRpcRequestForExperimentalChanges>
+        for JsonRpcRequestForExperimentalChanges
     {
-        fn from(value: &JsonRpcRequestForRpcStateChangesInBlockByTypeRequest) -> Self {
+        fn from(value: &JsonRpcRequestForExperimentalChanges) -> Self {
             value.clone()
         }
     }
 
-    ///JsonRpcRequestForRpcStateChangesInBlockByTypeRequestMethod
+    ///JsonRpcRequestForExperimentalChangesInBlock
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "EXPERIMENTAL_changes"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum JsonRpcRequestForRpcStateChangesInBlockByTypeRequestMethod {
-        #[serde(rename = "EXPERIMENTAL_changes")]
-        ExperimentalChanges,
-    }
-
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcStateChangesInBlockByTypeRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcStateChangesInBlockByTypeRequestMethod) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for JsonRpcRequestForRpcStateChangesInBlockByTypeRequestMethod {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::ExperimentalChanges => write!(f, "EXPERIMENTAL_changes"),
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for JsonRpcRequestForRpcStateChangesInBlockByTypeRequestMethod {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "EXPERIMENTAL_changes" => Ok(Self::ExperimentalChanges),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcStateChangesInBlockByTypeRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String>
-        for JsonRpcRequestForRpcStateChangesInBlockByTypeRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String>
-        for JsonRpcRequestForRpcStateChangesInBlockByTypeRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    ///JsonRpcRequestForRpcStateChangesInBlockRequest
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "JsonRpcRequest_for_RpcStateChangesInBlockRequest",
+    ///  "title": "JsonRpcRequest_for_EXPERIMENTAL_changes_in_block",
     ///  "type": "object",
     ///  "required": [
     ///    "id",
@@ -10712,22 +9158,22 @@ pub mod types {
     /// ```
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcStateChangesInBlockRequest {
+    pub struct JsonRpcRequestForExperimentalChangesInBlock {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcStateChangesInBlockRequestMethod,
+        pub method: JsonRpcRequestForExperimentalChangesInBlockMethod,
         pub params: RpcStateChangesInBlockRequest,
     }
 
-    impl ::std::convert::From<&JsonRpcRequestForRpcStateChangesInBlockRequest>
-        for JsonRpcRequestForRpcStateChangesInBlockRequest
+    impl ::std::convert::From<&JsonRpcRequestForExperimentalChangesInBlock>
+        for JsonRpcRequestForExperimentalChangesInBlock
     {
-        fn from(value: &JsonRpcRequestForRpcStateChangesInBlockRequest) -> Self {
+        fn from(value: &JsonRpcRequestForExperimentalChangesInBlock) -> Self {
             value.clone()
         }
     }
 
-    ///JsonRpcRequestForRpcStateChangesInBlockRequestMethod
+    ///JsonRpcRequestForExperimentalChangesInBlockMethod
     ///
     /// <details><summary>JSON schema</summary>
     ///
@@ -10752,18 +9198,18 @@ pub mod types {
         PartialEq,
         PartialOrd,
     )]
-    pub enum JsonRpcRequestForRpcStateChangesInBlockRequestMethod {
+    pub enum JsonRpcRequestForExperimentalChangesInBlockMethod {
         #[serde(rename = "EXPERIMENTAL_changes_in_block")]
         ExperimentalChangesInBlock,
     }
 
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcStateChangesInBlockRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcStateChangesInBlockRequestMethod) -> Self {
+    impl ::std::convert::From<&Self> for JsonRpcRequestForExperimentalChangesInBlockMethod {
+        fn from(value: &JsonRpcRequestForExperimentalChangesInBlockMethod) -> Self {
             value.clone()
         }
     }
 
-    impl ::std::fmt::Display for JsonRpcRequestForRpcStateChangesInBlockRequestMethod {
+    impl ::std::fmt::Display for JsonRpcRequestForExperimentalChangesInBlockMethod {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match *self {
                 Self::ExperimentalChangesInBlock => write!(f, "EXPERIMENTAL_changes_in_block"),
@@ -10771,7 +9217,7 @@ pub mod types {
         }
     }
 
-    impl ::std::str::FromStr for JsonRpcRequestForRpcStateChangesInBlockRequestMethod {
+    impl ::std::str::FromStr for JsonRpcRequestForExperimentalChangesInBlockMethod {
         type Err = self::error::ConversionError;
         fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
             match value {
@@ -10781,7 +9227,7 @@ pub mod types {
         }
     }
 
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcStateChangesInBlockRequestMethod {
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForExperimentalChangesInBlockMethod {
         type Error = self::error::ConversionError;
         fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
             value.parse()
@@ -10789,7 +9235,7 @@ pub mod types {
     }
 
     impl ::std::convert::TryFrom<&::std::string::String>
-        for JsonRpcRequestForRpcStateChangesInBlockRequestMethod
+        for JsonRpcRequestForExperimentalChangesInBlockMethod
     {
         type Error = self::error::ConversionError;
         fn try_from(
@@ -10800,7 +9246,7 @@ pub mod types {
     }
 
     impl ::std::convert::TryFrom<::std::string::String>
-        for JsonRpcRequestForRpcStateChangesInBlockRequestMethod
+        for JsonRpcRequestForExperimentalChangesInBlockMethod
     {
         type Error = self::error::ConversionError;
         fn try_from(
@@ -10810,13 +9256,94 @@ pub mod types {
         }
     }
 
-    ///JsonRpcRequestForRpcStatusRequest
+    ///JsonRpcRequestForExperimentalChangesMethod
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "title": "JsonRpcRequest_for_RpcStatusRequest",
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_changes"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForExperimentalChangesMethod {
+        #[serde(rename = "EXPERIMENTAL_changes")]
+        ExperimentalChanges,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForExperimentalChangesMethod {
+        fn from(value: &JsonRpcRequestForExperimentalChangesMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForExperimentalChangesMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalChanges => write!(f, "EXPERIMENTAL_changes"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForExperimentalChangesMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_changes" => Ok(Self::ExperimentalChanges),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForExperimentalChangesMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for JsonRpcRequestForExperimentalChangesMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForExperimentalChangesMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForExperimentalCongestionLevel
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_EXPERIMENTAL_congestion_level",
     ///  "type": "object",
     ///  "required": [
     ///    "id",
@@ -10834,33 +9361,33 @@ pub mod types {
     ///    "method": {
     ///      "type": "string",
     ///      "enum": [
-    ///        "status"
+    ///        "EXPERIMENTAL_congestion_level"
     ///      ]
     ///    },
     ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcStatusRequest"
+    ///      "$ref": "#/components/schemas/RpcCongestionLevelRequest"
     ///    }
     ///  }
     ///}
     /// ```
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcStatusRequest {
+    pub struct JsonRpcRequestForExperimentalCongestionLevel {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcStatusRequestMethod,
-        pub params: RpcStatusRequest,
+        pub method: JsonRpcRequestForExperimentalCongestionLevelMethod,
+        pub params: RpcCongestionLevelRequest,
     }
 
-    impl ::std::convert::From<&JsonRpcRequestForRpcStatusRequest>
-        for JsonRpcRequestForRpcStatusRequest
+    impl ::std::convert::From<&JsonRpcRequestForExperimentalCongestionLevel>
+        for JsonRpcRequestForExperimentalCongestionLevel
     {
-        fn from(value: &JsonRpcRequestForRpcStatusRequest) -> Self {
+        fn from(value: &JsonRpcRequestForExperimentalCongestionLevel) -> Self {
             value.clone()
         }
     }
 
-    ///JsonRpcRequestForRpcStatusRequestMethod
+    ///JsonRpcRequestForExperimentalCongestionLevelMethod
     ///
     /// <details><summary>JSON schema</summary>
     ///
@@ -10868,7 +9395,7 @@ pub mod types {
     ///{
     ///  "type": "string",
     ///  "enum": [
-    ///    "status"
+    ///    "EXPERIMENTAL_congestion_level"
     ///  ]
     ///}
     /// ```
@@ -10885,43 +9412,45 @@ pub mod types {
         PartialEq,
         PartialOrd,
     )]
-    pub enum JsonRpcRequestForRpcStatusRequestMethod {
-        #[serde(rename = "status")]
-        Status,
+    pub enum JsonRpcRequestForExperimentalCongestionLevelMethod {
+        #[serde(rename = "EXPERIMENTAL_congestion_level")]
+        ExperimentalCongestionLevel,
     }
 
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcStatusRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcStatusRequestMethod) -> Self {
+    impl ::std::convert::From<&Self> for JsonRpcRequestForExperimentalCongestionLevelMethod {
+        fn from(value: &JsonRpcRequestForExperimentalCongestionLevelMethod) -> Self {
             value.clone()
         }
     }
 
-    impl ::std::fmt::Display for JsonRpcRequestForRpcStatusRequestMethod {
+    impl ::std::fmt::Display for JsonRpcRequestForExperimentalCongestionLevelMethod {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match *self {
-                Self::Status => write!(f, "status"),
+                Self::ExperimentalCongestionLevel => write!(f, "EXPERIMENTAL_congestion_level"),
             }
         }
     }
 
-    impl ::std::str::FromStr for JsonRpcRequestForRpcStatusRequestMethod {
+    impl ::std::str::FromStr for JsonRpcRequestForExperimentalCongestionLevelMethod {
         type Err = self::error::ConversionError;
         fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
             match value {
-                "status" => Ok(Self::Status),
+                "EXPERIMENTAL_congestion_level" => Ok(Self::ExperimentalCongestionLevel),
                 _ => Err("invalid value".into()),
             }
         }
     }
 
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcStatusRequestMethod {
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForExperimentalCongestionLevelMethod {
         type Error = self::error::ConversionError;
         fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
             value.parse()
         }
     }
 
-    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForRpcStatusRequestMethod {
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for JsonRpcRequestForExperimentalCongestionLevelMethod
+    {
         type Error = self::error::ConversionError;
         fn try_from(
             value: &::std::string::String,
@@ -10930,7 +9459,9 @@ pub mod types {
         }
     }
 
-    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForRpcStatusRequestMethod {
+    impl ::std::convert::TryFrom<::std::string::String>
+        for JsonRpcRequestForExperimentalCongestionLevelMethod
+    {
         type Error = self::error::ConversionError;
         fn try_from(
             value: ::std::string::String,
@@ -10939,13 +9470,948 @@ pub mod types {
         }
     }
 
-    ///JsonRpcRequestForRpcTransactionStatusRequest
+    ///JsonRpcRequestForExperimentalGenesisConfig
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "title": "JsonRpcRequest_for_RpcTransactionStatusRequest",
+    ///  "title": "JsonRpcRequest_for_EXPERIMENTAL_genesis_config",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "EXPERIMENTAL_genesis_config"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/GenesisConfigRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExperimentalGenesisConfig {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForExperimentalGenesisConfigMethod,
+        pub params: GenesisConfigRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExperimentalGenesisConfig>
+        for JsonRpcRequestForExperimentalGenesisConfig
+    {
+        fn from(value: &JsonRpcRequestForExperimentalGenesisConfig) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForExperimentalGenesisConfigMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_genesis_config"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForExperimentalGenesisConfigMethod {
+        #[serde(rename = "EXPERIMENTAL_genesis_config")]
+        ExperimentalGenesisConfig,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForExperimentalGenesisConfigMethod {
+        fn from(value: &JsonRpcRequestForExperimentalGenesisConfigMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForExperimentalGenesisConfigMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalGenesisConfig => write!(f, "EXPERIMENTAL_genesis_config"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForExperimentalGenesisConfigMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_genesis_config" => Ok(Self::ExperimentalGenesisConfig),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForExperimentalGenesisConfigMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for JsonRpcRequestForExperimentalGenesisConfigMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for JsonRpcRequestForExperimentalGenesisConfigMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForExperimentalLightClientBlockProof
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_EXPERIMENTAL_light_client_block_proof",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "EXPERIMENTAL_light_client_block_proof"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcLightClientBlockProofRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExperimentalLightClientBlockProof {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForExperimentalLightClientBlockProofMethod,
+        pub params: RpcLightClientBlockProofRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExperimentalLightClientBlockProof>
+        for JsonRpcRequestForExperimentalLightClientBlockProof
+    {
+        fn from(value: &JsonRpcRequestForExperimentalLightClientBlockProof) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForExperimentalLightClientBlockProofMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_light_client_block_proof"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForExperimentalLightClientBlockProofMethod {
+        #[serde(rename = "EXPERIMENTAL_light_client_block_proof")]
+        ExperimentalLightClientBlockProof,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForExperimentalLightClientBlockProofMethod {
+        fn from(value: &JsonRpcRequestForExperimentalLightClientBlockProofMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForExperimentalLightClientBlockProofMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalLightClientBlockProof => {
+                    write!(f, "EXPERIMENTAL_light_client_block_proof")
+                }
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForExperimentalLightClientBlockProofMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_light_client_block_proof" => {
+                    Ok(Self::ExperimentalLightClientBlockProof)
+                }
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForExperimentalLightClientBlockProofMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for JsonRpcRequestForExperimentalLightClientBlockProofMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for JsonRpcRequestForExperimentalLightClientBlockProofMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForExperimentalLightClientProof
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_EXPERIMENTAL_light_client_proof",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "EXPERIMENTAL_light_client_proof"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcLightClientExecutionProofRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExperimentalLightClientProof {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForExperimentalLightClientProofMethod,
+        pub params: RpcLightClientExecutionProofRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExperimentalLightClientProof>
+        for JsonRpcRequestForExperimentalLightClientProof
+    {
+        fn from(value: &JsonRpcRequestForExperimentalLightClientProof) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForExperimentalLightClientProofMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_light_client_proof"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForExperimentalLightClientProofMethod {
+        #[serde(rename = "EXPERIMENTAL_light_client_proof")]
+        ExperimentalLightClientProof,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForExperimentalLightClientProofMethod {
+        fn from(value: &JsonRpcRequestForExperimentalLightClientProofMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForExperimentalLightClientProofMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalLightClientProof => write!(f, "EXPERIMENTAL_light_client_proof"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForExperimentalLightClientProofMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_light_client_proof" => Ok(Self::ExperimentalLightClientProof),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForExperimentalLightClientProofMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for JsonRpcRequestForExperimentalLightClientProofMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for JsonRpcRequestForExperimentalLightClientProofMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForExperimentalMaintenanceWindows
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_EXPERIMENTAL_maintenance_windows",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "EXPERIMENTAL_maintenance_windows"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcMaintenanceWindowsRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExperimentalMaintenanceWindows {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForExperimentalMaintenanceWindowsMethod,
+        pub params: RpcMaintenanceWindowsRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExperimentalMaintenanceWindows>
+        for JsonRpcRequestForExperimentalMaintenanceWindows
+    {
+        fn from(value: &JsonRpcRequestForExperimentalMaintenanceWindows) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForExperimentalMaintenanceWindowsMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_maintenance_windows"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForExperimentalMaintenanceWindowsMethod {
+        #[serde(rename = "EXPERIMENTAL_maintenance_windows")]
+        ExperimentalMaintenanceWindows,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForExperimentalMaintenanceWindowsMethod {
+        fn from(value: &JsonRpcRequestForExperimentalMaintenanceWindowsMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForExperimentalMaintenanceWindowsMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalMaintenanceWindows => {
+                    write!(f, "EXPERIMENTAL_maintenance_windows")
+                }
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForExperimentalMaintenanceWindowsMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_maintenance_windows" => Ok(Self::ExperimentalMaintenanceWindows),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForExperimentalMaintenanceWindowsMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for JsonRpcRequestForExperimentalMaintenanceWindowsMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for JsonRpcRequestForExperimentalMaintenanceWindowsMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForExperimentalProtocolConfig
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_EXPERIMENTAL_protocol_config",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "EXPERIMENTAL_protocol_config"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcProtocolConfigRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExperimentalProtocolConfig {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForExperimentalProtocolConfigMethod,
+        pub params: RpcProtocolConfigRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExperimentalProtocolConfig>
+        for JsonRpcRequestForExperimentalProtocolConfig
+    {
+        fn from(value: &JsonRpcRequestForExperimentalProtocolConfig) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForExperimentalProtocolConfigMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_protocol_config"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForExperimentalProtocolConfigMethod {
+        #[serde(rename = "EXPERIMENTAL_protocol_config")]
+        ExperimentalProtocolConfig,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForExperimentalProtocolConfigMethod {
+        fn from(value: &JsonRpcRequestForExperimentalProtocolConfigMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForExperimentalProtocolConfigMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalProtocolConfig => write!(f, "EXPERIMENTAL_protocol_config"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForExperimentalProtocolConfigMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_protocol_config" => Ok(Self::ExperimentalProtocolConfig),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForExperimentalProtocolConfigMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for JsonRpcRequestForExperimentalProtocolConfigMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for JsonRpcRequestForExperimentalProtocolConfigMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForExperimentalReceipt
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_EXPERIMENTAL_receipt",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "EXPERIMENTAL_receipt"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcReceiptRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExperimentalReceipt {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForExperimentalReceiptMethod,
+        pub params: RpcReceiptRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExperimentalReceipt>
+        for JsonRpcRequestForExperimentalReceipt
+    {
+        fn from(value: &JsonRpcRequestForExperimentalReceipt) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForExperimentalReceiptMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_receipt"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForExperimentalReceiptMethod {
+        #[serde(rename = "EXPERIMENTAL_receipt")]
+        ExperimentalReceipt,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForExperimentalReceiptMethod {
+        fn from(value: &JsonRpcRequestForExperimentalReceiptMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForExperimentalReceiptMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalReceipt => write!(f, "EXPERIMENTAL_receipt"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForExperimentalReceiptMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_receipt" => Ok(Self::ExperimentalReceipt),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForExperimentalReceiptMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for JsonRpcRequestForExperimentalReceiptMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForExperimentalReceiptMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForExperimentalSplitStorageInfo
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_EXPERIMENTAL_split_storage_info",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "EXPERIMENTAL_split_storage_info"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcSplitStorageInfoRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForExperimentalSplitStorageInfo {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForExperimentalSplitStorageInfoMethod,
+        pub params: RpcSplitStorageInfoRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForExperimentalSplitStorageInfo>
+        for JsonRpcRequestForExperimentalSplitStorageInfo
+    {
+        fn from(value: &JsonRpcRequestForExperimentalSplitStorageInfo) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForExperimentalSplitStorageInfoMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_split_storage_info"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForExperimentalSplitStorageInfoMethod {
+        #[serde(rename = "EXPERIMENTAL_split_storage_info")]
+        ExperimentalSplitStorageInfo,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForExperimentalSplitStorageInfoMethod {
+        fn from(value: &JsonRpcRequestForExperimentalSplitStorageInfoMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForExperimentalSplitStorageInfoMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalSplitStorageInfo => write!(f, "EXPERIMENTAL_split_storage_info"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForExperimentalSplitStorageInfoMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_split_storage_info" => Ok(Self::ExperimentalSplitStorageInfo),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForExperimentalSplitStorageInfoMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for JsonRpcRequestForExperimentalSplitStorageInfoMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for JsonRpcRequestForExperimentalSplitStorageInfoMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForExperimentalTxStatus
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_EXPERIMENTAL_tx_status",
     ///  "type": "object",
     ///  "required": [
     ///    "id",
@@ -10974,22 +10440,22 @@ pub mod types {
     /// ```
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcTransactionStatusRequest {
+    pub struct JsonRpcRequestForExperimentalTxStatus {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcTransactionStatusRequestMethod,
+        pub method: JsonRpcRequestForExperimentalTxStatusMethod,
         pub params: RpcTransactionStatusRequest,
     }
 
-    impl ::std::convert::From<&JsonRpcRequestForRpcTransactionStatusRequest>
-        for JsonRpcRequestForRpcTransactionStatusRequest
+    impl ::std::convert::From<&JsonRpcRequestForExperimentalTxStatus>
+        for JsonRpcRequestForExperimentalTxStatus
     {
-        fn from(value: &JsonRpcRequestForRpcTransactionStatusRequest) -> Self {
+        fn from(value: &JsonRpcRequestForExperimentalTxStatus) -> Self {
             value.clone()
         }
     }
 
-    ///JsonRpcRequestForRpcTransactionStatusRequestMethod
+    ///JsonRpcRequestForExperimentalTxStatusMethod
     ///
     /// <details><summary>JSON schema</summary>
     ///
@@ -11014,18 +10480,18 @@ pub mod types {
         PartialEq,
         PartialOrd,
     )]
-    pub enum JsonRpcRequestForRpcTransactionStatusRequestMethod {
+    pub enum JsonRpcRequestForExperimentalTxStatusMethod {
         #[serde(rename = "EXPERIMENTAL_tx_status")]
         ExperimentalTxStatus,
     }
 
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcTransactionStatusRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcTransactionStatusRequestMethod) -> Self {
+    impl ::std::convert::From<&Self> for JsonRpcRequestForExperimentalTxStatusMethod {
+        fn from(value: &JsonRpcRequestForExperimentalTxStatusMethod) -> Self {
             value.clone()
         }
     }
 
-    impl ::std::fmt::Display for JsonRpcRequestForRpcTransactionStatusRequestMethod {
+    impl ::std::fmt::Display for JsonRpcRequestForExperimentalTxStatusMethod {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match *self {
                 Self::ExperimentalTxStatus => write!(f, "EXPERIMENTAL_tx_status"),
@@ -11033,7 +10499,7 @@ pub mod types {
         }
     }
 
-    impl ::std::str::FromStr for JsonRpcRequestForRpcTransactionStatusRequestMethod {
+    impl ::std::str::FromStr for JsonRpcRequestForExperimentalTxStatusMethod {
         type Err = self::error::ConversionError;
         fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
             match value {
@@ -11043,7 +10509,7 @@ pub mod types {
         }
     }
 
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcTransactionStatusRequestMethod {
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForExperimentalTxStatusMethod {
         type Error = self::error::ConversionError;
         fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
             value.parse()
@@ -11051,7 +10517,7 @@ pub mod types {
     }
 
     impl ::std::convert::TryFrom<&::std::string::String>
-        for JsonRpcRequestForRpcTransactionStatusRequestMethod
+        for JsonRpcRequestForExperimentalTxStatusMethod
     {
         type Error = self::error::ConversionError;
         fn try_from(
@@ -11062,7 +10528,7 @@ pub mod types {
     }
 
     impl ::std::convert::TryFrom<::std::string::String>
-        for JsonRpcRequestForRpcTransactionStatusRequestMethod
+        for JsonRpcRequestForExperimentalTxStatusMethod
     {
         type Error = self::error::ConversionError;
         fn try_from(
@@ -11072,144 +10538,13 @@ pub mod types {
         }
     }
 
-    ///JsonRpcRequestForRpcValidatorRequest
+    ///JsonRpcRequestForExperimentalValidatorsOrdered
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "title": "JsonRpcRequest_for_RpcValidatorRequest",
-    ///  "type": "object",
-    ///  "required": [
-    ///    "id",
-    ///    "jsonrpc",
-    ///    "method",
-    ///    "params"
-    ///  ],
-    ///  "properties": {
-    ///    "id": {
-    ///      "type": "string"
-    ///    },
-    ///    "jsonrpc": {
-    ///      "type": "string"
-    ///    },
-    ///    "method": {
-    ///      "type": "string",
-    ///      "enum": [
-    ///        "validators"
-    ///      ]
-    ///    },
-    ///    "params": {
-    ///      "$ref": "#/components/schemas/RpcValidatorRequest"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcValidatorRequest {
-        pub id: ::std::string::String,
-        pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcValidatorRequestMethod,
-        pub params: RpcValidatorRequest,
-    }
-
-    impl ::std::convert::From<&JsonRpcRequestForRpcValidatorRequest>
-        for JsonRpcRequestForRpcValidatorRequest
-    {
-        fn from(value: &JsonRpcRequestForRpcValidatorRequest) -> Self {
-            value.clone()
-        }
-    }
-
-    ///JsonRpcRequestForRpcValidatorRequestMethod
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "validators"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum JsonRpcRequestForRpcValidatorRequestMethod {
-        #[serde(rename = "validators")]
-        Validators,
-    }
-
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcValidatorRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcValidatorRequestMethod) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for JsonRpcRequestForRpcValidatorRequestMethod {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::Validators => write!(f, "validators"),
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for JsonRpcRequestForRpcValidatorRequestMethod {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "validators" => Ok(Self::Validators),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcValidatorRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String>
-        for JsonRpcRequestForRpcValidatorRequestMethod
-    {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForRpcValidatorRequestMethod {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    ///JsonRpcRequestForRpcValidatorsOrderedRequest
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "title": "JsonRpcRequest_for_RpcValidatorsOrderedRequest",
+    ///  "title": "JsonRpcRequest_for_EXPERIMENTAL_validators_ordered",
     ///  "type": "object",
     ///  "required": [
     ///    "id",
@@ -11238,22 +10573,22 @@ pub mod types {
     /// ```
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct JsonRpcRequestForRpcValidatorsOrderedRequest {
+    pub struct JsonRpcRequestForExperimentalValidatorsOrdered {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
-        pub method: JsonRpcRequestForRpcValidatorsOrderedRequestMethod,
+        pub method: JsonRpcRequestForExperimentalValidatorsOrderedMethod,
         pub params: RpcValidatorsOrderedRequest,
     }
 
-    impl ::std::convert::From<&JsonRpcRequestForRpcValidatorsOrderedRequest>
-        for JsonRpcRequestForRpcValidatorsOrderedRequest
+    impl ::std::convert::From<&JsonRpcRequestForExperimentalValidatorsOrdered>
+        for JsonRpcRequestForExperimentalValidatorsOrdered
     {
-        fn from(value: &JsonRpcRequestForRpcValidatorsOrderedRequest) -> Self {
+        fn from(value: &JsonRpcRequestForExperimentalValidatorsOrdered) -> Self {
             value.clone()
         }
     }
 
-    ///JsonRpcRequestForRpcValidatorsOrderedRequestMethod
+    ///JsonRpcRequestForExperimentalValidatorsOrderedMethod
     ///
     /// <details><summary>JSON schema</summary>
     ///
@@ -11278,18 +10613,18 @@ pub mod types {
         PartialEq,
         PartialOrd,
     )]
-    pub enum JsonRpcRequestForRpcValidatorsOrderedRequestMethod {
+    pub enum JsonRpcRequestForExperimentalValidatorsOrderedMethod {
         #[serde(rename = "EXPERIMENTAL_validators_ordered")]
         ExperimentalValidatorsOrdered,
     }
 
-    impl ::std::convert::From<&Self> for JsonRpcRequestForRpcValidatorsOrderedRequestMethod {
-        fn from(value: &JsonRpcRequestForRpcValidatorsOrderedRequestMethod) -> Self {
+    impl ::std::convert::From<&Self> for JsonRpcRequestForExperimentalValidatorsOrderedMethod {
+        fn from(value: &JsonRpcRequestForExperimentalValidatorsOrderedMethod) -> Self {
             value.clone()
         }
     }
 
-    impl ::std::fmt::Display for JsonRpcRequestForRpcValidatorsOrderedRequestMethod {
+    impl ::std::fmt::Display for JsonRpcRequestForExperimentalValidatorsOrderedMethod {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match *self {
                 Self::ExperimentalValidatorsOrdered => write!(f, "EXPERIMENTAL_validators_ordered"),
@@ -11297,7 +10632,7 @@ pub mod types {
         }
     }
 
-    impl ::std::str::FromStr for JsonRpcRequestForRpcValidatorsOrderedRequestMethod {
+    impl ::std::str::FromStr for JsonRpcRequestForExperimentalValidatorsOrderedMethod {
         type Err = self::error::ConversionError;
         fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
             match value {
@@ -11307,7 +10642,7 @@ pub mod types {
         }
     }
 
-    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForRpcValidatorsOrderedRequestMethod {
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForExperimentalValidatorsOrderedMethod {
         type Error = self::error::ConversionError;
         fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
             value.parse()
@@ -11315,7 +10650,7 @@ pub mod types {
     }
 
     impl ::std::convert::TryFrom<&::std::string::String>
-        for JsonRpcRequestForRpcValidatorsOrderedRequestMethod
+        for JsonRpcRequestForExperimentalValidatorsOrderedMethod
     {
         type Error = self::error::ConversionError;
         fn try_from(
@@ -11326,8 +10661,1159 @@ pub mod types {
     }
 
     impl ::std::convert::TryFrom<::std::string::String>
-        for JsonRpcRequestForRpcValidatorsOrderedRequestMethod
+        for JsonRpcRequestForExperimentalValidatorsOrderedMethod
     {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForGasPrice
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_gas_price",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "gas_price"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcGasPriceRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForGasPrice {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForGasPriceMethod,
+        pub params: RpcGasPriceRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForGasPrice> for JsonRpcRequestForGasPrice {
+        fn from(value: &JsonRpcRequestForGasPrice) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForGasPriceMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "gas_price"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForGasPriceMethod {
+        #[serde(rename = "gas_price")]
+        GasPrice,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForGasPriceMethod {
+        fn from(value: &JsonRpcRequestForGasPriceMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForGasPriceMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::GasPrice => write!(f, "gas_price"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForGasPriceMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "gas_price" => Ok(Self::GasPrice),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForGasPriceMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForGasPriceMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForGasPriceMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForHealth
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_health",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "health"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcHealthRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForHealth {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForHealthMethod,
+        pub params: RpcHealthRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForHealth> for JsonRpcRequestForHealth {
+        fn from(value: &JsonRpcRequestForHealth) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForHealthMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "health"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForHealthMethod {
+        #[serde(rename = "health")]
+        Health,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForHealthMethod {
+        fn from(value: &JsonRpcRequestForHealthMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForHealthMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::Health => write!(f, "health"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForHealthMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "health" => Ok(Self::Health),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForHealthMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForHealthMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForHealthMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForLightClientProof
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_light_client_proof",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "light_client_proof"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcLightClientExecutionProofRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForLightClientProof {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForLightClientProofMethod,
+        pub params: RpcLightClientExecutionProofRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForLightClientProof>
+        for JsonRpcRequestForLightClientProof
+    {
+        fn from(value: &JsonRpcRequestForLightClientProof) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForLightClientProofMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "light_client_proof"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForLightClientProofMethod {
+        #[serde(rename = "light_client_proof")]
+        LightClientProof,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForLightClientProofMethod {
+        fn from(value: &JsonRpcRequestForLightClientProofMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForLightClientProofMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::LightClientProof => write!(f, "light_client_proof"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForLightClientProofMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "light_client_proof" => Ok(Self::LightClientProof),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForLightClientProofMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForLightClientProofMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForLightClientProofMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForNetworkInfo
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_network_info",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "network_info"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcNetworkInfoRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForNetworkInfo {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForNetworkInfoMethod,
+        pub params: RpcNetworkInfoRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForNetworkInfo> for JsonRpcRequestForNetworkInfo {
+        fn from(value: &JsonRpcRequestForNetworkInfo) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForNetworkInfoMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "network_info"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForNetworkInfoMethod {
+        #[serde(rename = "network_info")]
+        NetworkInfo,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForNetworkInfoMethod {
+        fn from(value: &JsonRpcRequestForNetworkInfoMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForNetworkInfoMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::NetworkInfo => write!(f, "network_info"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForNetworkInfoMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "network_info" => Ok(Self::NetworkInfo),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForNetworkInfoMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForNetworkInfoMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForNetworkInfoMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForNextLightClientBlock
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_next_light_client_block",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "next_light_client_block"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcLightClientNextBlockRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForNextLightClientBlock {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForNextLightClientBlockMethod,
+        pub params: RpcLightClientNextBlockRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForNextLightClientBlock>
+        for JsonRpcRequestForNextLightClientBlock
+    {
+        fn from(value: &JsonRpcRequestForNextLightClientBlock) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForNextLightClientBlockMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "next_light_client_block"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForNextLightClientBlockMethod {
+        #[serde(rename = "next_light_client_block")]
+        NextLightClientBlock,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForNextLightClientBlockMethod {
+        fn from(value: &JsonRpcRequestForNextLightClientBlockMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForNextLightClientBlockMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::NextLightClientBlock => write!(f, "next_light_client_block"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForNextLightClientBlockMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "next_light_client_block" => Ok(Self::NextLightClientBlock),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForNextLightClientBlockMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for JsonRpcRequestForNextLightClientBlockMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for JsonRpcRequestForNextLightClientBlockMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForSendTx
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_send_tx",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "send_tx"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcSendTransactionRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForSendTx {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForSendTxMethod,
+        pub params: RpcSendTransactionRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForSendTx> for JsonRpcRequestForSendTx {
+        fn from(value: &JsonRpcRequestForSendTx) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForSendTxMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "send_tx"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForSendTxMethod {
+        #[serde(rename = "send_tx")]
+        SendTx,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForSendTxMethod {
+        fn from(value: &JsonRpcRequestForSendTxMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForSendTxMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::SendTx => write!(f, "send_tx"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForSendTxMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "send_tx" => Ok(Self::SendTx),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForSendTxMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForSendTxMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForSendTxMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForStatus
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_status",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "status"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcStatusRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForStatus {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForStatusMethod,
+        pub params: RpcStatusRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForStatus> for JsonRpcRequestForStatus {
+        fn from(value: &JsonRpcRequestForStatus) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForStatusMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "status"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForStatusMethod {
+        #[serde(rename = "status")]
+        Status,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForStatusMethod {
+        fn from(value: &JsonRpcRequestForStatusMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForStatusMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::Status => write!(f, "status"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForStatusMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "status" => Ok(Self::Status),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForStatusMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForStatusMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForStatusMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForTx
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_tx",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "tx"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcTransactionStatusRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForTx {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForTxMethod,
+        pub params: RpcTransactionStatusRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForTx> for JsonRpcRequestForTx {
+        fn from(value: &JsonRpcRequestForTx) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForTxMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "tx"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForTxMethod {
+        #[serde(rename = "tx")]
+        Tx,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForTxMethod {
+        fn from(value: &JsonRpcRequestForTxMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForTxMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::Tx => write!(f, "tx"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForTxMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "tx" => Ok(Self::Tx),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForTxMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForTxMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForTxMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    ///JsonRpcRequestForValidators
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "title": "JsonRpcRequest_for_validators",
+    ///  "type": "object",
+    ///  "required": [
+    ///    "id",
+    ///    "jsonrpc",
+    ///    "method",
+    ///    "params"
+    ///  ],
+    ///  "properties": {
+    ///    "id": {
+    ///      "type": "string"
+    ///    },
+    ///    "jsonrpc": {
+    ///      "type": "string"
+    ///    },
+    ///    "method": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "validators"
+    ///      ]
+    ///    },
+    ///    "params": {
+    ///      "$ref": "#/components/schemas/RpcValidatorRequest"
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct JsonRpcRequestForValidators {
+        pub id: ::std::string::String,
+        pub jsonrpc: ::std::string::String,
+        pub method: JsonRpcRequestForValidatorsMethod,
+        pub params: RpcValidatorRequest,
+    }
+
+    impl ::std::convert::From<&JsonRpcRequestForValidators> for JsonRpcRequestForValidators {
+        fn from(value: &JsonRpcRequestForValidators) -> Self {
+            value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForValidatorsMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "validators"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForValidatorsMethod {
+        #[serde(rename = "validators")]
+        Validators,
+    }
+
+    impl ::std::convert::From<&Self> for JsonRpcRequestForValidatorsMethod {
+        fn from(value: &JsonRpcRequestForValidatorsMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForValidatorsMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::Validators => write!(f, "validators"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForValidatorsMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "validators" => Ok(Self::Validators),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for JsonRpcRequestForValidatorsMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String> for JsonRpcRequestForValidatorsMethod {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String> for JsonRpcRequestForValidatorsMethod {
         type Error = self::error::ConversionError;
         fn try_from(
             value: ::std::string::String,
@@ -24097,7 +24583,7 @@ impl Client {
     ///Sends a `POST` request to `/EXPERIMENTAL_changes`
     pub async fn experimental_changes<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcStateChangesInBlockByTypeRequest,
+        body: &'a types::JsonRpcRequestForExperimentalChanges,
     ) -> Result<
         ResponseValue<types::JsonRpcResponseForRpcStateChangesInBlockResponseAndRpcError>,
         Error<()>,
@@ -24124,7 +24610,7 @@ impl Client {
     ///Sends a `POST` request to `/EXPERIMENTAL_changes_in_block`
     pub async fn experimental_changes_in_block<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcStateChangesInBlockRequest,
+        body: &'a types::JsonRpcRequestForExperimentalChangesInBlock,
     ) -> Result<
         ResponseValue<types::JsonRpcResponseForRpcStateChangesInBlockByTypeResponseAndRpcError>,
         Error<()>,
@@ -24151,7 +24637,7 @@ impl Client {
     ///Sends a `POST` request to `/EXPERIMENTAL_congestion_level`
     pub async fn experimental_congestion_level<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcCongestionLevelRequest,
+        body: &'a types::JsonRpcRequestForExperimentalCongestionLevel,
     ) -> Result<
         ResponseValue<types::JsonRpcResponseForRpcCongestionLevelResponseAndRpcError>,
         Error<()>,
@@ -24178,7 +24664,7 @@ impl Client {
     ///Sends a `POST` request to `/EXPERIMENTAL_genesis_config`
     pub async fn experimental_genesis_config<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForGenesisConfigRequest,
+        body: &'a types::JsonRpcRequestForExperimentalGenesisConfig,
     ) -> Result<ResponseValue<types::JsonRpcResponseForGenesisConfigAndRpcError>, Error<()>> {
         let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
@@ -24202,7 +24688,7 @@ impl Client {
     ///Sends a `POST` request to `/EXPERIMENTAL_light_client_block_proof`
     pub async fn experimental_light_client_block_proof<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcLightClientBlockProofRequest,
+        body: &'a types::JsonRpcRequestForExperimentalLightClientBlockProof,
     ) -> Result<
         ResponseValue<types::JsonRpcResponseForRpcLightClientBlockProofResponseAndRpcError>,
         Error<()>,
@@ -24229,7 +24715,7 @@ impl Client {
     ///Sends a `POST` request to `/EXPERIMENTAL_light_client_proof`
     pub async fn experimental_light_client_proof<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcLightClientExecutionProofRequest,
+        body: &'a types::JsonRpcRequestForExperimentalLightClientProof,
     ) -> Result<
         ResponseValue<types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError>,
         Error<()>,
@@ -24256,7 +24742,7 @@ impl Client {
     ///Sends a `POST` request to `/EXPERIMENTAL_maintenance_windows`
     pub async fn experimental_maintenance_windows<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcMaintenanceWindowsRequest,
+        body: &'a types::JsonRpcRequestForExperimentalMaintenanceWindows,
     ) -> Result<
         ResponseValue<types::JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError>,
         Error<()>,
@@ -24283,7 +24769,7 @@ impl Client {
     ///Sends a `POST` request to `/EXPERIMENTAL_protocol_config`
     pub async fn experimental_protocol_config<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcProtocolConfigRequest,
+        body: &'a types::JsonRpcRequestForExperimentalProtocolConfig,
     ) -> Result<
         ResponseValue<types::JsonRpcResponseForRpcProtocolConfigResponseAndRpcError>,
         Error<()>,
@@ -24310,7 +24796,7 @@ impl Client {
     ///Sends a `POST` request to `/EXPERIMENTAL_receipt`
     pub async fn experimental_receipt<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcReceiptRequest,
+        body: &'a types::JsonRpcRequestForExperimentalReceipt,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcReceiptResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
@@ -24335,7 +24821,7 @@ impl Client {
     ///Sends a `POST` request to `/EXPERIMENTAL_split_storage_info`
     pub async fn experimental_split_storage_info<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcSplitStorageInfoRequest,
+        body: &'a types::JsonRpcRequestForExperimentalSplitStorageInfo,
     ) -> Result<
         ResponseValue<types::JsonRpcResponseForRpcSplitStorageInfoResponseAndRpcError>,
         Error<()>,
@@ -24362,7 +24848,7 @@ impl Client {
     ///Sends a `POST` request to `/EXPERIMENTAL_tx_status`
     pub async fn experimental_tx_status<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcTransactionStatusRequest,
+        body: &'a types::JsonRpcRequestForExperimentalTxStatus,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
@@ -24387,7 +24873,7 @@ impl Client {
     ///Sends a `POST` request to `/EXPERIMENTAL_validators_ordered`
     pub async fn experimental_validators_ordered<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcValidatorsOrderedRequest,
+        body: &'a types::JsonRpcRequestForExperimentalValidatorsOrdered,
     ) -> Result<
         ResponseValue<types::JsonRpcResponseForArrayOfValidatorStakeViewAndRpcError>,
         Error<()>,
@@ -24414,7 +24900,7 @@ impl Client {
     ///Sends a `POST` request to `/block`
     pub async fn block<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcBlockRequest,
+        body: &'a types::JsonRpcRequestForBlock,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcBlockResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
@@ -24439,7 +24925,7 @@ impl Client {
     ///Sends a `POST` request to `/broadcast_tx_async`
     pub async fn broadcast_tx_async<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcSendTransactionRequest,
+        body: &'a types::JsonRpcRequestForBroadcastTxAsync,
     ) -> Result<ResponseValue<types::JsonRpcResponseForCryptoHashAndRpcError>, Error<()>> {
         let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
@@ -24463,7 +24949,7 @@ impl Client {
     ///Sends a `POST` request to `/broadcast_tx_commit`
     pub async fn broadcast_tx_commit<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcSendTransactionRequest,
+        body: &'a types::JsonRpcRequestForBroadcastTxCommit,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
@@ -24488,7 +24974,7 @@ impl Client {
     ///Sends a `POST` request to `/chunk`
     pub async fn chunk<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcChunkRequest,
+        body: &'a types::JsonRpcRequestForChunk,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcChunkResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
@@ -24513,7 +24999,7 @@ impl Client {
     ///Sends a `POST` request to `/client_config`
     pub async fn client_config<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcClientConfigRequest,
+        body: &'a types::JsonRpcRequestForClientConfig,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcClientConfigResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
@@ -24538,7 +25024,7 @@ impl Client {
     ///Sends a `POST` request to `/gas_price`
     pub async fn gas_price<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcGasPriceRequest,
+        body: &'a types::JsonRpcRequestForGasPrice,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcGasPriceResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
@@ -24563,7 +25049,7 @@ impl Client {
     ///Sends a `POST` request to `/health`
     pub async fn health<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcHealthRequest,
+        body: &'a types::JsonRpcRequestForHealth,
     ) -> Result<
         ResponseValue<types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError>,
         Error<()>,
@@ -24590,7 +25076,7 @@ impl Client {
     ///Sends a `POST` request to `/light_client_proof`
     pub async fn light_client_proof<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcLightClientExecutionProofRequest,
+        body: &'a types::JsonRpcRequestForLightClientProof,
     ) -> Result<
         ResponseValue<types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError>,
         Error<()>,
@@ -24617,7 +25103,7 @@ impl Client {
     ///Sends a `POST` request to `/network_info`
     pub async fn network_info<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcNetworkInfoRequest,
+        body: &'a types::JsonRpcRequestForNetworkInfo,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcNetworkInfoResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
@@ -24642,7 +25128,7 @@ impl Client {
     ///Sends a `POST` request to `/next_light_client_block`
     pub async fn next_light_client_block<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcLightClientNextBlockRequest,
+        body: &'a types::JsonRpcRequestForNextLightClientBlock,
     ) -> Result<
         ResponseValue<types::JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError>,
         Error<()>,
@@ -24669,7 +25155,7 @@ impl Client {
     ///Sends a `POST` request to `/send_tx`
     pub async fn send_tx<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcSendTransactionRequest,
+        body: &'a types::JsonRpcRequestForSendTx,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
@@ -24694,7 +25180,7 @@ impl Client {
     ///Sends a `POST` request to `/status`
     pub async fn status<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcStatusRequest,
+        body: &'a types::JsonRpcRequestForStatus,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcStatusResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
@@ -24719,7 +25205,7 @@ impl Client {
     ///Sends a `POST` request to `/tx`
     pub async fn tx<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcTransactionStatusRequest,
+        body: &'a types::JsonRpcRequestForTx,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);
@@ -24744,7 +25230,7 @@ impl Client {
     ///Sends a `POST` request to `/validators`
     pub async fn validators<'a>(
         &'a self,
-        body: &'a types::JsonRpcRequestForRpcValidatorRequest,
+        body: &'a types::JsonRpcRequestForValidators,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcValidatorResponseAndRpcError>, Error<()>>
     {
         let url = format!("{}/", self.baseurl,);

@@ -27,25 +27,25 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     //     })
     // };
 
-    // let payloadBroadcastAsync = keeper::types::JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum {
-    //     id: String::from("dontcare"),
-    //     jsonrpc: String::from("2.0"),
-    //     method: keeper::types::BroadCastTxAsyncMethodNameHelperEnum::BroadcastTxAsync,
-    //     params: keeper::types::RpcSendTransactionRequest {
-    //         signed_tx_base64: signed_tx_base64.clone(),
-    //         wait_until: Some(keeper::types::TxExecutionStatus::Executed)
-    //     }
-    // };
+    let payloadBroadcastAsync = keeper::types::JsonRpcRequestForBroadcastTxAsync {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::JsonRpcRequestForBroadcastTxAsyncMethod::BroadcastTxAsync,
+        params: keeper::types::RpcSendTransactionRequest {
+            signed_tx_base64: signed_tx_base64.clone(),
+            wait_until: keeper::types::TxExecutionStatus::Executed
+        }
+    };
 
-    // let payloadBroadcastCommit = keeper::types::JsonRpcRequestForBroadCastTxCommitMethodNameHelperEnum {
-    //     id: String::from("dontcare"),
-    //     jsonrpc: String::from("2.0"),
-    //     method: keeper::types::BroadCastTxCommitMethodNameHelperEnum::BroadcastTxCommit,
-    //     params: keeper::types::RpcSendTransactionRequest {
-    //         signed_tx_base64: signed_tx_base64.clone(),
-    //         wait_until: Some(keeper::types::TxExecutionStatus::Executed)
-    //     }
-    // };
+    let payloadBroadcastCommit = keeper::types::JsonRpcRequestForBroadcastTxCommit {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::JsonRpcRequestForBroadcastTxCommitMethod::BroadcastTxCommit,
+        params: keeper::types::RpcSendTransactionRequest {
+            signed_tx_base64: signed_tx_base64.clone(),
+            wait_until: keeper::types::TxExecutionStatus::Executed
+        }
+    };
 
     // let payloadChunk = keeper::types::JsonRpcRequestForChunkMethodNameHelperEnum {
     //     id: String::from("dontcare"),
@@ -138,12 +138,12 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     //     params: keeper::types::RpcStatusRequest(serde_json::Map::new())
     // };
 
-    // let payloadValidators = keeper::types::JsonRpcRequestForValidatorsMethodNameHelperEnum {
-    //     id: String::from("dontcare"),
-    //     jsonrpc: String::from("2.0"),
-    //     method: keeper::types::ValidatorsMethodNameHelperEnum::Validators,
-    //     params: keeper::types::RpcValidatorRequest::Latest
-    // };
+    let payloadValidators = keeper::types::JsonRpcRequestForValidators {
+        id: String::from("dontcare"),
+        jsonrpc: String::from("2.0"),
+        method: keeper::types::JsonRpcRequestForValidatorsMethod::Validators,
+        params: keeper::types::RpcValidatorRequest::Latest
+    };
 
     // let payloadClientConfig = keeper::types::JsonRpcRequestForClientConfigMethodNameHelperEnum {
     //     id: String::from("dontcare"),
@@ -236,39 +236,39 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     //     }
     // };
 
-    let payloadExpValidators = keeper::types::JsonRpcRequestForRpcValidatorsOrderedRequest {
+    let payloadExpValidators = keeper::types::JsonRpcRequestForExperimentalValidatorsOrdered {
         id: String::from("dontcare"),
         jsonrpc: String::from("2.0"),
-        method: keeper::types::JsonRpcRequestForRpcValidatorsOrderedRequestMethod::ExperimentalValidatorsOrdered,
+        method: keeper::types::JsonRpcRequestForExperimentalValidatorsOrderedMethod::ExperimentalValidatorsOrdered,
         params: keeper::types::RpcValidatorsOrderedRequest {
             block_id: None
         }
     };
 
-    let payloadMaintenanceWindows = keeper::types::JsonRpcRequestForRpcMaintenanceWindowsRequest {
+    let payloadMaintenanceWindows = keeper::types::JsonRpcRequestForExperimentalMaintenanceWindows {
         id: String::from("dontcare"),
         jsonrpc: String::from("2.0"),
-        method: keeper::types::JsonRpcRequestForRpcMaintenanceWindowsRequestMethod::ExperimentalMaintenanceWindows,
+        method: keeper::types::JsonRpcRequestForExperimentalMaintenanceWindowsMethod::ExperimentalMaintenanceWindows,
         params: keeper::types::RpcMaintenanceWindowsRequest {
             account_id: sender_account_id.clone(),
         }
     };
 
-    let payloadSplitStorage = keeper::types::JsonRpcRequestForRpcSplitStorageInfoRequest {
+    let payloadSplitStorage = keeper::types::JsonRpcRequestForExperimentalSplitStorageInfo {
         id: String::from("dontcare"),
         jsonrpc: String::from("2.0"),
-        method: keeper::types::JsonRpcRequestForRpcSplitStorageInfoRequestMethod::ExperimentalSplitStorageInfo,
+        method: keeper::types::JsonRpcRequestForExperimentalSplitStorageInfoMethod::ExperimentalSplitStorageInfo,
         params: keeper::types::RpcSplitStorageInfoRequest(serde_json::Map::new())
     };
 
     // let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
     // println!("the_response block: {:#?}", block);
 
-    // let broadcast_async: keeper::types::JsonRpcResponseForCryptoHashAndRpcError = client_remote.broadcast_tx_async(&payloadBroadcastAsync).await?.into_inner();
-    // println!("the_response broadcast_async: {:#?}", broadcast_async);
+    let broadcast_async: keeper::types::JsonRpcResponseForCryptoHashAndRpcError = client_remote.broadcast_tx_async(&payloadBroadcastAsync).await?.into_inner();
+    println!("the_response broadcast_async: {:#?}", broadcast_async);
 
-    // let broadcast_commit: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.broadcast_tx_commit(&payloadBroadcastCommit).await?.into_inner();
-    // println!("the_response broadcast_commit: {:#?}", broadcast_commit);
+    let broadcast_commit: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.broadcast_tx_commit(&payloadBroadcastCommit).await?.into_inner();
+    println!("the_response broadcast_commit: {:#?}", broadcast_commit);
     
     // let chunk: keeper::types::JsonRpcResponseForRpcChunkResponseAndRpcError = client_remote.chunk(&payloadChunk).await?.into_inner();
     // println!("the_response chunk: {:#?}", chunk);
@@ -302,8 +302,8 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     // let status = client_local.status(&payloadStatus).await?;
     // println!("the_response status: {:#?}", status);
 
-    // let validators: keeper::types::JsonRpcResponseForRpcValidatorResponseAndRpcError = client_remote.validators(&payloadValidators).await?.into_inner();
-    // println!("the_response validators: {:#?}", validators);
+    let validators: keeper::types::JsonRpcResponseForRpcValidatorResponseAndRpcError = client_remote.validators(&payloadValidators).await?.into_inner();
+    println!("the_response validators: {:#?}", validators);
 
     // let client_config: keeper::types::JsonRpcResponseForRpcClientConfigResponseAndRpcError = client_local.client_config(&payloadClientConfig).await?.into_inner();
     // println!("the_response client_config: {:#?}", client_config);

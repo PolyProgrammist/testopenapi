@@ -253,7 +253,7 @@ fn add_spec_for_path_internal<RequestType: JsonSchema, ResponseType: JsonSchema>
     let mut request_map = schemas_map::<RequestType>();
     let response_map = schemas_map::<ResponseType>();
 
-    let request_struct_name = format!("JsonRpcRequest_for_{}", RequestType::schema_name());
+    let request_struct_name = format!("JsonRpcRequest_for_{}", method_name);
     let json_rpc_request = json!({
         "properties": {
             "id": {

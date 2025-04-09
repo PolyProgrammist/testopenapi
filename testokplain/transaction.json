@@ -12,7 +12,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcStateChangesInBlockByTypeRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_EXPERIMENTAL_changes"
                             }
                         }
                     },
@@ -39,7 +39,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcStateChangesInBlockRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_EXPERIMENTAL_changes_in_block"
                             }
                         }
                     },
@@ -66,7 +66,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcCongestionLevelRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_EXPERIMENTAL_congestion_level"
                             }
                         }
                     },
@@ -93,7 +93,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_GenesisConfigRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_EXPERIMENTAL_genesis_config"
                             }
                         }
                     },
@@ -120,7 +120,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcLightClientBlockProofRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_EXPERIMENTAL_light_client_block_proof"
                             }
                         }
                     },
@@ -147,7 +147,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcLightClientExecutionProofRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_EXPERIMENTAL_light_client_proof"
                             }
                         }
                     },
@@ -174,7 +174,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcMaintenanceWindowsRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_EXPERIMENTAL_maintenance_windows"
                             }
                         }
                     },
@@ -201,7 +201,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcProtocolConfigRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_EXPERIMENTAL_protocol_config"
                             }
                         }
                     },
@@ -228,7 +228,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcReceiptRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_EXPERIMENTAL_receipt"
                             }
                         }
                     },
@@ -255,7 +255,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcSplitStorageInfoRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_EXPERIMENTAL_split_storage_info"
                             }
                         }
                     },
@@ -282,7 +282,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcTransactionStatusRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_EXPERIMENTAL_tx_status"
                             }
                         }
                     },
@@ -309,7 +309,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcValidatorsOrderedRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_EXPERIMENTAL_validators_ordered"
                             }
                         }
                     },
@@ -336,7 +336,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcBlockRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_block"
                             }
                         }
                     },
@@ -363,7 +363,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcSendTransactionRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_broadcast_tx_async"
                             }
                         }
                     },
@@ -390,7 +390,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcSendTransactionRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_broadcast_tx_commit"
                             }
                         }
                     },
@@ -417,7 +417,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcChunkRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_chunk"
                             }
                         }
                     },
@@ -444,7 +444,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcClientConfigRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_client_config"
                             }
                         }
                     },
@@ -471,7 +471,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcGasPriceRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_gas_price"
                             }
                         }
                     },
@@ -498,7 +498,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcHealthRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_health"
                             }
                         }
                     },
@@ -525,7 +525,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcLightClientExecutionProofRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_light_client_proof"
                             }
                         }
                     },
@@ -552,7 +552,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcNetworkInfoRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_network_info"
                             }
                         }
                     },
@@ -579,7 +579,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcLightClientNextBlockRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_next_light_client_block"
                             }
                         }
                     },
@@ -606,7 +606,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcSendTransactionRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_send_tx"
                             }
                         }
                     },
@@ -633,7 +633,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcStatusRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_status"
                             }
                         }
                     },
@@ -660,7 +660,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcTransactionStatusRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_tx"
                             }
                         }
                     },
@@ -687,7 +687,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/JsonRpcRequest_for_RpcValidatorRequest"
+                                "$ref": "#/components/schemas/JsonRpcRequest_for_validators"
                             }
                         }
                     },
@@ -5892,439 +5892,7 @@
                     }
                 ]
             },
-            "JsonRpcRequest_for_GenesisConfigRequest": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    },
-                    "method": {
-                        "enum": [
-                            "EXPERIMENTAL_genesis_config"
-                        ],
-                        "type": "string"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/GenesisConfigRequest"
-                    }
-                },
-                "required": [
-                    "jsonrpc",
-                    "id",
-                    "params",
-                    "method"
-                ],
-                "title": "JsonRpcRequest_for_GenesisConfigRequest",
-                "type": "object"
-            },
-            "JsonRpcRequest_for_RpcBlockRequest": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    },
-                    "method": {
-                        "enum": [
-                            "block"
-                        ],
-                        "type": "string"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/RpcBlockRequest"
-                    }
-                },
-                "required": [
-                    "jsonrpc",
-                    "id",
-                    "params",
-                    "method"
-                ],
-                "title": "JsonRpcRequest_for_RpcBlockRequest",
-                "type": "object"
-            },
-            "JsonRpcRequest_for_RpcChunkRequest": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    },
-                    "method": {
-                        "enum": [
-                            "chunk"
-                        ],
-                        "type": "string"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/RpcChunkRequest"
-                    }
-                },
-                "required": [
-                    "jsonrpc",
-                    "id",
-                    "params",
-                    "method"
-                ],
-                "title": "JsonRpcRequest_for_RpcChunkRequest",
-                "type": "object"
-            },
-            "JsonRpcRequest_for_RpcClientConfigRequest": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    },
-                    "method": {
-                        "enum": [
-                            "client_config"
-                        ],
-                        "type": "string"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/RpcClientConfigRequest"
-                    }
-                },
-                "required": [
-                    "jsonrpc",
-                    "id",
-                    "params",
-                    "method"
-                ],
-                "title": "JsonRpcRequest_for_RpcClientConfigRequest",
-                "type": "object"
-            },
-            "JsonRpcRequest_for_RpcCongestionLevelRequest": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    },
-                    "method": {
-                        "enum": [
-                            "EXPERIMENTAL_congestion_level"
-                        ],
-                        "type": "string"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/RpcCongestionLevelRequest"
-                    }
-                },
-                "required": [
-                    "jsonrpc",
-                    "id",
-                    "params",
-                    "method"
-                ],
-                "title": "JsonRpcRequest_for_RpcCongestionLevelRequest",
-                "type": "object"
-            },
-            "JsonRpcRequest_for_RpcGasPriceRequest": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    },
-                    "method": {
-                        "enum": [
-                            "gas_price"
-                        ],
-                        "type": "string"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/RpcGasPriceRequest"
-                    }
-                },
-                "required": [
-                    "jsonrpc",
-                    "id",
-                    "params",
-                    "method"
-                ],
-                "title": "JsonRpcRequest_for_RpcGasPriceRequest",
-                "type": "object"
-            },
-            "JsonRpcRequest_for_RpcHealthRequest": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    },
-                    "method": {
-                        "enum": [
-                            "health"
-                        ],
-                        "type": "string"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/RpcHealthRequest"
-                    }
-                },
-                "required": [
-                    "jsonrpc",
-                    "id",
-                    "params",
-                    "method"
-                ],
-                "title": "JsonRpcRequest_for_RpcHealthRequest",
-                "type": "object"
-            },
-            "JsonRpcRequest_for_RpcLightClientBlockProofRequest": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    },
-                    "method": {
-                        "enum": [
-                            "EXPERIMENTAL_light_client_block_proof"
-                        ],
-                        "type": "string"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/RpcLightClientBlockProofRequest"
-                    }
-                },
-                "required": [
-                    "jsonrpc",
-                    "id",
-                    "params",
-                    "method"
-                ],
-                "title": "JsonRpcRequest_for_RpcLightClientBlockProofRequest",
-                "type": "object"
-            },
-            "JsonRpcRequest_for_RpcLightClientExecutionProofRequest": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    },
-                    "method": {
-                        "enum": [
-                            "EXPERIMENTAL_light_client_proof"
-                        ],
-                        "type": "string"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/RpcLightClientExecutionProofRequest"
-                    }
-                },
-                "required": [
-                    "jsonrpc",
-                    "id",
-                    "params",
-                    "method"
-                ],
-                "title": "JsonRpcRequest_for_RpcLightClientExecutionProofRequest",
-                "type": "object"
-            },
-            "JsonRpcRequest_for_RpcLightClientNextBlockRequest": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    },
-                    "method": {
-                        "enum": [
-                            "next_light_client_block"
-                        ],
-                        "type": "string"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/RpcLightClientNextBlockRequest"
-                    }
-                },
-                "required": [
-                    "jsonrpc",
-                    "id",
-                    "params",
-                    "method"
-                ],
-                "title": "JsonRpcRequest_for_RpcLightClientNextBlockRequest",
-                "type": "object"
-            },
-            "JsonRpcRequest_for_RpcMaintenanceWindowsRequest": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    },
-                    "method": {
-                        "enum": [
-                            "EXPERIMENTAL_maintenance_windows"
-                        ],
-                        "type": "string"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/RpcMaintenanceWindowsRequest"
-                    }
-                },
-                "required": [
-                    "jsonrpc",
-                    "id",
-                    "params",
-                    "method"
-                ],
-                "title": "JsonRpcRequest_for_RpcMaintenanceWindowsRequest",
-                "type": "object"
-            },
-            "JsonRpcRequest_for_RpcNetworkInfoRequest": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    },
-                    "method": {
-                        "enum": [
-                            "network_info"
-                        ],
-                        "type": "string"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/RpcNetworkInfoRequest"
-                    }
-                },
-                "required": [
-                    "jsonrpc",
-                    "id",
-                    "params",
-                    "method"
-                ],
-                "title": "JsonRpcRequest_for_RpcNetworkInfoRequest",
-                "type": "object"
-            },
-            "JsonRpcRequest_for_RpcProtocolConfigRequest": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    },
-                    "method": {
-                        "enum": [
-                            "EXPERIMENTAL_protocol_config"
-                        ],
-                        "type": "string"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/RpcProtocolConfigRequest"
-                    }
-                },
-                "required": [
-                    "jsonrpc",
-                    "id",
-                    "params",
-                    "method"
-                ],
-                "title": "JsonRpcRequest_for_RpcProtocolConfigRequest",
-                "type": "object"
-            },
-            "JsonRpcRequest_for_RpcReceiptRequest": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    },
-                    "method": {
-                        "enum": [
-                            "EXPERIMENTAL_receipt"
-                        ],
-                        "type": "string"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/RpcReceiptRequest"
-                    }
-                },
-                "required": [
-                    "jsonrpc",
-                    "id",
-                    "params",
-                    "method"
-                ],
-                "title": "JsonRpcRequest_for_RpcReceiptRequest",
-                "type": "object"
-            },
-            "JsonRpcRequest_for_RpcSendTransactionRequest": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    },
-                    "method": {
-                        "enum": [
-                            "send_tx"
-                        ],
-                        "type": "string"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/RpcSendTransactionRequest"
-                    }
-                },
-                "required": [
-                    "jsonrpc",
-                    "id",
-                    "params",
-                    "method"
-                ],
-                "title": "JsonRpcRequest_for_RpcSendTransactionRequest",
-                "type": "object"
-            },
-            "JsonRpcRequest_for_RpcSplitStorageInfoRequest": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    },
-                    "method": {
-                        "enum": [
-                            "EXPERIMENTAL_split_storage_info"
-                        ],
-                        "type": "string"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/RpcSplitStorageInfoRequest"
-                    }
-                },
-                "required": [
-                    "jsonrpc",
-                    "id",
-                    "params",
-                    "method"
-                ],
-                "title": "JsonRpcRequest_for_RpcSplitStorageInfoRequest",
-                "type": "object"
-            },
-            "JsonRpcRequest_for_RpcStateChangesInBlockByTypeRequest": {
+            "JsonRpcRequest_for_EXPERIMENTAL_changes": {
                 "properties": {
                     "id": {
                         "type": "string"
@@ -6348,10 +5916,10 @@
                     "params",
                     "method"
                 ],
-                "title": "JsonRpcRequest_for_RpcStateChangesInBlockByTypeRequest",
+                "title": "JsonRpcRequest_for_EXPERIMENTAL_changes",
                 "type": "object"
             },
-            "JsonRpcRequest_for_RpcStateChangesInBlockRequest": {
+            "JsonRpcRequest_for_EXPERIMENTAL_changes_in_block": {
                 "properties": {
                     "id": {
                         "type": "string"
@@ -6375,10 +5943,10 @@
                     "params",
                     "method"
                 ],
-                "title": "JsonRpcRequest_for_RpcStateChangesInBlockRequest",
+                "title": "JsonRpcRequest_for_EXPERIMENTAL_changes_in_block",
                 "type": "object"
             },
-            "JsonRpcRequest_for_RpcStatusRequest": {
+            "JsonRpcRequest_for_EXPERIMENTAL_congestion_level": {
                 "properties": {
                     "id": {
                         "type": "string"
@@ -6388,12 +5956,12 @@
                     },
                     "method": {
                         "enum": [
-                            "status"
+                            "EXPERIMENTAL_congestion_level"
                         ],
                         "type": "string"
                     },
                     "params": {
-                        "$ref": "#/components/schemas/RpcStatusRequest"
+                        "$ref": "#/components/schemas/RpcCongestionLevelRequest"
                     }
                 },
                 "required": [
@@ -6402,10 +5970,199 @@
                     "params",
                     "method"
                 ],
-                "title": "JsonRpcRequest_for_RpcStatusRequest",
+                "title": "JsonRpcRequest_for_EXPERIMENTAL_congestion_level",
                 "type": "object"
             },
-            "JsonRpcRequest_for_RpcTransactionStatusRequest": {
+            "JsonRpcRequest_for_EXPERIMENTAL_genesis_config": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "EXPERIMENTAL_genesis_config"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/GenesisConfigRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_EXPERIMENTAL_genesis_config",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_EXPERIMENTAL_light_client_block_proof": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "EXPERIMENTAL_light_client_block_proof"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcLightClientBlockProofRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_EXPERIMENTAL_light_client_block_proof",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_EXPERIMENTAL_light_client_proof": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "EXPERIMENTAL_light_client_proof"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcLightClientExecutionProofRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_EXPERIMENTAL_light_client_proof",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_EXPERIMENTAL_maintenance_windows": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "EXPERIMENTAL_maintenance_windows"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcMaintenanceWindowsRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_EXPERIMENTAL_maintenance_windows",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_EXPERIMENTAL_protocol_config": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "EXPERIMENTAL_protocol_config"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcProtocolConfigRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_EXPERIMENTAL_protocol_config",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_EXPERIMENTAL_receipt": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "EXPERIMENTAL_receipt"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcReceiptRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_EXPERIMENTAL_receipt",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_EXPERIMENTAL_split_storage_info": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "EXPERIMENTAL_split_storage_info"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcSplitStorageInfoRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_EXPERIMENTAL_split_storage_info",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_EXPERIMENTAL_tx_status": {
                 "properties": {
                     "id": {
                         "type": "string"
@@ -6429,37 +6186,10 @@
                     "params",
                     "method"
                 ],
-                "title": "JsonRpcRequest_for_RpcTransactionStatusRequest",
+                "title": "JsonRpcRequest_for_EXPERIMENTAL_tx_status",
                 "type": "object"
             },
-            "JsonRpcRequest_for_RpcValidatorRequest": {
-                "properties": {
-                    "id": {
-                        "type": "string"
-                    },
-                    "jsonrpc": {
-                        "type": "string"
-                    },
-                    "method": {
-                        "enum": [
-                            "validators"
-                        ],
-                        "type": "string"
-                    },
-                    "params": {
-                        "$ref": "#/components/schemas/RpcValidatorRequest"
-                    }
-                },
-                "required": [
-                    "jsonrpc",
-                    "id",
-                    "params",
-                    "method"
-                ],
-                "title": "JsonRpcRequest_for_RpcValidatorRequest",
-                "type": "object"
-            },
-            "JsonRpcRequest_for_RpcValidatorsOrderedRequest": {
+            "JsonRpcRequest_for_EXPERIMENTAL_validators_ordered": {
                 "properties": {
                     "id": {
                         "type": "string"
@@ -6483,7 +6213,385 @@
                     "params",
                     "method"
                 ],
-                "title": "JsonRpcRequest_for_RpcValidatorsOrderedRequest",
+                "title": "JsonRpcRequest_for_EXPERIMENTAL_validators_ordered",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_block": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "block"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcBlockRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_block",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_broadcast_tx_async": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "broadcast_tx_async"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcSendTransactionRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_broadcast_tx_async",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_broadcast_tx_commit": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "broadcast_tx_commit"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcSendTransactionRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_broadcast_tx_commit",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_chunk": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "chunk"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcChunkRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_chunk",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_client_config": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "client_config"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcClientConfigRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_client_config",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_gas_price": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "gas_price"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcGasPriceRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_gas_price",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_health": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "health"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcHealthRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_health",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_light_client_proof": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "light_client_proof"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcLightClientExecutionProofRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_light_client_proof",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_network_info": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "network_info"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcNetworkInfoRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_network_info",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_next_light_client_block": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "next_light_client_block"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcLightClientNextBlockRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_next_light_client_block",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_send_tx": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "send_tx"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcSendTransactionRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_send_tx",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_status": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "status"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcStatusRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_status",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_tx": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "tx"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcTransactionStatusRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_tx",
+                "type": "object"
+            },
+            "JsonRpcRequest_for_validators": {
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "jsonrpc": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "enum": [
+                            "validators"
+                        ],
+                        "type": "string"
+                    },
+                    "params": {
+                        "$ref": "#/components/schemas/RpcValidatorRequest"
+                    }
+                },
+                "required": [
+                    "jsonrpc",
+                    "id",
+                    "params",
+                    "method"
+                ],
+                "title": "JsonRpcRequest_for_validators",
                 "type": "object"
             },
             "JsonRpcResponse_for_Array_of_MaintenanceWindow_and_RpcError": {
