@@ -5945,85 +5945,6 @@ pub mod types {
         }
     }
 
-    ///ExpSplitStorageInfoMethodNameHelperEnum
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "string",
-    ///  "enum": [
-    ///    "EXPERIMENTAL_split_storage_info"
-    ///  ]
-    ///}
-    /// ```
-    /// </details>
-    #[derive(
-        :: serde :: Deserialize,
-        :: serde :: Serialize,
-        Clone,
-        Copy,
-        Debug,
-        Eq,
-        Hash,
-        Ord,
-        PartialEq,
-        PartialOrd,
-    )]
-    pub enum ExpSplitStorageInfoMethodNameHelperEnum {
-        #[serde(rename = "EXPERIMENTAL_split_storage_info")]
-        ExperimentalSplitStorageInfo,
-    }
-
-    impl ::std::convert::From<&Self> for ExpSplitStorageInfoMethodNameHelperEnum {
-        fn from(value: &ExpSplitStorageInfoMethodNameHelperEnum) -> Self {
-            value.clone()
-        }
-    }
-
-    impl ::std::fmt::Display for ExpSplitStorageInfoMethodNameHelperEnum {
-        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match *self {
-                Self::ExperimentalSplitStorageInfo => write!(f, "EXPERIMENTAL_split_storage_info"),
-            }
-        }
-    }
-
-    impl ::std::str::FromStr for ExpSplitStorageInfoMethodNameHelperEnum {
-        type Err = self::error::ConversionError;
-        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            match value {
-                "EXPERIMENTAL_split_storage_info" => Ok(Self::ExperimentalSplitStorageInfo),
-                _ => Err("invalid value".into()),
-            }
-        }
-    }
-
-    impl ::std::convert::TryFrom<&str> for ExpSplitStorageInfoMethodNameHelperEnum {
-        type Error = self::error::ConversionError;
-        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<&::std::string::String> for ExpSplitStorageInfoMethodNameHelperEnum {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: &::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
-    impl ::std::convert::TryFrom<::std::string::String> for ExpSplitStorageInfoMethodNameHelperEnum {
-        type Error = self::error::ConversionError;
-        fn try_from(
-            value: ::std::string::String,
-        ) -> ::std::result::Result<Self, self::error::ConversionError> {
-            value.parse()
-        }
-    }
-
     ///ExpTxStatusMethodNameHelperEnum
     ///
     /// <details><summary>JSON schema</summary>
@@ -10631,8 +10552,10 @@ pub mod types {
     ///      "type": "string"
     ///    },
     ///    "method": {
-    ///      "$ref":
-    /// "#/components/schemas/ExpSplitStorageInfoMethodNameHelperEnum"
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "EXPERIMENTAL_split_storage_info"
+    ///      ]
     ///    },
     ///    "params": {
     ///      "$ref": "#/components/schemas/RpcSplitStorageInfoRequest"
@@ -10645,7 +10568,7 @@ pub mod types {
     pub struct JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnum {
         pub id: ::std::string::String,
         pub jsonrpc: ::std::string::String,
-        pub method: ExpSplitStorageInfoMethodNameHelperEnum,
+        pub method: JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnumMethod,
         pub params: RpcSplitStorageInfoRequest,
     }
 
@@ -10654,6 +10577,93 @@ pub mod types {
     {
         fn from(value: &JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnum) -> Self {
             value.clone()
+        }
+    }
+
+    ///JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnumMethod
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "EXPERIMENTAL_split_storage_info"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnumMethod {
+        #[serde(rename = "EXPERIMENTAL_split_storage_info")]
+        ExperimentalSplitStorageInfo,
+    }
+
+    impl ::std::convert::From<&Self>
+        for JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnumMethod
+    {
+        fn from(value: &JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnumMethod) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnumMethod {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::ExperimentalSplitStorageInfo => write!(f, "EXPERIMENTAL_split_storage_info"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnumMethod {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "EXPERIMENTAL_split_storage_info" => Ok(Self::ExperimentalSplitStorageInfo),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str>
+        for JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnumMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnumMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnumMethod
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
         }
     }
 
@@ -24432,7 +24442,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcStateChangesInBlockResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_changes", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24459,7 +24469,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcStateChangesInBlockByTypeResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_changes_in_block", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24486,7 +24496,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcCongestionLevelResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_congestion_level", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24510,7 +24520,7 @@ impl Client {
         &'a self,
         body: &'a types::JsonRpcRequestForExpGenesisMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForGenesisConfigAndRpcError>, Error<()>> {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_genesis_config", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24537,7 +24547,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcLightClientBlockProofResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_light_client_block_proof", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24564,7 +24574,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_light_client_proof", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24591,7 +24601,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_maintenance_windows", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24618,7 +24628,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcProtocolConfigResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_protocol_config", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24643,7 +24653,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForExpReceiptMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcReceiptResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_receipt", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24670,7 +24680,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcSplitStorageInfoResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_split_storage_info", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24695,7 +24705,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForExpTxStatusMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_tx_status", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24722,7 +24732,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForArrayOfValidatorStakeViewAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_validators_ordered", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24747,7 +24757,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForBlockMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcBlockResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/block", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24771,7 +24781,7 @@ impl Client {
         &'a self,
         body: &'a types::JsonRpcRequestForBroadCastTxAsyncMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForCryptoHashAndRpcError>, Error<()>> {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/broadcast_tx_async", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24796,7 +24806,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForBroadCastTxCommitMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/broadcast_tx_commit", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24821,7 +24831,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForChunkMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcChunkResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/chunk", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24846,7 +24856,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForClientConfigMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcClientConfigResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/client_config", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24871,7 +24881,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForGasPriceMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcGasPriceResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/gas_price", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24898,7 +24908,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/health", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24925,7 +24935,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/light_client_proof", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24950,7 +24960,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForNetworkInfoMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcNetworkInfoResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/network_info", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24977,7 +24987,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/next_light_client_block", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25002,7 +25012,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForSendTxMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/send_tx", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25027,7 +25037,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForStatusMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcStatusResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/status", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25052,7 +25062,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForTxMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/tx", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25077,7 +25087,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForValidatorsMethodNameHelperEnum,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcValidatorResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/validators", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client

@@ -3546,12 +3546,6 @@
                 ],
                 "type": "string"
             },
-            "ExpSplitStorageInfoMethodNameHelperEnum": {
-                "enum": [
-                    "EXPERIMENTAL_split_storage_info"
-                ],
-                "type": "string"
-            },
             "ExpTxStatusMethodNameHelperEnum": {
                 "enum": [
                     "EXPERIMENTAL_tx_status"
@@ -6350,7 +6344,10 @@
                         "type": "string"
                     },
                     "method": {
-                        "$ref": "#/components/schemas/ExpSplitStorageInfoMethodNameHelperEnum"
+                        "enum": [
+                            "EXPERIMENTAL_split_storage_info"
+                        ],
+                        "type": "string"
                     },
                     "params": {
                         "$ref": "#/components/schemas/RpcSplitStorageInfoRequest"

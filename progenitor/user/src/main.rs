@@ -257,7 +257,7 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
     let payloadSplitStorage = keeper::types::JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnum {
         id: String::from("dontcare"),
         jsonrpc: String::from("2.0"),
-        method: keeper::types::ExpSplitStorageInfoMethodNameHelperEnum::ExperimentalSplitStorageInfo,
+        method: keeper::types::JsonRpcRequestForExpSplitStorageInfoMethodNameHelperEnumMethod::ExperimentalSplitStorageInfo,
         params: keeper::types::RpcSplitStorageInfoRequest(serde_json::Map::new())
     };
 
