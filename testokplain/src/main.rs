@@ -152,15 +152,6 @@ trait MethodNameTrait {
     type T: JsonSchema;
 }
 
-#[derive(JsonSchema)]
-#[allow(dead_code)] // Suppress fields never read
-struct JsonRpcRequest<S: MethodNameTrait> {
-    jsonrpc: String,
-    id: String,
-    params: S::T,
-    method: S::S,
-}
-
 #[derive(Clone, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
 pub struct MaintenanceWindow {
     pub start: near_primitives::types::BlockHeight,
@@ -170,7 +161,7 @@ pub struct MaintenanceWindow {
 pub type RpcMaintenanceWindowsResponse =
     Vec<MaintenanceWindow>;
 
-type SchemasMap = serde_json::Value; //okapi::Map::<String, okapi::openapi3::SchemaObject>;
+type SchemasMap = serde_json::Value;
 type PathsMap = okapi::Map::<String, okapi::openapi3::PathItem>;
 
 fn schemas_map<T: JsonSchema>() -> SchemasMap {
@@ -181,7 +172,11 @@ fn schemas_map<T: JsonSchema>() -> SchemasMap {
 
     let the_schema = root_schema.as_value();
 
-    let mut result: SchemasMap = the_schema.get("components").unwrap().get("schemas").unwrap().clone(); //root_schema.definitions.into_iter().map(|(k, v)| (k, v.into())).collect();
+    let mut result: SchemasMap = if let Some(components) = the_schema.get("components") {
+        components.get("schemas").unwrap().clone()
+    } else {
+        json!({})
+    };
     let root_schema_name = the_schema.get("title").unwrap().as_str().unwrap();
     
     let mut the_schema = the_schema.clone();
@@ -255,26 +250,56 @@ fn paths_map(request_schema_name: String, response_schema_name: String, method_n
 }
 
 fn add_spec_for_path_internal<RequestType: JsonSchema, ResponseType: JsonSchema>(all_schemas: &mut SchemasMap, all_paths: &mut PathsMap, method_name: String) {
-    let request_map = schemas_map::<RequestType>();
+    let mut request_map = schemas_map::<RequestType>();
     let response_map = schemas_map::<ResponseType>();
+
+    let request_struct_name = format!("JsonRpcRequest_for_{}", RequestType::schema_name());
+    let json_rpc_request = json!({
+        "properties": {
+            "id": {
+                "type": "string"
+            },
+            "jsonrpc": {
+                "type": "string"
+            },
+            "method": {
+                "enum": [
+                    method_name
+                ],
+                "type": "string"
+            },
+            "params": {
+                "$ref": format!("#/components/schemas/{}", RequestType::schema_name())
+            }
+        },
+        "required": [
+            "jsonrpc",
+            "id",
+            "params",
+            "method"
+        ],
+        "title": request_struct_name.clone(),
+        "type": "object"
+    });
+    if let Some(obj) = request_map.as_object_mut() {
+        obj.insert(request_struct_name.clone(), json_rpc_request);
+    }
 
     let mut schemas = request_map;
     okapi::merge::merge_map_json(&mut schemas, response_map.clone(), "name");
-    // schemas.extend(response_map);
 
     let paths = paths_map(
-        format!("#/components/schemas/{}", RequestType::schema_name()), 
+        format!("#/components/schemas/{}", request_struct_name.clone()), 
         format!("#/components/schemas/{}", ResponseType::schema_name()),
         method_name
     );
 
     okapi::merge::merge_map_json(all_schemas, schemas.clone(), "name");
-    // all_schemas.extend(schemas.clone());
     all_paths.extend(paths.clone());
 }
 
-fn add_spec_for_path<Request: JsonSchema + MethodNameTrait, Response: JsonSchema>(all_schemas: &mut SchemasMap, all_paths: &mut PathsMap, method_name: String) {
-    add_spec_for_path_internal::<JsonRpcRequest<Request>, JsonRpcResponse<Response, RpcError>>(all_schemas, all_paths, method_name)
+fn add_spec_for_path<Request: JsonSchema, Response: JsonSchema>(all_schemas: &mut SchemasMap, all_paths: &mut PathsMap, method_name: String) {
+    add_spec_for_path_internal::<Request, JsonRpcResponse<Response, RpcError>>(all_schemas, all_paths, method_name)
 }
 
 fn whole_spec(all_schemas: SchemasMap, all_paths: PathsMap) -> OpenApi {
@@ -415,33 +440,33 @@ fn main() {
     let mut all_schemas = json!({}); //SchemasMap::new();
     let mut all_paths = PathsMap::new();
 
-    add_spec_for_path::<BlockMethodNameHelperEnum, RpcBlockResponse>(&mut all_schemas, &mut all_paths, "block".to_string());
-    add_spec_for_path::<BroadCastTxAsyncMethodNameHelperEnum, CryptoHash>(&mut all_schemas, &mut all_paths, "broadcast_tx_async".to_string());
-    add_spec_for_path::<BroadCastTxCommitMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "broadcast_tx_commit".to_string());
-    add_spec_for_path::<ChunkMethodNameHelperEnum, RpcChunkResponse>(&mut all_schemas, &mut all_paths, "chunk".to_string());
-    add_spec_for_path::<GasPriceMethodNameHelperEnum, RpcGasPriceResponse>(&mut all_schemas, &mut all_paths, "gas_price".to_string());
-    add_spec_for_path::<HealthMethodNameHelperEnum, Option<RpcHealthResponse>>(&mut all_schemas, &mut all_paths, "health".to_string());
-    add_spec_for_path::<LightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "light_client_proof".to_string());
-    add_spec_for_path::<NextLightClientBlockMethodNameHelperEnum, RpcLightClientNextBlockResponse>(&mut all_schemas, &mut all_paths, "next_light_client_block".to_string());
-    add_spec_for_path::<NetworkInfoMethodNameHelperEnum, RpcNetworkInfoResponse>(&mut all_schemas, &mut all_paths, "network_info".to_string());
-    add_spec_for_path::<SendTxMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "send_tx".to_string());
-    add_spec_for_path::<StatusMethodNameHelperEnum, RpcStatusResponse>(&mut all_schemas, &mut all_paths, "status".to_string());
-    add_spec_for_path::<TxMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "tx".to_string());
-    add_spec_for_path::<ValidatorsMethodNameHelperEnum, RpcValidatorResponse>(&mut all_schemas, &mut all_paths, "validators".to_string());
-    add_spec_for_path::<ClientConfigMethodNameHelperEnum, RpcClientConfigResponse>(&mut all_schemas, &mut all_paths, "client_config".to_string());
+    // add_spec_for_path::<BlockMethodNameHelperEnum, RpcBlockResponse>(&mut all_schemas, &mut all_paths, "block".to_string());
+    // add_spec_for_path::<BroadCastTxAsyncMethodNameHelperEnum, CryptoHash>(&mut all_schemas, &mut all_paths, "broadcast_tx_async".to_string());
+    // add_spec_for_path::<BroadCastTxCommitMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "broadcast_tx_commit".to_string());
+    // add_spec_for_path::<ChunkMethodNameHelperEnum, RpcChunkResponse>(&mut all_schemas, &mut all_paths, "chunk".to_string());
+    // add_spec_for_path::<GasPriceMethodNameHelperEnum, RpcGasPriceResponse>(&mut all_schemas, &mut all_paths, "gas_price".to_string());
+    // add_spec_for_path::<HealthMethodNameHelperEnum, Option<RpcHealthResponse>>(&mut all_schemas, &mut all_paths, "health".to_string());
+    // add_spec_for_path::<LightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "light_client_proof".to_string());
+    // add_spec_for_path::<NextLightClientBlockMethodNameHelperEnum, RpcLightClientNextBlockResponse>(&mut all_schemas, &mut all_paths, "next_light_client_block".to_string());
+    // add_spec_for_path::<NetworkInfoMethodNameHelperEnum, RpcNetworkInfoResponse>(&mut all_schemas, &mut all_paths, "network_info".to_string());
+    // add_spec_for_path::<SendTxMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "send_tx".to_string());
+    // add_spec_for_path::<StatusMethodNameHelperEnum, RpcStatusResponse>(&mut all_schemas, &mut all_paths, "status".to_string());
+    // add_spec_for_path::<TxMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "tx".to_string());
+    // add_spec_for_path::<ValidatorsMethodNameHelperEnum, RpcValidatorResponse>(&mut all_schemas, &mut all_paths, "validators".to_string());
+    // add_spec_for_path::<ClientConfigMethodNameHelperEnum, RpcClientConfigResponse>(&mut all_schemas, &mut all_paths, "client_config".to_string());
 
-    add_spec_for_path::<ExpChangeMethodNameHelperEnum, RpcStateChangesInBlockResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes".to_string());
-    add_spec_for_path::<ExpChangesBlockMethodNameHelperEnum, RpcStateChangesInBlockByTypeResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes_in_block".to_string());
-    add_spec_for_path::<ExpGongestionMethodNameHelperEnum, RpcCongestionLevelResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_congestion_level".to_string());
-    add_spec_for_path::<ExpGenesisMethodNameHelperEnum, GenesisConfig>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_genesis_config".to_string());
-    add_spec_for_path::<ExpLightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_proof".to_string());
-    add_spec_for_path::<ExpLightClientBlockProofMethodNameHelperEnum, RpcLightClientBlockProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_block_proof".to_string());
-    add_spec_for_path::<ExpProtocolConfigMethodNameHelperEnum, RpcProtocolConfigResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_protocol_config".to_string());
-    add_spec_for_path::<ExpReceiptMethodNameHelperEnum, RpcReceiptResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_receipt".to_string());
-    add_spec_for_path::<ExpTxStatusMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_tx_status".to_string());
-    add_spec_for_path::<ExpValidatorsMethodNameHelperEnum, RpcValidatorsOrderedResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_validators_ordered".to_string());
-    add_spec_for_path::<ExpMaintenanceWindoesMethodNameHelperEnum, RpcMaintenanceWindowsResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_maintenance_windows".to_string());
-    add_spec_for_path::<ExpSplitStorageInfoMethodNameHelperEnum, RpcSplitStorageInfoResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_split_storage_info".to_string());
+    // add_spec_for_path::<ExpChangeMethodNameHelperEnum, RpcStateChangesInBlockResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes".to_string());
+    // add_spec_for_path::<ExpChangesBlockMethodNameHelperEnum, RpcStateChangesInBlockByTypeResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes_in_block".to_string());
+    // add_spec_for_path::<ExpGongestionMethodNameHelperEnum, RpcCongestionLevelResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_congestion_level".to_string());
+    // add_spec_for_path::<ExpGenesisMethodNameHelperEnum, GenesisConfig>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_genesis_config".to_string());
+    // add_spec_for_path::<ExpLightClientProofMethodNameHelperEnum, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_proof".to_string());
+    // add_spec_for_path::<ExpLightClientBlockProofMethodNameHelperEnum, RpcLightClientBlockProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_block_proof".to_string());
+    // add_spec_for_path::<ExpProtocolConfigMethodNameHelperEnum, RpcProtocolConfigResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_protocol_config".to_string());
+    // add_spec_for_path::<ExpReceiptMethodNameHelperEnum, RpcReceiptResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_receipt".to_string());
+    // add_spec_for_path::<ExpTxStatusMethodNameHelperEnum, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_tx_status".to_string());
+    // add_spec_for_path::<ExpValidatorsMethodNameHelperEnum, RpcValidatorsOrderedResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_validators_ordered".to_string());
+    add_spec_for_path::<RpcMaintenanceWindowsRequest, RpcMaintenanceWindowsResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_maintenance_windows".to_string());
+    add_spec_for_path::<RpcSplitStorageInfoRequest, RpcSplitStorageInfoResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_split_storage_info".to_string());
 
     let path_schema = whole_spec(all_schemas, all_paths);
     
