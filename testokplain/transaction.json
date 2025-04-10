@@ -4599,12 +4599,16 @@
                         "type": "integer"
                     },
                     "minimum_stake_ratio": {
-                        "$ref": "#/components/schemas/Rational32SchemaProvider",
-                        "default": [
-                            1,
-                            6250
-                        ],
-                        "description": "The lowest ratio s/s_total any block producer can have.\n See <https://github.com/near/NEPs/pull/167> for details"
+                        "default": {
+                            "denom": 1,
+                            "numer": 6250
+                        },
+                        "description": "The lowest ratio s/s_total any block producer can have.\n See <https://github.com/near/NEPs/pull/167> for details",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Rational32SchemaProvider"
+                            }
+                        ]
                     },
                     "minimum_validators_per_shard": {
                         "default": 1,
@@ -4655,20 +4659,28 @@
                         "type": "integer"
                     },
                     "online_max_threshold": {
-                        "$ref": "#/components/schemas/Rational32SchemaProvider",
-                        "default": [
-                            99,
-                            100
-                        ],
-                        "description": "Online maximum threshold above which validator gets full reward."
+                        "default": {
+                            "denom": 99,
+                            "numer": 100
+                        },
+                        "description": "Online maximum threshold above which validator gets full reward.",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Rational32SchemaProvider"
+                            }
+                        ]
                     },
                     "online_min_threshold": {
-                        "$ref": "#/components/schemas/Rational32SchemaProvider",
-                        "default": [
-                            9,
-                            10
-                        ],
-                        "description": "Online minimum threshold below which validator doesn't receive reward."
+                        "default": {
+                            "denom": 9,
+                            "numer": 10
+                        },
+                        "description": "Online minimum threshold below which validator doesn't receive reward.",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Rational32SchemaProvider"
+                            }
+                        ]
                     },
                     "protocol_reward_rate": {
                         "$ref": "#/components/schemas/Rational32SchemaProvider",
@@ -4679,12 +4691,16 @@
                         "description": "Protocol treasury account"
                     },
                     "protocol_upgrade_stake_threshold": {
-                        "$ref": "#/components/schemas/Rational32SchemaProvider",
-                        "default": [
-                            4,
-                            5
-                        ],
-                        "description": "Threshold of stake that needs to indicate that they ready for upgrade."
+                        "default": {
+                            "denom": 4,
+                            "numer": 5
+                        },
+                        "description": "Threshold of stake that needs to indicate that they ready for upgrade.",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Rational32SchemaProvider"
+                            }
+                        ]
                     },
                     "protocol_version": {
                         "description": "Protocol version that this genesis works with.",

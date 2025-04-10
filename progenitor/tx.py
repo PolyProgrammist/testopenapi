@@ -34,6 +34,17 @@ def reconstructAllOfOneOf(schema):
 
 def iterate_nested_json_for_loop(json_obj):
     if isinstance(json_obj, dict):
+        if '$ref' in json_obj and json_obj['$ref'] == "#/components/schemas/Rational32SchemaProvider" and 'default' in json_obj and not isinstance(json_obj['default'], dict):
+            json_obj['default'] = {
+                'denom': json_obj['default'][0],
+                'numer': json_obj['default'][1]
+            }
+            json_obj['allOf'] = [
+                {
+                    "$ref": "#/components/schemas/Rational32SchemaProvider"
+                }
+            ]
+            del json_obj['$ref']
         if 'const' in json_obj:
             t = json_obj['const']
             del json_obj['const']

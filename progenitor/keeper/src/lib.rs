@@ -6630,7 +6630,16 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "minimum_stake_ratio": {
-    ///      "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///      "description": "The lowest ratio s/s_total any block producer can have.\n See <https://github.com/near/NEPs/pull/167> for details",
+    ///      "default": {
+    ///        "denom": 1,
+    ///        "numer": 6250
+    ///      },
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
     ///    },
     ///    "minimum_validators_per_shard": {
     ///      "description": "The minimum number of validators each shard must
@@ -6687,10 +6696,30 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "online_max_threshold": {
-    ///      "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///      "description": "Online maximum threshold above which validator gets
+    /// full reward.",
+    ///      "default": {
+    ///        "denom": 99,
+    ///        "numer": 100
+    ///      },
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
     ///    },
     ///    "online_min_threshold": {
-    ///      "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///      "description": "Online minimum threshold below which validator
+    /// doesn't receive reward.",
+    ///      "default": {
+    ///        "denom": 9,
+    ///        "numer": 10
+    ///      },
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
     ///    },
     ///    "protocol_reward_rate": {
     ///      "$ref": "#/components/schemas/Rational32SchemaProvider"
@@ -6699,7 +6728,17 @@ pub mod types {
     ///      "$ref": "#/components/schemas/AccountId"
     ///    },
     ///    "protocol_upgrade_stake_threshold": {
-    ///      "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///      "description": "Threshold of stake that needs to indicate that they
+    /// ready for upgrade.",
+    ///      "default": {
+    ///        "denom": 4,
+    ///        "numer": 5
+    ///      },
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
     ///    },
     ///    "protocol_version": {
     ///      "description": "Protocol version that this genesis works with.",
@@ -6803,8 +6842,10 @@ pub mod types {
         /// this number.
         #[serde(default = "defaults::default_u64::<u64, 10>")]
         pub minimum_stake_divisor: u64,
-        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
-        pub minimum_stake_ratio: ::std::option::Option<Rational32SchemaProvider>,
+        ///The lowest ratio s/s_total any block producer can have.
+        /// See <https://github.com/near/NEPs/pull/167> for details
+        #[serde(default = "defaults::genesis_config_minimum_stake_ratio")]
+        pub minimum_stake_ratio: Rational32SchemaProvider,
         ///The minimum number of validators each shard must have
         #[serde(default = "defaults::default_u64::<u64, 1>")]
         pub minimum_validators_per_shard: u64,
@@ -6828,14 +6869,19 @@ pub mod types {
         pub num_chunk_producer_seats: u64,
         #[serde(default = "defaults::default_u64::<u64, 300>")]
         pub num_chunk_validator_seats: u64,
-        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
-        pub online_max_threshold: ::std::option::Option<Rational32SchemaProvider>,
-        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
-        pub online_min_threshold: ::std::option::Option<Rational32SchemaProvider>,
+        ///Online maximum threshold above which validator gets full reward.
+        #[serde(default = "defaults::genesis_config_online_max_threshold")]
+        pub online_max_threshold: Rational32SchemaProvider,
+        ///Online minimum threshold below which validator doesn't receive
+        /// reward.
+        #[serde(default = "defaults::genesis_config_online_min_threshold")]
+        pub online_min_threshold: Rational32SchemaProvider,
         pub protocol_reward_rate: Rational32SchemaProvider,
         pub protocol_treasury_account: AccountId,
-        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
-        pub protocol_upgrade_stake_threshold: ::std::option::Option<Rational32SchemaProvider>,
+        ///Threshold of stake that needs to indicate that they ready for
+        /// upgrade.
+        #[serde(default = "defaults::genesis_config_protocol_upgrade_stake_threshold")]
+        pub protocol_upgrade_stake_threshold: Rational32SchemaProvider,
         ///Protocol version that this genesis works with.
         pub protocol_version: u32,
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -24506,6 +24552,35 @@ pub mod types {
             T::try_from(V).unwrap()
         }
 
+        pub(super) fn genesis_config_minimum_stake_ratio() -> super::Rational32SchemaProvider {
+            super::Rational32SchemaProvider {
+                denom: 1_i32,
+                numer: 6250_i32,
+            }
+        }
+
+        pub(super) fn genesis_config_online_max_threshold() -> super::Rational32SchemaProvider {
+            super::Rational32SchemaProvider {
+                denom: 99_i32,
+                numer: 100_i32,
+            }
+        }
+
+        pub(super) fn genesis_config_online_min_threshold() -> super::Rational32SchemaProvider {
+            super::Rational32SchemaProvider {
+                denom: 9_i32,
+                numer: 10_i32,
+            }
+        }
+
+        pub(super) fn genesis_config_protocol_upgrade_stake_threshold(
+        ) -> super::Rational32SchemaProvider {
+            super::Rational32SchemaProvider {
+                denom: 4_i32,
+                numer: 5_i32,
+            }
+        }
+
         pub(super) fn rpc_send_transaction_request_wait_until() -> super::TxExecutionStatus {
             super::TxExecutionStatus::ExecutedOptimistic
         }
@@ -24588,7 +24663,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcStateChangesInBlockResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_changes", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24615,7 +24690,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcStateChangesInBlockByTypeResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_changes_in_block", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24642,7 +24717,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcCongestionLevelResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_congestion_level", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24666,7 +24741,7 @@ impl Client {
         &'a self,
         body: &'a types::JsonRpcRequestForExperimentalGenesisConfig,
     ) -> Result<ResponseValue<types::JsonRpcResponseForGenesisConfigAndRpcError>, Error<()>> {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_genesis_config", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24693,7 +24768,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcLightClientBlockProofResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_light_client_block_proof", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24720,7 +24795,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_light_client_proof", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24747,7 +24822,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_maintenance_windows", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24774,7 +24849,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcProtocolConfigResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_protocol_config", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24799,7 +24874,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForExperimentalReceipt,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcReceiptResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_receipt", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24826,7 +24901,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcSplitStorageInfoResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_split_storage_info", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24851,7 +24926,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForExperimentalTxStatus,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_tx_status", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24878,7 +24953,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForArrayOfValidatorStakeViewAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/EXPERIMENTAL_validators_ordered", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24903,7 +24978,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForBlock,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcBlockResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/block", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24927,7 +25002,7 @@ impl Client {
         &'a self,
         body: &'a types::JsonRpcRequestForBroadcastTxAsync,
     ) -> Result<ResponseValue<types::JsonRpcResponseForCryptoHashAndRpcError>, Error<()>> {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/broadcast_tx_async", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24952,7 +25027,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForBroadcastTxCommit,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/broadcast_tx_commit", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24977,7 +25052,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForChunk,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcChunkResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/chunk", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25002,7 +25077,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForClientConfig,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcClientConfigResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/client_config", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25027,7 +25102,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForGasPrice,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcGasPriceResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/gas_price", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25054,7 +25129,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/health", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25081,7 +25156,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/light_client_proof", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25106,7 +25181,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForNetworkInfo,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcNetworkInfoResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/network_info", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25133,7 +25208,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/next_light_client_block", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25158,7 +25233,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForSendTx,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/send_tx", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25183,7 +25258,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForStatus,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcStatusResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/status", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25208,7 +25283,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForTx,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/tx", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25233,7 +25308,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForValidators,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcValidatorResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/", self.baseurl,);
+        let url = format!("{}/validators", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
