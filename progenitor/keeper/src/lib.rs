@@ -24663,7 +24663,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcStateChangesInBlockResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/EXPERIMENTAL_changes", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24690,7 +24690,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcStateChangesInBlockByTypeResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/EXPERIMENTAL_changes_in_block", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24717,7 +24717,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcCongestionLevelResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/EXPERIMENTAL_congestion_level", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24741,7 +24741,7 @@ impl Client {
         &'a self,
         body: &'a types::JsonRpcRequestForExperimentalGenesisConfig,
     ) -> Result<ResponseValue<types::JsonRpcResponseForGenesisConfigAndRpcError>, Error<()>> {
-        let url = format!("{}/EXPERIMENTAL_genesis_config", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24768,7 +24768,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcLightClientBlockProofResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/EXPERIMENTAL_light_client_block_proof", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24795,7 +24795,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/EXPERIMENTAL_light_client_proof", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24822,7 +24822,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/EXPERIMENTAL_maintenance_windows", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24849,7 +24849,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcProtocolConfigResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/EXPERIMENTAL_protocol_config", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24874,7 +24874,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForExperimentalReceipt,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcReceiptResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/EXPERIMENTAL_receipt", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24901,7 +24901,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcSplitStorageInfoResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/EXPERIMENTAL_split_storage_info", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24926,7 +24926,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForExperimentalTxStatus,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/EXPERIMENTAL_tx_status", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24953,7 +24953,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForArrayOfValidatorStakeViewAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/EXPERIMENTAL_validators_ordered", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -24978,7 +24978,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForBlock,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcBlockResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/block", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25002,7 +25002,7 @@ impl Client {
         &'a self,
         body: &'a types::JsonRpcRequestForBroadcastTxAsync,
     ) -> Result<ResponseValue<types::JsonRpcResponseForCryptoHashAndRpcError>, Error<()>> {
-        let url = format!("{}/broadcast_tx_async", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25027,7 +25027,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForBroadcastTxCommit,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/broadcast_tx_commit", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25052,7 +25052,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForChunk,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcChunkResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/chunk", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25077,7 +25077,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForClientConfig,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcClientConfigResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/client_config", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25102,7 +25102,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForGasPrice,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcGasPriceResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/gas_price", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25129,7 +25129,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/health", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25156,7 +25156,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/light_client_proof", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25181,7 +25181,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForNetworkInfo,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcNetworkInfoResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/network_info", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25208,7 +25208,7 @@ impl Client {
         ResponseValue<types::JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError>,
         Error<()>,
     > {
-        let url = format!("{}/next_light_client_block", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25233,7 +25233,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForSendTx,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/send_tx", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25258,7 +25258,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForStatus,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcStatusResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/status", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25283,7 +25283,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForTx,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcTransactionResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/tx", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
@@ -25308,7 +25308,7 @@ impl Client {
         body: &'a types::JsonRpcRequestForValidators,
     ) -> Result<ResponseValue<types::JsonRpcResponseForRpcValidatorResponseAndRpcError>, Error<()>>
     {
-        let url = format!("{}/validators", self.baseurl,);
+        let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self
             .client
