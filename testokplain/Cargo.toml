@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-schemars = "1.0.0-alpha.17"
+schemars = { path = "../../schemars/schemars" }
 serde_json = "1.0.139"
 okapi = { path = "../okapi/okapi" } # OpenAPI generation
 serde = { version = "1", features = ["derive"] }
