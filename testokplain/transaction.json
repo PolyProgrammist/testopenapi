@@ -720,7 +720,11 @@
                         "type": "integer"
                     },
                     "permission": {
-                        "$ref": "#/components/schemas/AccessKeyPermission",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AccessKeyPermission"
+                            }
+                        ],
                         "description": "Defines permissions for this access key."
                     }
                 },
@@ -734,15 +738,27 @@
                 "description": "Describes the cost of creating an access key.",
                 "properties": {
                     "full_access_cost": {
-                        "$ref": "#/components/schemas/Fee",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Fee"
+                            }
+                        ],
                         "description": "Base cost of creating a full access access-key."
                     },
                     "function_call_cost": {
-                        "$ref": "#/components/schemas/Fee",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Fee"
+                            }
+                        ],
                         "description": "Base cost of creating an access-key restricted to specific functions."
                     },
                     "function_call_cost_per_byte": {
-                        "$ref": "#/components/schemas/Fee",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Fee"
+                            }
+                        ],
                         "description": "Cost per byte of method_names of creating a restricted access-key."
                     }
                 },
@@ -770,10 +786,10 @@
                     },
                     {
                         "description": "Grants full access to the account.\n NOTE: It's used to replace account-level public keys.",
-                        "type": "string",
                         "enum": [
                             "FullAccess"
-                        ]
+                        ],
+                        "type": "string"
                     }
                 ]
             },
@@ -845,7 +861,11 @@
                         "type": "integer"
                     },
                     "registrar_account_id": {
-                        "$ref": "#/components/schemas/AccountId",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AccountId"
+                            }
+                        ],
                         "description": "The account ID of the account registrar. This account ID allowed to create top-level\n accounts of any valid length."
                     }
                 },
@@ -1062,47 +1082,91 @@
                 "description": "Describes the cost of creating a specific action, `Action`. Includes all variants.",
                 "properties": {
                     "add_key_cost": {
-                        "$ref": "#/components/schemas/AccessKeyCreationConfigView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AccessKeyCreationConfigView"
+                            }
+                        ],
                         "description": "Base cost of adding a key."
                     },
                     "create_account_cost": {
-                        "$ref": "#/components/schemas/Fee",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Fee"
+                            }
+                        ],
                         "description": "Base cost of creating an account."
                     },
                     "delegate_cost": {
-                        "$ref": "#/components/schemas/Fee",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Fee"
+                            }
+                        ],
                         "description": "Base cost for processing a delegate action.\n\n This is on top of the costs for the actions inside the delegate action."
                     },
                     "delete_account_cost": {
-                        "$ref": "#/components/schemas/Fee",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Fee"
+                            }
+                        ],
                         "description": "Base cost of deleting an account."
                     },
                     "delete_key_cost": {
-                        "$ref": "#/components/schemas/Fee",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Fee"
+                            }
+                        ],
                         "description": "Base cost of deleting a key."
                     },
                     "deploy_contract_cost": {
-                        "$ref": "#/components/schemas/Fee",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Fee"
+                            }
+                        ],
                         "description": "Base cost of deploying a contract."
                     },
                     "deploy_contract_cost_per_byte": {
-                        "$ref": "#/components/schemas/Fee",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Fee"
+                            }
+                        ],
                         "description": "Cost per byte of deploying a contract."
                     },
                     "function_call_cost": {
-                        "$ref": "#/components/schemas/Fee",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Fee"
+                            }
+                        ],
                         "description": "Base cost of calling a function."
                     },
                     "function_call_cost_per_byte": {
-                        "$ref": "#/components/schemas/Fee",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Fee"
+                            }
+                        ],
                         "description": "Cost per byte of method name and arguments of calling a function."
                     },
                     "stake_cost": {
-                        "$ref": "#/components/schemas/Fee",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Fee"
+                            }
+                        ],
                         "description": "Base cost of staking."
                     },
                     "transfer_cost": {
-                        "$ref": "#/components/schemas/Fee",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Fee"
+                            }
+                        ],
                         "description": "Base cost of making a transfer."
                     }
                 },
@@ -1132,7 +1196,11 @@
                         "type": "integer"
                     },
                     "kind": {
-                        "$ref": "#/components/schemas/ActionErrorKind",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ActionErrorKind"
+                            }
+                        ],
                         "description": "The kind of ActionError happened"
                     }
                 },
@@ -1342,7 +1410,11 @@
                             "LackBalanceForState": {
                                 "properties": {
                                     "account_id": {
-                                        "$ref": "#/components/schemas/AccountId",
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/components/schemas/AccountId"
+                                            }
+                                        ],
                                         "description": "An account which needs balance"
                                     },
                                     "amount": {
@@ -1514,10 +1586,10 @@
                     },
                     {
                         "description": "Signature does not match the provided actions and given signer public key.",
-                        "type": "string",
                         "enum": [
                             "DelegateActionInvalidSignature"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -1546,10 +1618,10 @@
                     },
                     {
                         "description": "Delegate action has expired. `max_block_height` is less than actual block height.",
-                        "type": "string",
                         "enum": [
                             "DelegateActionExpired"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -1925,10 +1997,10 @@
                 "oneOf": [
                     {
                         "description": "The delete action must be a final action in transaction",
-                        "type": "string",
                         "enum": [
                             "DeleteActionMustBeFinal"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -2048,10 +2120,10 @@
                     },
                     {
                         "description": "Integer overflow during a compute.",
-                        "type": "string",
                         "enum": [
                             "IntegerOverflow"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -2184,17 +2256,17 @@
                     },
                     {
                         "description": "The attached amount of gas in a FunctionCall action has to be a positive number.",
-                        "type": "string",
                         "enum": [
                             "FunctionCallZeroAttachedGas"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "There should be the only one DelegateAction",
-                        "type": "string",
                         "enum": [
                             "DelegateActionMustBeOnlyOne"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -2228,11 +2300,19 @@
             "AddKeyAction": {
                 "properties": {
                     "access_key": {
-                        "$ref": "#/components/schemas/AccessKey",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AccessKey"
+                            }
+                        ],
                         "description": "An access key with the permission"
                     },
                     "public_key": {
-                        "$ref": "#/components/schemas/PublicKey",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/PublicKey"
+                            }
+                        ],
                         "description": "A public key which will be associated with an access_key"
                     }
                 },
@@ -2246,7 +2326,11 @@
                 "description": "`BandwidthRequest` describes the size of receipts that a shard would like to send to another shard.\n When a shard wants to send a lot of receipts to another shard, it needs to create a request and wait\n for a bandwidth grant from the bandwidth scheduler.",
                 "properties": {
                     "requested_values_bitmap": {
-                        "$ref": "#/components/schemas/BandwidthRequestBitmap",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/BandwidthRequestBitmap"
+                            }
+                        ],
                         "description": "Bitmap which describes what values of bandwidth are requested."
                     },
                     "to_shard": {
@@ -2374,7 +2458,11 @@
                         "type": "array"
                     },
                     "block_body_hash": {
-                        "$ref": "#/components/schemas/CryptoHash",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/CryptoHash"
+                            }
+                        ],
                         "nullable": true
                     },
                     "block_merkle_root": {
@@ -2431,7 +2519,11 @@
                         "$ref": "#/components/schemas/CryptoHash"
                     },
                     "epoch_sync_data_hash": {
-                        "$ref": "#/components/schemas/CryptoHash",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/CryptoHash"
+                            }
+                        ],
                         "nullable": true
                     },
                     "gas_price": {
@@ -2652,14 +2744,22 @@
                         "type": "string"
                     },
                     "bandwidth_requests": {
-                        "$ref": "#/components/schemas/BandwidthRequests",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/BandwidthRequests"
+                            }
+                        ],
                         "nullable": true
                     },
                     "chunk_hash": {
                         "$ref": "#/components/schemas/CryptoHash"
                     },
                     "congestion_info": {
-                        "$ref": "#/components/schemas/CongestionInfoView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/CongestionInfoView"
+                            }
+                        ],
                         "nullable": true
                     },
                     "encoded_length": {
@@ -3064,11 +3164,19 @@
             "DataReceiptCreationConfigView": {
                 "properties": {
                     "base_cost": {
-                        "$ref": "#/components/schemas/Fee",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Fee"
+                            }
+                        ],
                         "description": "Base cost of creating a data receipt.\n Both `send` and `exec` costs are burned when a new receipt has input dependencies. The gas\n is charged for each input dependency. The dependencies are specified when a receipt is\n created using `promise_then` and `promise_batch_then`.\n NOTE: Any receipt with output dependencies will produce data receipts. Even if it fails.\n Even if the last action is not a function call (in case of success it will return empty\n value)."
                     },
                     "cost_per_byte": {
-                        "$ref": "#/components/schemas/Fee",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Fee"
+                            }
+                        ],
                         "description": "Additional cost per byte sent.\n Both `send` and `exec` costs are burned when a function call finishes execution and returns\n `N` bytes of data to every output dependency. For each output dependency the cost is\n `(send(sir) + exec()) * N`."
                     }
                 },
@@ -3116,15 +3224,27 @@
                         "type": "integer"
                     },
                     "public_key": {
-                        "$ref": "#/components/schemas/PublicKey",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/PublicKey"
+                            }
+                        ],
                         "description": "Public key used to sign this delegated action."
                     },
                     "receiver_id": {
-                        "$ref": "#/components/schemas/AccountId",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AccountId"
+                            }
+                        ],
                         "description": "Receiver of the delegated actions."
                     },
                     "sender_id": {
-                        "$ref": "#/components/schemas/AccountId",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AccountId"
+                            }
+                        ],
                         "description": "Signer of the delegated actions"
                     }
                 },
@@ -3152,7 +3272,11 @@
             "DeleteKeyAction": {
                 "properties": {
                     "public_key": {
-                        "$ref": "#/components/schemas/PublicKey",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/PublicKey"
+                            }
+                        ],
                         "description": "A public key associated with the access_key to be deleted."
                     }
                 },
@@ -3243,11 +3367,19 @@
                         "type": "string"
                     },
                     "iteration_delay": {
-                        "$ref": "#/components/schemas/DurationSchemeProvider",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/DurationSchemeProvider"
+                            }
+                        ],
                         "description": "How often to check if a new epoch has started.\n Feel free to set to `None`, defaults are sensible."
                     },
                     "location": {
-                        "$ref": "#/components/schemas/ExternalStorageLocation",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ExternalStorageLocation"
+                            }
+                        ],
                         "description": "Specifies where to write the obtained state parts."
                     },
                     "restart_dump_for_shards": {
@@ -3282,7 +3414,11 @@
                 "type": "object"
             },
             "EpochId": {
-                "$ref": "#/components/schemas/CryptoHash",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/CryptoHash"
+                    }
+                ],
                 "description": "Epoch identifier -- wrapped hash, to make it easier to distinguish.\n EpochId of epoch T is the hash of last block in T-2\n EpochId of first two epochs is 0"
             },
             "EpochSyncConfig": {
@@ -3304,7 +3440,11 @@
                         "type": "boolean"
                     },
                     "timeout_for_epoch_sync": {
-                        "$ref": "#/components/schemas/DurationSchemeProvider",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/DurationSchemeProvider"
+                            }
+                        ],
                         "description": "Timeout for epoch sync requests. The node will continue retrying indefinitely even\n if this timeout is exceeded."
                     }
                 },
@@ -3337,7 +3477,11 @@
             "ExecutionOutcomeView": {
                 "properties": {
                     "executor_id": {
-                        "$ref": "#/components/schemas/AccountId",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AccountId"
+                            }
+                        ],
                         "description": "The id of the account on which the execution happens. For transaction this is signer_id,\n for receipt this is receiver_id."
                     },
                     "gas_burnt": {
@@ -3354,7 +3498,11 @@
                         "type": "array"
                     },
                     "metadata": {
-                        "$ref": "#/components/schemas/ExecutionMetadataView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ExecutionMetadataView"
+                            }
+                        ],
                         "default": {
                             "version": 1
                         },
@@ -3368,7 +3516,11 @@
                         "type": "array"
                     },
                     "status": {
-                        "$ref": "#/components/schemas/ExecutionStatusView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ExecutionStatusView"
+                            }
+                        ],
                         "description": "Execution status. Contains the result in case of successful execution."
                     },
                     "tokens_burnt": {
@@ -3416,10 +3568,10 @@
                 "oneOf": [
                     {
                         "description": "The execution is pending or unknown.",
-                        "type": "string",
                         "enum": [
                             "Unknown"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -4069,7 +4221,11 @@
                         "type": "integer"
                     },
                     "location": {
-                        "$ref": "#/components/schemas/ExternalStorageLocation",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ExternalStorageLocation"
+                            }
+                        ],
                         "description": "Location of state parts."
                     },
                     "num_concurrent_requests": {
@@ -4202,15 +4358,27 @@
                         "type": "array"
                     },
                     "status": {
-                        "$ref": "#/components/schemas/FinalExecutionStatus",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/FinalExecutionStatus"
+                            }
+                        ],
                         "description": "Execution status defined by chain.rs:get_final_transaction_result\n FinalExecutionStatus::NotStarted - the tx is not converted to the receipt yet\n FinalExecutionStatus::Started - we have at least 1 receipt, but the first leaf receipt_id (using dfs) hasn't finished the execution\n FinalExecutionStatus::Failure - the result of the first leaf receipt_id\n FinalExecutionStatus::SuccessValue - the result of the first leaf receipt_id"
                     },
                     "transaction": {
-                        "$ref": "#/components/schemas/SignedTransactionView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/SignedTransactionView"
+                            }
+                        ],
                         "description": "Signed Transaction"
                     },
                     "transaction_outcome": {
-                        "$ref": "#/components/schemas/ExecutionOutcomeWithIdView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ExecutionOutcomeWithIdView"
+                            }
+                        ],
                         "description": "The execution outcome of the signed transaction."
                     }
                 },
@@ -4240,15 +4408,27 @@
                         "type": "array"
                     },
                     "status": {
-                        "$ref": "#/components/schemas/FinalExecutionStatus",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/FinalExecutionStatus"
+                            }
+                        ],
                         "description": "Execution status defined by chain.rs:get_final_transaction_result\n FinalExecutionStatus::NotStarted - the tx is not converted to the receipt yet\n FinalExecutionStatus::Started - we have at least 1 receipt, but the first leaf receipt_id (using dfs) hasn't finished the execution\n FinalExecutionStatus::Failure - the result of the first leaf receipt_id\n FinalExecutionStatus::SuccessValue - the result of the first leaf receipt_id"
                     },
                     "transaction": {
-                        "$ref": "#/components/schemas/SignedTransactionView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/SignedTransactionView"
+                            }
+                        ],
                         "description": "Signed Transaction"
                     },
                     "transaction_outcome": {
-                        "$ref": "#/components/schemas/ExecutionOutcomeWithIdView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ExecutionOutcomeWithIdView"
+                            }
+                        ],
                         "description": "The execution outcome of the signed transaction."
                     }
                 },
@@ -4265,17 +4445,17 @@
                 "oneOf": [
                     {
                         "description": "The execution has not yet started.",
-                        "type": "string",
                         "enum": [
                             "NotStarted"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "The execution has started and still going.",
-                        "type": "string",
                         "enum": [
                             "Started"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -4487,7 +4667,11 @@
                         "type": "integer"
                     },
                     "gc_step_period": {
-                        "$ref": "#/components/schemas/DurationSchemeProvider",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/DurationSchemeProvider"
+                            }
+                        ],
                         "default": {
                             "nanos": 0,
                             "secs": 1
@@ -4559,7 +4743,11 @@
                         "type": "integer"
                     },
                     "gas_price_adjustment_rate": {
-                        "$ref": "#/components/schemas/Rational32SchemaProvider",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Rational32SchemaProvider"
+                            }
+                        ],
                         "description": "Gas price adjustment rate"
                     },
                     "genesis_height": {
@@ -4577,7 +4765,11 @@
                         "type": "string"
                     },
                     "max_inflation_rate": {
-                        "$ref": "#/components/schemas/Rational32SchemaProvider",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Rational32SchemaProvider"
+                            }
+                        ],
                         "description": "Maximum inflation on the total supply every epoch."
                     },
                     "max_kickout_stake_perc": {
@@ -4599,16 +4791,16 @@
                         "type": "integer"
                     },
                     "minimum_stake_ratio": {
-                        "default": {
-                            "denom": 1,
-                            "numer": 6250
-                        },
-                        "description": "The lowest ratio s/s_total any block producer can have.\n See <https://github.com/near/NEPs/pull/167> for details",
                         "allOf": [
                             {
                                 "$ref": "#/components/schemas/Rational32SchemaProvider"
                             }
-                        ]
+                        ],
+                        "default": {
+                            "denom": 1,
+                            "numer": 6250
+                        },
+                        "description": "The lowest ratio s/s_total any block producer can have.\n See <https://github.com/near/NEPs/pull/167> for details"
                     },
                     "minimum_validators_per_shard": {
                         "default": 1,
@@ -4659,48 +4851,56 @@
                         "type": "integer"
                     },
                     "online_max_threshold": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Rational32SchemaProvider"
+                            }
+                        ],
                         "default": {
                             "denom": 99,
                             "numer": 100
                         },
-                        "description": "Online maximum threshold above which validator gets full reward.",
+                        "description": "Online maximum threshold above which validator gets full reward."
+                    },
+                    "online_min_threshold": {
                         "allOf": [
                             {
                                 "$ref": "#/components/schemas/Rational32SchemaProvider"
                             }
-                        ]
-                    },
-                    "online_min_threshold": {
+                        ],
                         "default": {
                             "denom": 9,
                             "numer": 10
                         },
-                        "description": "Online minimum threshold below which validator doesn't receive reward.",
+                        "description": "Online minimum threshold below which validator doesn't receive reward."
+                    },
+                    "protocol_reward_rate": {
                         "allOf": [
                             {
                                 "$ref": "#/components/schemas/Rational32SchemaProvider"
                             }
-                        ]
-                    },
-                    "protocol_reward_rate": {
-                        "$ref": "#/components/schemas/Rational32SchemaProvider",
+                        ],
                         "description": "Protocol treasury rate"
                     },
                     "protocol_treasury_account": {
-                        "$ref": "#/components/schemas/AccountId",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AccountId"
+                            }
+                        ],
                         "description": "Protocol treasury account"
                     },
                     "protocol_upgrade_stake_threshold": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Rational32SchemaProvider"
+                            }
+                        ],
                         "default": {
                             "denom": 4,
                             "numer": 5
                         },
-                        "description": "Threshold of stake that needs to indicate that they ready for upgrade.",
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Rational32SchemaProvider"
-                            }
-                        ]
+                        "description": "Threshold of stake that needs to indicate that they ready for upgrade."
                     },
                     "protocol_version": {
                         "description": "Protocol version that this genesis works with.",
@@ -4709,7 +4909,11 @@
                         "type": "integer"
                     },
                     "shard_layout": {
-                        "$ref": "#/components/schemas/ShardLayout",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ShardLayout"
+                            }
+                        ],
                         "default": {
                             "V2": {
                                 "boundary_accounts": [],
@@ -4814,17 +5018,17 @@
                 "oneOf": [
                     {
                         "description": "Contract is deployed under its code hash.\n Users will be able reference it by that hash.\n This effectively makes the contract immutable.",
-                        "type": "string",
                         "enum": [
                             "CodeHash"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Contract is deployed under the owner account id.\n Users will be able reference it by that account id.\n This allows the owner to update the contract for all its users.",
-                        "type": "string",
                         "enum": [
                             "AccountId"
-                        ]
+                        ],
+                        "type": "string"
                     }
                 ]
             },
@@ -4860,45 +5064,45 @@
                 "oneOf": [
                     {
                         "description": "String encoding is bad UTF-16 sequence",
-                        "type": "string",
                         "enum": [
                             "BadUTF16"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "String encoding is bad UTF-8 sequence",
-                        "type": "string",
                         "enum": [
                             "BadUTF8"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Exceeded the prepaid gas",
-                        "type": "string",
                         "enum": [
                             "GasExceeded"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Exceeded the maximum amount of gas allowed to burn per contract",
-                        "type": "string",
                         "enum": [
                             "GasLimitExceeded"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Exceeded the account balance",
-                        "type": "string",
                         "enum": [
                             "BalanceExceeded"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Tried to call an empty method name",
-                        "type": "string",
                         "enum": [
                             "EmptyMethodName"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -4923,10 +5127,10 @@
                     },
                     {
                         "description": "IntegerOverflow happened during a contract execution",
-                        "type": "string",
                         "enum": [
                             "IntegerOverflow"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -4953,17 +5157,17 @@
                     },
                     {
                         "description": "Actions can only be appended to non-joint promise.",
-                        "type": "string",
                         "enum": [
                             "CannotAppendActionToJointPromise"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Returning joint promise is currently prohibited",
-                        "type": "string",
                         "enum": [
                             "CannotReturnJointPromise"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -5036,10 +5240,10 @@
                     },
                     {
                         "description": "Accessed memory outside the bounds",
-                        "type": "string",
                         "enum": [
                             "MemoryAccessViolation"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -5089,24 +5293,24 @@
                     },
                     {
                         "description": "VM Logic returned an invalid account id",
-                        "type": "string",
                         "enum": [
                             "InvalidAccountId"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "VM Logic returned an invalid method name",
-                        "type": "string",
                         "enum": [
                             "InvalidMethodName"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "VM Logic provided an invalid public key",
-                        "type": "string",
                         "enum": [
                             "InvalidPublicKey"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -5516,10 +5720,10 @@
                     },
                     {
                         "description": "Transaction requires a full permission access key.",
-                        "type": "string",
                         "enum": [
                             "RequiresFullAccess"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -5556,10 +5760,10 @@
                     },
                     {
                         "description": "Having a deposit with a function call action is not allowed with a function call access key.",
-                        "type": "string",
                         "enum": [
                             "DepositWithFunctionCall"
-                        ]
+                        ],
+                        "type": "string"
                     }
                 ]
             },
@@ -5702,10 +5906,10 @@
                     },
                     {
                         "description": "TX signature is not valid",
-                        "type": "string",
                         "enum": [
                             "InvalidSignature"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -5747,7 +5951,11 @@
                                         "type": "string"
                                     },
                                     "signer_id": {
-                                        "$ref": "#/components/schemas/AccountId",
+                                        "allOf": [
+                                            {
+                                                "$ref": "#/components/schemas/AccountId"
+                                            }
+                                        ],
                                         "description": "An account which doesn't have enough balance to cover storage."
                                     }
                                 },
@@ -5765,24 +5973,24 @@
                     },
                     {
                         "description": "An integer overflow occurred during transaction cost estimation.",
-                        "type": "string",
                         "enum": [
                             "CostOverflow"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Transaction parent block hash doesn't belong to the current chain",
-                        "type": "string",
                         "enum": [
                             "InvalidChain"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Transaction has expired",
-                        "type": "string",
                         "enum": [
                             "Expired"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -5828,10 +6036,10 @@
                     },
                     {
                         "description": "Transaction version is invalid.",
-                        "type": "string",
                         "enum": [
                             "InvalidTransactionVersion"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -8068,31 +8276,31 @@
                 "oneOf": [
                     {
                         "description": "Missing trie value when reading from TrieIterator.",
-                        "type": "string",
                         "enum": [
                             "TrieIterator"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Missing trie value when reading from TriePrefetchingStorage.",
-                        "type": "string",
                         "enum": [
                             "TriePrefetchingStorage"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Missing trie value when reading from TrieMemoryPartialStorage.",
-                        "type": "string",
                         "enum": [
                             "TrieMemoryPartialStorage"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Missing trie value when reading from TrieStorage.",
-                        "type": "string",
                         "enum": [
                             "TrieStorage"
-                        ]
+                        ],
+                        "type": "string"
                     }
                 ]
             },
@@ -8188,17 +8396,29 @@
                 "type": "object"
             },
             "NonDelegateAction": {
-                "$ref": "#/components/schemas/Action",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Action"
+                    }
+                ],
                 "description": "This is Action which mustn't contain DelegateAction.\n\n This struct is needed to avoid the recursion when Action/DelegateAction is deserialized.\n\n Important: Don't make the inner Action public, this must only be constructed\n through the correct interface that ensures the inner Action is actually not\n a delegate action. That would break an assumption of this type, which we use\n in several places. For example, borsh de-/serialization relies on it. If the\n invariant is broken, we may end up with a `Transaction` or `Receipt` that we\n can serialize but deserializing it back causes a parsing error."
             },
             "PeerId": {
-                "$ref": "#/components/schemas/PublicKey",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/PublicKey"
+                    }
+                ],
                 "description": "Peer id is the public key."
             },
             "PeerInfoView": {
                 "properties": {
                     "account_id": {
-                        "$ref": "#/components/schemas/AccountId",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AccountId"
+                            }
+                        ],
                         "nullable": true
                     },
                     "addr": {
@@ -8208,7 +8428,11 @@
                         "type": "boolean"
                     },
                     "block_hash": {
-                        "$ref": "#/components/schemas/CryptoHash",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/CryptoHash"
+                            }
+                        ],
                         "nullable": true
                     },
                     "connection_established_time_millis": {
@@ -8285,66 +8509,66 @@
                 "oneOf": [
                     {
                         "description": "Error happened while serializing the module.",
-                        "type": "string",
                         "enum": [
                             "Serialization"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Error happened while deserializing the module.",
-                        "type": "string",
                         "enum": [
                             "Deserialization"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Internal memory declaration has been found in the module.",
-                        "type": "string",
                         "enum": [
                             "InternalMemoryDeclared"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Gas instrumentation failed.\n\n This most likely indicates the module isn't valid.",
-                        "type": "string",
                         "enum": [
                             "GasInstrumentation"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Stack instrumentation failed.\n\n This  most likely indicates the module isn't valid.",
-                        "type": "string",
                         "enum": [
                             "StackHeightInstrumentation"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Error happened during instantiation.\n\n This might indicate that `start` function trapped, or module isn't\n instantiable and/or un-linkable.",
-                        "type": "string",
                         "enum": [
                             "Instantiate"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Error creating memory.",
-                        "type": "string",
                         "enum": [
                             "Memory"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Contract contains too many functions.",
-                        "type": "string",
                         "enum": [
                             "TooManyFunctions"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Contract contains too many locals.",
-                        "type": "string",
                         "enum": [
                             "TooManyLocals"
-                        ]
+                        ],
+                        "type": "string"
                     }
                 ]
             },
@@ -8864,7 +9088,11 @@
                         "type": "string"
                     },
                     "chunk_distribution_network": {
-                        "$ref": "#/components/schemas/ChunkDistributionNetworkConfig",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ChunkDistributionNetworkConfig"
+                            }
+                        ],
                         "description": "Optional config for the Chunk Distribution Network feature.\n If set to `None` then this node does not participate in the Chunk Distribution Network.\n Nodes not participating will still function fine, but possibly with higher\n latency due to the need of requesting chunks over the peer-to-peer network.",
                         "nullable": true
                     },
@@ -8910,15 +9138,27 @@
                         "type": "integer"
                     },
                     "epoch_sync": {
-                        "$ref": "#/components/schemas/EpochSyncConfig",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/EpochSyncConfig"
+                            }
+                        ],
                         "description": "Options for epoch sync."
                     },
                     "expected_shutdown": {
-                        "$ref": "#/components/schemas/MutableConfigValue",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/MutableConfigValue"
+                            }
+                        ],
                         "description": "Graceful shutdown at expected block height."
                     },
                     "gc": {
-                        "$ref": "#/components/schemas/GCConfig",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/GCConfig"
+                            }
+                        ],
                         "description": "Garbage collection configuration."
                     },
                     "header_sync_expected_height_per_second": {
@@ -8972,7 +9212,11 @@
                         "type": "array"
                     },
                     "log_summary_style": {
-                        "$ref": "#/components/schemas/LogSummaryStyle",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/LogSummaryStyle"
+                            }
+                        ],
                         "description": "Enable coloring of the logs"
                     },
                     "max_block_production_delay": {
@@ -9068,7 +9312,11 @@
                         "type": "boolean"
                     },
                     "state_sync": {
-                        "$ref": "#/components/schemas/StateSyncConfig",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/StateSyncConfig"
+                            }
+                        ],
                         "description": "Options for syncing state."
                     },
                     "state_sync_enabled": {
@@ -9161,7 +9409,11 @@
                         "type": "array"
                     },
                     "tracked_shadow_validator": {
-                        "$ref": "#/components/schemas/AccountId",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AccountId"
+                            }
+                        ],
                         "description": "Track shards that should be tracked by given validator.",
                         "nullable": true
                     },
@@ -9214,7 +9466,11 @@
                         "type": "integer"
                     },
                     "version": {
-                        "$ref": "#/components/schemas/Version",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Version"
+                            }
+                        ],
                         "description": "Version of the binary."
                     },
                     "view_client_threads": {
@@ -9338,7 +9594,11 @@
             "RpcError": {
                 "properties": {
                     "cause": {
-                        "$ref": "#/components/schemas/CauseRpcErrorKind",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/CauseRpcErrorKind"
+                            }
+                        ],
                         "nullable": true
                     },
                     "code": {
@@ -9352,7 +9612,11 @@
                         "type": "string"
                     },
                     "name": {
-                        "$ref": "#/components/schemas/NameRpcErrorKind",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/NameRpcErrorKind"
+                            }
+                        ],
                         "nullable": true
                     }
                 },
@@ -9636,7 +9900,11 @@
             "RpcPeerInfo": {
                 "properties": {
                     "account_id": {
-                        "$ref": "#/components/schemas/AccountId",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AccountId"
+                            }
+                        ],
                         "nullable": true
                     },
                     "addr": {
@@ -9745,7 +10013,11 @@
                         "type": "integer"
                     },
                     "gas_price_adjustment_rate": {
-                        "$ref": "#/components/schemas/Rational32SchemaProvider",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Rational32SchemaProvider"
+                            }
+                        ],
                         "description": "Gas price adjustment rate"
                     },
                     "genesis_height": {
@@ -9764,7 +10036,11 @@
                         "type": "string"
                     },
                     "max_inflation_rate": {
-                        "$ref": "#/components/schemas/Rational32SchemaProvider",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Rational32SchemaProvider"
+                            }
+                        ],
                         "description": "Maximum inflation on the total supply every epoch."
                     },
                     "max_kickout_stake_perc": {
@@ -9784,7 +10060,11 @@
                         "type": "integer"
                     },
                     "minimum_stake_ratio": {
-                        "$ref": "#/components/schemas/Rational32SchemaProvider",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Rational32SchemaProvider"
+                            }
+                        ],
                         "description": "The lowest ratio s/s_total any block producer can have.\n See <https://github.com/near/NEPs/pull/167> for details"
                     },
                     "minimum_validators_per_shard": {
@@ -9821,23 +10101,43 @@
                         "type": "integer"
                     },
                     "online_max_threshold": {
-                        "$ref": "#/components/schemas/Rational32SchemaProvider",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Rational32SchemaProvider"
+                            }
+                        ],
                         "description": "Online maximum threshold above which validator gets full reward."
                     },
                     "online_min_threshold": {
-                        "$ref": "#/components/schemas/Rational32SchemaProvider",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Rational32SchemaProvider"
+                            }
+                        ],
                         "description": "Online minimum threshold below which validator doesn't receive reward."
                     },
                     "protocol_reward_rate": {
-                        "$ref": "#/components/schemas/Rational32SchemaProvider",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Rational32SchemaProvider"
+                            }
+                        ],
                         "description": "Protocol treasury rate"
                     },
                     "protocol_treasury_account": {
-                        "$ref": "#/components/schemas/AccountId",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AccountId"
+                            }
+                        ],
                         "description": "Protocol treasury account"
                     },
                     "protocol_upgrade_stake_threshold": {
-                        "$ref": "#/components/schemas/Rational32SchemaProvider",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Rational32SchemaProvider"
+                            }
+                        ],
                         "description": "Threshold of stake that needs to indicate that they ready for upgrade."
                     },
                     "protocol_version": {
@@ -9847,11 +10147,19 @@
                         "type": "integer"
                     },
                     "runtime_config": {
-                        "$ref": "#/components/schemas/RuntimeConfigView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/RuntimeConfigView"
+                            }
+                        ],
                         "description": "Runtime configuration (mostly economics constants)."
                     },
                     "shard_layout": {
-                        "$ref": "#/components/schemas/ShardLayout",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ShardLayout"
+                            }
+                        ],
                         "description": "Layout information regarding how to split accounts to shards"
                     },
                     "shuffle_shard_assignment_for_chunk_producers": {
@@ -9966,10 +10274,10 @@
                                 "type": "object"
                             },
                             "name": {
-                                "type": "string",
                                 "enum": [
                                     "METHOD_NOT_FOUND"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -9992,10 +10300,10 @@
                                 "type": "object"
                             },
                             "name": {
-                                "type": "string",
                                 "enum": [
                                     "PARSE_ERROR"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -10703,12 +11011,20 @@
                         "type": "string"
                     },
                     "detailed_debug_status": {
-                        "$ref": "#/components/schemas/DetailedDebugStatus",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/DetailedDebugStatus"
+                            }
+                        ],
                         "description": "Information about last blocks, network, epoch and chain & chunk info.",
                         "nullable": true
                     },
                     "genesis_hash": {
-                        "$ref": "#/components/schemas/CryptoHash",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/CryptoHash"
+                            }
+                        ],
                         "description": "Genesis hash of the chain."
                     },
                     "latest_protocol_version": {
@@ -10718,12 +11034,20 @@
                         "type": "integer"
                     },
                     "node_key": {
-                        "$ref": "#/components/schemas/PublicKey",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/PublicKey"
+                            }
+                        ],
                         "description": "Deprecated; same as `validator_public_key` which you should use instead.",
                         "nullable": true
                     },
                     "node_public_key": {
-                        "$ref": "#/components/schemas/PublicKey",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/PublicKey"
+                            }
+                        ],
                         "description": "Public key of the node."
                     },
                     "protocol_version": {
@@ -10738,7 +11062,11 @@
                         "type": "string"
                     },
                     "sync_info": {
-                        "$ref": "#/components/schemas/StatusSyncInfo",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/StatusSyncInfo"
+                            }
+                        ],
                         "description": "Sync status of the node."
                     },
                     "uptime_sec": {
@@ -10747,12 +11075,20 @@
                         "type": "integer"
                     },
                     "validator_account_id": {
-                        "$ref": "#/components/schemas/AccountId",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AccountId"
+                            }
+                        ],
                         "description": "Validator id of the node",
                         "nullable": true
                     },
                     "validator_public_key": {
-                        "$ref": "#/components/schemas/PublicKey",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/PublicKey"
+                            }
+                        ],
                         "description": "Public key of the validator.",
                         "nullable": true
                     },
@@ -10764,7 +11100,11 @@
                         "type": "array"
                     },
                     "version": {
-                        "$ref": "#/components/schemas/Version",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Version"
+                            }
+                        ],
                         "description": "Binary version."
                     }
                 },
@@ -10956,11 +11296,19 @@
                 "description": "View that preserves JSON format of the runtime config.",
                 "properties": {
                     "account_creation_config": {
-                        "$ref": "#/components/schemas/AccountCreationConfigView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AccountCreationConfigView"
+                            }
+                        ],
                         "description": "Config that defines rules for account creation."
                     },
                     "congestion_control_config": {
-                        "$ref": "#/components/schemas/CongestionControlConfigView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/CongestionControlConfigView"
+                            }
+                        ],
                         "description": "The configuration for congestion control."
                     },
                     "storage_amount_per_byte": {
@@ -10968,15 +11316,27 @@
                         "type": "string"
                     },
                     "transaction_costs": {
-                        "$ref": "#/components/schemas/RuntimeFeesConfigView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/RuntimeFeesConfigView"
+                            }
+                        ],
                         "description": "Costs of different actions that need to be performed when sending and\n processing transaction and receipts."
                     },
                     "wasm_config": {
-                        "$ref": "#/components/schemas/VMConfigView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/VMConfigView"
+                            }
+                        ],
                         "description": "Config of wasm operations."
                     },
                     "witness_config": {
-                        "$ref": "#/components/schemas/WitnessConfigView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/WitnessConfigView"
+                            }
+                        ],
                         "description": "Configuration specific to ChunkStateWitness."
                     }
                 },
@@ -10993,27 +11353,51 @@
             "RuntimeFeesConfigView": {
                 "properties": {
                     "action_creation_config": {
-                        "$ref": "#/components/schemas/ActionCreationConfigView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ActionCreationConfigView"
+                            }
+                        ],
                         "description": "Describes the cost of creating a certain action, `Action`. Includes all variants."
                     },
                     "action_receipt_creation_config": {
-                        "$ref": "#/components/schemas/Fee",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Fee"
+                            }
+                        ],
                         "description": "Describes the cost of creating an action receipt, `ActionReceipt`, excluding the actual cost\n of actions.\n - `send` cost is burned when a receipt is created using `promise_create` or\n     `promise_batch_create`\n - `exec` cost is burned when the receipt is being executed."
                     },
                     "burnt_gas_reward": {
-                        "$ref": "#/components/schemas/Rational32SchemaProvider",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Rational32SchemaProvider"
+                            }
+                        ],
                         "description": "Fraction of the burnt gas to reward to the contract account for execution."
                     },
                     "data_receipt_creation_config": {
-                        "$ref": "#/components/schemas/DataReceiptCreationConfigView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/DataReceiptCreationConfigView"
+                            }
+                        ],
                         "description": "Describes the cost of creating a data receipt, `DataReceipt`."
                     },
                     "pessimistic_gas_price_inflation_ratio": {
-                        "$ref": "#/components/schemas/Rational32SchemaProvider",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Rational32SchemaProvider"
+                            }
+                        ],
                         "description": "Pessimistic gas price inflation ratio."
                     },
                     "storage_usage_config": {
-                        "$ref": "#/components/schemas/StorageUsageConfigView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/StorageUsageConfigView"
+                            }
+                        ],
                         "description": "Describes fees for storage."
                     }
                 },
@@ -11297,7 +11681,11 @@
                 "description": "An action which stakes signer_id tokens and setup's validator public key",
                 "properties": {
                     "public_key": {
-                        "$ref": "#/components/schemas/PublicKey",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/PublicKey"
+                            }
+                        ],
                         "description": "Validator key which will be used to sign transactions on behalf of signer_id"
                     },
                     "stake": {
@@ -11317,10 +11705,10 @@
                     {
                         "properties": {
                             "type": {
-                                "type": "string",
                                 "enum": [
                                     "not_writable_to_disk"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -11331,10 +11719,10 @@
                     {
                         "properties": {
                             "type": {
-                                "type": "string",
                                 "enum": [
                                     "initial_state"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -11348,10 +11736,10 @@
                                 "$ref": "#/components/schemas/CryptoHash"
                             },
                             "type": {
-                                "type": "string",
                                 "enum": [
                                     "transaction_processing"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -11366,10 +11754,10 @@
                                 "$ref": "#/components/schemas/CryptoHash"
                             },
                             "type": {
-                                "type": "string",
                                 "enum": [
                                     "action_receipt_processing_started"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -11384,10 +11772,10 @@
                                 "$ref": "#/components/schemas/CryptoHash"
                             },
                             "type": {
-                                "type": "string",
                                 "enum": [
                                     "action_receipt_gas_reward"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -11402,10 +11790,10 @@
                                 "$ref": "#/components/schemas/CryptoHash"
                             },
                             "type": {
-                                "type": "string",
                                 "enum": [
                                     "receipt_processing"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -11420,10 +11808,10 @@
                                 "$ref": "#/components/schemas/CryptoHash"
                             },
                             "type": {
-                                "type": "string",
                                 "enum": [
                                     "postponed_receipt"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -11435,10 +11823,10 @@
                     {
                         "properties": {
                             "type": {
-                                "type": "string",
                                 "enum": [
                                     "updated_delayed_receipts"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -11449,10 +11837,10 @@
                     {
                         "properties": {
                             "type": {
-                                "type": "string",
                                 "enum": [
                                     "validator_accounts_update"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -11463,10 +11851,10 @@
                     {
                         "properties": {
                             "type": {
-                                "type": "string",
                                 "enum": [
                                     "migration"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -11477,10 +11865,10 @@
                     {
                         "properties": {
                             "type": {
-                                "type": "string",
                                 "enum": [
                                     "resharding_v2"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -11491,10 +11879,10 @@
                     {
                         "properties": {
                             "type": {
-                                "type": "string",
                                 "enum": [
                                     "bandwidth_scheduler_state_update"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -11513,10 +11901,10 @@
                                 "$ref": "#/components/schemas/AccountId"
                             },
                             "type": {
-                                "type": "string",
                                 "enum": [
                                     "account_touched"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -11531,10 +11919,10 @@
                                 "$ref": "#/components/schemas/AccountId"
                             },
                             "type": {
-                                "type": "string",
                                 "enum": [
                                     "access_key_touched"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -11549,10 +11937,10 @@
                                 "$ref": "#/components/schemas/AccountId"
                             },
                             "type": {
-                                "type": "string",
                                 "enum": [
                                     "data_touched"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -11567,10 +11955,10 @@
                                 "$ref": "#/components/schemas/AccountId"
                             },
                             "type": {
-                                "type": "string",
                                 "enum": [
                                     "contract_code_touched"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -11596,11 +11984,19 @@
                                 "$ref": "#/components/schemas/CryptoHash"
                             },
                             "global_contract_account_id": {
-                                "$ref": "#/components/schemas/AccountId",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/AccountId"
+                                    }
+                                ],
                                 "nullable": true
                             },
                             "global_contract_hash": {
-                                "$ref": "#/components/schemas/CryptoHash",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/CryptoHash"
+                                    }
+                                ],
                                 "nullable": true
                             },
                             "locked": {
@@ -11770,7 +12166,11 @@
                 "description": "Options for dumping state to S3.",
                 "properties": {
                     "dump": {
-                        "$ref": "#/components/schemas/DumpConfig",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/DumpConfig"
+                            }
+                        ],
                         "description": "`none` value disables state dump to external storage.",
                         "nullable": true
                     },
@@ -11783,7 +12183,11 @@
             "StatusSyncInfo": {
                 "properties": {
                     "earliest_block_hash": {
-                        "$ref": "#/components/schemas/CryptoHash",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/CryptoHash"
+                            }
+                        ],
                         "nullable": true
                     },
                     "earliest_block_height": {
@@ -11796,7 +12200,11 @@
                         "type": "string"
                     },
                     "epoch_id": {
-                        "$ref": "#/components/schemas/EpochId",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/EpochId"
+                            }
+                        ],
                         "nullable": true
                     },
                     "epoch_start_height": {
@@ -11838,10 +12246,10 @@
                 "oneOf": [
                     {
                         "description": "Key-value db internal failure",
-                        "type": "string",
                         "enum": [
                             "StorageInternalError"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -11858,10 +12266,10 @@
                     },
                     {
                         "description": "Found trie node which shouldn't be part of state. Raised during\n validation of state sync parts where incorrect node was passed.\n TODO (#8997): consider including hash of trie node.",
-                        "type": "string",
                         "enum": [
                             "UnexpectedTrieValue"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -11904,10 +12312,10 @@
                     },
                     {
                         "description": "Indicates that a resharding operation on flat storage is already in progress,\n when it wasn't expected to be so.",
-                        "type": "string",
                         "enum": [
                             "FlatStorageReshardingAlreadyInProgress"
-                        ]
+                        ],
+                        "type": "string"
                     }
                 ]
             },
@@ -11953,10 +12361,10 @@
                 "oneOf": [
                     {
                         "description": "Syncs state from the peers without reading anything from external storage.",
-                        "type": "string",
                         "enum": [
                             "Peers"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -12034,45 +12442,45 @@
                 "oneOf": [
                     {
                         "description": "Transaction is waiting to be included into the block",
-                        "type": "string",
                         "enum": [
                             "NONE"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Transaction is included into the block. The block may be not finalized yet",
-                        "type": "string",
                         "enum": [
                             "INCLUDED"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Transaction is included into the block +\n All non-refund transaction receipts finished their execution.\n The corresponding blocks for tx and each receipt may be not finalized yet",
-                        "type": "string",
                         "enum": [
                             "EXECUTED_OPTIMISTIC"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Transaction is included into finalized block",
-                        "type": "string",
                         "enum": [
                             "INCLUDED_FINAL"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Transaction is included into finalized block +\n All non-refund transaction receipts finished their execution.\n The corresponding blocks for each receipt may be not finalized yet",
-                        "type": "string",
                         "enum": [
                             "EXECUTED"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Transaction is included into finalized block +\n Execution of all transaction receipts is finalized, including refund receipts",
-                        "type": "string",
                         "enum": [
                             "FINAL"
-                        ]
+                        ],
+                        "type": "string"
                     }
                 ]
             },
@@ -12118,7 +12526,11 @@
                         "type": "boolean"
                     },
                     "ext_costs": {
-                        "$ref": "#/components/schemas/ExtCostsConfigView",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ExtCostsConfigView"
+                            }
+                        ],
                         "description": "Costs for runtime externals"
                     },
                     "fix_contract_loading_cost": {
@@ -12140,7 +12552,11 @@
                         "type": "boolean"
                     },
                     "limit_config": {
-                        "$ref": "#/components/schemas/LimitConfig",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/LimitConfig"
+                            }
+                        ],
                         "description": "Describes limits for VM and Runtime.\n\n TODO: Consider changing this to `VMLimitConfigView` to avoid dependency\n on runtime."
                     },
                     "math_extension": {
@@ -12154,11 +12570,19 @@
                         "type": "integer"
                     },
                     "storage_get_mode": {
-                        "$ref": "#/components/schemas/StorageGetMode",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/StorageGetMode"
+                            }
+                        ],
                         "description": "See [VMConfig::storage_get_mode](crate::vm::Config::storage_get_mode)."
                     },
                     "vm_kind": {
-                        "$ref": "#/components/schemas/VMKind",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/VMKind"
+                            }
+                        ],
                         "description": "See [VMConfig::vm_kind](crate::vm::Config::vm_kind)."
                     },
                     "yield_resume_host_functions": {
@@ -12190,31 +12614,31 @@
                 "oneOf": [
                     {
                         "description": "Wasmer 0.17.x VM.",
-                        "type": "string",
                         "enum": [
                             "Wasmer0"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Wasmtime VM.",
-                        "type": "string",
                         "enum": [
                             "Wasmtime"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Wasmer 2.x VM.",
-                        "type": "string",
                         "enum": [
                             "Wasmer2"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "NearVM.",
-                        "type": "string",
                         "enum": [
                             "NearVm"
-                        ]
+                        ],
+                        "type": "string"
                     }
                 ]
             },
@@ -12238,10 +12662,10 @@
                 "oneOf": [
                     {
                         "description": "Slashed validators are kicked out.",
-                        "type": "string",
                         "enum": [
                             "Slashed"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -12303,10 +12727,10 @@
                     },
                     {
                         "description": "Validator unstaked themselves.",
-                        "type": "string",
                         "enum": [
                             "Unstaked"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -12335,10 +12759,10 @@
                     },
                     {
                         "description": "Enough stake but is not chosen because of seat limits.",
-                        "type": "string",
                         "enum": [
                             "DidNotGetASeat"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "additionalProperties": false,
@@ -12389,13 +12813,17 @@
             "ValidatorStakeView": {
                 "oneOf": [
                     {
-                        "$ref": "#/components/schemas/ValidatorStakeViewV1",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ValidatorStakeViewV1"
+                            }
+                        ],
                         "properties": {
                             "validator_stake_struct_version": {
-                                "type": "string",
                                 "enum": [
                                     "V1"
-                                ]
+                                ],
+                                "type": "string"
                             }
                         },
                         "required": [
@@ -12453,66 +12881,66 @@
                 "oneOf": [
                     {
                         "description": "An `unreachable` opcode was executed.",
-                        "type": "string",
                         "enum": [
                             "Unreachable"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Call indirect incorrect signature trap.",
-                        "type": "string",
                         "enum": [
                             "IncorrectCallIndirectSignature"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Memory out of bounds trap.",
-                        "type": "string",
                         "enum": [
                             "MemoryOutOfBounds"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Call indirect out of bounds trap.",
-                        "type": "string",
                         "enum": [
                             "CallIndirectOOB"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "An arithmetic exception, e.g. divided by zero.",
-                        "type": "string",
                         "enum": [
                             "IllegalArithmetic"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Misaligned atomic access trap.",
-                        "type": "string",
                         "enum": [
                             "MisalignedAtomicAccess"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Indirect call to null.",
-                        "type": "string",
                         "enum": [
                             "IndirectCallToNull"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Stack overflow.",
-                        "type": "string",
                         "enum": [
                             "StackOverflow"
-                        ]
+                        ],
+                        "type": "string"
                     },
                     {
                         "description": "Generic trap.",
-                        "type": "string",
                         "enum": [
                             "GenericTrap"
-                        ]
+                        ],
+                        "type": "string"
                     }
                 ]
             },

@@ -34,17 +34,17 @@ def reconstructAllOfOneOf(schema):
 
 def iterate_nested_json_for_loop(json_obj):
     if isinstance(json_obj, dict):
-        if '$ref' in json_obj and json_obj['$ref'] == "#/components/schemas/Rational32SchemaProvider" and 'default' in json_obj and not isinstance(json_obj['default'], dict):
+        if 'allOf' in json_obj and '$ref' in json_obj['allOf'][0] and json_obj['allOf'][0]['$ref'] == "#/components/schemas/Rational32SchemaProvider" and 'default' in json_obj and not isinstance(json_obj['default'], dict):
             json_obj['default'] = {
                 'denom': json_obj['default'][0],
                 'numer': json_obj['default'][1]
             }
-            json_obj['allOf'] = [
-                {
-                    "$ref": "#/components/schemas/Rational32SchemaProvider"
-                }
-            ]
-            del json_obj['$ref']
+            # json_obj['allOf'] = [
+            #     {
+            #         "$ref": "#/components/schemas/Rational32SchemaProvider"
+            #     }
+            # ]
+            # del json_obj['$ref']
         if 'const' in json_obj:
             t = json_obj['const']
             del json_obj['const']
@@ -80,33 +80,36 @@ f.close()
 
 iterate_nested_json_for_loop(spec)
 
-spec['components']['schemas']['BlockHeaderView']['properties']['approvals']['items'] = {
-    "allOf": [
-        {
-            "$ref": "#/components/schemas/Signature"
-        }
-    ],
-    "nullable": True
-}
+if 'BlockHeaderView' in spec['components']['schemas']:
+    spec['components']['schemas']['BlockHeaderView']['properties']['approvals']['items'] = {
+        "allOf": [
+            {
+                "$ref": "#/components/schemas/Signature"
+            }
+        ],
+        "nullable": True
+    }
 
-spec['components']['schemas']['RpcLightClientNextBlockResponse']['properties']['approvals_after_next']['items'] = {
-    "allOf": [
-        {
-            "$ref": "#/components/schemas/Signature"
-        }
-    ],
-    "nullable": True
-}
+if 'RpcLightClientNextBlockResponse' in spec['components']['schemas']:
+    spec['components']['schemas']['RpcLightClientNextBlockResponse']['properties']['approvals_after_next']['items'] = {
+        "allOf": [
+            {
+                "$ref": "#/components/schemas/Signature"
+            }
+        ],
+        "nullable": True
+    }
 
-spec['components']['schemas']['CauseRpcErrorKind'] = {
-    "anyOf": [
-        {
-            "$ref": "#/components/schemas/RpcRequestValidationErrorKind"
-        },
-        {},
-        {}
-    ]
-}
+if 'CauseRpcErrorKind' in spec['components']['schemas']:
+    spec['components']['schemas']['CauseRpcErrorKind'] = {
+        "anyOf": [
+            {
+                "$ref": "#/components/schemas/RpcRequestValidationErrorKind"
+            },
+            {},
+            {}
+        ]
+    }
 
 
 

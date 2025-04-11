@@ -67,7 +67,12 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "permission": {
-    ///      "$ref": "#/components/schemas/AccessKeyPermission"
+    ///      "description": "Defines permissions for this access key.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/AccessKeyPermission"
+    ///        }
+    ///      ]
     ///    }
     ///  }
     ///}
@@ -79,6 +84,7 @@ pub mod types {
         /// key is created, nonce is set to `(block_height - 1) * 1e6`
         /// to avoid tx hash collision on access key re-creation. See <https://github.com/near/nearcore/issues/3779> for more details.
         pub nonce: u64,
+        ///Defines permissions for this access key.
         pub permission: AccessKeyPermission,
     }
 
@@ -103,13 +109,30 @@ pub mod types {
     ///  ],
     ///  "properties": {
     ///    "full_access_cost": {
-    ///      "$ref": "#/components/schemas/Fee"
+    ///      "description": "Base cost of creating a full access access-key.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
     ///    },
     ///    "function_call_cost": {
-    ///      "$ref": "#/components/schemas/Fee"
+    ///      "description": "Base cost of creating an access-key restricted to
+    /// specific functions.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
     ///    },
     ///    "function_call_cost_per_byte": {
-    ///      "$ref": "#/components/schemas/Fee"
+    ///      "description": "Cost per byte of method_names of creating a
+    /// restricted access-key.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
     ///    }
     ///  }
     ///}
@@ -117,8 +140,12 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct AccessKeyCreationConfigView {
+        ///Base cost of creating a full access access-key.
         pub full_access_cost: Fee,
+        ///Base cost of creating an access-key restricted to specific
+        /// functions.
         pub function_call_cost: Fee,
+        ///Cost per byte of method_names of creating a restricted access-key.
         pub function_call_cost_per_byte: Fee,
     }
 
@@ -302,7 +329,12 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "registrar_account_id": {
-    ///      "$ref": "#/components/schemas/AccountId"
+    ///      "description": "The account ID of the account registrar. This account ID allowed to create top-level\n accounts of any valid length.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        }
+    ///      ]
     ///    }
     ///  }
     ///}
@@ -313,6 +345,8 @@ pub mod types {
         ///The minimum length of the top-level account ID that is allowed to be
         /// created by any account.
         pub min_allowed_top_level_account_length: u8,
+        ///The account ID of the account registrar. This account ID allowed to
+        /// create top-level accounts of any valid length.
         pub registrar_account_id: AccountId,
     }
 
@@ -792,37 +826,95 @@ pub mod types {
     ///  ],
     ///  "properties": {
     ///    "add_key_cost": {
-    ///      "$ref": "#/components/schemas/AccessKeyCreationConfigView"
+    ///      "description": "Base cost of adding a key.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/AccessKeyCreationConfigView"
+    ///        }
+    ///      ]
     ///    },
     ///    "create_account_cost": {
-    ///      "$ref": "#/components/schemas/Fee"
+    ///      "description": "Base cost of creating an account.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
     ///    },
     ///    "delegate_cost": {
-    ///      "$ref": "#/components/schemas/Fee"
+    ///      "description": "Base cost for processing a delegate action.\n\n
+    /// This is on top of the costs for the actions inside the delegate
+    /// action.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
     ///    },
     ///    "delete_account_cost": {
-    ///      "$ref": "#/components/schemas/Fee"
+    ///      "description": "Base cost of deleting an account.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
     ///    },
     ///    "delete_key_cost": {
-    ///      "$ref": "#/components/schemas/Fee"
+    ///      "description": "Base cost of deleting a key.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
     ///    },
     ///    "deploy_contract_cost": {
-    ///      "$ref": "#/components/schemas/Fee"
+    ///      "description": "Base cost of deploying a contract.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
     ///    },
     ///    "deploy_contract_cost_per_byte": {
-    ///      "$ref": "#/components/schemas/Fee"
+    ///      "description": "Cost per byte of deploying a contract.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
     ///    },
     ///    "function_call_cost": {
-    ///      "$ref": "#/components/schemas/Fee"
+    ///      "description": "Base cost of calling a function.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
     ///    },
     ///    "function_call_cost_per_byte": {
-    ///      "$ref": "#/components/schemas/Fee"
+    ///      "description": "Cost per byte of method name and arguments of
+    /// calling a function.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
     ///    },
     ///    "stake_cost": {
-    ///      "$ref": "#/components/schemas/Fee"
+    ///      "description": "Base cost of staking.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
     ///    },
     ///    "transfer_cost": {
-    ///      "$ref": "#/components/schemas/Fee"
+    ///      "description": "Base cost of making a transfer.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
     ///    }
     ///  }
     ///}
@@ -830,16 +922,30 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct ActionCreationConfigView {
+        ///Base cost of adding a key.
         pub add_key_cost: AccessKeyCreationConfigView,
+        ///Base cost of creating an account.
         pub create_account_cost: Fee,
+        ///Base cost for processing a delegate action.
+        ///
+        /// This is on top of the costs for the actions inside the delegate
+        /// action.
         pub delegate_cost: Fee,
+        ///Base cost of deleting an account.
         pub delete_account_cost: Fee,
+        ///Base cost of deleting a key.
         pub delete_key_cost: Fee,
+        ///Base cost of deploying a contract.
         pub deploy_contract_cost: Fee,
+        ///Cost per byte of deploying a contract.
         pub deploy_contract_cost_per_byte: Fee,
+        ///Base cost of calling a function.
         pub function_call_cost: Fee,
+        ///Cost per byte of method name and arguments of calling a function.
         pub function_call_cost_per_byte: Fee,
+        ///Base cost of staking.
         pub stake_cost: Fee,
+        ///Base cost of making a transfer.
         pub transfer_cost: Fee,
     }
 
@@ -873,7 +979,12 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "kind": {
-    ///      "$ref": "#/components/schemas/ActionErrorKind"
+    ///      "description": "The kind of ActionError happened",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/ActionErrorKind"
+    ///        }
+    ///      ]
     ///    }
     ///  }
     ///}
@@ -886,6 +997,7 @@ pub mod types {
         /// `ActionErrorKind::LackBalanceForState`
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub index: ::std::option::Option<u64>,
+        ///The kind of ActionError happened
         pub kind: ActionErrorKind,
     }
 
@@ -1118,7 +1230,12 @@ pub mod types {
     ///          ],
     ///          "properties": {
     ///            "account_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
+    ///              "description": "An account which needs balance",
+    ///              "allOf": [
+    ///                {
+    ///                  "$ref": "#/components/schemas/AccountId"
+    ///                }
+    ///              ]
     ///            },
     ///            "amount": {
     ///              "description": "Balance required to complete an action.",
@@ -1465,6 +1582,7 @@ pub mod types {
         ///ActionReceipt can't be completed, because the remaining balance will
         /// not be enough to cover storage.
         LackBalanceForState {
+            ///An account which needs balance
             account_id: AccountId,
             ///Balance required to complete an action.
             amount: ::std::string::String,
@@ -2282,10 +2400,21 @@ pub mod types {
     ///  ],
     ///  "properties": {
     ///    "access_key": {
-    ///      "$ref": "#/components/schemas/AccessKey"
+    ///      "description": "An access key with the permission",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/AccessKey"
+    ///        }
+    ///      ]
     ///    },
     ///    "public_key": {
-    ///      "$ref": "#/components/schemas/PublicKey"
+    ///      "description": "A public key which will be associated with an
+    /// access_key",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/PublicKey"
+    ///        }
+    ///      ]
     ///    }
     ///  }
     ///}
@@ -2293,7 +2422,9 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct AddKeyAction {
+        ///An access key with the permission
         pub access_key: AccessKey,
+        ///A public key which will be associated with an access_key
         pub public_key: PublicKey,
     }
 
@@ -2323,7 +2454,13 @@ pub mod types {
     ///  ],
     ///  "properties": {
     ///    "requested_values_bitmap": {
-    ///      "$ref": "#/components/schemas/BandwidthRequestBitmap"
+    ///      "description": "Bitmap which describes what values of bandwidth are
+    /// requested.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/BandwidthRequestBitmap"
+    ///        }
+    ///      ]
     ///    },
     ///    "to_shard": {
     ///      "description": "Requesting bandwidth to this shard.",
@@ -2337,6 +2474,7 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct BandwidthRequest {
+        ///Bitmap which describes what values of bandwidth are requested.
         pub requested_values_bitmap: BandwidthRequestBitmap,
         ///Requesting bandwidth to this shard.
         pub to_shard: u16,
@@ -2596,7 +2734,18 @@ pub mod types {
     ///      }
     ///    },
     ///    "block_body_hash": {
-    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/CryptoHash"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "block_merkle_root": {
     ///      "$ref": "#/components/schemas/CryptoHash"
@@ -2656,7 +2805,18 @@ pub mod types {
     ///      "$ref": "#/components/schemas/CryptoHash"
     ///    },
     ///    "epoch_sync_data_hash": {
-    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/CryptoHash"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "gas_price": {
     ///      "type": "string"
@@ -3139,13 +3299,35 @@ pub mod types {
     ///      "type": "string"
     ///    },
     ///    "bandwidth_requests": {
-    ///      "$ref": "#/components/schemas/BandwidthRequests"
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/BandwidthRequests"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "chunk_hash": {
     ///      "$ref": "#/components/schemas/CryptoHash"
     ///    },
     ///    "congestion_info": {
-    ///      "$ref": "#/components/schemas/CongestionInfoView"
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/CongestionInfoView"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "encoded_length": {
     ///      "type": "integer",
@@ -3907,10 +4089,23 @@ pub mod types {
     ///  ],
     ///  "properties": {
     ///    "base_cost": {
-    ///      "$ref": "#/components/schemas/Fee"
+    ///      "description": "Base cost of creating a data receipt.\n Both `send` and `exec` costs are burned when a new receipt has input dependencies. The gas\n is charged for each input dependency. The dependencies are specified when a receipt is\n created using `promise_then` and `promise_batch_then`.\n NOTE: Any receipt with output dependencies will produce data receipts. Even if it fails.\n Even if the last action is not a function call (in case of success it will return empty\n value).",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
     ///    },
     ///    "cost_per_byte": {
-    ///      "$ref": "#/components/schemas/Fee"
+    ///      "description": "Additional cost per byte sent.\n Both `send` and
+    /// `exec` costs are burned when a function call finishes execution and
+    /// returns\n `N` bytes of data to every output dependency. For each output
+    /// dependency the cost is\n `(send(sir) + exec()) * N`.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
     ///    }
     ///  }
     ///}
@@ -3918,7 +4113,21 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct DataReceiptCreationConfigView {
+        ///Base cost of creating a data receipt.
+        /// Both `send` and `exec` costs are burned when a new receipt has input
+        /// dependencies. The gas is charged for each input dependency.
+        /// The dependencies are specified when a receipt is
+        /// created using `promise_then` and `promise_batch_then`.
+        /// NOTE: Any receipt with output dependencies will produce data
+        /// receipts. Even if it fails. Even if the last action is not a
+        /// function call (in case of success it will return empty
+        /// value).
         pub base_cost: Fee,
+        ///Additional cost per byte sent.
+        /// Both `send` and `exec` costs are burned when a function call
+        /// finishes execution and returns `N` bytes of data to every
+        /// output dependency. For each output dependency the cost is
+        /// `(send(sir) + exec()) * N`.
         pub cost_per_byte: Fee,
     }
 
@@ -4006,13 +4215,28 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "public_key": {
-    ///      "$ref": "#/components/schemas/PublicKey"
+    ///      "description": "Public key used to sign this delegated action.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/PublicKey"
+    ///        }
+    ///      ]
     ///    },
     ///    "receiver_id": {
-    ///      "$ref": "#/components/schemas/AccountId"
+    ///      "description": "Receiver of the delegated actions.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        }
+    ///      ]
     ///    },
     ///    "sender_id": {
-    ///      "$ref": "#/components/schemas/AccountId"
+    ///      "description": "Signer of the delegated actions",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        }
+    ///      ]
     ///    }
     ///  }
     ///}
@@ -4033,8 +4257,11 @@ pub mod types {
         /// relayer and should match for given account's `public_key`.
         /// After this action is processed it will increment.
         pub nonce: u64,
+        ///Public key used to sign this delegated action.
         pub public_key: PublicKey,
+        ///Receiver of the delegated actions.
         pub receiver_id: AccountId,
+        ///Signer of the delegated actions
         pub sender_id: AccountId,
     }
 
@@ -4085,7 +4312,13 @@ pub mod types {
     ///  ],
     ///  "properties": {
     ///    "public_key": {
-    ///      "$ref": "#/components/schemas/PublicKey"
+    ///      "description": "A public key associated with the access_key to be
+    /// deleted.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/PublicKey"
+    ///        }
+    ///      ]
     ///    }
     ///  }
     ///}
@@ -4093,6 +4326,7 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct DeleteKeyAction {
+        ///A public key associated with the access_key to be deleted.
         pub public_key: PublicKey,
     }
 
@@ -4333,10 +4567,22 @@ pub mod types {
     ///      ]
     ///    },
     ///    "iteration_delay": {
-    ///      "$ref": "#/components/schemas/DurationSchemeProvider"
+    ///      "description": "How often to check if a new epoch has started.\n
+    /// Feel free to set to `None`, defaults are sensible.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/DurationSchemeProvider"
+    ///        }
+    ///      ]
     ///    },
     ///    "location": {
-    ///      "$ref": "#/components/schemas/ExternalStorageLocation"
+    ///      "description": "Specifies where to write the obtained state
+    /// parts.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/ExternalStorageLocation"
+    ///        }
+    ///      ]
     ///    },
     ///    "restart_dump_for_shards": {
     ///      "description": "Use in case a node that dumps state to the external
@@ -4359,8 +4605,11 @@ pub mod types {
         /// the bucket.
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub credentials_file: ::std::option::Option<::std::string::String>,
+        ///How often to check if a new epoch has started.
+        /// Feel free to set to `None`, defaults are sensible.
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub iteration_delay: ::std::option::Option<DurationSchemeProvider>,
+        ///Specifies where to write the obtained state parts.
         pub location: ExternalStorageLocation,
         ///Use in case a node that dumps state to the external storage
         /// gets in trouble.
@@ -4410,13 +4659,22 @@ pub mod types {
         }
     }
 
-    ///EpochId
+    ///Epoch identifier -- wrapped hash, to make it easier to distinguish.
+    /// EpochId of epoch T is the hash of last block in T-2
+    /// EpochId of first two epochs is 0
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "$ref": "#/components/schemas/CryptoHash"
+    ///  "description": "Epoch identifier -- wrapped hash, to make it easier to
+    /// distinguish.\n EpochId of epoch T is the hash of last block in T-2\n
+    /// EpochId of first two epochs is 0",
+    ///  "allOf": [
+    ///    {
+    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///    }
+    ///  ]
     ///}
     /// ```
     /// </details>
@@ -4524,7 +4782,13 @@ pub mod types {
     ///      "type": "boolean"
     ///    },
     ///    "timeout_for_epoch_sync": {
-    ///      "$ref": "#/components/schemas/DurationSchemeProvider"
+    ///      "description": "Timeout for epoch sync requests. The node will
+    /// continue retrying indefinitely even\n if this timeout is exceeded.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/DurationSchemeProvider"
+    ///        }
+    ///      ]
     ///    }
     ///  }
     ///}
@@ -4555,6 +4819,8 @@ pub mod types {
         /// increase in network traffic.
         #[serde(default)]
         pub ignore_epoch_sync_network_requests: bool,
+        ///Timeout for epoch sync requests. The node will continue retrying
+        /// indefinitely even if this timeout is exceeded.
         pub timeout_for_epoch_sync: DurationSchemeProvider,
     }
 
@@ -4623,7 +4889,14 @@ pub mod types {
     ///  ],
     ///  "properties": {
     ///    "executor_id": {
-    ///      "$ref": "#/components/schemas/AccountId"
+    ///      "description": "The id of the account on which the execution
+    /// happens. For transaction this is signer_id,\n for receipt this is
+    /// receiver_id.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        }
+    ///      ]
     ///    },
     ///    "gas_burnt": {
     ///      "description": "The amount of the gas burnt by the given
@@ -4640,7 +4913,15 @@ pub mod types {
     ///      }
     ///    },
     ///    "metadata": {
-    ///      "$ref": "#/components/schemas/ExecutionMetadataView"
+    ///      "description": "Execution metadata, versioned",
+    ///      "default": {
+    ///        "version": 1
+    ///      },
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/ExecutionMetadataView"
+    ///        }
+    ///      ]
     ///    },
     ///    "receipt_ids": {
     ///      "description": "Receipt IDs generated by this transaction or
@@ -4651,7 +4932,13 @@ pub mod types {
     ///      }
     ///    },
     ///    "status": {
-    ///      "$ref": "#/components/schemas/ExecutionStatusView"
+    ///      "description": "Execution status. Contains the result in case of
+    /// successful execution.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/ExecutionStatusView"
+    ///        }
+    ///      ]
     ///    },
     ///    "tokens_burnt": {
     ///      "description": "The amount of tokens burnt corresponding to the
@@ -4666,15 +4953,21 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct ExecutionOutcomeView {
+        ///The id of the account on which the execution happens. For
+        /// transaction this is signer_id, for receipt this is
+        /// receiver_id.
         pub executor_id: AccountId,
         ///The amount of the gas burnt by the given transaction or receipt.
         pub gas_burnt: u64,
         ///Logs from this transaction or receipt.
         pub logs: ::std::vec::Vec<::std::string::String>,
-        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
-        pub metadata: ::std::option::Option<ExecutionMetadataView>,
+        ///Execution metadata, versioned
+        #[serde(default = "defaults::execution_outcome_view_metadata")]
+        pub metadata: ExecutionMetadataView,
         ///Receipt IDs generated by this transaction or receipt.
         pub receipt_ids: ::std::vec::Vec<CryptoHash>,
+        ///Execution status. Contains the result in case of successful
+        /// execution.
         pub status: ExecutionStatusView,
         ///The amount of tokens burnt corresponding to the burnt gas amount.
         /// This value doesn't always equal to the `gas_burnt` multiplied by the
@@ -5632,7 +5925,12 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "location": {
-    ///      "$ref": "#/components/schemas/ExternalStorageLocation"
+    ///      "description": "Location of state parts.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/ExternalStorageLocation"
+    ///        }
+    ///      ]
     ///    },
     ///    "num_concurrent_requests": {
     ///      "description": "When fetching state parts from external storage,
@@ -5662,6 +5960,7 @@ pub mod types {
         /// storage.
         #[serde(default = "defaults::default_u64::<u64, 3>")]
         pub external_storage_fallback_threshold: u64,
+        ///Location of state parts.
         pub location: ExternalStorageLocation,
         ///When fetching state parts from external storage, throttle fetch
         /// requests to this many concurrent requests.
@@ -5867,13 +6166,35 @@ pub mod types {
     ///      }
     ///    },
     ///    "status": {
-    ///      "$ref": "#/components/schemas/FinalExecutionStatus"
+    ///      "description": "Execution status defined by
+    /// chain.rs:get_final_transaction_result\n FinalExecutionStatus::NotStarted
+    /// - the tx is not converted to the receipt yet\n
+    /// FinalExecutionStatus::Started - we have at least 1 receipt, but the
+    /// first leaf receipt_id (using dfs) hasn't finished the execution\n
+    /// FinalExecutionStatus::Failure - the result of the first leaf
+    /// receipt_id\n FinalExecutionStatus::SuccessValue - the result of the
+    /// first leaf receipt_id",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/FinalExecutionStatus"
+    ///        }
+    ///      ]
     ///    },
     ///    "transaction": {
-    ///      "$ref": "#/components/schemas/SignedTransactionView"
+    ///      "description": "Signed Transaction",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/SignedTransactionView"
+    ///        }
+    ///      ]
     ///    },
     ///    "transaction_outcome": {
-    ///      "$ref": "#/components/schemas/ExecutionOutcomeWithIdView"
+    ///      "description": "The execution outcome of the signed transaction.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/ExecutionOutcomeWithIdView"
+    ///        }
+    ///      ]
     ///    }
     ///  }
     ///}
@@ -5883,8 +6204,17 @@ pub mod types {
     pub struct FinalExecutionOutcomeView {
         ///The execution outcome of receipts.
         pub receipts_outcome: ::std::vec::Vec<ExecutionOutcomeWithIdView>,
+        ///Execution status defined by chain.rs:get_final_transaction_result
+        /// FinalExecutionStatus::NotStarted - the tx is not converted to the
+        /// receipt yet FinalExecutionStatus::Started - we have at least
+        /// 1 receipt, but the first leaf receipt_id (using dfs) hasn't finished
+        /// the execution FinalExecutionStatus::Failure - the result of
+        /// the first leaf receipt_id FinalExecutionStatus::SuccessValue
+        /// - the result of the first leaf receipt_id
         pub status: FinalExecutionStatus,
+        ///Signed Transaction
         pub transaction: SignedTransactionView,
+        ///The execution outcome of the signed transaction.
         pub transaction_outcome: ExecutionOutcomeWithIdView,
     }
 
@@ -5927,13 +6257,35 @@ pub mod types {
     ///      }
     ///    },
     ///    "status": {
-    ///      "$ref": "#/components/schemas/FinalExecutionStatus"
+    ///      "description": "Execution status defined by
+    /// chain.rs:get_final_transaction_result\n FinalExecutionStatus::NotStarted
+    /// - the tx is not converted to the receipt yet\n
+    /// FinalExecutionStatus::Started - we have at least 1 receipt, but the
+    /// first leaf receipt_id (using dfs) hasn't finished the execution\n
+    /// FinalExecutionStatus::Failure - the result of the first leaf
+    /// receipt_id\n FinalExecutionStatus::SuccessValue - the result of the
+    /// first leaf receipt_id",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/FinalExecutionStatus"
+    ///        }
+    ///      ]
     ///    },
     ///    "transaction": {
-    ///      "$ref": "#/components/schemas/SignedTransactionView"
+    ///      "description": "Signed Transaction",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/SignedTransactionView"
+    ///        }
+    ///      ]
     ///    },
     ///    "transaction_outcome": {
-    ///      "$ref": "#/components/schemas/ExecutionOutcomeWithIdView"
+    ///      "description": "The execution outcome of the signed transaction.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/ExecutionOutcomeWithIdView"
+    ///        }
+    ///      ]
     ///    }
     ///  }
     ///}
@@ -5945,8 +6297,17 @@ pub mod types {
         pub receipts: ::std::vec::Vec<ReceiptView>,
         ///The execution outcome of receipts.
         pub receipts_outcome: ::std::vec::Vec<ExecutionOutcomeWithIdView>,
+        ///Execution status defined by chain.rs:get_final_transaction_result
+        /// FinalExecutionStatus::NotStarted - the tx is not converted to the
+        /// receipt yet FinalExecutionStatus::Started - we have at least
+        /// 1 receipt, but the first leaf receipt_id (using dfs) hasn't finished
+        /// the execution FinalExecutionStatus::Failure - the result of
+        /// the first leaf receipt_id FinalExecutionStatus::SuccessValue
+        /// - the result of the first leaf receipt_id
         pub status: FinalExecutionStatus,
+        ///Signed Transaction
         pub transaction: SignedTransactionView,
+        ///The execution outcome of the signed transaction.
         pub transaction_outcome: ExecutionOutcomeWithIdView,
     }
 
@@ -6449,7 +6810,16 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "gc_step_period": {
-    ///      "$ref": "#/components/schemas/DurationSchemeProvider"
+    ///      "description": "How often gc should be run",
+    ///      "default": {
+    ///        "nanos": 0,
+    ///        "secs": 1
+    ///      },
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/DurationSchemeProvider"
+    ///        }
+    ///      ]
     ///    }
     ///  }
     ///}
@@ -6468,8 +6838,9 @@ pub mod types {
         ///Number of epochs for which we keep store data.
         #[serde(default = "defaults::default_u64::<u64, 5>")]
         pub gc_num_epochs_to_keep: u64,
-        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
-        pub gc_step_period: ::std::option::Option<DurationSchemeProvider>,
+        ///How often gc should be run
+        #[serde(default = "defaults::gc_config_gc_step_period")]
+        pub gc_step_period: DurationSchemeProvider,
     }
 
     impl ::std::convert::From<&GcConfig> for GcConfig {
@@ -6484,7 +6855,7 @@ pub mod types {
                 gc_blocks_limit: defaults::default_u64::<u64, 2>(),
                 gc_fork_clean_step: defaults::default_u64::<u64, 100>(),
                 gc_num_epochs_to_keep: defaults::default_u64::<u64, 5>(),
-                gc_step_period: Default::default(),
+                gc_step_period: defaults::gc_config_gc_step_period(),
             }
         }
     }
@@ -6589,7 +6960,12 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "gas_price_adjustment_rate": {
-    ///      "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///      "description": "Gas price adjustment rate",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
     ///    },
     ///    "genesis_height": {
     ///      "description": "Height of genesis block.",
@@ -6606,7 +6982,13 @@ pub mod types {
     ///      "type": "string"
     ///    },
     ///    "max_inflation_rate": {
-    ///      "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///      "description": "Maximum inflation on the total supply every
+    /// epoch.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
     ///    },
     ///    "max_kickout_stake_perc": {
     ///      "description": "Max stake percentage of the validators we will kick
@@ -6722,10 +7104,20 @@ pub mod types {
     ///      ]
     ///    },
     ///    "protocol_reward_rate": {
-    ///      "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///      "description": "Protocol treasury rate",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
     ///    },
     ///    "protocol_treasury_account": {
-    ///      "$ref": "#/components/schemas/AccountId"
+    ///      "description": "Protocol treasury account",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        }
+    ///      ]
     ///    },
     ///    "protocol_upgrade_stake_threshold": {
     ///      "description": "Threshold of stake that needs to indicate that they
@@ -6747,7 +7139,30 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "shard_layout": {
-    ///      "$ref": "#/components/schemas/ShardLayout"
+    ///      "description": "Layout information regarding how to split accounts
+    /// to shards",
+    ///      "default": {
+    ///        "V2": {
+    ///          "boundary_accounts": [],
+    ///          "id_to_index_map": {
+    ///            "0": 0
+    ///          },
+    ///          "index_to_id_map": {
+    ///            "0": 0
+    ///          },
+    ///          "shard_ids": [
+    ///            0
+    ///          ],
+    ///          "shards_parent_map": null,
+    ///          "shards_split_map": null,
+    ///          "version": 0
+    ///        }
+    ///      },
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/ShardLayout"
+    ///        }
+    ///      ]
     ///    },
     ///    "shuffle_shard_assignment_for_chunk_producers": {
     ///      "description": "If true, shuffle the chunk producers across shards.
@@ -6826,12 +7241,14 @@ pub mod types {
         pub fishermen_threshold: ::std::string::String,
         ///Initial gas limit.
         pub gas_limit: u64,
+        ///Gas price adjustment rate
         pub gas_price_adjustment_rate: Rational32SchemaProvider,
         ///Height of genesis block.
         pub genesis_height: u64,
         ///Official time of blockchain start.
         pub genesis_time: chrono::DateTime<chrono::offset::Utc>,
         pub max_gas_price: ::std::string::String,
+        ///Maximum inflation on the total supply every epoch.
         pub max_inflation_rate: Rational32SchemaProvider,
         ///Max stake percentage of the validators we will kick out.
         #[serde(default = "defaults::default_u64::<u8, 100>")]
@@ -6876,7 +7293,9 @@ pub mod types {
         /// reward.
         #[serde(default = "defaults::genesis_config_online_min_threshold")]
         pub online_min_threshold: Rational32SchemaProvider,
+        ///Protocol treasury rate
         pub protocol_reward_rate: Rational32SchemaProvider,
+        ///Protocol treasury account
         pub protocol_treasury_account: AccountId,
         ///Threshold of stake that needs to indicate that they ready for
         /// upgrade.
@@ -6884,8 +7303,9 @@ pub mod types {
         pub protocol_upgrade_stake_threshold: Rational32SchemaProvider,
         ///Protocol version that this genesis works with.
         pub protocol_version: u32,
-        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
-        pub shard_layout: ::std::option::Option<ShardLayout>,
+        ///Layout information regarding how to split accounts to shards
+        #[serde(default = "defaults::genesis_config_shard_layout")]
+        pub shard_layout: ShardLayout,
         ///If true, shuffle the chunk producers across shards. In other words,
         /// if the shard assignments were `[S_0, S_1, S_2, S_3]` where
         /// `S_i` represents the set of chunk producers for shard `i`,
@@ -8218,7 +8638,13 @@ pub mod types {
     ///              "type": "string"
     ///            },
     ///            "signer_id": {
-    ///              "$ref": "#/components/schemas/AccountId"
+    ///              "description": "An account which doesn't have enough
+    /// balance to cover storage.",
+    ///              "allOf": [
+    ///                {
+    ///                  "$ref": "#/components/schemas/AccountId"
+    ///                }
+    ///              ]
     ///            }
     ///          }
     ///        }
@@ -8421,6 +8847,7 @@ pub mod types {
         LackBalanceForState {
             ///Required balance to cover the state.
             amount: ::std::string::String,
+            ///An account which doesn't have enough balance to cover storage.
             signer_id: AccountId,
         },
         ///An integer overflow occurred during transaction cost estimation.
@@ -14852,13 +15279,38 @@ pub mod types {
         }
     }
 
-    ///NonDelegateAction
+    ///This is Action which mustn't contain DelegateAction.
+    ///
+    /// This struct is needed to avoid the recursion when Action/DelegateAction
+    /// is deserialized.
+    ///
+    /// Important: Don't make the inner Action public, this must only be
+    /// constructed through the correct interface that ensures the inner
+    /// Action is actually not a delegate action. That would break an
+    /// assumption of this type, which we use in several places. For
+    /// example, borsh de-/serialization relies on it. If the invariant is
+    /// broken, we may end up with a `Transaction` or `Receipt` that we
+    /// can serialize but deserializing it back causes a parsing error.
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "$ref": "#/components/schemas/Action"
+    ///  "description": "This is Action which mustn't contain
+    /// DelegateAction.\n\n This struct is needed to avoid the recursion when
+    /// Action/DelegateAction is deserialized.\n\n Important: Don't make the
+    /// inner Action public, this must only be constructed\n through the correct
+    /// interface that ensures the inner Action is actually not\n a delegate
+    /// action. That would break an assumption of this type, which we use\n in
+    /// several places. For example, borsh de-/serialization relies on it. If
+    /// the\n invariant is broken, we may end up with a `Transaction` or
+    /// `Receipt` that we\n can serialize but deserializing it back causes a
+    /// parsing error.",
+    ///  "allOf": [
+    ///    {
+    ///      "$ref": "#/components/schemas/Action"
+    ///    }
+    ///  ]
     ///}
     /// ```
     /// </details>
@@ -14890,13 +15342,18 @@ pub mod types {
         }
     }
 
-    ///PeerId
+    ///Peer id is the public key.
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "$ref": "#/components/schemas/PublicKey"
+    ///  "description": "Peer id is the public key.",
+    ///  "allOf": [
+    ///    {
+    ///      "$ref": "#/components/schemas/PublicKey"
+    ///    }
+    ///  ]
     ///}
     /// ```
     /// </details>
@@ -14985,7 +15442,18 @@ pub mod types {
     ///  ],
     ///  "properties": {
     ///    "account_id": {
-    ///      "$ref": "#/components/schemas/AccountId"
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "addr": {
     ///      "type": "string"
@@ -14994,7 +15462,18 @@ pub mod types {
     ///      "type": "boolean"
     ///    },
     ///    "block_hash": {
-    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/CryptoHash"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "connection_established_time_millis": {
     ///      "type": "integer",
@@ -16181,7 +16660,24 @@ pub mod types {
     ///      "type": "string"
     ///    },
     ///    "chunk_distribution_network": {
-    ///      "$ref": "#/components/schemas/ChunkDistributionNetworkConfig"
+    ///      "description": "Optional config for the Chunk Distribution Network
+    /// feature.\n If set to `None` then this node does not participate in the
+    /// Chunk Distribution Network.\n Nodes not participating will still
+    /// function fine, but possibly with higher\n latency due to the need of
+    /// requesting chunks over the peer-to-peer network.",
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref":
+    /// "#/components/schemas/ChunkDistributionNetworkConfig"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "chunk_request_retry_period": {
     ///      "description": "Time between checking to re-request chunks.",
@@ -16227,13 +16723,28 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "epoch_sync": {
-    ///      "$ref": "#/components/schemas/EpochSyncConfig"
+    ///      "description": "Options for epoch sync.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/EpochSyncConfig"
+    ///        }
+    ///      ]
     ///    },
     ///    "expected_shutdown": {
-    ///      "$ref": "#/components/schemas/MutableConfigValue"
+    ///      "description": "Graceful shutdown at expected block height.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/MutableConfigValue"
+    ///        }
+    ///      ]
     ///    },
     ///    "gc": {
-    ///      "$ref": "#/components/schemas/GCConfig"
+    ///      "description": "Garbage collection configuration.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/GCConfig"
+    ///        }
+    ///      ]
     ///    },
     ///    "header_sync_expected_height_per_second": {
     ///      "description": "Expected increase of header head height per second
@@ -16289,7 +16800,12 @@ pub mod types {
     ///      "minItems": 2
     ///    },
     ///    "log_summary_style": {
-    ///      "$ref": "#/components/schemas/LogSummaryStyle"
+    ///      "description": "Enable coloring of the logs",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/LogSummaryStyle"
+    ///        }
+    ///      ]
     ///    },
     ///    "max_block_production_delay": {
     ///      "description": "Maximum wait for approvals before producing
@@ -16414,7 +16930,12 @@ pub mod types {
     ///      "type": "boolean"
     ///    },
     ///    "state_sync": {
-    ///      "$ref": "#/components/schemas/StateSyncConfig"
+    ///      "description": "Options for syncing state.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/StateSyncConfig"
+    ///        }
+    ///      ]
     ///    },
     ///    "state_sync_enabled": {
     ///      "description": "Whether to use the State Sync mechanism.\n If
@@ -16513,7 +17034,20 @@ pub mod types {
     ///      }
     ///    },
     ///    "tracked_shadow_validator": {
-    ///      "$ref": "#/components/schemas/AccountId"
+    ///      "description": "Track shards that should be tracked by given
+    /// validator.",
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "tracked_shard_schedule": {
     ///      "description": "Rotate between these sets of tracked shards.\n Used
@@ -16574,7 +17108,12 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "version": {
-    ///      "$ref": "#/components/schemas/Version"
+    ///      "description": "Version of the binary.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Version"
+    ///        }
+    ///      ]
     ///    },
     ///    "view_client_threads": {
     ///      "description": "Number of threads for ViewClientActor pool.",
@@ -16612,6 +17151,11 @@ pub mod types {
         pub catchup_step_period: [u64; 2usize],
         ///Chain id for status.
         pub chain_id: ::std::string::String,
+        ///Optional config for the Chunk Distribution Network feature.
+        /// If set to `None` then this node does not participate in the Chunk
+        /// Distribution Network. Nodes not participating will still
+        /// function fine, but possibly with higher latency due to the
+        /// need of requesting chunks over the peer-to-peer network.
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub chunk_distribution_network: ::std::option::Option<ChunkDistributionNetworkConfig>,
         ///Time between checking to re-request chunks.
@@ -16625,8 +17169,11 @@ pub mod types {
         pub enable_statistics_export: bool,
         ///Epoch length.
         pub epoch_length: u64,
+        ///Options for epoch sync.
         pub epoch_sync: EpochSyncConfig,
+        ///Graceful shutdown at expected block height.
         pub expected_shutdown: MutableConfigValue,
+        ///Garbage collection configuration.
         pub gc: GcConfig,
         ///Expected increase of header head height per second during header
         /// sync
@@ -16640,6 +17187,7 @@ pub mod types {
         pub header_sync_stall_ban_timeout: [u64; 2usize],
         ///Period between logging summary information.
         pub log_summary_period: [u64; 2usize],
+        ///Enable coloring of the logs
         pub log_summary_style: LogSummaryStyle,
         ///Maximum wait for approvals before producing block.
         pub max_block_production_delay: [u64; 2usize],
@@ -16699,6 +17247,7 @@ pub mod types {
         pub save_trie_changes: bool,
         ///Skip waiting for sync (for testing or single node testnet).
         pub skip_sync_wait: bool,
+        ///Options for syncing state.
         pub state_sync: StateSyncConfig,
         ///Whether to use the State Sync mechanism.
         /// If disabled, the node will do Block Sync instead of State Sync.
@@ -16722,6 +17271,7 @@ pub mod types {
         pub sync_step_period: [u64; 2usize],
         ///Accounts that this client tracks.
         pub tracked_accounts: ::std::vec::Vec<AccountId>,
+        ///Track shards that should be tracked by given validator.
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub tracked_shadow_validator: ::std::option::Option<AccountId>,
         ///Rotate between these sets of tracked shards.
@@ -16744,6 +17294,7 @@ pub mod types {
         ///If the node is not a chunk producer within that many blocks, then
         /// route to upcoming chunk producers.
         pub tx_routing_height_horizon: u64,
+        ///Version of the binary.
         pub version: Version,
         ///Number of threads for ViewClientActor pool.
         pub view_client_threads: u32,
@@ -16857,7 +17408,18 @@ pub mod types {
     ///  ],
     ///  "properties": {
     ///    "cause": {
-    ///      "$ref": "#/components/schemas/CauseRpcErrorKind"
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/CauseRpcErrorKind"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "code": {
     ///      "type": "integer",
@@ -16868,7 +17430,18 @@ pub mod types {
     ///      "type": "string"
     ///    },
     ///    "name": {
-    ///      "$ref": "#/components/schemas/NameRpcErrorKind"
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/NameRpcErrorKind"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    }
     ///  }
     ///}
@@ -17572,7 +18145,18 @@ pub mod types {
     ///  ],
     ///  "properties": {
     ///    "account_id": {
-    ///      "$ref": "#/components/schemas/AccountId"
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "addr": {
     ///      "type": [
@@ -17783,7 +18367,12 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "gas_price_adjustment_rate": {
-    ///      "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///      "description": "Gas price adjustment rate",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
     ///    },
     ///    "genesis_height": {
     ///      "description": "Height of genesis block.",
@@ -17801,7 +18390,13 @@ pub mod types {
     ///      "type": "string"
     ///    },
     ///    "max_inflation_rate": {
-    ///      "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///      "description": "Maximum inflation on the total supply every
+    /// epoch.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
     ///    },
     ///    "max_kickout_stake_perc": {
     ///      "description": "Max stake percentage of the validators we will kick
@@ -17823,7 +18418,12 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "minimum_stake_ratio": {
-    ///      "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///      "description": "The lowest ratio s/s_total any block producer can have.\n See <https://github.com/near/NEPs/pull/167> for details",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
     ///    },
     ///    "minimum_validators_per_shard": {
     ///      "description": "The minimum number of validators each shard must
@@ -17862,19 +18462,47 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "online_max_threshold": {
-    ///      "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///      "description": "Online maximum threshold above which validator gets
+    /// full reward.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
     ///    },
     ///    "online_min_threshold": {
-    ///      "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///      "description": "Online minimum threshold below which validator
+    /// doesn't receive reward.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
     ///    },
     ///    "protocol_reward_rate": {
-    ///      "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///      "description": "Protocol treasury rate",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
     ///    },
     ///    "protocol_treasury_account": {
-    ///      "$ref": "#/components/schemas/AccountId"
+    ///      "description": "Protocol treasury account",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        }
+    ///      ]
     ///    },
     ///    "protocol_upgrade_stake_threshold": {
-    ///      "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///      "description": "Threshold of stake that needs to indicate that they
+    /// ready for upgrade.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
     ///    },
     ///    "protocol_version": {
     ///      "description": "Current Protocol Version",
@@ -17883,10 +18511,22 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "runtime_config": {
-    ///      "$ref": "#/components/schemas/RuntimeConfigView"
+    ///      "description": "Runtime configuration (mostly economics
+    /// constants).",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/RuntimeConfigView"
+    ///        }
+    ///      ]
     ///    },
     ///    "shard_layout": {
-    ///      "$ref": "#/components/schemas/ShardLayout"
+    ///      "description": "Layout information regarding how to split accounts
+    /// to shards",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/ShardLayout"
+    ///        }
+    ///      ]
     ///    },
     ///    "shuffle_shard_assignment_for_chunk_producers": {
     ///      "description": "If true, shuffle the chunk producers across shards.
@@ -17937,6 +18577,7 @@ pub mod types {
         pub fishermen_threshold: ::std::string::String,
         ///Initial gas limit.
         pub gas_limit: u64,
+        ///Gas price adjustment rate
         pub gas_price_adjustment_rate: Rational32SchemaProvider,
         ///Height of genesis block.
         pub genesis_height: u64,
@@ -17944,6 +18585,7 @@ pub mod types {
         pub genesis_time: chrono::DateTime<chrono::offset::Utc>,
         ///Maximum gas price.
         pub max_gas_price: ::std::string::String,
+        ///Maximum inflation on the total supply every epoch.
         pub max_inflation_rate: Rational32SchemaProvider,
         ///Max stake percentage of the validators we will kick out.
         pub max_kickout_stake_perc: u8,
@@ -17952,6 +18594,8 @@ pub mod types {
         ///The minimum stake required for staking is last seat price divided by
         /// this number.
         pub minimum_stake_divisor: u64,
+        ///The lowest ratio s/s_total any block producer can have.
+        /// See <https://github.com/near/NEPs/pull/167> for details
         pub minimum_stake_ratio: Rational32SchemaProvider,
         ///The minimum number of validators each shard must have
         pub minimum_validators_per_shard: u64,
@@ -17964,14 +18608,23 @@ pub mod types {
         pub num_blocks_per_year: u64,
         ///Number of validator seats for chunk only producers.
         pub num_chunk_only_producer_seats: u64,
+        ///Online maximum threshold above which validator gets full reward.
         pub online_max_threshold: Rational32SchemaProvider,
+        ///Online minimum threshold below which validator doesn't receive
+        /// reward.
         pub online_min_threshold: Rational32SchemaProvider,
+        ///Protocol treasury rate
         pub protocol_reward_rate: Rational32SchemaProvider,
+        ///Protocol treasury account
         pub protocol_treasury_account: AccountId,
+        ///Threshold of stake that needs to indicate that they ready for
+        /// upgrade.
         pub protocol_upgrade_stake_threshold: Rational32SchemaProvider,
         ///Current Protocol Version
         pub protocol_version: u32,
+        ///Runtime configuration (mostly economics constants).
         pub runtime_config: RuntimeConfigView,
+        ///Layout information regarding how to split accounts to shards
         pub shard_layout: ShardLayout,
         ///If true, shuffle the chunk producers across shards. In other words,
         /// if the shard assignments were `[S_0, S_1, S_2, S_3]` where
@@ -20438,10 +21091,28 @@ pub mod types {
     ///      "type": "string"
     ///    },
     ///    "detailed_debug_status": {
-    ///      "$ref": "#/components/schemas/DetailedDebugStatus"
+    ///      "description": "Information about last blocks, network, epoch and
+    /// chain & chunk info.",
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/DetailedDebugStatus"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "genesis_hash": {
-    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///      "description": "Genesis hash of the chain.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///        }
+    ///      ]
     ///    },
     ///    "latest_protocol_version": {
     ///      "description": "Latest protocol version that this client
@@ -20451,10 +21122,28 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "node_key": {
-    ///      "$ref": "#/components/schemas/PublicKey"
+    ///      "description": "Deprecated; same as `validator_public_key` which
+    /// you should use instead.",
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/PublicKey"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "node_public_key": {
-    ///      "$ref": "#/components/schemas/PublicKey"
+    ///      "description": "Public key of the node.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/PublicKey"
+    ///        }
+    ///      ]
     ///    },
     ///    "protocol_version": {
     ///      "description": "Currently active protocol version.",
@@ -20471,7 +21160,12 @@ pub mod types {
     ///      ]
     ///    },
     ///    "sync_info": {
-    ///      "$ref": "#/components/schemas/StatusSyncInfo"
+    ///      "description": "Sync status of the node.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/StatusSyncInfo"
+    ///        }
+    ///      ]
     ///    },
     ///    "uptime_sec": {
     ///      "description": "Uptime of the node.",
@@ -20479,10 +21173,34 @@ pub mod types {
     ///      "format": "int64"
     ///    },
     ///    "validator_account_id": {
-    ///      "$ref": "#/components/schemas/AccountId"
+    ///      "description": "Validator id of the node",
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "validator_public_key": {
-    ///      "$ref": "#/components/schemas/PublicKey"
+    ///      "description": "Public key of the validator.",
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/PublicKey"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "validators": {
     ///      "description": "Current epoch validators.",
@@ -20492,7 +21210,12 @@ pub mod types {
     ///      }
     ///    },
     ///    "version": {
-    ///      "$ref": "#/components/schemas/Version"
+    ///      "description": "Binary version.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Version"
+    ///        }
+    ///      ]
     ///    }
     ///  }
     ///}
@@ -20502,13 +21225,19 @@ pub mod types {
     pub struct RpcStatusResponse {
         ///Unique chain id.
         pub chain_id: ::std::string::String,
+        ///Information about last blocks, network, epoch and chain & chunk
+        /// info.
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub detailed_debug_status: ::std::option::Option<DetailedDebugStatus>,
+        ///Genesis hash of the chain.
         pub genesis_hash: CryptoHash,
         ///Latest protocol version that this client supports.
         pub latest_protocol_version: u32,
+        ///Deprecated; same as `validator_public_key` which you should use
+        /// instead.
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub node_key: ::std::option::Option<PublicKey>,
+        ///Public key of the node.
         pub node_public_key: PublicKey,
         ///Currently active protocol version.
         pub protocol_version: u32,
@@ -20516,15 +21245,19 @@ pub mod types {
         /// enabled.
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub rpc_addr: ::std::option::Option<::std::string::String>,
+        ///Sync status of the node.
         pub sync_info: StatusSyncInfo,
         ///Uptime of the node.
         pub uptime_sec: i64,
+        ///Validator id of the node
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub validator_account_id: ::std::option::Option<AccountId>,
+        ///Public key of the validator.
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub validator_public_key: ::std::option::Option<PublicKey>,
         ///Current epoch validators.
         pub validators: ::std::vec::Vec<ValidatorInfo>,
+        ///Binary version.
         pub version: Version,
     }
 
@@ -20569,16 +21302,38 @@ pub mod types {
             receipts: ::std::vec::Vec<ReceiptView>,
             ///The execution outcome of receipts.
             receipts_outcome: ::std::vec::Vec<ExecutionOutcomeWithIdView>,
+            ///Execution status defined by
+            /// chain.rs:get_final_transaction_result
+            /// FinalExecutionStatus::NotStarted - the tx is not converted to
+            /// the receipt yet FinalExecutionStatus::Started - we
+            /// have at least 1 receipt, but the first leaf receipt_id (using
+            /// dfs) hasn't finished the execution
+            /// FinalExecutionStatus::Failure - the result of the first leaf
+            /// receipt_id FinalExecutionStatus::SuccessValue - the
+            /// result of the first leaf receipt_id
             status: FinalExecutionStatus,
+            ///Signed Transaction
             transaction: SignedTransactionView,
+            ///The execution outcome of the signed transaction.
             transaction_outcome: ExecutionOutcomeWithIdView,
         },
         Variant1 {
             final_execution_status: TxExecutionStatus,
             ///The execution outcome of receipts.
             receipts_outcome: ::std::vec::Vec<ExecutionOutcomeWithIdView>,
+            ///Execution status defined by
+            /// chain.rs:get_final_transaction_result
+            /// FinalExecutionStatus::NotStarted - the tx is not converted to
+            /// the receipt yet FinalExecutionStatus::Started - we
+            /// have at least 1 receipt, but the first leaf receipt_id (using
+            /// dfs) hasn't finished the execution
+            /// FinalExecutionStatus::Failure - the result of the first leaf
+            /// receipt_id FinalExecutionStatus::SuccessValue - the
+            /// result of the first leaf receipt_id
             status: FinalExecutionStatus,
+            ///Signed Transaction
             transaction: SignedTransactionView,
+            ///The execution outcome of the signed transaction.
             transaction_outcome: ExecutionOutcomeWithIdView,
         },
     }
@@ -20889,23 +21644,49 @@ pub mod types {
     ///  ],
     ///  "properties": {
     ///    "account_creation_config": {
-    ///      "$ref": "#/components/schemas/AccountCreationConfigView"
+    ///      "description": "Config that defines rules for account creation.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/AccountCreationConfigView"
+    ///        }
+    ///      ]
     ///    },
     ///    "congestion_control_config": {
-    ///      "$ref": "#/components/schemas/CongestionControlConfigView"
+    ///      "description": "The configuration for congestion control.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/CongestionControlConfigView"
+    ///        }
+    ///      ]
     ///    },
     ///    "storage_amount_per_byte": {
     ///      "description": "Amount of yN per byte required to have on the account.  See\n <https://nomicon.io/Economics/Economic#state-stake> for details.",
     ///      "type": "string"
     ///    },
     ///    "transaction_costs": {
-    ///      "$ref": "#/components/schemas/RuntimeFeesConfigView"
+    ///      "description": "Costs of different actions that need to be
+    /// performed when sending and\n processing transaction and receipts.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/RuntimeFeesConfigView"
+    ///        }
+    ///      ]
     ///    },
     ///    "wasm_config": {
-    ///      "$ref": "#/components/schemas/VMConfigView"
+    ///      "description": "Config of wasm operations.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/VMConfigView"
+    ///        }
+    ///      ]
     ///    },
     ///    "witness_config": {
-    ///      "$ref": "#/components/schemas/WitnessConfigView"
+    ///      "description": "Configuration specific to ChunkStateWitness.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/WitnessConfigView"
+    ///        }
+    ///      ]
     ///    }
     ///  }
     ///}
@@ -20913,13 +21694,19 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct RuntimeConfigView {
+        ///Config that defines rules for account creation.
         pub account_creation_config: AccountCreationConfigView,
+        ///The configuration for congestion control.
         pub congestion_control_config: CongestionControlConfigView,
         ///Amount of yN per byte required to have on the account.  See
         /// <https://nomicon.io/Economics/Economic#state-stake> for details.
         pub storage_amount_per_byte: ::std::string::String,
+        ///Costs of different actions that need to be performed when sending
+        /// and processing transaction and receipts.
         pub transaction_costs: RuntimeFeesConfigView,
+        ///Config of wasm operations.
         pub wasm_config: VmConfigView,
+        ///Configuration specific to ChunkStateWitness.
         pub witness_config: WitnessConfigView,
     }
 
@@ -20946,22 +21733,59 @@ pub mod types {
     ///  ],
     ///  "properties": {
     ///    "action_creation_config": {
-    ///      "$ref": "#/components/schemas/ActionCreationConfigView"
+    ///      "description": "Describes the cost of creating a certain action,
+    /// `Action`. Includes all variants.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/ActionCreationConfigView"
+    ///        }
+    ///      ]
     ///    },
     ///    "action_receipt_creation_config": {
-    ///      "$ref": "#/components/schemas/Fee"
+    ///      "description": "Describes the cost of creating an action receipt,
+    /// `ActionReceipt`, excluding the actual cost\n of actions.\n - `send` cost
+    /// is burned when a receipt is created using `promise_create` or\n
+    /// `promise_batch_create`\n - `exec` cost is burned when the receipt is
+    /// being executed.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Fee"
+    ///        }
+    ///      ]
     ///    },
     ///    "burnt_gas_reward": {
-    ///      "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///      "description": "Fraction of the burnt gas to reward to the contract
+    /// account for execution.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
     ///    },
     ///    "data_receipt_creation_config": {
-    ///      "$ref": "#/components/schemas/DataReceiptCreationConfigView"
+    ///      "description": "Describes the cost of creating a data receipt,
+    /// `DataReceipt`.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/DataReceiptCreationConfigView"
+    ///        }
+    ///      ]
     ///    },
     ///    "pessimistic_gas_price_inflation_ratio": {
-    ///      "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///      "description": "Pessimistic gas price inflation ratio.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
+    ///        }
+    ///      ]
     ///    },
     ///    "storage_usage_config": {
-    ///      "$ref": "#/components/schemas/StorageUsageConfigView"
+    ///      "description": "Describes fees for storage.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/StorageUsageConfigView"
+    ///        }
+    ///      ]
     ///    }
     ///  }
     ///}
@@ -20969,11 +21793,23 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct RuntimeFeesConfigView {
+        ///Describes the cost of creating a certain action, `Action`. Includes
+        /// all variants.
         pub action_creation_config: ActionCreationConfigView,
+        ///Describes the cost of creating an action receipt, `ActionReceipt`,
+        /// excluding the actual cost of actions.
+        /// - `send` cost is burned when a receipt is created using
+        ///   `promise_create` or `promise_batch_create`
+        /// - `exec` cost is burned when the receipt is being executed.
         pub action_receipt_creation_config: Fee,
+        ///Fraction of the burnt gas to reward to the contract account for
+        /// execution.
         pub burnt_gas_reward: Rational32SchemaProvider,
+        ///Describes the cost of creating a data receipt, `DataReceipt`.
         pub data_receipt_creation_config: DataReceiptCreationConfigView,
+        ///Pessimistic gas price inflation ratio.
         pub pessimistic_gas_price_inflation_ratio: Rational32SchemaProvider,
+        ///Describes fees for storage.
         pub storage_usage_config: StorageUsageConfigView,
     }
 
@@ -21659,7 +22495,13 @@ pub mod types {
     ///  ],
     ///  "properties": {
     ///    "public_key": {
-    ///      "$ref": "#/components/schemas/PublicKey"
+    ///      "description": "Validator key which will be used to sign
+    /// transactions on behalf of signer_id",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/PublicKey"
+    ///        }
+    ///      ]
     ///    },
     ///    "stake": {
     ///      "description": "Amount of tokens to stake.",
@@ -21671,6 +22513,8 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct StakeAction {
+        ///Validator key which will be used to sign transactions on behalf of
+        /// signer_id
         pub public_key: PublicKey,
         ///Amount of tokens to stake.
         pub stake: ::std::string::String,
@@ -22053,10 +22897,32 @@ pub mod types {
     ///          "$ref": "#/components/schemas/CryptoHash"
     ///        },
     ///        "global_contract_account_id": {
-    ///          "$ref": "#/components/schemas/AccountId"
+    ///          "oneOf": [
+    ///            {
+    ///              "type": "null"
+    ///            },
+    ///            {
+    ///              "allOf": [
+    ///                {
+    ///                  "$ref": "#/components/schemas/AccountId"
+    ///                }
+    ///              ]
+    ///            }
+    ///          ]
     ///        },
     ///        "global_contract_hash": {
-    ///          "$ref": "#/components/schemas/CryptoHash"
+    ///          "oneOf": [
+    ///            {
+    ///              "type": "null"
+    ///            },
+    ///            {
+    ///              "allOf": [
+    ///                {
+    ///                  "$ref": "#/components/schemas/CryptoHash"
+    ///                }
+    ///              ]
+    ///            }
+    ///          ]
     ///        },
     ///        "locked": {
     ///          "type": "string"
@@ -22283,10 +23149,32 @@ pub mod types {
     ///      "$ref": "#/components/schemas/CryptoHash"
     ///    },
     ///    "global_contract_account_id": {
-    ///      "$ref": "#/components/schemas/AccountId"
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/AccountId"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "global_contract_hash": {
-    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/CryptoHash"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "locked": {
     ///      "type": "string"
@@ -22742,7 +23630,20 @@ pub mod types {
     ///  "type": "object",
     ///  "properties": {
     ///    "dump": {
-    ///      "$ref": "#/components/schemas/DumpConfig"
+    ///      "description": "`none` value disables state dump to external
+    /// storage.",
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/DumpConfig"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "sync": {
     ///      "$ref": "#/components/schemas/SyncConfig"
@@ -22753,6 +23654,7 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct StateSyncConfig {
+        ///`none` value disables state dump to external storage.
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub dump: ::std::option::Option<DumpConfig>,
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -22791,7 +23693,18 @@ pub mod types {
     ///  ],
     ///  "properties": {
     ///    "earliest_block_hash": {
-    ///      "$ref": "#/components/schemas/CryptoHash"
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/CryptoHash"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "earliest_block_height": {
     ///      "type": [
@@ -22805,7 +23718,18 @@ pub mod types {
     ///      "type": "string"
     ///    },
     ///    "epoch_id": {
-    ///      "$ref": "#/components/schemas/EpochId"
+    ///      "oneOf": [
+    ///        {
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/EpochId"
+    ///            }
+    ///          ]
+    ///        }
+    ///      ]
     ///    },
     ///    "epoch_start_height": {
     ///      "type": [
@@ -23918,39 +24842,37 @@ pub mod types {
     ///
     /// ```json
     ///{
-    ///  "oneOf": [
+    ///  "type": "object",
+    ///  "allOf": [
     ///    {
     ///      "$ref": "#/components/schemas/ValidatorStakeViewV1"
     ///    }
-    ///  ]
+    ///  ],
+    ///  "required": [
+    ///    "validator_stake_struct_version"
+    ///  ],
+    ///  "properties": {
+    ///    "validator_stake_struct_version": {
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "V1"
+    ///      ]
+    ///    }
+    ///  }
     ///}
     /// ```
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    #[serde(transparent)]
-    pub struct ValidatorStakeView(pub ValidatorStakeViewV1);
-    impl ::std::ops::Deref for ValidatorStakeView {
-        type Target = ValidatorStakeViewV1;
-        fn deref(&self) -> &ValidatorStakeViewV1 {
-            &self.0
-        }
-    }
-
-    impl ::std::convert::From<ValidatorStakeView> for ValidatorStakeViewV1 {
-        fn from(value: ValidatorStakeView) -> Self {
-            value.0
-        }
+    pub struct ValidatorStakeView {
+        pub account_id: AccountId,
+        pub public_key: PublicKey,
+        pub stake: ::std::string::String,
+        pub validator_stake_struct_version: ValidatorStakeViewValidatorStakeStructVersion,
     }
 
     impl ::std::convert::From<&ValidatorStakeView> for ValidatorStakeView {
         fn from(value: &ValidatorStakeView) -> Self {
             value.clone()
-        }
-    }
-
-    impl ::std::convert::From<ValidatorStakeViewV1> for ValidatorStakeView {
-        fn from(value: ValidatorStakeViewV1) -> Self {
-            Self(value)
         }
     }
 
@@ -23990,6 +24912,88 @@ pub mod types {
     impl ::std::convert::From<&ValidatorStakeViewV1> for ValidatorStakeViewV1 {
         fn from(value: &ValidatorStakeViewV1) -> Self {
             value.clone()
+        }
+    }
+
+    ///ValidatorStakeViewValidatorStakeStructVersion
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string",
+    ///  "enum": [
+    ///    "V1"
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Copy,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    pub enum ValidatorStakeViewValidatorStakeStructVersion {
+        V1,
+    }
+
+    impl ::std::convert::From<&Self> for ValidatorStakeViewValidatorStakeStructVersion {
+        fn from(value: &ValidatorStakeViewValidatorStakeStructVersion) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::fmt::Display for ValidatorStakeViewValidatorStakeStructVersion {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            match *self {
+                Self::V1 => write!(f, "V1"),
+            }
+        }
+    }
+
+    impl ::std::str::FromStr for ValidatorStakeViewValidatorStakeStructVersion {
+        type Err = self::error::ConversionError;
+        fn from_str(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            match value {
+                "V1" => Ok(Self::V1),
+                _ => Err("invalid value".into()),
+            }
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for ValidatorStakeViewValidatorStakeStructVersion {
+        type Error = self::error::ConversionError;
+        fn try_from(value: &str) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&::std::string::String>
+        for ValidatorStakeViewValidatorStakeStructVersion
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: &::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<::std::string::String>
+        for ValidatorStakeViewValidatorStakeStructVersion
+    {
+        type Error = self::error::ConversionError;
+        fn try_from(
+            value: ::std::string::String,
+        ) -> ::std::result::Result<Self, self::error::ConversionError> {
+            value.parse()
         }
     }
 
@@ -24094,7 +25098,12 @@ pub mod types {
     ///      "type": "boolean"
     ///    },
     ///    "ext_costs": {
-    ///      "$ref": "#/components/schemas/ExtCostsConfigView"
+    ///      "description": "Costs for runtime externals",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/ExtCostsConfigView"
+    ///        }
+    ///      ]
     ///    },
     ///    "fix_contract_loading_cost": {
     ///      "description": "See
@@ -24121,7 +25130,14 @@ pub mod types {
     ///      "type": "boolean"
     ///    },
     ///    "limit_config": {
-    ///      "$ref": "#/components/schemas/LimitConfig"
+    ///      "description": "Describes limits for VM and Runtime.\n\n TODO:
+    /// Consider changing this to `VMLimitConfigView` to avoid dependency\n on
+    /// runtime.",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/LimitConfig"
+    ///        }
+    ///      ]
     ///    },
     ///    "math_extension": {
     ///      "description": "See
@@ -24135,10 +25151,22 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "storage_get_mode": {
-    ///      "$ref": "#/components/schemas/StorageGetMode"
+    ///      "description": "See
+    /// [VMConfig::storage_get_mode](crate::vm::Config::storage_get_mode).",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/StorageGetMode"
+    ///        }
+    ///      ]
     ///    },
     ///    "vm_kind": {
-    ///      "$ref": "#/components/schemas/VMKind"
+    ///      "description": "See
+    /// [VMConfig::vm_kind](crate::vm::Config::vm_kind).",
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/VMKind"
+    ///        }
+    ///      ]
     ///    },
     ///    "yield_resume_host_functions": {
     ///      "description": "See
@@ -24162,6 +25190,7 @@ pub mod types {
         pub ed25519_verify: bool,
         ///See [VMConfig::eth_implicit_accounts](crate::vm::Config::eth_implicit_accounts).
         pub eth_implicit_accounts: bool,
+        ///Costs for runtime externals
         pub ext_costs: ExtCostsConfigView,
         ///See [VMConfig::fix_contract_loading_cost](crate::vm::Config::fix_contract_loading_cost).
         pub fix_contract_loading_cost: bool,
@@ -24171,12 +25200,18 @@ pub mod types {
         pub grow_mem_cost: u32,
         ///See [VMConfig::implicit_account_creation](crate::vm::Config::implicit_account_creation).
         pub implicit_account_creation: bool,
+        ///Describes limits for VM and Runtime.
+        ///
+        /// TODO: Consider changing this to `VMLimitConfigView` to avoid
+        /// dependency on runtime.
         pub limit_config: LimitConfig,
         ///See [VMConfig::math_extension](crate::vm::Config::math_extension).
         pub math_extension: bool,
         ///Gas cost of a regular operation.
         pub regular_op_cost: u32,
+        ///See [VMConfig::storage_get_mode](crate::vm::Config::storage_get_mode).
         pub storage_get_mode: StorageGetMode,
+        ///See [VMConfig::vm_kind](crate::vm::Config::vm_kind).
         pub vm_kind: VmKind,
         ///See [VMConfig::yield_resume_host_functions](`crate::vm::Config::yield_resume_host_functions).
         pub yield_resume_host_functions: bool,
@@ -24552,6 +25587,20 @@ pub mod types {
             T::try_from(V).unwrap()
         }
 
+        pub(super) fn execution_outcome_view_metadata() -> super::ExecutionMetadataView {
+            super::ExecutionMetadataView {
+                gas_profile: Default::default(),
+                version: 1_u32,
+            }
+        }
+
+        pub(super) fn gc_config_gc_step_period() -> super::DurationSchemeProvider {
+            super::DurationSchemeProvider {
+                nanos: 0_i32,
+                secs: 1_i64,
+            }
+        }
+
         pub(super) fn genesis_config_minimum_stake_ratio() -> super::Rational32SchemaProvider {
             super::Rational32SchemaProvider {
                 denom: 1_i32,
@@ -24579,6 +25628,20 @@ pub mod types {
                 denom: 4_i32,
                 numer: 5_i32,
             }
+        }
+
+        pub(super) fn genesis_config_shard_layout() -> super::ShardLayout {
+            super::ShardLayout::V2(super::ShardLayoutV2 {
+                boundary_accounts: vec![],
+                id_to_index_map: [("0".to_string(), 0_u32)].into_iter().collect(),
+                index_to_id_map: [("0".to_string(), super::ShardId(0_u64))]
+                    .into_iter()
+                    .collect(),
+                shard_ids: vec![super::ShardId(0_u64)],
+                shards_parent_map: ::std::option::Option::None,
+                shards_split_map: ::std::option::Option::None,
+                version: 0_u32,
+            })
         }
 
         pub(super) fn rpc_send_transaction_request_wait_until() -> super::TxExecutionStatus {
