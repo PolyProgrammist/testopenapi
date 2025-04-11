@@ -39,18 +39,6 @@ def iterate_nested_json_for_loop(json_obj):
                 'denom': json_obj['default'][0],
                 'numer': json_obj['default'][1]
             }
-            # json_obj['allOf'] = [
-            #     {
-            #         "$ref": "#/components/schemas/Rational32SchemaProvider"
-            #     }
-            # ]
-            # del json_obj['$ref']
-        if 'const' in json_obj:
-            t = json_obj['const']
-            del json_obj['const']
-            json_obj['enum'] = [t]
-        for key, value in json_obj.items():
-            iterate_nested_json_for_loop(value)
         if 'allOf' in json_obj:
             oneOfs = 0
             for item in json_obj['allOf']:
@@ -58,6 +46,8 @@ def iterate_nested_json_for_loop(json_obj):
                     oneOfs += 1
             if oneOfs >= 2:
                 reconstructAllOfOneOf(json_obj)
+        for key, value in json_obj.items():
+            iterate_nested_json_for_loop(value)
     if isinstance(json_obj, list):
         for item in json_obj:
             iterate_nested_json_for_loop(item)
@@ -79,39 +69,6 @@ spec = json.load(f)
 f.close()
 
 iterate_nested_json_for_loop(spec)
-
-if 'BlockHeaderView' in spec['components']['schemas']:
-    spec['components']['schemas']['BlockHeaderView']['properties']['approvals']['items'] = {
-        "allOf": [
-            {
-                "$ref": "#/components/schemas/Signature"
-            }
-        ],
-        "nullable": True
-    }
-
-if 'RpcLightClientNextBlockResponse' in spec['components']['schemas']:
-    spec['components']['schemas']['RpcLightClientNextBlockResponse']['properties']['approvals_after_next']['items'] = {
-        "allOf": [
-            {
-                "$ref": "#/components/schemas/Signature"
-            }
-        ],
-        "nullable": True
-    }
-
-if 'CauseRpcErrorKind' in spec['components']['schemas']:
-    spec['components']['schemas']['CauseRpcErrorKind'] = {
-        "anyOf": [
-            {
-                "$ref": "#/components/schemas/RpcRequestValidationErrorKind"
-            },
-            {},
-            {}
-        ]
-    }
-
-
 
 f = open(filename, 'w')
 json.dump(spec, f, indent=4)
