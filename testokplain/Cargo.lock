@@ -754,7 +754,7 @@ name = "near-account-id"
 version = "1.0.0"
 dependencies = [
  "borsh",
- "schemars 1.0.0-alpha.17",
+ "schemars 0.8.22",
  "serde",
 ]
 
