@@ -53,16 +53,6 @@ def iterate_nested_json_for_loop(json_obj):
             iterate_nested_json_for_loop(item)
 
 filename = '../testokplain/transaction.json'
-f = open(filename)
-filedata = f.read()
-f.close()
-
-filedata = filedata.replace('"type": "null"', '"type": "object"')
-
-f = open(filename, 'w')
-f.write(filedata)
-f.close()
-
 
 f = open(filename, 'r')
 spec = json.load(f)

@@ -163,8 +163,43 @@ pub type RpcMaintenanceWindowsResponse =
 type SchemasMap = serde_json::Value;
 type PathsMap = okapi::Map::<String, okapi::openapi3::PathItem>;
 
+#[derive(Debug, Clone)]
+pub struct ReplaceNullType;
+use schemars::transform::transform_subschemas;
+
+impl schemars::transform::Transform for ReplaceNullType {
+    fn transform(&mut self, schema: &mut schemars::Schema) {
+        transform_subschemas(self, schema);
+
+        if let Some(value) = schema.get("type") {
+            if value == "null" {
+                schema.insert("type".into(), serde_json::Value::String("object".to_string()));
+            }
+        }
+    }
+}
+
 fn schemas_map<T: JsonSchema>() -> SchemasMap {
-    let settings = schemars::gen::SchemaSettings::openapi3();
+    let mut settings = schemars::gen::SchemaSettings::openapi3();
+    settings.transforms.insert(
+        0,
+        Box::new(|s: &mut schemars::Schema| {
+            let obj = s.ensure_object();
+            if let Some(components) = obj.get("components") {
+                if let Some(schemas) = components.get("schemas") {
+                    let defs = obj["components"]["schemas"].take();
+                    obj.insert("$defs".to_owned(), defs);                
+                }
+            }
+        }),
+    );
+    settings.transforms.push(Box::new(ReplaceNullType));
+    settings.transforms.push(Box::new(|s: &mut schemars::Schema| {
+        let obj = s.ensure_object();
+        if (!obj.get("$defs").is_none()) {
+            obj["components"]["schemas"] = obj.remove("$defs").unwrap();
+        }
+    }));
     let mut generator = schemars::gen::SchemaGenerator::new(settings);
 
     let root_schema = generator.clone().into_root_schema_for::<T>();
