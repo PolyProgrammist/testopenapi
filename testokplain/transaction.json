@@ -4743,12 +4743,14 @@
                         "type": "integer"
                     },
                     "gas_price_adjustment_rate": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Rational32SchemaProvider"
-                            }
-                        ],
-                        "description": "Gas price adjustment rate"
+                        "description": "Gas price adjustment rate",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
                     },
                     "genesis_height": {
                         "description": "Height of genesis block.",
@@ -4765,12 +4767,14 @@
                         "type": "string"
                     },
                     "max_inflation_rate": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Rational32SchemaProvider"
-                            }
-                        ],
-                        "description": "Maximum inflation on the total supply every epoch."
+                        "description": "Maximum inflation on the total supply every epoch.",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
                     },
                     "max_kickout_stake_perc": {
                         "default": 100,
@@ -4791,16 +4795,18 @@
                         "type": "integer"
                     },
                     "minimum_stake_ratio": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Rational32SchemaProvider"
-                            }
+                        "default": [
+                            1,
+                            6250
                         ],
-                        "default": {
-                            "denom": 1,
-                            "numer": 6250
+                        "description": "The lowest ratio s/s_total any block producer can have.\n See <https://github.com/near/NEPs/pull/167> for details",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
                         },
-                        "description": "The lowest ratio s/s_total any block producer can have.\n See <https://github.com/near/NEPs/pull/167> for details"
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
                     },
                     "minimum_validators_per_shard": {
                         "default": 1,
@@ -4851,36 +4857,42 @@
                         "type": "integer"
                     },
                     "online_max_threshold": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Rational32SchemaProvider"
-                            }
+                        "default": [
+                            99,
+                            100
                         ],
-                        "default": {
-                            "denom": 99,
-                            "numer": 100
+                        "description": "Online maximum threshold above which validator gets full reward.",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
                         },
-                        "description": "Online maximum threshold above which validator gets full reward."
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
                     },
                     "online_min_threshold": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Rational32SchemaProvider"
-                            }
+                        "default": [
+                            9,
+                            10
                         ],
-                        "default": {
-                            "denom": 9,
-                            "numer": 10
+                        "description": "Online minimum threshold below which validator doesn't receive reward.",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
                         },
-                        "description": "Online minimum threshold below which validator doesn't receive reward."
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
                     },
                     "protocol_reward_rate": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Rational32SchemaProvider"
-                            }
-                        ],
-                        "description": "Protocol treasury rate"
+                        "description": "Protocol treasury rate",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
                     },
                     "protocol_treasury_account": {
                         "allOf": [
@@ -4891,16 +4903,18 @@
                         "description": "Protocol treasury account"
                     },
                     "protocol_upgrade_stake_threshold": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Rational32SchemaProvider"
-                            }
+                        "default": [
+                            4,
+                            5
                         ],
-                        "default": {
-                            "denom": 4,
-                            "numer": 5
+                        "description": "Threshold of stake that needs to indicate that they ready for upgrade.",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
                         },
-                        "description": "Threshold of stake that needs to indicate that they ready for upgrade."
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
                     },
                     "protocol_version": {
                         "description": "Protocol version that this genesis works with.",
@@ -8575,23 +8589,6 @@
             "PublicKey": {
                 "type": "string"
             },
-            "Rational32SchemaProvider": {
-                "properties": {
-                    "denom": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "numer": {
-                        "format": "int32",
-                        "type": "integer"
-                    }
-                },
-                "required": [
-                    "numer",
-                    "denom"
-                ],
-                "type": "object"
-            },
             "ReceiptEnumView": {
                 "oneOf": [
                     {
@@ -10013,12 +10010,14 @@
                         "type": "integer"
                     },
                     "gas_price_adjustment_rate": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Rational32SchemaProvider"
-                            }
-                        ],
-                        "description": "Gas price adjustment rate"
+                        "description": "Gas price adjustment rate",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
                     },
                     "genesis_height": {
                         "description": "Height of genesis block.",
@@ -10036,12 +10035,14 @@
                         "type": "string"
                     },
                     "max_inflation_rate": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Rational32SchemaProvider"
-                            }
-                        ],
-                        "description": "Maximum inflation on the total supply every epoch."
+                        "description": "Maximum inflation on the total supply every epoch.",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
                     },
                     "max_kickout_stake_perc": {
                         "description": "Max stake percentage of the validators we will kick out.",
@@ -10060,12 +10061,14 @@
                         "type": "integer"
                     },
                     "minimum_stake_ratio": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Rational32SchemaProvider"
-                            }
-                        ],
-                        "description": "The lowest ratio s/s_total any block producer can have.\n See <https://github.com/near/NEPs/pull/167> for details"
+                        "description": "The lowest ratio s/s_total any block producer can have.\n See <https://github.com/near/NEPs/pull/167> for details",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
                     },
                     "minimum_validators_per_shard": {
                         "description": "The minimum number of validators each shard must have",
@@ -10101,28 +10104,34 @@
                         "type": "integer"
                     },
                     "online_max_threshold": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Rational32SchemaProvider"
-                            }
-                        ],
-                        "description": "Online maximum threshold above which validator gets full reward."
+                        "description": "Online maximum threshold above which validator gets full reward.",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
                     },
                     "online_min_threshold": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Rational32SchemaProvider"
-                            }
-                        ],
-                        "description": "Online minimum threshold below which validator doesn't receive reward."
+                        "description": "Online minimum threshold below which validator doesn't receive reward.",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
                     },
                     "protocol_reward_rate": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Rational32SchemaProvider"
-                            }
-                        ],
-                        "description": "Protocol treasury rate"
+                        "description": "Protocol treasury rate",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
                     },
                     "protocol_treasury_account": {
                         "allOf": [
@@ -10133,12 +10142,14 @@
                         "description": "Protocol treasury account"
                     },
                     "protocol_upgrade_stake_threshold": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Rational32SchemaProvider"
-                            }
-                        ],
-                        "description": "Threshold of stake that needs to indicate that they ready for upgrade."
+                        "description": "Threshold of stake that needs to indicate that they ready for upgrade.",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
                     },
                     "protocol_version": {
                         "description": "Current Protocol Version",
@@ -11369,12 +11380,14 @@
                         "description": "Describes the cost of creating an action receipt, `ActionReceipt`, excluding the actual cost\n of actions.\n - `send` cost is burned when a receipt is created using `promise_create` or\n     `promise_batch_create`\n - `exec` cost is burned when the receipt is being executed."
                     },
                     "burnt_gas_reward": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Rational32SchemaProvider"
-                            }
-                        ],
-                        "description": "Fraction of the burnt gas to reward to the contract account for execution."
+                        "description": "Fraction of the burnt gas to reward to the contract account for execution.",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
                     },
                     "data_receipt_creation_config": {
                         "allOf": [
@@ -11385,12 +11398,14 @@
                         "description": "Describes the cost of creating a data receipt, `DataReceipt`."
                     },
                     "pessimistic_gas_price_inflation_ratio": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Rational32SchemaProvider"
-                            }
-                        ],
-                        "description": "Pessimistic gas price inflation ratio."
+                        "description": "Pessimistic gas price inflation ratio.",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
                     },
                     "storage_usage_config": {
                         "allOf": [

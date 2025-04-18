@@ -6961,11 +6961,13 @@ pub mod types {
     ///    },
     ///    "gas_price_adjustment_rate": {
     ///      "description": "Gas price adjustment rate",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
-    ///        }
-    ///      ]
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "int32"
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "genesis_height": {
     ///      "description": "Height of genesis block.",
@@ -6984,11 +6986,13 @@ pub mod types {
     ///    "max_inflation_rate": {
     ///      "description": "Maximum inflation on the total supply every
     /// epoch.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
-    ///        }
-    ///      ]
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "int32"
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "max_kickout_stake_perc": {
     ///      "description": "Max stake percentage of the validators we will kick
@@ -7013,15 +7017,17 @@ pub mod types {
     ///    },
     ///    "minimum_stake_ratio": {
     ///      "description": "The lowest ratio s/s_total any block producer can have.\n See <https://github.com/near/NEPs/pull/167> for details",
-    ///      "default": {
-    ///        "denom": 1,
-    ///        "numer": 6250
+    ///      "default": [
+    ///        1,
+    ///        6250
+    ///      ],
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "int32"
     ///      },
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
-    ///        }
-    ///      ]
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "minimum_validators_per_shard": {
     ///      "description": "The minimum number of validators each shard must
@@ -7080,36 +7086,42 @@ pub mod types {
     ///    "online_max_threshold": {
     ///      "description": "Online maximum threshold above which validator gets
     /// full reward.",
-    ///      "default": {
-    ///        "denom": 99,
-    ///        "numer": 100
+    ///      "default": [
+    ///        99,
+    ///        100
+    ///      ],
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "int32"
     ///      },
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
-    ///        }
-    ///      ]
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "online_min_threshold": {
     ///      "description": "Online minimum threshold below which validator
     /// doesn't receive reward.",
-    ///      "default": {
-    ///        "denom": 9,
-    ///        "numer": 10
+    ///      "default": [
+    ///        9,
+    ///        10
+    ///      ],
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "int32"
     ///      },
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
-    ///        }
-    ///      ]
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "protocol_reward_rate": {
     ///      "description": "Protocol treasury rate",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
-    ///        }
-    ///      ]
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "int32"
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "protocol_treasury_account": {
     ///      "description": "Protocol treasury account",
@@ -7122,15 +7134,17 @@ pub mod types {
     ///    "protocol_upgrade_stake_threshold": {
     ///      "description": "Threshold of stake that needs to indicate that they
     /// ready for upgrade.",
-    ///      "default": {
-    ///        "denom": 4,
-    ///        "numer": 5
+    ///      "default": [
+    ///        4,
+    ///        5
+    ///      ],
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "int32"
     ///      },
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
-    ///        }
-    ///      ]
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "protocol_version": {
     ///      "description": "Protocol version that this genesis works with.",
@@ -7242,14 +7256,14 @@ pub mod types {
         ///Initial gas limit.
         pub gas_limit: u64,
         ///Gas price adjustment rate
-        pub gas_price_adjustment_rate: Rational32SchemaProvider,
+        pub gas_price_adjustment_rate: [i32; 2usize],
         ///Height of genesis block.
         pub genesis_height: u64,
         ///Official time of blockchain start.
         pub genesis_time: chrono::DateTime<chrono::offset::Utc>,
         pub max_gas_price: ::std::string::String,
         ///Maximum inflation on the total supply every epoch.
-        pub max_inflation_rate: Rational32SchemaProvider,
+        pub max_inflation_rate: [i32; 2usize],
         ///Max stake percentage of the validators we will kick out.
         #[serde(default = "defaults::default_u64::<u8, 100>")]
         pub max_kickout_stake_perc: u8,
@@ -7262,7 +7276,7 @@ pub mod types {
         ///The lowest ratio s/s_total any block producer can have.
         /// See <https://github.com/near/NEPs/pull/167> for details
         #[serde(default = "defaults::genesis_config_minimum_stake_ratio")]
-        pub minimum_stake_ratio: Rational32SchemaProvider,
+        pub minimum_stake_ratio: [i32; 2usize],
         ///The minimum number of validators each shard must have
         #[serde(default = "defaults::default_u64::<u64, 1>")]
         pub minimum_validators_per_shard: u64,
@@ -7288,19 +7302,19 @@ pub mod types {
         pub num_chunk_validator_seats: u64,
         ///Online maximum threshold above which validator gets full reward.
         #[serde(default = "defaults::genesis_config_online_max_threshold")]
-        pub online_max_threshold: Rational32SchemaProvider,
+        pub online_max_threshold: [i32; 2usize],
         ///Online minimum threshold below which validator doesn't receive
         /// reward.
         #[serde(default = "defaults::genesis_config_online_min_threshold")]
-        pub online_min_threshold: Rational32SchemaProvider,
+        pub online_min_threshold: [i32; 2usize],
         ///Protocol treasury rate
-        pub protocol_reward_rate: Rational32SchemaProvider,
+        pub protocol_reward_rate: [i32; 2usize],
         ///Protocol treasury account
         pub protocol_treasury_account: AccountId,
         ///Threshold of stake that needs to indicate that they ready for
         /// upgrade.
         #[serde(default = "defaults::genesis_config_protocol_upgrade_stake_threshold")]
-        pub protocol_upgrade_stake_threshold: Rational32SchemaProvider,
+        pub protocol_upgrade_stake_threshold: [i32; 2usize],
         ///Protocol version that this genesis works with.
         pub protocol_version: u32,
         ///Layout information regarding how to split accounts to shards
@@ -15809,42 +15823,6 @@ pub mod types {
         }
     }
 
-    ///Rational32SchemaProvider
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "denom",
-    ///    "numer"
-    ///  ],
-    ///  "properties": {
-    ///    "denom": {
-    ///      "type": "integer",
-    ///      "format": "int32"
-    ///    },
-    ///    "numer": {
-    ///      "type": "integer",
-    ///      "format": "int32"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct Rational32SchemaProvider {
-        pub denom: i32,
-        pub numer: i32,
-    }
-
-    impl ::std::convert::From<&Rational32SchemaProvider> for Rational32SchemaProvider {
-        fn from(value: &Rational32SchemaProvider) -> Self {
-            value.clone()
-        }
-    }
-
     ///ReceiptEnumView
     ///
     /// <details><summary>JSON schema</summary>
@@ -18368,11 +18346,13 @@ pub mod types {
     ///    },
     ///    "gas_price_adjustment_rate": {
     ///      "description": "Gas price adjustment rate",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
-    ///        }
-    ///      ]
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "int32"
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "genesis_height": {
     ///      "description": "Height of genesis block.",
@@ -18392,11 +18372,13 @@ pub mod types {
     ///    "max_inflation_rate": {
     ///      "description": "Maximum inflation on the total supply every
     /// epoch.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
-    ///        }
-    ///      ]
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "int32"
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "max_kickout_stake_perc": {
     ///      "description": "Max stake percentage of the validators we will kick
@@ -18419,11 +18401,13 @@ pub mod types {
     ///    },
     ///    "minimum_stake_ratio": {
     ///      "description": "The lowest ratio s/s_total any block producer can have.\n See <https://github.com/near/NEPs/pull/167> for details",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
-    ///        }
-    ///      ]
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "int32"
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "minimum_validators_per_shard": {
     ///      "description": "The minimum number of validators each shard must
@@ -18464,28 +18448,34 @@ pub mod types {
     ///    "online_max_threshold": {
     ///      "description": "Online maximum threshold above which validator gets
     /// full reward.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
-    ///        }
-    ///      ]
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "int32"
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "online_min_threshold": {
     ///      "description": "Online minimum threshold below which validator
     /// doesn't receive reward.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
-    ///        }
-    ///      ]
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "int32"
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "protocol_reward_rate": {
     ///      "description": "Protocol treasury rate",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
-    ///        }
-    ///      ]
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "int32"
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "protocol_treasury_account": {
     ///      "description": "Protocol treasury account",
@@ -18498,11 +18488,13 @@ pub mod types {
     ///    "protocol_upgrade_stake_threshold": {
     ///      "description": "Threshold of stake that needs to indicate that they
     /// ready for upgrade.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
-    ///        }
-    ///      ]
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "int32"
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "protocol_version": {
     ///      "description": "Current Protocol Version",
@@ -18578,7 +18570,7 @@ pub mod types {
         ///Initial gas limit.
         pub gas_limit: u64,
         ///Gas price adjustment rate
-        pub gas_price_adjustment_rate: Rational32SchemaProvider,
+        pub gas_price_adjustment_rate: [i32; 2usize],
         ///Height of genesis block.
         pub genesis_height: u64,
         ///Official time of blockchain start.
@@ -18586,7 +18578,7 @@ pub mod types {
         ///Maximum gas price.
         pub max_gas_price: ::std::string::String,
         ///Maximum inflation on the total supply every epoch.
-        pub max_inflation_rate: Rational32SchemaProvider,
+        pub max_inflation_rate: [i32; 2usize],
         ///Max stake percentage of the validators we will kick out.
         pub max_kickout_stake_perc: u8,
         ///Minimum gas price. It is also the initial gas price.
@@ -18596,7 +18588,7 @@ pub mod types {
         pub minimum_stake_divisor: u64,
         ///The lowest ratio s/s_total any block producer can have.
         /// See <https://github.com/near/NEPs/pull/167> for details
-        pub minimum_stake_ratio: Rational32SchemaProvider,
+        pub minimum_stake_ratio: [i32; 2usize],
         ///The minimum number of validators each shard must have
         pub minimum_validators_per_shard: u64,
         ///Number of block producer seats at genesis.
@@ -18609,17 +18601,17 @@ pub mod types {
         ///Number of validator seats for chunk only producers.
         pub num_chunk_only_producer_seats: u64,
         ///Online maximum threshold above which validator gets full reward.
-        pub online_max_threshold: Rational32SchemaProvider,
+        pub online_max_threshold: [i32; 2usize],
         ///Online minimum threshold below which validator doesn't receive
         /// reward.
-        pub online_min_threshold: Rational32SchemaProvider,
+        pub online_min_threshold: [i32; 2usize],
         ///Protocol treasury rate
-        pub protocol_reward_rate: Rational32SchemaProvider,
+        pub protocol_reward_rate: [i32; 2usize],
         ///Protocol treasury account
         pub protocol_treasury_account: AccountId,
         ///Threshold of stake that needs to indicate that they ready for
         /// upgrade.
-        pub protocol_upgrade_stake_threshold: Rational32SchemaProvider,
+        pub protocol_upgrade_stake_threshold: [i32; 2usize],
         ///Current Protocol Version
         pub protocol_version: u32,
         ///Runtime configuration (mostly economics constants).
@@ -21756,11 +21748,13 @@ pub mod types {
     ///    "burnt_gas_reward": {
     ///      "description": "Fraction of the burnt gas to reward to the contract
     /// account for execution.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
-    ///        }
-    ///      ]
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "int32"
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "data_receipt_creation_config": {
     ///      "description": "Describes the cost of creating a data receipt,
@@ -21773,11 +21767,13 @@ pub mod types {
     ///    },
     ///    "pessimistic_gas_price_inflation_ratio": {
     ///      "description": "Pessimistic gas price inflation ratio.",
-    ///      "allOf": [
-    ///        {
-    ///          "$ref": "#/components/schemas/Rational32SchemaProvider"
-    ///        }
-    ///      ]
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "int32"
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
     ///    },
     ///    "storage_usage_config": {
     ///      "description": "Describes fees for storage.",
@@ -21804,11 +21800,11 @@ pub mod types {
         pub action_receipt_creation_config: Fee,
         ///Fraction of the burnt gas to reward to the contract account for
         /// execution.
-        pub burnt_gas_reward: Rational32SchemaProvider,
+        pub burnt_gas_reward: [i32; 2usize],
         ///Describes the cost of creating a data receipt, `DataReceipt`.
         pub data_receipt_creation_config: DataReceiptCreationConfigView,
         ///Pessimistic gas price inflation ratio.
-        pub pessimistic_gas_price_inflation_ratio: Rational32SchemaProvider,
+        pub pessimistic_gas_price_inflation_ratio: [i32; 2usize],
         ///Describes fees for storage.
         pub storage_usage_config: StorageUsageConfigView,
     }
@@ -25601,33 +25597,20 @@ pub mod types {
             }
         }
 
-        pub(super) fn genesis_config_minimum_stake_ratio() -> super::Rational32SchemaProvider {
-            super::Rational32SchemaProvider {
-                denom: 1_i32,
-                numer: 6250_i32,
-            }
+        pub(super) fn genesis_config_minimum_stake_ratio() -> [i32; 2usize] {
+            [1_i32, 6250_i32]
         }
 
-        pub(super) fn genesis_config_online_max_threshold() -> super::Rational32SchemaProvider {
-            super::Rational32SchemaProvider {
-                denom: 99_i32,
-                numer: 100_i32,
-            }
+        pub(super) fn genesis_config_online_max_threshold() -> [i32; 2usize] {
+            [99_i32, 100_i32]
         }
 
-        pub(super) fn genesis_config_online_min_threshold() -> super::Rational32SchemaProvider {
-            super::Rational32SchemaProvider {
-                denom: 9_i32,
-                numer: 10_i32,
-            }
+        pub(super) fn genesis_config_online_min_threshold() -> [i32; 2usize] {
+            [9_i32, 10_i32]
         }
 
-        pub(super) fn genesis_config_protocol_upgrade_stake_threshold(
-        ) -> super::Rational32SchemaProvider {
-            super::Rational32SchemaProvider {
-                denom: 4_i32,
-                numer: 5_i32,
-            }
+        pub(super) fn genesis_config_protocol_upgrade_stake_threshold() -> [i32; 2usize] {
+            [4_i32, 5_i32]
         }
 
         pub(super) fn genesis_config_shard_layout() -> super::ShardLayout {
