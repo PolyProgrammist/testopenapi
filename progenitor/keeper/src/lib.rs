@@ -12335,17 +12335,6 @@ pub mod types {
     ///    {
     ///      "type": "object",
     ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
     ///        "error"
     ///      ],
     ///      "properties": {
@@ -12379,11 +12368,6 @@ pub mod types {
             result: ::std::vec::Vec<MaintenanceWindow>,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -12423,17 +12407,6 @@ pub mod types {
     ///    {
     ///      "type": "object",
     ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
     ///        "error"
     ///      ],
     ///      "properties": {
@@ -12467,11 +12440,6 @@ pub mod types {
             result: ::std::vec::Vec<ValidatorStakeView>,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -12501,17 +12469,6 @@ pub mod types {
     ///      "properties": {
     ///        "result": {
     ///          "$ref": "#/components/schemas/CryptoHash"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -12551,11 +12508,6 @@ pub mod types {
             result: CryptoHash,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -12585,17 +12537,6 @@ pub mod types {
     ///      "properties": {
     ///        "result": {
     ///          "$ref": "#/components/schemas/GenesisConfig"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -12635,11 +12576,6 @@ pub mod types {
             result: GenesisConfig,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -12683,17 +12619,6 @@ pub mod types {
     ///    {
     ///      "type": "object",
     ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
     ///        "error"
     ///      ],
     ///      "properties": {
@@ -12728,11 +12653,6 @@ pub mod types {
             result: ::std::option::Option<RpcHealthResponse>,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -12762,17 +12682,6 @@ pub mod types {
     ///      "properties": {
     ///        "result": {
     ///          "$ref": "#/components/schemas/RpcBlockResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -12812,11 +12721,6 @@ pub mod types {
             result: RpcBlockResponse,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -12846,17 +12750,6 @@ pub mod types {
     ///      "properties": {
     ///        "result": {
     ///          "$ref": "#/components/schemas/RpcChunkResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -12896,11 +12789,6 @@ pub mod types {
             result: RpcChunkResponse,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -12930,17 +12818,6 @@ pub mod types {
     ///      "properties": {
     ///        "result": {
     ///          "$ref": "#/components/schemas/RpcClientConfigResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -12980,11 +12857,6 @@ pub mod types {
             result: RpcClientConfigResponse,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -13014,17 +12886,6 @@ pub mod types {
     ///      "properties": {
     ///        "result": {
     ///          "$ref": "#/components/schemas/RpcCongestionLevelResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -13064,11 +12925,6 @@ pub mod types {
             result: RpcCongestionLevelResponse,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -13098,17 +12954,6 @@ pub mod types {
     ///      "properties": {
     ///        "result": {
     ///          "$ref": "#/components/schemas/RpcGasPriceResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -13148,11 +12993,6 @@ pub mod types {
             result: RpcGasPriceResponse,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -13183,17 +13023,6 @@ pub mod types {
     ///      "properties": {
     ///        "result": {
     ///          "$ref": "#/components/schemas/RpcLightClientBlockProofResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -13233,11 +13062,6 @@ pub mod types {
             result: RpcLightClientBlockProofResponse,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -13268,17 +13092,6 @@ pub mod types {
     ///        "result": {
     ///          "$ref":
     /// "#/components/schemas/RpcLightClientExecutionProofResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -13318,11 +13131,6 @@ pub mod types {
             result: RpcLightClientExecutionProofResponse,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -13355,17 +13163,6 @@ pub mod types {
     ///      "properties": {
     ///        "result": {
     ///          "$ref": "#/components/schemas/RpcLightClientNextBlockResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -13405,11 +13202,6 @@ pub mod types {
             result: RpcLightClientNextBlockResponse,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -13439,17 +13231,6 @@ pub mod types {
     ///      "properties": {
     ///        "result": {
     ///          "$ref": "#/components/schemas/RpcNetworkInfoResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -13489,11 +13270,6 @@ pub mod types {
             result: RpcNetworkInfoResponse,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -13523,17 +13299,6 @@ pub mod types {
     ///      "properties": {
     ///        "result": {
     ///          "$ref": "#/components/schemas/RpcProtocolConfigResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -13573,11 +13338,6 @@ pub mod types {
             result: RpcProtocolConfigResponse,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -13607,17 +13367,6 @@ pub mod types {
     ///      "properties": {
     ///        "result": {
     ///          "$ref": "#/components/schemas/RpcReceiptResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -13657,11 +13406,6 @@ pub mod types {
             result: RpcReceiptResponse,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -13692,17 +13436,6 @@ pub mod types {
     ///      "properties": {
     ///        "result": {
     ///          "$ref": "#/components/schemas/RpcSplitStorageInfoResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -13742,11 +13475,6 @@ pub mod types {
             result: RpcSplitStorageInfoResponse,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -13777,17 +13505,6 @@ pub mod types {
     ///        "result": {
     ///          "$ref":
     /// "#/components/schemas/RpcStateChangesInBlockByTypeResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -13827,11 +13544,6 @@ pub mod types {
             result: RpcStateChangesInBlockByTypeResponse,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -13864,17 +13576,6 @@ pub mod types {
     ///      "properties": {
     ///        "result": {
     ///          "$ref": "#/components/schemas/RpcStateChangesInBlockResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -13914,11 +13615,6 @@ pub mod types {
             result: RpcStateChangesInBlockResponse,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -13948,17 +13644,6 @@ pub mod types {
     ///      "properties": {
     ///        "result": {
     ///          "$ref": "#/components/schemas/RpcStatusResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -13998,11 +13683,6 @@ pub mod types {
             result: RpcStatusResponse,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -14032,17 +13712,6 @@ pub mod types {
     ///      "properties": {
     ///        "result": {
     ///          "$ref": "#/components/schemas/RpcTransactionResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -14082,11 +13751,6 @@ pub mod types {
             result: RpcTransactionResponse,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
@@ -14116,17 +13780,6 @@ pub mod types {
     ///      "properties": {
     ///        "result": {
     ///          "$ref": "#/components/schemas/RpcValidatorResponse"
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "tmp"
-    ///      ],
-    ///      "properties": {
-    ///        "tmp": {
-    ///          "$ref": "#/components/schemas/RpcError"
     ///        }
     ///      }
     ///    },
@@ -14166,11 +13819,6 @@ pub mod types {
             result: RpcValidatorResponse,
         },
         Variant1 {
-            id: ::std::string::String,
-            jsonrpc: ::std::string::String,
-            tmp: RpcError,
-        },
-        Variant2 {
             error: RpcError,
             id: ::std::string::String,
             jsonrpc: ::std::string::String,

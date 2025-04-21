@@ -133,8 +133,7 @@ pub struct RpcError {
 #[serde(untagged)]
 pub enum ResponseEither<T, E> {
     Success { result: T },
-    Error { tmp: E },
-    RpcError { error: RpcError }
+    RpcError { error: E }
 }
 
 #[derive(JsonSchema)]

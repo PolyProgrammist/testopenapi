@@ -6850,17 +6850,6 @@
                     },
                     {
                         "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
                             "error": {
                                 "$ref": "#/components/schemas/RpcError"
                             }
@@ -6899,17 +6888,6 @@
                         },
                         "required": [
                             "result"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
                         ],
                         "type": "object"
                     },
@@ -6955,17 +6933,6 @@
                     },
                     {
                         "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
                             "error": {
                                 "$ref": "#/components/schemas/RpcError"
                             }
@@ -7001,17 +6968,6 @@
                         },
                         "required": [
                             "result"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
                         ],
                         "type": "object"
                     },
@@ -7059,17 +7015,6 @@
                     },
                     {
                         "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
                             "error": {
                                 "$ref": "#/components/schemas/RpcError"
                             }
@@ -7105,17 +7050,6 @@
                         },
                         "required": [
                             "result"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
                         ],
                         "type": "object"
                     },
@@ -7161,17 +7095,6 @@
                     },
                     {
                         "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
                             "error": {
                                 "$ref": "#/components/schemas/RpcError"
                             }
@@ -7207,17 +7130,6 @@
                         },
                         "required": [
                             "result"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
                         ],
                         "type": "object"
                     },
@@ -7263,17 +7175,6 @@
                     },
                     {
                         "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
                             "error": {
                                 "$ref": "#/components/schemas/RpcError"
                             }
@@ -7309,17 +7210,6 @@
                         },
                         "required": [
                             "result"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
                         ],
                         "type": "object"
                     },
@@ -7365,17 +7255,6 @@
                     },
                     {
                         "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
                             "error": {
                                 "$ref": "#/components/schemas/RpcError"
                             }
@@ -7411,17 +7290,6 @@
                         },
                         "required": [
                             "result"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
                         ],
                         "type": "object"
                     },
@@ -7467,17 +7335,6 @@
                     },
                     {
                         "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
                             "error": {
                                 "$ref": "#/components/schemas/RpcError"
                             }
@@ -7513,17 +7370,6 @@
                         },
                         "required": [
                             "result"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
                         ],
                         "type": "object"
                     },
@@ -7569,17 +7415,6 @@
                     },
                     {
                         "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
                             "error": {
                                 "$ref": "#/components/schemas/RpcError"
                             }
@@ -7615,17 +7450,6 @@
                         },
                         "required": [
                             "result"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
                         ],
                         "type": "object"
                     },
@@ -7671,17 +7495,6 @@
                     },
                     {
                         "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
                             "error": {
                                 "$ref": "#/components/schemas/RpcError"
                             }
@@ -7717,17 +7530,6 @@
                         },
                         "required": [
                             "result"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
                         ],
                         "type": "object"
                     },
@@ -7773,17 +7575,6 @@
                     },
                     {
                         "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
                             "error": {
                                 "$ref": "#/components/schemas/RpcError"
                             }
@@ -7819,17 +7610,6 @@
                         },
                         "required": [
                             "result"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
                         ],
                         "type": "object"
                     },
@@ -7875,17 +7655,6 @@
                     },
                     {
                         "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
                             "error": {
                                 "$ref": "#/components/schemas/RpcError"
                             }
@@ -7921,17 +7690,6 @@
                         },
                         "required": [
                             "result"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
-                            "tmp": {
-                                "$ref": "#/components/schemas/RpcError"
-                            }
-                        },
-                        "required": [
-                            "tmp"
                         ],
                         "type": "object"
                     },
