@@ -1,0 +1,2 @@
+cd testokplain && cargo run > transaction.json && cd ../progenitor && python3 tx.py --no-progenitor && cd .. && cp testokplain/transaction.json ../nearcore/chain/jsonrpc/jsonrpc-tests/openapi.json &&
+cd testokplain && cargo run --features=progenitor > transaction.json && cd ../progenitor && python3 tx.py && cd .. && cp testokplain/transaction.json ../nearcore/chain/jsonrpc/jsonrpc-tests/progenitor.json

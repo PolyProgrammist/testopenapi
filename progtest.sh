@@ -1,0 +1,1 @@
+./specs.sh && cd progenitor && cargo progenitor -i ../testokplain/transaction.json -o keeper -n keeper -v 0.1.0 && python3 tx.py && cd user && cargo run && cd ../..

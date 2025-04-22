@@ -7,12 +7,17 @@ use near_primitives::views::TxExecutionStatus;
 use serde_with::serde_as;
 use serde_with::base64::Base64;
 
+#[cfg(feature="progenitor")]
 #[derive(Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
 pub struct RpcStateChangesInBlockResponse {
     pub block_hash: near_primitives::hash::CryptoHash,
     pub changes: Vec<StateChangeWithCauseView>,
 }
 
+#[cfg(not(feature="progenitor"))]
+use near_jsonrpc_primitives::types::changes::RpcStateChangesInBlockResponse;
+
+#[cfg(feature="progenitor")]
 #[derive(Clone, Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
 pub struct StateChangeWithCauseView {
     pub cause: near_primitives::views::StateChangeCauseView,
@@ -21,6 +26,7 @@ pub struct StateChangeWithCauseView {
     pub change: StateChangeValueViewContent,
 }
 
+#[cfg(feature="progenitor")]
 #[derive(Clone, Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum StateChangeValueViewType {
@@ -33,6 +39,7 @@ pub enum StateChangeValueViewType {
     ContractCodeDeletion,
 }
 
+#[cfg(feature="progenitor")]
 #[serde_as]
 #[derive(Clone, Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
 #[serde(untagged)]
@@ -80,6 +87,7 @@ pub enum StateChangeValueViewContent {
     },
 }
 
+#[cfg(feature="progenitor")]
 #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
 #[serde(untagged)]
 pub enum CauseRpcErrorKind {
@@ -88,6 +96,7 @@ pub enum CauseRpcErrorKind {
     InternalError(serde_json::Value),
 }
 
+#[cfg(feature="progenitor")]
 #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum NameRpcErrorKind {
@@ -96,6 +105,7 @@ pub enum NameRpcErrorKind {
     InternalError,
 }
 
+#[cfg(feature="progenitor")]
 #[derive(serde::Serialize, serde::Deserialize, schemars::JsonSchema, Clone, Debug)]
 #[serde(rename_all = "snake_case")]
 pub enum TypeTransactionOrReceiptId {
@@ -103,6 +113,7 @@ pub enum TypeTransactionOrReceiptId {
     Receipt,
 }
 
+#[cfg(feature="progenitor")]
 #[derive(serde::Serialize, serde::Deserialize, schemars::JsonSchema, Clone, Debug)]
 #[serde(untagged)]
 pub enum TransactionOrReceiptId {
@@ -110,6 +121,7 @@ pub enum TransactionOrReceiptId {
     Receipt { receipt_id: CryptoHash, receiver_id: near_primitives::types::AccountId },
 }
 
+#[cfg(feature="progenitor")]
 #[derive(Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
 pub struct RpcLightClientExecutionProofRequest {
     #[serde(flatten)]
@@ -119,6 +131,10 @@ pub struct RpcLightClientExecutionProofRequest {
     pub light_client_head: near_primitives::hash::CryptoHash,
 }
 
+#[cfg(not(feature="progenitor"))]
+use near_jsonrpc_primitives::types::light_client::RpcLightClientExecutionProofRequest;
+
+#[cfg(feature="progenitor")]
 #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
 pub struct RpcError {
     pub name: Option<NameRpcErrorKind>,
@@ -128,6 +144,9 @@ pub struct RpcError {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub data: Option<serde_json::Value>,
 }
+
+#[cfg(not(feature="progenitor"))]
+use near_jsonrpc_primitives::errors::RpcError;
 
 #[derive(JsonSchema)]
 #[serde(untagged)]
@@ -355,7 +374,6 @@ fn whole_spec(all_schemas: SchemasMap, all_paths: PathsMap) -> OpenApi {
 // // //// ---- implement for all requests ----- 
 
 use near_primitives::{hash::CryptoHash, types::MaybeBlockId};
-// use near_jsonrpc_primitives::errors::RpcError;
 use near_jsonrpc_primitives::types::{
     transactions::{
         RpcTransactionResponse, RpcTransactionStatusRequest, RpcSendTransactionRequest

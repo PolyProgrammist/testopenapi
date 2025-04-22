@@ -1,6 +1,7 @@
 import json
 import re
 import itertools
+import sys
 
 def reconstructAllOfOneOf(schema):
     # return
@@ -53,7 +54,9 @@ f = open(filename, 'r')
 spec = json.load(f)
 f.close()
 
-iterate_nested_json_for_loop(spec)
+
+if len(sys.argv) <= 1 or sys.argv[1] != 'no-progenitor':
+    iterate_nested_json_for_loop(spec)
 
 f = open(filename, 'w')
 json.dump(spec, f, indent=4)
