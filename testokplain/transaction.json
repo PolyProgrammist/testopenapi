@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "My API",
+        "title": "NEAR Protocol JSON RPC API",
         "version": "1.0.0"
     },
     "paths": {
@@ -186,7 +186,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/JsonRpcResponse_for_Array_of_MaintenanceWindow_and_RpcError"
+                                    "$ref": "#/components/schemas/JsonRpcResponse_for_Array_of_Range_of_uint64_and_RpcError"
                                 }
                             }
                         }
@@ -807,6 +807,7 @@
                             "FunctionCall": {
                                 "properties": {
                                     "allowance": {
+                                        "nullable": true,
                                         "type": "string"
                                     },
                                     "method_names": {
@@ -820,7 +821,6 @@
                                     }
                                 },
                                 "required": [
-                                    "allowance",
                                     "receiver_id",
                                     "method_names"
                                 ],
@@ -904,6 +904,11 @@
             "AccountId": {
                 "description": "NEAR Account Identifier.\n\n This is a unique, syntactically valid, human-readable account identifier on the NEAR network.\n\n [See the crate-level docs for information about validation.](index.html#account-id-rules)\n\n Also see [Error kind precedence](AccountId#error-kind-precedence).\n\n ## Examples\n\n ```\n use near_account_id::AccountId;\n\n let alice: AccountId = \"alice.near\".parse().unwrap();\n\n assert!(\"\u0192elicia.near\".parse::<AccountId>().is_err()); // (\u0192 is not f)\n ```",
                 "type": "string"
+            },
+            "AccountIdValidityRulesVersion": {
+                "format": "uint8",
+                "minimum": 0,
+                "type": "integer"
             },
             "AccountInfo": {
                 "description": "Account info for validators",
@@ -3369,10 +3374,11 @@
                     "iteration_delay": {
                         "allOf": [
                             {
-                                "$ref": "#/components/schemas/DurationSchemeProvider"
+                                "$ref": "#/components/schemas/DurationAsStdSchemaProvider"
                             }
                         ],
-                        "description": "How often to check if a new epoch has started.\n Feel free to set to `None`, defaults are sensible."
+                        "description": "How often to check if a new epoch has started.\n Feel free to set to `None`, defaults are sensible.",
+                        "nullable": true
                     },
                     "location": {
                         "allOf": [
@@ -3396,7 +3402,7 @@
                 ],
                 "type": "object"
             },
-            "DurationSchemeProvider": {
+            "DurationAsStdSchemaProvider": {
                 "properties": {
                     "nanos": {
                         "format": "int32",
@@ -3442,7 +3448,7 @@
                     "timeout_for_epoch_sync": {
                         "allOf": [
                             {
-                                "$ref": "#/components/schemas/DurationSchemeProvider"
+                                "$ref": "#/components/schemas/DurationAsStdSchemaProvider"
                             }
                         ],
                         "description": "Timeout for epoch sync requests. The node will continue retrying indefinitely even\n if this timeout is exceeded."
@@ -4621,6 +4627,7 @@
                 "properties": {
                     "allowance": {
                         "description": "Allowance is a balance limit to use by this access key to pay for function call gas and\n transaction fees. When this access key is used, both account balance and the allowance is\n decreased by the same value.\n `None` means unlimited allowance.\n NOTE: To change or increase the allowance, the old access key needs to be deleted and a new\n access key should be created.",
+                        "nullable": true,
                         "type": "string"
                     },
                     "method_names": {
@@ -4636,7 +4643,6 @@
                     }
                 },
                 "required": [
-                    "allowance",
                     "receiver_id",
                     "method_names"
                 ],
@@ -4669,7 +4675,7 @@
                     "gc_step_period": {
                         "allOf": [
                             {
-                                "$ref": "#/components/schemas/DurationSchemeProvider"
+                                "$ref": "#/components/schemas/DurationAsStdSchemaProvider"
                             }
                         ],
                         "default": {
@@ -5011,21 +5017,6 @@
             },
             "GenesisConfigRequest": {
                 "title": "GenesisConfigRequest",
-                "type": "object"
-            },
-            "GlobalContractData": {
-                "properties": {
-                    "code": {
-                        "type": "string"
-                    },
-                    "id": {
-                        "$ref": "#/components/schemas/GlobalContractIdentifier"
-                    }
-                },
-                "required": [
-                    "code",
-                    "id"
-                ],
                 "type": "object"
             },
             "GlobalContractDeployMode": {
@@ -6832,13 +6823,13 @@
                 "title": "JsonRpcRequest_for_validators",
                 "type": "object"
             },
-            "JsonRpcResponse_for_Array_of_MaintenanceWindow_and_RpcError": {
-                "anyOf": [
+            "JsonRpcResponse_for_Array_of_Range_of_uint64_and_RpcError": {
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
                                 "items": {
-                                    "$ref": "#/components/schemas/MaintenanceWindow"
+                                    "$ref": "#/components/schemas/Range_of_uint64"
                                 },
                                 "type": "array"
                             }
@@ -6872,11 +6863,11 @@
                     "jsonrpc",
                     "id"
                 ],
-                "title": "JsonRpcResponse_for_Array_of_MaintenanceWindow_and_RpcError",
+                "title": "JsonRpcResponse_for_Array_of_Range_of_uint64_and_RpcError",
                 "type": "object"
             },
             "JsonRpcResponse_for_Array_of_ValidatorStakeView_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -6919,7 +6910,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_CryptoHash_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -6959,7 +6950,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_GenesisConfig_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -6999,7 +6990,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_Nullable_RpcHealthResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7011,6 +7002,9 @@
                                 "nullable": true
                             }
                         },
+                        "required": [
+                            "result"
+                        ],
                         "type": "object"
                     },
                     {
@@ -7041,7 +7035,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcBlockResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7081,7 +7075,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcChunkResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7121,7 +7115,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcClientConfigResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7161,7 +7155,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcCongestionLevelResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7201,7 +7195,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcGasPriceResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7241,7 +7235,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcLightClientBlockProofResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7281,7 +7275,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcLightClientExecutionProofResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7321,7 +7315,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcLightClientNextBlockResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7361,7 +7355,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcNetworkInfoResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7401,7 +7395,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcProtocolConfigResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7441,7 +7435,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcReceiptResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7481,7 +7475,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcSplitStorageInfoResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7521,7 +7515,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcStateChangesInBlockByTypeResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7561,7 +7555,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcStateChangesInBlockResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7601,7 +7595,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcStatusResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7641,7 +7635,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcTransactionResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7681,7 +7675,7 @@
                 "type": "object"
             },
             "JsonRpcResponse_for_RpcValidatorResponse_and_RpcError": {
-                "anyOf": [
+                "oneOf": [
                     {
                         "properties": {
                             "result": {
@@ -7766,18 +7760,13 @@
                 "description": "Describes limits for VM and Runtime.\n TODO #4139: consider switching to strongly-typed wrappers instead of raw quantities",
                 "properties": {
                     "account_id_validity_rules_version": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/AccountIdValidityRulesVersion"
+                            }
+                        ],
                         "default": 0,
-                        "description": "Whether to enforce account_id well-formed-ness where it wasn't enforced\n historically.",
-                        "format": "uint8",
-                        "minimum": 0,
-                        "type": "integer"
-                    },
-                    "contract_prepare_version": {
-                        "default": 0,
-                        "description": "Whether a legacy version of stack limiting should be used, see\n [`ContractPrepareVersion`].",
-                        "format": "uint8",
-                        "minimum": 0,
-                        "type": "integer"
+                        "description": "Whether to enforce account_id well-formed-ness where it wasn't enforced\n historically."
                     },
                     "initial_memory_pages": {
                         "description": "The initial number of memory pages.\n NOTE: It's not a limiter itself, but it's a value we use for initial_memory_pages.",
@@ -7937,12 +7926,6 @@
                         "minimum": 0,
                         "type": "integer"
                     },
-                    "wasmer2_stack_limit": {
-                        "default": 102400,
-                        "description": "If present, stores the secondary stack limit as implemented by wasmer2.\n\n This limit should never be hit normally.",
-                        "format": "int32",
-                        "type": "integer"
-                    },
                     "yield_timeout_length_in_blocks": {
                         "description": "Number of blocks after which a yielded promise times out.",
                         "format": "uint64",
@@ -7985,25 +7968,6 @@
                     "colored"
                 ],
                 "type": "string"
-            },
-            "MaintenanceWindow": {
-                "properties": {
-                    "finish": {
-                        "format": "uint64",
-                        "minimum": 0,
-                        "type": "integer"
-                    },
-                    "start": {
-                        "format": "uint64",
-                        "minimum": 0,
-                        "type": "integer"
-                    }
-                },
-                "required": [
-                    "start",
-                    "finish"
-                ],
-                "type": "object"
             },
             "MerklePathItem": {
                 "properties": {
@@ -8347,6 +8311,25 @@
             "PublicKey": {
                 "type": "string"
             },
+            "Range_of_uint64": {
+                "properties": {
+                    "end": {
+                        "format": "uint64",
+                        "minimum": 0,
+                        "type": "integer"
+                    },
+                    "start": {
+                        "format": "uint64",
+                        "minimum": 0,
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "start",
+                    "end"
+                ],
+                "type": "object"
+            },
             "ReceiptEnumView": {
                 "oneOf": [
                     {
@@ -8436,12 +8419,27 @@
                         "properties": {
                             "GlobalContractDistribution": {
                                 "properties": {
-                                    "data": {
-                                        "$ref": "#/components/schemas/GlobalContractData"
+                                    "already_delivered_shards": {
+                                        "items": {
+                                            "$ref": "#/components/schemas/ShardId"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "code": {
+                                        "type": "string"
+                                    },
+                                    "id": {
+                                        "$ref": "#/components/schemas/GlobalContractIdentifier"
+                                    },
+                                    "target_shard": {
+                                        "$ref": "#/components/schemas/ShardId"
                                     }
                                 },
                                 "required": [
-                                    "data"
+                                    "id",
+                                    "target_shard",
+                                    "already_delivered_shards",
+                                    "code"
                                 ],
                                 "type": "object"
                             }
@@ -8862,6 +8860,16 @@
                         "minItems": 2,
                         "type": "array"
                     },
+                    "chunk_wait_mult": {
+                        "description": "Multiplier for the wait time for all chunks to be received.",
+                        "items": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2,
+                        "type": "array"
+                    },
                     "client_background_migration_threads": {
                         "description": "Number of threads to execute background migration work in client.",
                         "format": "uint",
@@ -9156,44 +9164,19 @@
                         "minItems": 2,
                         "type": "array"
                     },
-                    "tracked_accounts": {
-                        "description": "Accounts that this client tracks.",
-                        "items": {
-                            "$ref": "#/components/schemas/AccountId"
-                        },
-                        "type": "array"
-                    },
-                    "tracked_shadow_validator": {
-                        "allOf": [
-                            {
-                                "$ref": "#/components/schemas/AccountId"
-                            }
-                        ],
-                        "description": "Track shards that should be tracked by given validator.",
-                        "nullable": true
-                    },
-                    "tracked_shard_schedule": {
-                        "description": "Rotate between these sets of tracked shards.\n Used to simulate the behavior of chunk only producers without staking tokens.\n This field is only used if `tracked_shards` is empty.",
-                        "items": {
-                            "items": {
-                                "$ref": "#/components/schemas/ShardId"
-                            },
-                            "type": "array"
-                        },
-                        "type": "array"
-                    },
-                    "tracked_shards": {
-                        "description": "Shards that this client tracks.",
-                        "items": {
-                            "$ref": "#/components/schemas/ShardId"
-                        },
-                        "type": "array"
+                    "tracked_shards_config": {
+                        "$ref": "#/components/schemas/TrackedShardsConfig"
                     },
                     "transaction_pool_size_limit": {
                         "description": "Limit of the size of per-shard transaction pool measured in bytes. If not set, the size\n will be unbounded.",
                         "format": "uint64",
                         "minimum": 0,
                         "nullable": true,
+                        "type": "integer"
+                    },
+                    "transaction_request_handler_threads": {
+                        "format": "uint",
+                        "minimum": 0,
                         "type": "integer"
                     },
                     "trie_viewer_state_size_limit": {
@@ -9254,6 +9237,7 @@
                     "min_block_production_delay",
                     "max_block_production_delay",
                     "max_block_wait_delay",
+                    "chunk_wait_mult",
                     "skip_sync_wait",
                     "sync_check_period",
                     "sync_step_period",
@@ -9280,9 +9264,7 @@
                     "doomslug_step_period",
                     "block_header_fetch_horizon",
                     "gc",
-                    "tracked_accounts",
-                    "tracked_shards",
-                    "tracked_shard_schedule",
+                    "tracked_shards_config",
                     "archive",
                     "save_trie_changes",
                     "view_client_threads",
@@ -9298,7 +9280,8 @@
                     "produce_chunk_add_transactions_time_limit",
                     "orphan_state_witness_pool_size",
                     "orphan_state_witness_max_size",
-                    "save_latest_witnesses"
+                    "save_latest_witnesses",
+                    "transaction_request_handler_threads"
                 ],
                 "type": "object"
             },
@@ -9855,12 +9838,6 @@
                         "minimum": 0,
                         "type": "integer"
                     },
-                    "num_chunk_only_producer_seats": {
-                        "description": "Number of validator seats for chunk only producers.",
-                        "format": "uint64",
-                        "minimum": 0,
-                        "type": "integer"
-                    },
                     "online_max_threshold": {
                         "description": "Online maximum threshold above which validator gets full reward.",
                         "items": {
@@ -9981,7 +9958,6 @@
                     "minimum_stake_ratio",
                     "shuffle_shard_assignment_for_chunk_producers",
                     "minimum_validators_per_shard",
-                    "num_chunk_only_producer_seats",
                     "shard_layout"
                 ],
                 "type": "object"
@@ -10086,7 +10062,7 @@
             "RpcSendTransactionRequest": {
                 "properties": {
                     "signed_tx_base64": {
-                        "type": "string"
+                        "$ref": "#/components/schemas/SignedTransaction"
                     },
                     "wait_until": {
                         "allOf": [
@@ -11379,7 +11355,7 @@
                         "additionalProperties": false,
                         "properties": {
                             "signed_tx_base64": {
-                                "type": "string"
+                                "$ref": "#/components/schemas/SignedTransaction2"
                             }
                         },
                         "required": [
@@ -11387,7 +11363,11 @@
                         ],
                         "type": "object"
                     }
-                ]
+                ],
+                "type": "string"
+            },
+            "SignedTransaction2": {
+                "type": "string"
             },
             "SignedTransactionView": {
                 "properties": {
@@ -11639,20 +11619,6 @@
                         "properties": {
                             "type": {
                                 "enum": [
-                                    "resharding_v2"
-                                ],
-                                "type": "string"
-                            }
-                        },
-                        "required": [
-                            "type"
-                        ],
-                        "type": "object"
-                    },
-                    {
-                        "properties": {
-                            "type": {
-                                "enum": [
                                     "bandwidth_scheduler_state_update"
                                 ],
                                 "type": "string"
@@ -11817,7 +11783,7 @@
                                 "$ref": "#/components/schemas/AccountId"
                             },
                             "public_key": {
-                                "type": "string"
+                                "$ref": "#/components/schemas/PublicKey"
                             }
                         },
                         "required": [
@@ -11833,7 +11799,7 @@
                                 "$ref": "#/components/schemas/AccountId"
                             },
                             "public_key": {
-                                "type": "string"
+                                "$ref": "#/components/schemas/PublicKey"
                             }
                         },
                         "required": [
@@ -11970,6 +11936,7 @@
                         "type": "integer"
                     },
                     "earliest_block_time": {
+                        "nullable": true,
                         "type": "string"
                     },
                     "epoch_id": {
@@ -12009,8 +11976,7 @@
                     "latest_block_height",
                     "latest_state_root",
                     "latest_block_time",
-                    "syncing",
-                    "earliest_block_time"
+                    "syncing"
                 ],
                 "type": "object"
             },
@@ -12169,6 +12135,73 @@
                 ],
                 "type": "object"
             },
+            "TrackedShardsConfig": {
+                "description": "Describes the expected behavior of the node regarding shard tracking.\n If the node is an active validator, it will also track the shards it is responsible for as a validator.",
+                "oneOf": [
+                    {
+                        "description": "Tracks no shards (light client).",
+                        "enum": [
+                            "NoShards"
+                        ],
+                        "type": "string"
+                    },
+                    {
+                        "description": "Tracks all shards.",
+                        "enum": [
+                            "AllShards"
+                        ],
+                        "type": "string"
+                    },
+                    {
+                        "additionalProperties": false,
+                        "description": "Tracks shards that are assigned to given validator account.",
+                        "properties": {
+                            "ShadowValidator": {
+                                "$ref": "#/components/schemas/AccountId"
+                            }
+                        },
+                        "required": [
+                            "ShadowValidator"
+                        ],
+                        "type": "object"
+                    },
+                    {
+                        "additionalProperties": false,
+                        "description": "Rotate between these sets of tracked shards.\n Used to simulate the behavior of chunk only producers without staking tokens.",
+                        "properties": {
+                            "Schedule": {
+                                "items": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/ShardId"
+                                    },
+                                    "type": "array"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "required": [
+                            "Schedule"
+                        ],
+                        "type": "object"
+                    },
+                    {
+                        "additionalProperties": false,
+                        "description": "Tracks shards that contain one of the given account.",
+                        "properties": {
+                            "Accounts": {
+                                "items": {
+                                    "$ref": "#/components/schemas/AccountId"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "required": [
+                            "Accounts"
+                        ],
+                        "type": "object"
+                    }
+                ]
+            },
             "TransferAction": {
                 "properties": {
                     "deposit": {
@@ -12278,20 +12311,8 @@
             },
             "VMConfigView": {
                 "properties": {
-                    "alt_bn128": {
-                        "description": "See [VMConfig::alt_bn128](crate::vm::Config::alt_bn128).",
-                        "type": "boolean"
-                    },
-                    "disable_9393_fix": {
-                        "description": "See [VMConfig::disable_9393_fix](crate::vm::Config::disable_9393_fix).",
-                        "type": "boolean"
-                    },
                     "discard_custom_sections": {
                         "description": "See [VMConfig::discard_custom_sections](crate::vm::Config::discard_custom_sections).",
-                        "type": "boolean"
-                    },
-                    "ed25519_verify": {
-                        "description": "See [VMConfig::ed25519_verify](crate::vm::Config::ed25519_verify).",
                         "type": "boolean"
                     },
                     "eth_implicit_accounts": {
@@ -12308,10 +12329,6 @@
                     },
                     "fix_contract_loading_cost": {
                         "description": "See [VMConfig::fix_contract_loading_cost](crate::vm::Config::fix_contract_loading_cost).",
-                        "type": "boolean"
-                    },
-                    "function_call_weight": {
-                        "description": "See [VMConfig::function_call_weight](crate::vm::Config::function_call_weight).",
                         "type": "boolean"
                     },
                     "grow_mem_cost": {
@@ -12331,10 +12348,6 @@
                             }
                         ],
                         "description": "Describes limits for VM and Runtime.\n\n TODO: Consider changing this to `VMLimitConfigView` to avoid dependency\n on runtime."
-                    },
-                    "math_extension": {
-                        "description": "See [VMConfig::math_extension](crate::vm::Config::math_extension).",
-                        "type": "boolean"
                     },
                     "regular_op_cost": {
                         "description": "Gas cost of a regular operation.",
@@ -12357,10 +12370,6 @@
                             }
                         ],
                         "description": "See [VMConfig::vm_kind](crate::vm::Config::vm_kind)."
-                    },
-                    "yield_resume_host_functions": {
-                        "description": "See [VMConfig::yield_resume_host_functions](`crate::vm::Config::yield_resume_host_functions).",
-                        "type": "boolean"
                     }
                 },
                 "required": [
@@ -12368,17 +12377,11 @@
                     "grow_mem_cost",
                     "regular_op_cost",
                     "vm_kind",
-                    "disable_9393_fix",
                     "discard_custom_sections",
                     "storage_get_mode",
                     "fix_contract_loading_cost",
                     "implicit_account_creation",
-                    "math_extension",
-                    "ed25519_verify",
-                    "alt_bn128",
-                    "function_call_weight",
                     "eth_implicit_accounts",
-                    "yield_resume_host_functions",
                     "limit_config"
                 ],
                 "type": "object"
@@ -12386,7 +12389,7 @@
             "VMKind": {
                 "oneOf": [
                     {
-                        "description": "Wasmer 0.17.x VM.",
+                        "description": "Wasmer 0.17.x VM. Gone now.",
                         "enum": [
                             "Wasmer0"
                         ],
@@ -12419,14 +12422,10 @@
                 "properties": {
                     "account_id": {
                         "$ref": "#/components/schemas/AccountId"
-                    },
-                    "is_slashed": {
-                        "type": "boolean"
                     }
                 },
                 "required": [
-                    "account_id",
-                    "is_slashed"
+                    "account_id"
                 ],
                 "type": "object"
             },
@@ -12434,9 +12433,9 @@
                 "description": "Reasons for removing a validator from the validator set.",
                 "oneOf": [
                     {
-                        "description": "Slashed validators are kicked out.",
+                        "description": "Deprecated",
                         "enum": [
-                            "Slashed"
+                            "_UnusedSlashed"
                         ],
                         "type": "string"
                     },

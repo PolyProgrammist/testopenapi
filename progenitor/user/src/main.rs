@@ -27,25 +27,25 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         })
     };
 
-    let payloadBroadcastAsync = keeper::types::JsonRpcRequestForBroadcastTxAsync {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::JsonRpcRequestForBroadcastTxAsyncMethod::BroadcastTxAsync,
-        params: keeper::types::RpcSendTransactionRequest {
-            signed_tx_base64: signed_tx_base64.clone(),
-            wait_until: keeper::types::TxExecutionStatus::Executed
-        }
-    };
+    // let payloadBroadcastAsync = keeper::types::JsonRpcRequestForBroadcastTxAsync {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::JsonRpcRequestForBroadcastTxAsyncMethod::BroadcastTxAsync,
+    //     params: keeper::types::RpcSendTransactionRequest {
+    //         signed_tx_base64: signed_tx_base64.clone(),
+    //         wait_until: keeper::types::TxExecutionStatus::Executed
+    //     }
+    // };
 
-    let payloadBroadcastCommit = keeper::types::JsonRpcRequestForBroadcastTxCommit {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::JsonRpcRequestForBroadcastTxCommitMethod::BroadcastTxCommit,
-        params: keeper::types::RpcSendTransactionRequest {
-            signed_tx_base64: signed_tx_base64.clone(),
-            wait_until: keeper::types::TxExecutionStatus::Executed
-        }
-    };
+    // let payloadBroadcastCommit = keeper::types::JsonRpcRequestForBroadcastTxCommit {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::JsonRpcRequestForBroadcastTxCommitMethod::BroadcastTxCommit,
+    //     params: keeper::types::RpcSendTransactionRequest {
+    //         signed_tx_base64: signed_tx_base64.clone(),
+    //         wait_until: keeper::types::TxExecutionStatus::Executed
+    //     }
+    // };
 
     let payloadChunk = keeper::types::JsonRpcRequestForChunk {
         id: String::from("dontcare"),
@@ -110,26 +110,26 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         params: keeper::types::RpcNetworkInfoRequest(serde_json::Map::new())
     };
 
-    let payloadSendTx = keeper::types::JsonRpcRequestForSendTx {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::JsonRpcRequestForSendTxMethod::SendTx,
-        params: keeper::types::RpcSendTransactionRequest {
-            signed_tx_base64: signed_tx_base64.clone(),
-            wait_until: keeper::types::TxExecutionStatus::Executed
-        }
-    };
+    // let payloadSendTx = keeper::types::JsonRpcRequestForSendTx {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::JsonRpcRequestForSendTxMethod::SendTx,
+    //     params: keeper::types::RpcSendTransactionRequest {
+    //         signed_tx_base64: signed_tx_base64.clone(),
+    //         wait_until: keeper::types::TxExecutionStatus::Executed
+    //     }
+    // };
 
-    let payloadTx = keeper::types::JsonRpcRequestForTx {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::JsonRpcRequestForTxMethod::Tx,
-        params: keeper::types::RpcTransactionStatusRequest::Variant1 {
-            tx_hash: transaction_hash.clone(),
-            sender_account_id: sender_account_id.clone(),
-            wait_until: keeper::types::TxExecutionStatus::None,
-        }
-    };
+    // let payloadTx = keeper::types::JsonRpcRequestForTx {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::JsonRpcRequestForTxMethod::Tx,
+    //     params: keeper::types::RpcTransactionStatusRequest::Variant1 {
+    //         tx_hash: transaction_hash.clone(),
+    //         sender_account_id: sender_account_id.clone(),
+    //         wait_until: keeper::types::TxExecutionStatus::None,
+    //     }
+    // };
 
     let payloadStatus = keeper::types::JsonRpcRequestForStatus {
         id: String::from("dontcare"),
@@ -225,16 +225,16 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         }
     };
 
-    let payloadExpTxStatus = keeper::types::JsonRpcRequestForExperimentalTxStatus {
-        id: String::from("dontcare"),
-        jsonrpc: String::from("2.0"),
-        method: keeper::types::JsonRpcRequestForExperimentalTxStatusMethod::ExperimentalTxStatus,
-        params: keeper::types::RpcTransactionStatusRequest::Variant1 {
-            tx_hash: transaction_hash.clone(),
-            sender_account_id: sender_account_id.clone(),
-            wait_until: keeper::types::TxExecutionStatus::None,
-        }
-    };
+    // let payloadExpTxStatus = keeper::types::JsonRpcRequestForExperimentalTxStatus {
+    //     id: String::from("dontcare"),
+    //     jsonrpc: String::from("2.0"),
+    //     method: keeper::types::JsonRpcRequestForExperimentalTxStatusMethod::ExperimentalTxStatus,
+    //     params: keeper::types::RpcTransactionStatusRequest::Variant1 {
+    //         tx_hash: transaction_hash.clone(),
+    //         sender_account_id: sender_account_id.clone(),
+    //         wait_until: keeper::types::TxExecutionStatus::None,
+    //     }
+    // };
 
     let payloadExpValidators = keeper::types::JsonRpcRequestForExperimentalValidatorsOrdered {
         id: String::from("dontcare"),
@@ -261,92 +261,92 @@ async fn print_transaction() -> Result<(), Box<dyn Error>> {
         params: keeper::types::RpcSplitStorageInfoRequest(serde_json::Map::new())
     };
 
-    let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
-    println!("the_response block: {:#?}", block);
+    // let block: keeper::types::JsonRpcResponseForRpcBlockResponseAndRpcError = client_remote.block(&payloadBlock).await?.into_inner();
+    // println!("the_response block: {:#?}", block);
 
-    let broadcast_async: keeper::types::JsonRpcResponseForCryptoHashAndRpcError = client_remote.broadcast_tx_async(&payloadBroadcastAsync).await?.into_inner();
-    println!("the_response broadcast_async: {:#?}", broadcast_async);
+    // let broadcast_async: keeper::types::JsonRpcResponseForCryptoHashAndRpcError = client_remote.broadcast_tx_async(&payloadBroadcastAsync).await?.into_inner();
+    // println!("the_response broadcast_async: {:#?}", broadcast_async);
 
-    let broadcast_commit: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.broadcast_tx_commit(&payloadBroadcastCommit).await?.into_inner();
-    println!("the_response broadcast_commit: {:#?}", broadcast_commit);
+    // let broadcast_commit: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.broadcast_tx_commit(&payloadBroadcastCommit).await?.into_inner();
+    // println!("the_response broadcast_commit: {:#?}", broadcast_commit);
     
-    let chunk: keeper::types::JsonRpcResponseForRpcChunkResponseAndRpcError = client_remote.chunk(&payloadChunk).await?.into_inner();
-    println!("the_response chunk: {:#?}", chunk);
+    // let chunk: keeper::types::JsonRpcResponseForRpcChunkResponseAndRpcError = client_remote.chunk(&payloadChunk).await?.into_inner();
+    // println!("the_response chunk: {:#?}", chunk);
 
-    // local as currently accepts only array, fixed in new version
-    let gas_price_with_block: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client_local.gas_price(&payloadGasPriceWithBlock).await?.into_inner();
-    println!("the_response gas_price_with_block: {:#?}", gas_price_with_block);
+    // // local as currently accepts only array, fixed in new version
+    // let gas_price_with_block: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client_local.gas_price(&payloadGasPriceWithBlock).await?.into_inner();
+    // println!("the_response gas_price_with_block: {:#?}", gas_price_with_block);
 
-    let gas_price_without_block: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client_local.gas_price(&payloadGasPriceWithoutBlock).await?.into_inner();
+    let gas_price_without_block: keeper::types::JsonRpcResponseForRpcGasPriceResponseAndRpcError = client_remote.gas_price(&payloadGasPriceWithoutBlock).await?.into_inner();
     println!("the_response gas_price_without_block: {:#?}", gas_price_without_block);
 
-    let health: keeper::types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError = client_remote.health(&payloadHealth).await?.into_inner();
-    println!("the_response health: {:#?}", health);
+    // let health: keeper::types::JsonRpcResponseForNullableRpcHealthResponseAndRpcError = client_remote.health(&payloadHealth).await?.into_inner();
+    // println!("the_response health: {:#?}", health);
 
-    let light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.light_client_proof(&payloadLightClientExecutionProof).await?.into_inner();
-    println!("the_response light_client_execution_proof: {:#?}", light_client_execution_proof);
+    // let light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.light_client_proof(&payloadLightClientExecutionProof).await?.into_inner();
+    // println!("the_response light_client_execution_proof: {:#?}", light_client_execution_proof);
 
-    let next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError = client_remote.next_light_client_block(&payloadNextLightClientBlock).await?.into_inner();
-    println!("the_response next_light_client_block: {:#?}", next_light_client_block);
+    // let next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientNextBlockResponseAndRpcError = client_remote.next_light_client_block(&payloadNextLightClientBlock).await?.into_inner();
+    // println!("the_response next_light_client_block: {:#?}", next_light_client_block);
 
-    let network_info: keeper::types::JsonRpcResponseForRpcNetworkInfoResponseAndRpcError = client_remote.network_info(&payloadNetworkInfo).await?.into_inner();
-    println!("the_response network_info: {:#?}", network_info);
+    // let network_info: keeper::types::JsonRpcResponseForRpcNetworkInfoResponseAndRpcError = client_remote.network_info(&payloadNetworkInfo).await?.into_inner();
+    // println!("the_response network_info: {:#?}", network_info);
 
-    let send_tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.send_tx(&payloadSendTx).await?.into_inner();
-    println!("the_response send_tx: {:#?}", send_tx);
+    // let send_tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.send_tx(&payloadSendTx).await?.into_inner();
+    // println!("the_response send_tx: {:#?}", send_tx);
 
-    let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.tx(&payloadTx).await?.into_inner();
-    println!("the_response tx: {:#?}", tx);
+    // let tx: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.tx(&payloadTx).await?.into_inner();
+    // println!("the_response tx: {:#?}", tx);
 
-    // local as ".version.commit" introduced recently: https://github.com/near/nearcore/pull/12722/files
-    let status = client_local.status(&payloadStatus).await?;
-    println!("the_response status: {:#?}", status);
+    // // local as ".version.commit" introduced recently: https://github.com/near/nearcore/pull/12722/files
+    // let status = client_local.status(&payloadStatus).await?;
+    // println!("the_response status: {:#?}", status);
 
-    let validators: keeper::types::JsonRpcResponseForRpcValidatorResponseAndRpcError = client_remote.validators(&payloadValidators).await?.into_inner();
-    println!("the_response validators: {:#?}", validators);
+    // let validators: keeper::types::JsonRpcResponseForRpcValidatorResponseAndRpcError = client_remote.validators(&payloadValidators).await?.into_inner();
+    // println!("the_response validators: {:#?}", validators);
 
-    let client_config: keeper::types::JsonRpcResponseForRpcClientConfigResponseAndRpcError = client_local.client_config(&payloadClientConfig).await?.into_inner();
-    println!("the_response client_config: {:#?}", client_config);
+    // let client_config: keeper::types::JsonRpcResponseForRpcClientConfigResponseAndRpcError = client_local.client_config(&payloadClientConfig).await?.into_inner();
+    // println!("the_response client_config: {:#?}", client_config);
 
-    let experimental_changes: keeper::types::JsonRpcResponseForRpcStateChangesInBlockResponseAndRpcError = client_remote.experimental_changes(&payloadStateChanges).await?.into_inner();
-    println!("the_response experimental_changes: {:#?}", experimental_changes);
+    // let experimental_changes: keeper::types::JsonRpcResponseForRpcStateChangesInBlockResponseAndRpcError = client_remote.experimental_changes(&payloadStateChanges).await?.into_inner();
+    // println!("the_response experimental_changes: {:#?}", experimental_changes);
 
-    let experimental_changes_in_block: keeper::types::JsonRpcResponseForRpcStateChangesInBlockByTypeResponseAndRpcError = client_remote.experimental_changes_in_block(&payloadChangesInBlock).await?.into_inner();
-    println!("the_response experimental_changes_in_block: {:#?}", experimental_changes_in_block);
+    // let experimental_changes_in_block: keeper::types::JsonRpcResponseForRpcStateChangesInBlockByTypeResponseAndRpcError = client_remote.experimental_changes_in_block(&payloadChangesInBlock).await?.into_inner();
+    // println!("the_response experimental_changes_in_block: {:#?}", experimental_changes_in_block);
 
-    let congestion_level: keeper::types::JsonRpcResponseForRpcCongestionLevelResponseAndRpcError = client_remote.experimental_congestion_level(&payloadCongestionLevel).await?.into_inner();
-    println!("the_response congestion_level: {:#?}", congestion_level);
+    // let congestion_level: keeper::types::JsonRpcResponseForRpcCongestionLevelResponseAndRpcError = client_remote.experimental_congestion_level(&payloadCongestionLevel).await?.into_inner();
+    // println!("the_response congestion_level: {:#?}", congestion_level);
 
-    let genesis_config_local: keeper::types::JsonRpcResponseForGenesisConfigAndRpcError = client_local.experimental_genesis_config(&payloadGenesisConfig).await?.into_inner();
-    println!("the_response genesis_config_local: {:#?}", genesis_config_local);
+    // let genesis_config_local: keeper::types::JsonRpcResponseForGenesisConfigAndRpcError = client_local.experimental_genesis_config(&payloadGenesisConfig).await?.into_inner();
+    // println!("the_response genesis_config_local: {:#?}", genesis_config_local);
 
-    let genesis_config_remote: keeper::types::JsonRpcResponseForGenesisConfigAndRpcError = client_remote.experimental_genesis_config(&payloadGenesisConfig).await?.into_inner();
-    println!("the_response genesis_config_remote: {:#?}", genesis_config_remote);
+    // let genesis_config_remote: keeper::types::JsonRpcResponseForGenesisConfigAndRpcError = client_remote.experimental_genesis_config(&payloadGenesisConfig).await?.into_inner();
+    // println!("the_response genesis_config_remote: {:#?}", genesis_config_remote);
 
-    let experimental_light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.experimental_light_client_proof(&payloadExpLightClientExecutionProof).await?.into_inner();
-    println!("the_response experimental_light_client_execution_proof: {:#?}", experimental_light_client_execution_proof);
+    // let experimental_light_client_execution_proof: keeper::types::JsonRpcResponseForRpcLightClientExecutionProofResponseAndRpcError = client_remote.experimental_light_client_proof(&payloadExpLightClientExecutionProof).await?.into_inner();
+    // println!("the_response experimental_light_client_execution_proof: {:#?}", experimental_light_client_execution_proof);
 
-    let experimental_next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientBlockProofResponseAndRpcError = client_remote.experimental_light_client_block_proof(&payloadExpLightClientBlock).await?.into_inner();
-    println!("the_response experimental_next_light_client_block: {:#?}", experimental_next_light_client_block);
+    // let experimental_next_light_client_block: keeper::types::JsonRpcResponseForRpcLightClientBlockProofResponseAndRpcError = client_remote.experimental_light_client_block_proof(&payloadExpLightClientBlock).await?.into_inner();
+    // println!("the_response experimental_next_light_client_block: {:#?}", experimental_next_light_client_block);
 
-    let experimental_protocol_config: keeper::types::JsonRpcResponseForRpcProtocolConfigResponseAndRpcError = client_remote.experimental_protocol_config(&payloadProtocolConfig).await?.into_inner();
-    println!("the_response experimental_protocol_config: {:#?}", experimental_protocol_config);
+    // let experimental_protocol_config: keeper::types::JsonRpcResponseForRpcProtocolConfigResponseAndRpcError = client_remote.experimental_protocol_config(&payloadProtocolConfig).await?.into_inner();
+    // println!("the_response experimental_protocol_config: {:#?}", experimental_protocol_config);
 
-    let experimental_receipt: keeper::types::JsonRpcResponseForRpcReceiptResponseAndRpcError = client_remote.experimental_receipt(&payloadReceipt).await?.into_inner();
-    println!("the_response experimental_receipt: {:#?}", experimental_receipt);
+    // let experimental_receipt: keeper::types::JsonRpcResponseForRpcReceiptResponseAndRpcError = client_remote.experimental_receipt(&payloadReceipt).await?.into_inner();
+    // println!("the_response experimental_receipt: {:#?}", experimental_receipt);
 
-    let experimental_tx_status: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.experimental_tx_status(&payloadExpTxStatus).await?.into_inner();
-    println!("the_response experimental_tx_status: {:#?}", experimental_tx_status);
+    // let experimental_tx_status: keeper::types::JsonRpcResponseForRpcTransactionResponseAndRpcError = client_remote.experimental_tx_status(&payloadExpTxStatus).await?.into_inner();
+    // println!("the_response experimental_tx_status: {:#?}", experimental_tx_status);
 
-    let experimental_validators: keeper::types::JsonRpcResponseForArrayOfValidatorStakeViewAndRpcError = client_remote.experimental_validators_ordered(&payloadExpValidators).await?.into_inner();
-    println!("the_response experimental_validators: {:#?}", experimental_validators);
+    // let experimental_validators: keeper::types::JsonRpcResponseForArrayOfValidatorStakeViewAndRpcError = client_remote.experimental_validators_ordered(&payloadExpValidators).await?.into_inner();
+    // println!("the_response experimental_validators: {:#?}", experimental_validators);
 
-    // local as changed from tuple to struct
-    let experimental_maintenance_windows: keeper::types::JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError = client_remote.experimental_maintenance_windows(&payloadMaintenanceWindows).await?.into_inner();
-    println!("the_response experimental_maintenance_windows: {:#?}", experimental_maintenance_windows);
+    // // local as changed from tuple to struct
+    // let experimental_maintenance_windows: keeper::types::JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError = client_remote.experimental_maintenance_windows(&payloadMaintenanceWindows).await?.into_inner();
+    // println!("the_response experimental_maintenance_windows: {:#?}", experimental_maintenance_windows);
 
-    let experimental_split_storage: keeper::types::JsonRpcResponseForRpcSplitStorageInfoResponseAndRpcError = client_remote.experimental_split_storage_info(&payloadSplitStorage).await?.into_inner();
-    println!("the_response experimental_split_storage: {:#?}", experimental_split_storage);
+    // let experimental_split_storage: keeper::types::JsonRpcResponseForRpcSplitStorageInfoResponseAndRpcError = client_remote.experimental_split_storage_info(&payloadSplitStorage).await?.into_inner();
+    // println!("the_response experimental_split_storage: {:#?}", experimental_split_storage);
 
     Ok(())
 }

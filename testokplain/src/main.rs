@@ -1,182 +1,182 @@
 use schemars::JsonSchema;
 use serde::{self, Deserialize, Serialize};
-use near_jsonrpc_primitives::{errors::RpcRequestValidationErrorKind, types::changes::RpcStateChangesInBlockRequest};
+// use near_jsonrpc_primitives::{errors::RpcRequestValidationErrorKind, types::changes::RpcStateChangesInBlockRequest};
 use okapi::openapi3::{OpenApi, SchemaObject};
 use serde_json::json;
-use near_primitives::views::TxExecutionStatus;
+// use near_primitives::views::TxExecutionStatus;
 use serde_with::serde_as;
 use serde_with::base64::Base64;
 
-#[cfg(feature="progenitor")]
-#[derive(Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
-pub struct RpcStateChangesInBlockResponse {
-    pub block_hash: near_primitives::hash::CryptoHash,
-    pub changes: Vec<StateChangeWithCauseView>,
-}
+// #[cfg(feature="progenitor")]
+// #[derive(Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
+// pub struct RpcStateChangesInBlockResponse {
+//     pub block_hash: near_primitives::hash::CryptoHash,
+//     pub changes: Vec<StateChangeWithCauseView>,
+// }
 
-#[cfg(not(feature="progenitor"))]
-use near_jsonrpc_primitives::types::changes::RpcStateChangesInBlockResponse;
+// #[cfg(not(feature="progenitor"))]
+// use near_jsonrpc_primitives::types::changes::RpcStateChangesInBlockResponse;
 
-#[cfg(feature="progenitor")]
-#[derive(Clone, Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
-pub struct StateChangeWithCauseView {
-    pub cause: near_primitives::views::StateChangeCauseView,
-    #[serde(rename = "type")]
-    pub value: StateChangeValueViewType,
-    pub change: StateChangeValueViewContent,
-}
+// #[cfg(feature="progenitor")]
+// #[derive(Clone, Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
+// pub struct StateChangeWithCauseView {
+//     pub cause: near_primitives::views::StateChangeCauseView,
+//     #[serde(rename = "type")]
+//     pub value: StateChangeValueViewType,
+//     pub change: StateChangeValueViewContent,
+// }
 
-#[cfg(feature="progenitor")]
-#[derive(Clone, Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
-#[serde(rename_all = "snake_case")]
-pub enum StateChangeValueViewType {
-    AccountUpdate,
-    AccountDeletion,
-    AccessKeyUpdate,
-    DataUpdate,
-    DataDeletion,
-    ContractCodeUpdate,
-    ContractCodeDeletion,
-}
+// #[cfg(feature="progenitor")]
+// #[derive(Clone, Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
+// #[serde(rename_all = "snake_case")]
+// pub enum StateChangeValueViewType {
+//     AccountUpdate,
+//     AccountDeletion,
+//     AccessKeyUpdate,
+//     DataUpdate,
+//     DataDeletion,
+//     ContractCodeUpdate,
+//     ContractCodeDeletion,
+// }
 
-#[cfg(feature="progenitor")]
-#[serde_as]
-#[derive(Clone, Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
-#[serde(untagged)]
-pub enum StateChangeValueViewContent {
-    AccountUpdate {
-        account_id: near_primitives::types::AccountId,
-        #[serde(flatten)]
-        account: near_primitives::views::AccountView,
-    },
-    AccountDeletion {
-        account_id: near_primitives::types::AccountId,
-    },
-    AccessKeyUpdate {
-        account_id: near_primitives::types::AccountId,
-        #[schemars(with = "String")]
-        public_key: near_crypto::PublicKey,
-        access_key: near_primitives::views::AccessKeyView,
-    },
-    AccessKeyDeletion {
-        account_id: near_primitives::types::AccountId,
-        #[schemars(with = "String")]
-        public_key: near_crypto::PublicKey,
-    },
-    DataUpdate {
-        account_id: near_primitives::types::AccountId,
-        #[serde(rename = "key_base64")]
-        key: near_primitives::types::StoreKey,
-        #[serde(rename = "value_base64")]
-        value: near_primitives::types::StoreValue,
-    },
-    DataDeletion {
-        account_id: near_primitives::types::AccountId,
-        #[serde(rename = "key_base64")]
-        key: near_primitives::types::StoreKey,
-    },
-    ContractCodeUpdate {
-        account_id: near_primitives::types::AccountId,
-        #[serde(rename = "code_base64")]
-        #[serde_as(as = "Base64")]
-        #[schemars(with = "String")]
-        code: Vec<u8>,
-    },
-    ContractCodeDeletion {
-        account_id: near_primitives::types::AccountId,
-    },
-}
+// #[cfg(feature="progenitor")]
+// #[serde_as]
+// #[derive(Clone, Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
+// #[serde(untagged)]
+// pub enum StateChangeValueViewContent {
+//     AccountUpdate {
+//         account_id: near_primitives::types::AccountId,
+//         #[serde(flatten)]
+//         account: near_primitives::views::AccountView,
+//     },
+//     AccountDeletion {
+//         account_id: near_primitives::types::AccountId,
+//     },
+//     AccessKeyUpdate {
+//         account_id: near_primitives::types::AccountId,
+//         #[schemars(with = "String")]
+//         public_key: near_crypto::PublicKey,
+//         access_key: near_primitives::views::AccessKeyView,
+//     },
+//     AccessKeyDeletion {
+//         account_id: near_primitives::types::AccountId,
+//         #[schemars(with = "String")]
+//         public_key: near_crypto::PublicKey,
+//     },
+//     DataUpdate {
+//         account_id: near_primitives::types::AccountId,
+//         #[serde(rename = "key_base64")]
+//         key: near_primitives::types::StoreKey,
+//         #[serde(rename = "value_base64")]
+//         value: near_primitives::types::StoreValue,
+//     },
+//     DataDeletion {
+//         account_id: near_primitives::types::AccountId,
+//         #[serde(rename = "key_base64")]
+//         key: near_primitives::types::StoreKey,
+//     },
+//     ContractCodeUpdate {
+//         account_id: near_primitives::types::AccountId,
+//         #[serde(rename = "code_base64")]
+//         #[serde_as(as = "Base64")]
+//         #[schemars(with = "String")]
+//         code: Vec<u8>,
+//     },
+//     ContractCodeDeletion {
+//         account_id: near_primitives::types::AccountId,
+//     },
+// }
 
-#[cfg(feature="progenitor")]
-#[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
-#[serde(untagged)]
-pub enum CauseRpcErrorKind {
-    RequestValidationError(RpcRequestValidationErrorKind),
-    HandlerError(serde_json::Value),
-    InternalError(serde_json::Value),
-}
+// #[cfg(feature="progenitor")]
+// #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
+// #[serde(untagged)]
+// pub enum CauseRpcErrorKind {
+//     RequestValidationError(RpcRequestValidationErrorKind),
+//     HandlerError(serde_json::Value),
+//     InternalError(serde_json::Value),
+// }
 
-#[cfg(feature="progenitor")]
-#[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
-pub enum NameRpcErrorKind {
-    RequestValidationError,
-    HandlerError,
-    InternalError,
-}
+// #[cfg(feature="progenitor")]
+// #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
+// #[serde(rename_all = "SCREAMING_SNAKE_CASE")]
+// pub enum NameRpcErrorKind {
+//     RequestValidationError,
+//     HandlerError,
+//     InternalError,
+// }
 
-#[cfg(feature="progenitor")]
-#[derive(serde::Serialize, serde::Deserialize, schemars::JsonSchema, Clone, Debug)]
-#[serde(rename_all = "snake_case")]
-pub enum TypeTransactionOrReceiptId {
-    Transaction,
-    Receipt,
-}
+// #[cfg(feature="progenitor")]
+// #[derive(serde::Serialize, serde::Deserialize, schemars::JsonSchema, Clone, Debug)]
+// #[serde(rename_all = "snake_case")]
+// pub enum TypeTransactionOrReceiptId {
+//     Transaction,
+//     Receipt,
+// }
 
-#[cfg(feature="progenitor")]
-#[derive(serde::Serialize, serde::Deserialize, schemars::JsonSchema, Clone, Debug)]
-#[serde(untagged)]
-pub enum TransactionOrReceiptId {
-    Transaction { transaction_hash: CryptoHash, sender_id: near_primitives::types::AccountId },
-    Receipt { receipt_id: CryptoHash, receiver_id: near_primitives::types::AccountId },
-}
+// #[cfg(feature="progenitor")]
+// #[derive(serde::Serialize, serde::Deserialize, schemars::JsonSchema, Clone, Debug)]
+// #[serde(untagged)]
+// pub enum TransactionOrReceiptId {
+//     Transaction { transaction_hash: CryptoHash, sender_id: near_primitives::types::AccountId },
+//     Receipt { receipt_id: CryptoHash, receiver_id: near_primitives::types::AccountId },
+// }
 
-#[cfg(feature="progenitor")]
-#[derive(Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
-pub struct RpcLightClientExecutionProofRequest {
-    #[serde(flatten)]
-    pub id: TransactionOrReceiptId,
-    #[serde(rename="type")]
-    pub thetype: TypeTransactionOrReceiptId,
-    pub light_client_head: near_primitives::hash::CryptoHash,
-}
+// #[cfg(feature="progenitor")]
+// #[derive(Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
+// pub struct RpcLightClientExecutionProofRequest {
+//     #[serde(flatten)]
+//     pub id: TransactionOrReceiptId,
+//     #[serde(rename="type")]
+//     pub thetype: TypeTransactionOrReceiptId,
+//     pub light_client_head: near_primitives::hash::CryptoHash,
+// }
 
-#[cfg(not(feature="progenitor"))]
-use near_jsonrpc_primitives::types::light_client::RpcLightClientExecutionProofRequest;
+// #[cfg(not(feature="progenitor"))]
+// use near_jsonrpc_primitives::types::light_client::RpcLightClientExecutionProofRequest;
 
-#[cfg(feature="progenitor")]
-#[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
-pub struct RpcError {
-    pub name: Option<NameRpcErrorKind>,
-    pub cause: Option<CauseRpcErrorKind>,
-    pub code: i64,
-    pub message: String,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub data: Option<serde_json::Value>,
-}
+// #[cfg(feature="progenitor")]
+// #[derive(Debug, serde::Serialize, serde::Deserialize, Clone, PartialEq, schemars::JsonSchema)]
+// pub struct RpcError {
+//     pub name: Option<NameRpcErrorKind>,
+//     pub cause: Option<CauseRpcErrorKind>,
+//     pub code: i64,
+//     pub message: String,
+//     #[serde(skip_serializing_if = "Option::is_none")]
+//     pub data: Option<serde_json::Value>,
+// }
 
-#[cfg(not(feature="progenitor"))]
-use near_jsonrpc_primitives::errors::RpcError;
+// #[cfg(not(feature="progenitor"))]
+// use near_jsonrpc_primitives::errors::RpcError;
 
-#[derive(JsonSchema)]
-#[serde(untagged)]
-pub enum ResponseEither<T, E> {
-    Success { result: T },
-    RpcError { error: E }
-}
+// #[derive(JsonSchema)]
+// #[serde(untagged)]
+// pub enum ResponseEither<T, E> {
+//     Success { result: T },
+//     RpcError { error: E }
+// }
 
-#[derive(JsonSchema)]
-#[allow(dead_code)] // Suppress fields never read
-struct JsonRpcResponse<T, E> {
-    jsonrpc: String,
-    id: String,
-    #[serde(flatten)]
-    response_or_error: ResponseEither<T, E>,
-}
+// #[derive(JsonSchema)]
+// #[allow(dead_code)] // Suppress fields never read
+// struct JsonRpcResponse<T, E> {
+//     jsonrpc: String,
+//     id: String,
+//     #[serde(flatten)]
+//     response_or_error: ResponseEither<T, E>,
+// }
 
-trait MethodNameTrait {
-    type S: JsonSchema;
-    type T: JsonSchema;
-}
+// trait MethodNameTrait {
+//     type S: JsonSchema;
+//     type T: JsonSchema;
+// }
 
-#[derive(Clone, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
-pub struct MaintenanceWindow {
-    pub start: near_primitives::types::BlockHeight,
-    pub finish: near_primitives::types::BlockHeight,
-}
+// #[derive(Clone, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
+// pub struct MaintenanceWindow {
+//     pub start: near_primitives::types::BlockHeight,
+//     pub finish: near_primitives::types::BlockHeight,
+// }
 
-pub type RpcMaintenanceWindowsResponse =
-    Vec<MaintenanceWindow>;
+// pub type RpcMaintenanceWindowsResponse =
+//     Vec<MaintenanceWindow>;
 
 type SchemasMap = serde_json::Value;
 type PathsMap = okapi::Map::<String, okapi::openapi3::PathItem>;
@@ -350,9 +350,9 @@ fn add_spec_for_path_internal<RequestType: JsonSchema, ResponseType: JsonSchema>
     all_paths.extend(paths.clone());
 }
 
-fn add_spec_for_path<Request: JsonSchema, Response: JsonSchema>(all_schemas: &mut SchemasMap, all_paths: &mut PathsMap, method_name: String) {
-    add_spec_for_path_internal::<Request, JsonRpcResponse<Response, RpcError>>(all_schemas, all_paths, method_name)
-}
+// fn add_spec_for_path<Request: JsonSchema, Response: JsonSchema>(all_schemas: &mut SchemasMap, all_paths: &mut PathsMap, method_name: String) {
+//     add_spec_for_path_internal::<Request, JsonRpcResponse<Response, RpcError>>(all_schemas, all_paths, method_name)
+// }
 
 fn whole_spec(all_schemas: SchemasMap, all_paths: PathsMap) -> OpenApi {
     OpenApi {
@@ -373,59 +373,59 @@ fn whole_spec(all_schemas: SchemasMap, all_paths: PathsMap) -> OpenApi {
 
 // // //// ---- implement for all requests ----- 
 
-use near_primitives::{hash::CryptoHash, types::MaybeBlockId};
-use near_jsonrpc_primitives::types::{
-    transactions::{
-        RpcTransactionResponse, RpcTransactionStatusRequest, RpcSendTransactionRequest
-    },
-    blocks::{
-        RpcBlockRequest, RpcBlockResponse
-    },
-    chunks::{
-        RpcChunkRequest, RpcChunkResponse
-    },
-    gas_price::{
-        RpcGasPriceRequest, RpcGasPriceResponse
-    },
-    status::{
-        RpcHealthResponse, RpcStatusResponse
-    },
-    validator::{
-        RpcValidatorRequest, RpcValidatorResponse, RpcValidatorsOrderedResponse
-    },
-    light_client::{
-        RpcLightClientNextBlockRequest, RpcLightClientExecutionProofResponse, RpcLightClientNextBlockResponse, RpcLightClientBlockProofResponse, RpcLightClientBlockProofRequest
-    },
-    network_info::{
-        RpcNetworkInfoResponse
-    },
-    client_config::{
-        RpcClientConfigResponse
-    },
-    changes::{
-        RpcStateChangesInBlockByTypeRequest, RpcStateChangesInBlockByTypeResponse
-    },
-    congestion::{
-        RpcCongestionLevelResponse, RpcCongestionLevelRequest
-    },
-    config::{
-        RpcProtocolConfigResponse, RpcProtocolConfigRequest
-    },
-    receipts::{
-        RpcReceiptResponse, RpcReceiptRequest
-    },
-    maintenance::{
-        RpcMaintenanceWindowsRequest
-    },
-    split_storage::{
-        RpcSplitStorageInfoResponse, RpcSplitStorageInfoRequest, 
-    },
-    validator::{
-        RpcValidatorsOrderedRequest
-    }
-};
+// use near_primitives::{hash::CryptoHash, types::MaybeBlockId};
+// use near_jsonrpc_primitives::types::{
+//     transactions::{
+//         RpcTransactionResponse, RpcTransactionStatusRequest, RpcSendTransactionRequest
+//     },
+//     blocks::{
+//         RpcBlockRequest, RpcBlockResponse
+//     },
+//     chunks::{
+//         RpcChunkRequest, RpcChunkResponse
+//     },
+//     gas_price::{
+//         RpcGasPriceRequest, RpcGasPriceResponse
+//     },
+//     status::{
+//         RpcHealthResponse, RpcStatusResponse
+//     },
+//     validator::{
+//         RpcValidatorRequest, RpcValidatorResponse, RpcValidatorsOrderedResponse
+//     },
+//     light_client::{
+//         RpcLightClientNextBlockRequest, RpcLightClientExecutionProofResponse, RpcLightClientNextBlockResponse, RpcLightClientBlockProofResponse, RpcLightClientBlockProofRequest
+//     },
+//     network_info::{
+//         RpcNetworkInfoResponse
+//     },
+//     client_config::{
+//         RpcClientConfigResponse
+//     },
+//     changes::{
+//         RpcStateChangesInBlockByTypeRequest, RpcStateChangesInBlockByTypeResponse
+//     },
+//     congestion::{
+//         RpcCongestionLevelResponse, RpcCongestionLevelRequest
+//     },
+//     config::{
+//         RpcProtocolConfigResponse, RpcProtocolConfigRequest
+//     },
+//     receipts::{
+//         RpcReceiptResponse, RpcReceiptRequest
+//     },
+//     maintenance::{
+//         RpcMaintenanceWindowsRequest
+//     },
+//     split_storage::{
+//         RpcSplitStorageInfoResponse, RpcSplitStorageInfoRequest, 
+//     },
+//     validator::{
+//         RpcValidatorsOrderedRequest
+//     }
+// };
 
-use near_chain_configs::GenesisConfig;
+// use near_chain_configs::GenesisConfig;
 
 
 macro_rules! generate_method_name_helper {
@@ -458,37 +458,72 @@ struct RpcClientConfigRequest;
 #[derive(JsonSchema)]
 struct GenesisConfigRequest;
 
+#[derive(serde::Serialize, serde::Deserialize, Clone, Debug, schemars::JsonSchema)]
+#[serde(tag = "type", rename_all = "snake_case")]
+pub enum UntaggedEnum {
+    A { a1: String, a2: String },
+    B { b1: String, b2: String },
+}
+
+#[derive(Debug, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
+pub struct MyRequest {
+    #[serde(flatten)]
+    pub id: UntaggedEnum,
+    pub name: String,
+}
+
+
+// #[derive(serde::Serialize, serde::Deserialize, Clone, Debug)]
+// #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+// #[serde(tag = "type", rename_all = "snake_case")]
+// pub enum TransactionOrReceiptId {
+//     Transaction { transaction_hash: CryptoHash, sender_id: AccountId },
+//     Receipt { receipt_id: CryptoHash, receiver_id: AccountId },
+// }
+
+// #[derive(Debug, serde::Serialize, serde::Deserialize)]
+// #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+// pub struct RpcLightClientExecutionProofRequest {
+//     #[serde(flatten)]
+//     pub id: near_primitives::types::TransactionOrReceiptId,
+//     pub light_client_head: near_primitives::hash::CryptoHash,
+// }
+
+
 fn main() {
     let mut all_schemas = json!({}); //SchemasMap::new();
     let mut all_paths = PathsMap::new();
 
-    add_spec_for_path::<RpcBlockRequest, RpcBlockResponse>(&mut all_schemas, &mut all_paths, "block".to_string());
-    add_spec_for_path::<RpcSendTransactionRequest, CryptoHash>(&mut all_schemas, &mut all_paths, "broadcast_tx_async".to_string());
-    add_spec_for_path::<RpcSendTransactionRequest, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "broadcast_tx_commit".to_string());
-    add_spec_for_path::<RpcChunkRequest, RpcChunkResponse>(&mut all_schemas, &mut all_paths, "chunk".to_string());
-    add_spec_for_path::<RpcGasPriceRequest, RpcGasPriceResponse>(&mut all_schemas, &mut all_paths, "gas_price".to_string());
-    add_spec_for_path::<RpcHealthRequest, Option<RpcHealthResponse>>(&mut all_schemas, &mut all_paths, "health".to_string());
-    add_spec_for_path::<RpcLightClientExecutionProofRequest, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "light_client_proof".to_string());
-    add_spec_for_path::<RpcLightClientNextBlockRequest, RpcLightClientNextBlockResponse>(&mut all_schemas, &mut all_paths, "next_light_client_block".to_string());
-    add_spec_for_path::<RpcNetworkInfoRequest, RpcNetworkInfoResponse>(&mut all_schemas, &mut all_paths, "network_info".to_string());
-    add_spec_for_path::<RpcSendTransactionRequest, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "send_tx".to_string());
-    add_spec_for_path::<RpcStatusRequest, RpcStatusResponse>(&mut all_schemas, &mut all_paths, "status".to_string());
-    add_spec_for_path::<RpcTransactionStatusRequest, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "tx".to_string());
-    add_spec_for_path::<RpcValidatorRequest, RpcValidatorResponse>(&mut all_schemas, &mut all_paths, "validators".to_string());
-    add_spec_for_path::<RpcClientConfigRequest, RpcClientConfigResponse>(&mut all_schemas, &mut all_paths, "client_config".to_string());
+    // add_spec_for_path::<RpcBlockRequest, RpcBlockResponse>(&mut all_schemas, &mut all_paths, "block".to_string());
+    // add_spec_for_path::<RpcSendTransactionRequest, CryptoHash>(&mut all_schemas, &mut all_paths, "broadcast_tx_async".to_string());
+    // add_spec_for_path::<RpcSendTransactionRequest, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "broadcast_tx_commit".to_string());
+    // add_spec_for_path::<RpcChunkRequest, RpcChunkResponse>(&mut all_schemas, &mut all_paths, "chunk".to_string());
+    // add_spec_for_path::<RpcGasPriceRequest, RpcGasPriceResponse>(&mut all_schemas, &mut all_paths, "gas_price".to_string());
+    // add_spec_for_path::<RpcHealthRequest, Option<RpcHealthResponse>>(&mut all_schemas, &mut all_paths, "health".to_string());
+    // add_spec_for_path::<RpcLightClientExecutionProofRequest, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "light_client_proof".to_string());
+    // add_spec_for_path::<RpcLightClientNextBlockRequest, RpcLightClientNextBlockResponse>(&mut all_schemas, &mut all_paths, "next_light_client_block".to_string());
+    // add_spec_for_path::<RpcNetworkInfoRequest, RpcNetworkInfoResponse>(&mut all_schemas, &mut all_paths, "network_info".to_string());
+    // add_spec_for_path::<RpcSendTransactionRequest, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "send_tx".to_string());
+    // add_spec_for_path::<RpcStatusRequest, RpcStatusResponse>(&mut all_schemas, &mut all_paths, "status".to_string());
+    // add_spec_for_path::<RpcTransactionStatusRequest, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "tx".to_string());
+    // add_spec_for_path::<RpcValidatorRequest, RpcValidatorResponse>(&mut all_schemas, &mut all_paths, "validators".to_string());
+    // add_spec_for_path::<RpcClientConfigRequest, RpcClientConfigResponse>(&mut all_schemas, &mut all_paths, "client_config".to_string());
 
-    add_spec_for_path::<RpcStateChangesInBlockByTypeRequest, RpcStateChangesInBlockResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes".to_string());
-    add_spec_for_path::<RpcStateChangesInBlockRequest, RpcStateChangesInBlockByTypeResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes_in_block".to_string());
-    add_spec_for_path::<RpcCongestionLevelRequest, RpcCongestionLevelResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_congestion_level".to_string());
-    add_spec_for_path::<GenesisConfigRequest, GenesisConfig>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_genesis_config".to_string());
-    add_spec_for_path::<RpcLightClientExecutionProofRequest, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_proof".to_string());
-    add_spec_for_path::<RpcLightClientBlockProofRequest, RpcLightClientBlockProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_block_proof".to_string());
-    add_spec_for_path::<RpcProtocolConfigRequest, RpcProtocolConfigResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_protocol_config".to_string());
-    add_spec_for_path::<RpcReceiptRequest, RpcReceiptResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_receipt".to_string());
-    add_spec_for_path::<RpcTransactionStatusRequest, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_tx_status".to_string());
-    add_spec_for_path::<RpcValidatorsOrderedRequest, RpcValidatorsOrderedResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_validators_ordered".to_string());
-    add_spec_for_path::<RpcMaintenanceWindowsRequest, RpcMaintenanceWindowsResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_maintenance_windows".to_string());
-    add_spec_for_path::<RpcSplitStorageInfoRequest, RpcSplitStorageInfoResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_split_storage_info".to_string());
+    // add_spec_for_path::<RpcStateChangesInBlockByTypeRequest, RpcStateChangesInBlockResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes".to_string());
+    // add_spec_for_path::<RpcStateChangesInBlockRequest, RpcStateChangesInBlockByTypeResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_changes_in_block".to_string());
+    // add_spec_for_path::<RpcCongestionLevelRequest, RpcCongestionLevelResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_congestion_level".to_string());
+    // add_spec_for_path::<GenesisConfigRequest, GenesisConfig>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_genesis_config".to_string());
+    // add_spec_for_path::<RpcLightClientExecutionProofRequest, RpcLightClientExecutionProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_proof".to_string());
+    // add_spec_for_path::<RpcLightClientBlockProofRequest, RpcLightClientBlockProofResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_light_client_block_proof".to_string());
+    // add_spec_for_path::<RpcProtocolConfigRequest, RpcProtocolConfigResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_protocol_config".to_string());
+    // add_spec_for_path::<RpcReceiptRequest, RpcReceiptResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_receipt".to_string());
+    // add_spec_for_path::<RpcTransactionStatusRequest, RpcTransactionResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_tx_status".to_string());
+    // add_spec_for_path::<RpcValidatorsOrderedRequest, RpcValidatorsOrderedResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_validators_ordered".to_string());
+    // add_spec_for_path::<RpcMaintenanceWindowsRequest, RpcMaintenanceWindowsResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_maintenance_windows".to_string());
+    // add_spec_for_path::<RpcSplitStorageInfoRequest, RpcSplitStorageInfoResponse>(&mut all_schemas, &mut all_paths, "EXPERIMENTAL_split_storage_info".to_string());
+
+    add_spec_for_path_internal::<MyRequest, String>(&mut all_schemas, &mut all_paths, "my_request".to_string());
+
 
     let path_schema = whole_spec(all_schemas, all_paths);
     

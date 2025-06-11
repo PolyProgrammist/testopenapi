@@ -229,13 +229,15 @@ pub mod types {
     ///        "FunctionCall": {
     ///          "type": "object",
     ///          "required": [
-    ///            "allowance",
     ///            "method_names",
     ///            "receiver_id"
     ///          ],
     ///          "properties": {
     ///            "allowance": {
-    ///              "type": "string"
+    ///              "type": [
+    ///                "string",
+    ///                "null"
+    ///              ]
     ///            },
     ///            "method_names": {
     ///              "type": "array",
@@ -259,7 +261,8 @@ pub mod types {
     pub enum AccessKeyPermissionView {
         FullAccess,
         FunctionCall {
-            allowance: ::std::string::String,
+            #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+            allowance: ::std::option::Option<::std::string::String>,
             method_names: ::std::vec::Vec<::std::string::String>,
             receiver_id: ::std::string::String,
         },
@@ -486,6 +489,80 @@ pub mod types {
     }
 
     impl ::std::fmt::Display for AccountId {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            self.0.fmt(f)
+        }
+    }
+
+    ///AccountIdValidityRulesVersion
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "integer",
+    ///  "format": "uint8",
+    ///  "minimum": 0.0
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    #[serde(transparent)]
+    pub struct AccountIdValidityRulesVersion(pub u8);
+    impl ::std::ops::Deref for AccountIdValidityRulesVersion {
+        type Target = u8;
+        fn deref(&self) -> &u8 {
+            &self.0
+        }
+    }
+
+    impl ::std::convert::From<AccountIdValidityRulesVersion> for u8 {
+        fn from(value: AccountIdValidityRulesVersion) -> Self {
+            value.0
+        }
+    }
+
+    impl ::std::convert::From<&AccountIdValidityRulesVersion> for AccountIdValidityRulesVersion {
+        fn from(value: &AccountIdValidityRulesVersion) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<u8> for AccountIdValidityRulesVersion {
+        fn from(value: u8) -> Self {
+            Self(value)
+        }
+    }
+
+    impl ::std::str::FromStr for AccountIdValidityRulesVersion {
+        type Err = <u8 as ::std::str::FromStr>::Err;
+        fn from_str(value: &str) -> ::std::result::Result<Self, Self::Err> {
+            Ok(Self(value.parse()?))
+        }
+    }
+
+    impl ::std::convert::TryFrom<&str> for AccountIdValidityRulesVersion {
+        type Error = <u8 as ::std::str::FromStr>::Err;
+        fn try_from(value: &str) -> ::std::result::Result<Self, Self::Error> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<&String> for AccountIdValidityRulesVersion {
+        type Error = <u8 as ::std::str::FromStr>::Err;
+        fn try_from(value: &String) -> ::std::result::Result<Self, Self::Error> {
+            value.parse()
+        }
+    }
+
+    impl ::std::convert::TryFrom<String> for AccountIdValidityRulesVersion {
+        type Error = <u8 as ::std::str::FromStr>::Err;
+        fn try_from(value: String) -> ::std::result::Result<Self, Self::Error> {
+            value.parse()
+        }
+    }
+
+    impl ::std::fmt::Display for AccountIdValidityRulesVersion {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             self.0.fmt(f)
         }
@@ -4569,9 +4646,16 @@ pub mod types {
     ///    "iteration_delay": {
     ///      "description": "How often to check if a new epoch has started.\n
     /// Feel free to set to `None`, defaults are sensible.",
-    ///      "allOf": [
+    ///      "oneOf": [
     ///        {
-    ///          "$ref": "#/components/schemas/DurationSchemeProvider"
+    ///          "type": "null"
+    ///        },
+    ///        {
+    ///          "allOf": [
+    ///            {
+    ///              "$ref": "#/components/schemas/DurationAsStdSchemaProvider"
+    ///            }
+    ///          ]
     ///        }
     ///      ]
     ///    },
@@ -4608,7 +4692,7 @@ pub mod types {
         ///How often to check if a new epoch has started.
         /// Feel free to set to `None`, defaults are sensible.
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
-        pub iteration_delay: ::std::option::Option<DurationSchemeProvider>,
+        pub iteration_delay: ::std::option::Option<DurationAsStdSchemaProvider>,
         ///Specifies where to write the obtained state parts.
         pub location: ExternalStorageLocation,
         ///Use in case a node that dumps state to the external storage
@@ -4623,7 +4707,7 @@ pub mod types {
         }
     }
 
-    ///DurationSchemeProvider
+    ///DurationAsStdSchemaProvider
     ///
     /// <details><summary>JSON schema</summary>
     ///
@@ -4648,13 +4732,13 @@ pub mod types {
     /// ```
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct DurationSchemeProvider {
+    pub struct DurationAsStdSchemaProvider {
         pub nanos: i32,
         pub secs: i64,
     }
 
-    impl ::std::convert::From<&DurationSchemeProvider> for DurationSchemeProvider {
-        fn from(value: &DurationSchemeProvider) -> Self {
+    impl ::std::convert::From<&DurationAsStdSchemaProvider> for DurationAsStdSchemaProvider {
+        fn from(value: &DurationAsStdSchemaProvider) -> Self {
             value.clone()
         }
     }
@@ -4786,7 +4870,7 @@ pub mod types {
     /// continue retrying indefinitely even\n if this timeout is exceeded.",
     ///      "allOf": [
     ///        {
-    ///          "$ref": "#/components/schemas/DurationSchemeProvider"
+    ///          "$ref": "#/components/schemas/DurationAsStdSchemaProvider"
     ///        }
     ///      ]
     ///    }
@@ -4821,7 +4905,7 @@ pub mod types {
         pub ignore_epoch_sync_network_requests: bool,
         ///Timeout for epoch sync requests. The node will continue retrying
         /// indefinitely even if this timeout is exceeded.
-        pub timeout_for_epoch_sync: DurationSchemeProvider,
+        pub timeout_for_epoch_sync: DurationAsStdSchemaProvider,
     }
 
     impl ::std::convert::From<&EpochSyncConfig> for EpochSyncConfig {
@@ -6722,7 +6806,6 @@ pub mod types {
     /// for the allowed function calls.",
     ///  "type": "object",
     ///  "required": [
-    ///    "allowance",
     ///    "method_names",
     ///    "receiver_id"
     ///  ],
@@ -6734,7 +6817,10 @@ pub mod types {
     /// decreased by the same value.\n `None` means unlimited allowance.\n NOTE:
     /// To change or increase the allowance, the old access key needs to be
     /// deleted and a new\n access key should be created.",
-    ///      "type": "string"
+    ///      "type": [
+    ///        "string",
+    ///        "null"
+    ///      ]
     ///    },
     ///    "method_names": {
     ///      "description": "A list of method names that can be used. The access key only allows transactions with the\n function call of one of the given method names.\n Empty list means any method name can be used.",
@@ -6760,7 +6846,8 @@ pub mod types {
         /// by the same value. `None` means unlimited allowance.
         /// NOTE: To change or increase the allowance, the old access key needs
         /// to be deleted and a new access key should be created.
-        pub allowance: ::std::string::String,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub allowance: ::std::option::Option<::std::string::String>,
         ///A list of method names that can be used. The access key only allows
         /// transactions with the function call of one of the given
         /// method names. Empty list means any method name can be used.
@@ -6817,7 +6904,7 @@ pub mod types {
     ///      },
     ///      "allOf": [
     ///        {
-    ///          "$ref": "#/components/schemas/DurationSchemeProvider"
+    ///          "$ref": "#/components/schemas/DurationAsStdSchemaProvider"
     ///        }
     ///      ]
     ///    }
@@ -6840,7 +6927,7 @@ pub mod types {
         pub gc_num_epochs_to_keep: u64,
         ///How often gc should be run
         #[serde(default = "defaults::gc_config_gc_step_period")]
-        pub gc_step_period: DurationSchemeProvider,
+        pub gc_step_period: DurationAsStdSchemaProvider,
     }
 
     impl ::std::convert::From<&GcConfig> for GcConfig {
@@ -7393,40 +7480,6 @@ pub mod types {
     {
         fn from(value: ::serde_json::Map<::std::string::String, ::serde_json::Value>) -> Self {
             Self(value)
-        }
-    }
-
-    ///GlobalContractData
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "code",
-    ///    "id"
-    ///  ],
-    ///  "properties": {
-    ///    "code": {
-    ///      "type": "string"
-    ///    },
-    ///    "id": {
-    ///      "$ref": "#/components/schemas/GlobalContractIdentifier"
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct GlobalContractData {
-        pub code: ::std::string::String,
-        pub id: GlobalContractIdentifier,
-    }
-
-    impl ::std::convert::From<&GlobalContractData> for GlobalContractData {
-        fn from(value: &GlobalContractData) -> Self {
-            value.clone()
         }
     }
 
@@ -12309,15 +12362,15 @@ pub mod types {
         }
     }
 
-    ///JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError
+    ///JsonRpcResponseForArrayOfRangeOfUint64AndRpcError
     ///
     /// <details><summary>JSON schema</summary>
     ///
     /// ```json
     ///{
-    ///  "title": "JsonRpcResponse_for_Array_of_MaintenanceWindow_and_RpcError",
+    ///  "title": "JsonRpcResponse_for_Array_of_Range_of_uint64_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -12327,7 +12380,7 @@ pub mod types {
     ///        "result": {
     ///          "type": "array",
     ///          "items": {
-    ///            "$ref": "#/components/schemas/MaintenanceWindow"
+    ///            "$ref": "#/components/schemas/Range_of_uint64"
     ///          }
     ///        }
     ///      }
@@ -12361,11 +12414,11 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     #[serde(untagged)]
-    pub enum JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError {
+    pub enum JsonRpcResponseForArrayOfRangeOfUint64AndRpcError {
         Variant0 {
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
-            result: ::std::vec::Vec<MaintenanceWindow>,
+            result: ::std::vec::Vec<RangeOfUint64>,
         },
         Variant1 {
             error: RpcError,
@@ -12374,8 +12427,8 @@ pub mod types {
         },
     }
 
-    impl ::std::convert::From<&Self> for JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError {
-        fn from(value: &JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError) -> Self {
+    impl ::std::convert::From<&Self> for JsonRpcResponseForArrayOfRangeOfUint64AndRpcError {
+        fn from(value: &JsonRpcResponseForArrayOfRangeOfUint64AndRpcError) -> Self {
             value.clone()
         }
     }
@@ -12389,7 +12442,7 @@ pub mod types {
     ///  "title": "JsonRpcResponse_for_Array_of_ValidatorStakeView_and_RpcError"
     /// ,
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -12460,7 +12513,7 @@ pub mod types {
     ///{
     ///  "title": "JsonRpcResponse_for_CryptoHash_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -12528,7 +12581,7 @@ pub mod types {
     ///{
     ///  "title": "JsonRpcResponse_for_GenesisConfig_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -12596,9 +12649,12 @@ pub mod types {
     ///{
     ///  "title": "JsonRpcResponse_for_Nullable_RpcHealthResponse_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
+    ///      "required": [
+    ///        "result"
+    ///      ],
     ///      "properties": {
     ///        "result": {
     ///          "oneOf": [
@@ -12649,7 +12705,6 @@ pub mod types {
         Variant0 {
             id: ::std::string::String,
             jsonrpc: ::std::string::String,
-            #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
             result: ::std::option::Option<RpcHealthResponse>,
         },
         Variant1 {
@@ -12673,7 +12728,7 @@ pub mod types {
     ///{
     ///  "title": "JsonRpcResponse_for_RpcBlockResponse_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -12741,7 +12796,7 @@ pub mod types {
     ///{
     ///  "title": "JsonRpcResponse_for_RpcChunkResponse_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -12809,7 +12864,7 @@ pub mod types {
     ///{
     ///  "title": "JsonRpcResponse_for_RpcClientConfigResponse_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -12877,7 +12932,7 @@ pub mod types {
     ///{
     ///  "title": "JsonRpcResponse_for_RpcCongestionLevelResponse_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -12945,7 +13000,7 @@ pub mod types {
     ///{
     ///  "title": "JsonRpcResponse_for_RpcGasPriceResponse_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -13014,7 +13069,7 @@ pub mod types {
     ///  "title": "
     /// JsonRpcResponse_for_RpcLightClientBlockProofResponse_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -13082,7 +13137,7 @@ pub mod types {
     ///{
     ///  "title": "JsonRpcResponse_for_RpcLightClientExecutionProofResponse_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -13154,7 +13209,7 @@ pub mod types {
     ///  "title": "
     /// JsonRpcResponse_for_RpcLightClientNextBlockResponse_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -13222,7 +13277,7 @@ pub mod types {
     ///{
     ///  "title": "JsonRpcResponse_for_RpcNetworkInfoResponse_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -13290,7 +13345,7 @@ pub mod types {
     ///{
     ///  "title": "JsonRpcResponse_for_RpcProtocolConfigResponse_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -13358,7 +13413,7 @@ pub mod types {
     ///{
     ///  "title": "JsonRpcResponse_for_RpcReceiptResponse_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -13427,7 +13482,7 @@ pub mod types {
     ///  "title": "JsonRpcResponse_for_RpcSplitStorageInfoResponse_and_RpcError"
     /// ,
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -13495,7 +13550,7 @@ pub mod types {
     ///{
     ///  "title": "JsonRpcResponse_for_RpcStateChangesInBlockByTypeResponse_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -13567,7 +13622,7 @@ pub mod types {
     ///  "title": "
     /// JsonRpcResponse_for_RpcStateChangesInBlockResponse_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -13635,7 +13690,7 @@ pub mod types {
     ///{
     ///  "title": "JsonRpcResponse_for_RpcStatusResponse_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -13703,7 +13758,7 @@ pub mod types {
     ///{
     ///  "title": "JsonRpcResponse_for_RpcTransactionResponse_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -13771,7 +13826,7 @@ pub mod types {
     ///{
     ///  "title": "JsonRpcResponse_for_RpcValidatorResponse_and_RpcError",
     ///  "type": "object",
-    ///  "anyOf": [
+    ///  "oneOf": [
     ///    {
     ///      "type": "object",
     ///      "required": [
@@ -13964,17 +14019,11 @@ pub mod types {
     ///      "description": "Whether to enforce account_id well-formed-ness
     /// where it wasn't enforced\n historically.",
     ///      "default": 0,
-    ///      "type": "integer",
-    ///      "format": "uint8",
-    ///      "minimum": 0.0
-    ///    },
-    ///    "contract_prepare_version": {
-    ///      "description": "Whether a legacy version of stack limiting should
-    /// be used, see\n [`ContractPrepareVersion`].",
-    ///      "default": 0,
-    ///      "type": "integer",
-    ///      "format": "uint8",
-    ///      "minimum": 0.0
+    ///      "allOf": [
+    ///        {
+    ///          "$ref": "#/components/schemas/AccountIdValidityRulesVersion"
+    ///        }
+    ///      ]
     ///    },
     ///    "initial_memory_pages": {
     ///      "description": "The initial number of memory pages.\n NOTE: It's
@@ -14156,12 +14205,6 @@ pub mod types {
     ///      "format": "uint64",
     ///      "minimum": 0.0
     ///    },
-    ///    "wasmer2_stack_limit": {
-    ///      "description": "If present, stores the secondary stack limit as implemented by wasmer2.\n\n This limit should never be hit normally.",
-    ///      "default": 102400,
-    ///      "type": "integer",
-    ///      "format": "int32"
-    ///    },
     ///    "yield_timeout_length_in_blocks": {
     ///      "description": "Number of blocks after which a yielded promise
     /// times out.",
@@ -14177,12 +14220,8 @@ pub mod types {
     pub struct LimitConfig {
         ///Whether to enforce account_id well-formed-ness where it wasn't
         /// enforced historically.
-        #[serde(default)]
-        pub account_id_validity_rules_version: u8,
-        ///Whether a legacy version of stack limiting should be used, see
-        /// [`ContractPrepareVersion`].
-        #[serde(default)]
-        pub contract_prepare_version: u8,
+        #[serde(default = "defaults::limit_config_account_id_validity_rules_version")]
+        pub account_id_validity_rules_version: AccountIdValidityRulesVersion,
         ///The initial number of memory pages.
         /// NOTE: It's not a limiter itself, but it's a value we use for
         /// initial_memory_pages.
@@ -14252,12 +14291,6 @@ pub mod types {
         pub per_receipt_storage_proof_size_limit: u32,
         ///Limit of memory used by registers.
         pub registers_memory_limit: u64,
-        ///If present, stores the secondary stack limit as implemented by
-        /// wasmer2.
-        ///
-        /// This limit should never be hit normally.
-        #[serde(default = "defaults::default_u64::<i32, 102400>")]
-        pub wasmer2_stack_limit: i32,
         ///Number of blocks after which a yielded promise times out.
         pub yield_timeout_length_in_blocks: u64,
     }
@@ -14349,44 +14382,6 @@ pub mod types {
             value: ::std::string::String,
         ) -> ::std::result::Result<Self, self::error::ConversionError> {
             value.parse()
-        }
-    }
-
-    ///MaintenanceWindow
-    ///
-    /// <details><summary>JSON schema</summary>
-    ///
-    /// ```json
-    ///{
-    ///  "type": "object",
-    ///  "required": [
-    ///    "finish",
-    ///    "start"
-    ///  ],
-    ///  "properties": {
-    ///    "finish": {
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    },
-    ///    "start": {
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    }
-    ///  }
-    ///}
-    /// ```
-    /// </details>
-    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    pub struct MaintenanceWindow {
-        pub finish: u64,
-        pub start: u64,
-    }
-
-    impl ::std::convert::From<&MaintenanceWindow> for MaintenanceWindow {
-        fn from(value: &MaintenanceWindow) -> Self {
-            value.clone()
         }
     }
 
@@ -15471,6 +15466,44 @@ pub mod types {
         }
     }
 
+    ///RangeOfUint64
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "object",
+    ///  "required": [
+    ///    "end",
+    ///    "start"
+    ///  ],
+    ///  "properties": {
+    ///    "end": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "start": {
+    ///      "type": "integer",
+    ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    }
+    ///  }
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub struct RangeOfUint64 {
+        pub end: u64,
+        pub start: u64,
+    }
+
+    impl ::std::convert::From<&RangeOfUint64> for RangeOfUint64 {
+        fn from(value: &RangeOfUint64) -> Self {
+            value.clone()
+        }
+    }
+
     ///ReceiptEnumView
     ///
     /// <details><summary>JSON schema</summary>
@@ -15570,11 +15603,26 @@ pub mod types {
     ///        "GlobalContractDistribution": {
     ///          "type": "object",
     ///          "required": [
-    ///            "data"
+    ///            "already_delivered_shards",
+    ///            "code",
+    ///            "id",
+    ///            "target_shard"
     ///          ],
     ///          "properties": {
-    ///            "data": {
-    ///              "$ref": "#/components/schemas/GlobalContractData"
+    ///            "already_delivered_shards": {
+    ///              "type": "array",
+    ///              "items": {
+    ///                "$ref": "#/components/schemas/ShardId"
+    ///              }
+    ///            },
+    ///            "code": {
+    ///              "type": "string"
+    ///            },
+    ///            "id": {
+    ///              "$ref": "#/components/schemas/GlobalContractIdentifier"
+    ///            },
+    ///            "target_shard": {
+    ///              "$ref": "#/components/schemas/ShardId"
     ///            }
     ///          }
     ///        }
@@ -15605,7 +15653,10 @@ pub mod types {
             is_promise_resume: bool,
         },
         GlobalContractDistribution {
-            data: GlobalContractData,
+            already_delivered_shards: ::std::vec::Vec<ShardId>,
+            code: ::std::string::String,
+            id: GlobalContractIdentifier,
+            target_shard: ShardId,
         },
     }
 
@@ -16195,6 +16246,7 @@ pub mod types {
     ///    "catchup_step_period",
     ///    "chain_id",
     ///    "chunk_request_retry_period",
+    ///    "chunk_wait_mult",
     ///    "client_background_migration_threads",
     ///    "doomslug_step_period",
     ///    "enable_multiline_logging",
@@ -16232,9 +16284,8 @@ pub mod types {
     ///    "sync_height_threshold",
     ///    "sync_max_block_requests",
     ///    "sync_step_period",
-    ///    "tracked_accounts",
-    ///    "tracked_shard_schedule",
-    ///    "tracked_shards",
+    ///    "tracked_shards_config",
+    ///    "transaction_request_handler_threads",
     ///    "ttl_account_id_router",
     ///    "tx_routing_height_horizon",
     ///    "version",
@@ -16312,6 +16363,17 @@ pub mod types {
     ///        "type": "integer",
     ///        "format": "uint64",
     ///        "minimum": 0.0
+    ///      },
+    ///      "maxItems": 2,
+    ///      "minItems": 2
+    ///    },
+    ///    "chunk_wait_mult": {
+    ///      "description": "Multiplier for the wait time for all chunks to be
+    /// received.",
+    ///      "type": "array",
+    ///      "items": {
+    ///        "type": "integer",
+    ///        "format": "int32"
     ///      },
     ///      "maxItems": 2,
     ///      "minItems": 2
@@ -16652,47 +16714,8 @@ pub mod types {
     ///      "maxItems": 2,
     ///      "minItems": 2
     ///    },
-    ///    "tracked_accounts": {
-    ///      "description": "Accounts that this client tracks.",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/AccountId"
-    ///      }
-    ///    },
-    ///    "tracked_shadow_validator": {
-    ///      "description": "Track shards that should be tracked by given
-    /// validator.",
-    ///      "oneOf": [
-    ///        {
-    ///          "type": "null"
-    ///        },
-    ///        {
-    ///          "allOf": [
-    ///            {
-    ///              "$ref": "#/components/schemas/AccountId"
-    ///            }
-    ///          ]
-    ///        }
-    ///      ]
-    ///    },
-    ///    "tracked_shard_schedule": {
-    ///      "description": "Rotate between these sets of tracked shards.\n Used
-    /// to simulate the behavior of chunk only producers without staking
-    /// tokens.\n This field is only used if `tracked_shards` is empty.",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "type": "array",
-    ///        "items": {
-    ///          "$ref": "#/components/schemas/ShardId"
-    ///        }
-    ///      }
-    ///    },
-    ///    "tracked_shards": {
-    ///      "description": "Shards that this client tracks.",
-    ///      "type": "array",
-    ///      "items": {
-    ///        "$ref": "#/components/schemas/ShardId"
-    ///      }
+    ///    "tracked_shards_config": {
+    ///      "$ref": "#/components/schemas/TrackedShardsConfig"
     ///    },
     ///    "transaction_pool_size_limit": {
     ///      "description": "Limit of the size of per-shard transaction pool
@@ -16702,6 +16725,11 @@ pub mod types {
     ///        "null"
     ///      ],
     ///      "format": "uint64",
+    ///      "minimum": 0.0
+    ///    },
+    ///    "transaction_request_handler_threads": {
+    ///      "type": "integer",
+    ///      "format": "uint",
     ///      "minimum": 0.0
     ///    },
     ///    "trie_viewer_state_size_limit": {
@@ -16786,6 +16814,8 @@ pub mod types {
         pub chunk_distribution_network: ::std::option::Option<ChunkDistributionNetworkConfig>,
         ///Time between checking to re-request chunks.
         pub chunk_request_retry_period: [u64; 2usize],
+        ///Multiplier for the wait time for all chunks to be received.
+        pub chunk_wait_mult: [i32; 2usize],
         ///Number of threads to execute background migration work in client.
         pub client_background_migration_threads: u32,
         ///Time between running doomslug timer.
@@ -16895,22 +16925,12 @@ pub mod types {
         pub sync_max_block_requests: u32,
         ///While syncing, how long to check for each step.
         pub sync_step_period: [u64; 2usize],
-        ///Accounts that this client tracks.
-        pub tracked_accounts: ::std::vec::Vec<AccountId>,
-        ///Track shards that should be tracked by given validator.
-        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
-        pub tracked_shadow_validator: ::std::option::Option<AccountId>,
-        ///Rotate between these sets of tracked shards.
-        /// Used to simulate the behavior of chunk only producers without
-        /// staking tokens. This field is only used if `tracked_shards`
-        /// is empty.
-        pub tracked_shard_schedule: ::std::vec::Vec<::std::vec::Vec<ShardId>>,
-        ///Shards that this client tracks.
-        pub tracked_shards: ::std::vec::Vec<ShardId>,
+        pub tracked_shards_config: TrackedShardsConfig,
         ///Limit of the size of per-shard transaction pool measured in bytes.
         /// If not set, the size will be unbounded.
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub transaction_pool_size_limit: ::std::option::Option<u64>,
+        pub transaction_request_handler_threads: u32,
         ///Upper bound of the byte size of contract state that is still
         /// viewable. None is no limit
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -17922,7 +17942,6 @@ pub mod types {
     ///    "num_block_producer_seats",
     ///    "num_block_producer_seats_per_shard",
     ///    "num_blocks_per_year",
-    ///    "num_chunk_only_producer_seats",
     ///    "online_max_threshold",
     ///    "online_min_threshold",
     ///    "protocol_reward_rate",
@@ -18086,13 +18105,6 @@ pub mod types {
     ///      "format": "uint64",
     ///      "minimum": 0.0
     ///    },
-    ///    "num_chunk_only_producer_seats": {
-    ///      "description": "Number of validator seats for chunk only
-    /// producers.",
-    ///      "type": "integer",
-    ///      "format": "uint64",
-    ///      "minimum": 0.0
-    ///    },
     ///    "online_max_threshold": {
     ///      "description": "Online maximum threshold above which validator gets
     /// full reward.",
@@ -18246,8 +18258,6 @@ pub mod types {
         pub num_block_producer_seats_per_shard: ::std::vec::Vec<u64>,
         ///Expected number of blocks per year
         pub num_blocks_per_year: u64,
-        ///Number of validator seats for chunk only producers.
-        pub num_chunk_only_producer_seats: u64,
         ///Online maximum threshold above which validator gets full reward.
         pub online_max_threshold: [i32; 2usize],
         ///Online minimum threshold below which validator doesn't receive
@@ -18459,7 +18469,7 @@ pub mod types {
     ///  ],
     ///  "properties": {
     ///    "signed_tx_base64": {
-    ///      "type": "string"
+    ///      "$ref": "#/components/schemas/SignedTransaction"
     ///    },
     ///    "wait_until": {
     ///      "default": "EXECUTED_OPTIMISTIC",
@@ -18475,7 +18485,7 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct RpcSendTransactionRequest {
-        pub signed_tx_base64: ::std::string::String,
+        pub signed_tx_base64: SignedTransaction,
         #[serde(default = "defaults::rpc_send_transaction_request_wait_until")]
         pub wait_until: TxExecutionStatus,
     }
@@ -21026,20 +21036,14 @@ pub mod types {
     /// ```
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
-    #[serde(untagged, deny_unknown_fields)]
-    pub enum RpcTransactionStatusRequest {
-        Variant0 {
-            signed_tx_base64: ::std::string::String,
-        },
-        Variant1 {
-            sender_account_id: AccountId,
-            tx_hash: CryptoHash,
-            #[serde(default = "defaults::rpc_transaction_status_request_variant1_wait_until")]
-            wait_until: TxExecutionStatus,
-        },
+    pub struct RpcTransactionStatusRequest {
+        pub sender_account_id: AccountId,
+        pub tx_hash: CryptoHash,
+        #[serde(default = "defaults::rpc_transaction_status_request_wait_until")]
+        pub wait_until: TxExecutionStatus,
     }
 
-    impl ::std::convert::From<&Self> for RpcTransactionStatusRequest {
+    impl ::std::convert::From<&RpcTransactionStatusRequest> for RpcTransactionStatusRequest {
         fn from(value: &RpcTransactionStatusRequest) -> Self {
             value.clone()
         }
@@ -21989,6 +21993,7 @@ pub mod types {
     ///
     /// ```json
     ///{
+    ///  "type": "string",
     ///  "oneOf": [
     ///    {
     ///      "type": "object",
@@ -21997,7 +22002,7 @@ pub mod types {
     ///      ],
     ///      "properties": {
     ///        "signed_tx_base64": {
-    ///          "type": "string"
+    ///          "$ref": "#/components/schemas/SignedTransaction2"
     ///        }
     ///      },
     ///      "additionalProperties": false
@@ -22009,12 +22014,79 @@ pub mod types {
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub enum SignedTransaction {
         #[serde(rename = "signed_tx_base64")]
-        SignedTxBase64(::std::string::String),
+        SignedTxBase64(SignedTransaction2),
     }
 
     impl ::std::convert::From<&Self> for SignedTransaction {
         fn from(value: &SignedTransaction) -> Self {
             value.clone()
+        }
+    }
+
+    impl ::std::convert::From<SignedTransaction2> for SignedTransaction {
+        fn from(value: SignedTransaction2) -> Self {
+            Self::SignedTxBase64(value)
+        }
+    }
+
+    ///SignedTransaction2
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "type": "string"
+    ///}
+    /// ```
+    /// </details>
+    #[derive(
+        :: serde :: Deserialize,
+        :: serde :: Serialize,
+        Clone,
+        Debug,
+        Eq,
+        Hash,
+        Ord,
+        PartialEq,
+        PartialOrd,
+    )]
+    #[serde(transparent)]
+    pub struct SignedTransaction2(pub ::std::string::String);
+    impl ::std::ops::Deref for SignedTransaction2 {
+        type Target = ::std::string::String;
+        fn deref(&self) -> &::std::string::String {
+            &self.0
+        }
+    }
+
+    impl ::std::convert::From<SignedTransaction2> for ::std::string::String {
+        fn from(value: SignedTransaction2) -> Self {
+            value.0
+        }
+    }
+
+    impl ::std::convert::From<&SignedTransaction2> for SignedTransaction2 {
+        fn from(value: &SignedTransaction2) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<::std::string::String> for SignedTransaction2 {
+        fn from(value: ::std::string::String) -> Self {
+            Self(value)
+        }
+    }
+
+    impl ::std::str::FromStr for SignedTransaction2 {
+        type Err = ::std::convert::Infallible;
+        fn from_str(value: &str) -> ::std::result::Result<Self, Self::Err> {
+            Ok(Self(value.to_string()))
+        }
+    }
+
+    impl ::std::fmt::Display for SignedTransaction2 {
+        fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+            self.0.fmt(f)
         }
     }
 
@@ -22347,20 +22419,6 @@ pub mod types {
     ///        "type": {
     ///          "type": "string",
     ///          "enum": [
-    ///            "resharding_v2"
-    ///          ]
-    ///        }
-    ///      }
-    ///    },
-    ///    {
-    ///      "type": "object",
-    ///      "required": [
-    ///        "type"
-    ///      ],
-    ///      "properties": {
-    ///        "type": {
-    ///          "type": "string",
-    ///          "enum": [
     ///            "bandwidth_scheduler_state_update"
     ///          ]
     ///        }
@@ -22393,8 +22451,6 @@ pub mod types {
         ValidatorAccountsUpdate,
         #[serde(rename = "migration")]
         Migration,
-        #[serde(rename = "resharding_v2")]
-        ReshardingV2,
         #[serde(rename = "bandwidth_scheduler_state_update")]
         BandwidthSchedulerStateUpdate,
     }
@@ -22611,7 +22667,7 @@ pub mod types {
     ///          "$ref": "#/components/schemas/AccountId"
     ///        },
     ///        "public_key": {
-    ///          "type": "string"
+    ///          "$ref": "#/components/schemas/PublicKey"
     ///        }
     ///      }
     ///    },
@@ -22626,7 +22682,7 @@ pub mod types {
     ///          "$ref": "#/components/schemas/AccountId"
     ///        },
     ///        "public_key": {
-    ///          "type": "string"
+    ///          "$ref": "#/components/schemas/PublicKey"
     ///        }
     ///      }
     ///    },
@@ -22914,7 +22970,7 @@ pub mod types {
     ///      "$ref": "#/components/schemas/AccountId"
     ///    },
     ///    "public_key": {
-    ///      "type": "string"
+    ///      "$ref": "#/components/schemas/PublicKey"
     ///    }
     ///  }
     ///}
@@ -22924,7 +22980,7 @@ pub mod types {
     pub struct StateChangeValueViewContentSubtype2 {
         pub access_key: AccessKeyView,
         pub account_id: AccountId,
-        pub public_key: ::std::string::String,
+        pub public_key: PublicKey,
     }
 
     impl ::std::convert::From<&StateChangeValueViewContentSubtype2>
@@ -22951,7 +23007,7 @@ pub mod types {
     ///      "$ref": "#/components/schemas/AccountId"
     ///    },
     ///    "public_key": {
-    ///      "type": "string"
+    ///      "$ref": "#/components/schemas/PublicKey"
     ///    }
     ///  }
     ///}
@@ -22960,7 +23016,7 @@ pub mod types {
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct StateChangeValueViewContentSubtype3 {
         pub account_id: AccountId,
-        pub public_key: ::std::string::String,
+        pub public_key: PublicKey,
     }
 
     impl ::std::convert::From<&StateChangeValueViewContentSubtype3>
@@ -23328,7 +23384,6 @@ pub mod types {
     ///{
     ///  "type": "object",
     ///  "required": [
-    ///    "earliest_block_time",
     ///    "latest_block_hash",
     ///    "latest_block_height",
     ///    "latest_block_time",
@@ -23359,7 +23414,10 @@ pub mod types {
     ///      "minimum": 0.0
     ///    },
     ///    "earliest_block_time": {
-    ///      "type": "string"
+    ///      "type": [
+    ///        "string",
+    ///        "null"
+    ///      ]
     ///    },
     ///    "epoch_id": {
     ///      "oneOf": [
@@ -23410,7 +23468,8 @@ pub mod types {
         pub earliest_block_hash: ::std::option::Option<CryptoHash>,
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub earliest_block_height: ::std::option::Option<u64>,
-        pub earliest_block_time: ::std::string::String,
+        #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
+        pub earliest_block_time: ::std::option::Option<::std::string::String>,
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
         pub epoch_id: ::std::option::Option<EpochId>,
         #[serde(default, skip_serializing_if = "::std::option::Option::is_none")]
@@ -23870,6 +23929,128 @@ pub mod types {
         }
     }
 
+    ///Describes the expected behavior of the node regarding shard tracking.
+    /// If the node is an active validator, it will also track the shards it is
+    /// responsible for as a validator.
+    ///
+    /// <details><summary>JSON schema</summary>
+    ///
+    /// ```json
+    ///{
+    ///  "description": "Describes the expected behavior of the node regarding
+    /// shard tracking.\n If the node is an active validator, it will also track
+    /// the shards it is responsible for as a validator.",
+    ///  "oneOf": [
+    ///    {
+    ///      "description": "Tracks no shards (light client).",
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "NoShards"
+    ///      ]
+    ///    },
+    ///    {
+    ///      "description": "Tracks all shards.",
+    ///      "type": "string",
+    ///      "enum": [
+    ///        "AllShards"
+    ///      ]
+    ///    },
+    ///    {
+    ///      "description": "Tracks shards that are assigned to given validator
+    /// account.",
+    ///      "type": "object",
+    ///      "required": [
+    ///        "ShadowValidator"
+    ///      ],
+    ///      "properties": {
+    ///        "ShadowValidator": {
+    ///          "$ref": "#/components/schemas/AccountId"
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "description": "Rotate between these sets of tracked shards.\n Used
+    /// to simulate the behavior of chunk only producers without staking
+    /// tokens.",
+    ///      "type": "object",
+    ///      "required": [
+    ///        "Schedule"
+    ///      ],
+    ///      "properties": {
+    ///        "Schedule": {
+    ///          "type": "array",
+    ///          "items": {
+    ///            "type": "array",
+    ///            "items": {
+    ///              "$ref": "#/components/schemas/ShardId"
+    ///            }
+    ///          }
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    },
+    ///    {
+    ///      "description": "Tracks shards that contain one of the given
+    /// account.",
+    ///      "type": "object",
+    ///      "required": [
+    ///        "Accounts"
+    ///      ],
+    ///      "properties": {
+    ///        "Accounts": {
+    ///          "type": "array",
+    ///          "items": {
+    ///            "$ref": "#/components/schemas/AccountId"
+    ///          }
+    ///        }
+    ///      },
+    ///      "additionalProperties": false
+    ///    }
+    ///  ]
+    ///}
+    /// ```
+    /// </details>
+    #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
+    pub enum TrackedShardsConfig {
+        ///Tracks no shards (light client).
+        NoShards,
+        ///Tracks all shards.
+        AllShards,
+        ///Tracks shards that are assigned to given validator account.
+        ShadowValidator(AccountId),
+        ///Rotate between these sets of tracked shards.
+        /// Used to simulate the behavior of chunk only producers without
+        /// staking tokens.
+        Schedule(::std::vec::Vec<::std::vec::Vec<ShardId>>),
+        ///Tracks shards that contain one of the given account.
+        Accounts(::std::vec::Vec<AccountId>),
+    }
+
+    impl ::std::convert::From<&Self> for TrackedShardsConfig {
+        fn from(value: &TrackedShardsConfig) -> Self {
+            value.clone()
+        }
+    }
+
+    impl ::std::convert::From<AccountId> for TrackedShardsConfig {
+        fn from(value: AccountId) -> Self {
+            Self::ShadowValidator(value)
+        }
+    }
+
+    impl ::std::convert::From<::std::vec::Vec<::std::vec::Vec<ShardId>>> for TrackedShardsConfig {
+        fn from(value: ::std::vec::Vec<::std::vec::Vec<ShardId>>) -> Self {
+            Self::Schedule(value)
+        }
+    }
+
+    impl ::std::convert::From<::std::vec::Vec<AccountId>> for TrackedShardsConfig {
+        fn from(value: ::std::vec::Vec<AccountId>) -> Self {
+            Self::Accounts(value)
+        }
+    }
+
     ///TransferAction
     ///
     /// <details><summary>JSON schema</summary>
@@ -24245,15 +24426,11 @@ pub mod types {
     ///{
     ///  "type": "object",
     ///  "required": [
-    ///    "account_id",
-    ///    "is_slashed"
+    ///    "account_id"
     ///  ],
     ///  "properties": {
     ///    "account_id": {
     ///      "$ref": "#/components/schemas/AccountId"
-    ///    },
-    ///    "is_slashed": {
-    ///      "type": "boolean"
     ///    }
     ///  }
     ///}
@@ -24262,7 +24439,6 @@ pub mod types {
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct ValidatorInfo {
         pub account_id: AccountId,
-        pub is_slashed: bool,
     }
 
     impl ::std::convert::From<&ValidatorInfo> for ValidatorInfo {
@@ -24281,10 +24457,10 @@ pub mod types {
     /// set.",
     ///  "oneOf": [
     ///    {
-    ///      "description": "Slashed validators are kicked out.",
+    ///      "description": "Deprecated",
     ///      "type": "string",
     ///      "enum": [
-    ///        "Slashed"
+    ///        "_UnusedSlashed"
     ///      ]
     ///    },
     ///    {
@@ -24421,8 +24597,9 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub enum ValidatorKickoutReason {
-        ///Slashed validators are kicked out.
-        Slashed,
+        ///Deprecated
+        #[serde(rename = "_UnusedSlashed")]
+        UnusedSlashed,
         ///Validator didn't produce enough blocks.
         NotEnoughBlocks { expected: u64, produced: u64 },
         ///Validator didn't produce enough chunks.
@@ -24696,43 +24873,22 @@ pub mod types {
     ///{
     ///  "type": "object",
     ///  "required": [
-    ///    "alt_bn128",
-    ///    "disable_9393_fix",
     ///    "discard_custom_sections",
-    ///    "ed25519_verify",
     ///    "eth_implicit_accounts",
     ///    "ext_costs",
     ///    "fix_contract_loading_cost",
-    ///    "function_call_weight",
     ///    "grow_mem_cost",
     ///    "implicit_account_creation",
     ///    "limit_config",
-    ///    "math_extension",
     ///    "regular_op_cost",
     ///    "storage_get_mode",
-    ///    "vm_kind",
-    ///    "yield_resume_host_functions"
+    ///    "vm_kind"
     ///  ],
     ///  "properties": {
-    ///    "alt_bn128": {
-    ///      "description": "See
-    /// [VMConfig::alt_bn128](crate::vm::Config::alt_bn128).",
-    ///      "type": "boolean"
-    ///    },
-    ///    "disable_9393_fix": {
-    ///      "description": "See
-    /// [VMConfig::disable_9393_fix](crate::vm::Config::disable_9393_fix).",
-    ///      "type": "boolean"
-    ///    },
     ///    "discard_custom_sections": {
     ///      "description": "See
     /// [VMConfig::discard_custom_sections](crate::vm::Config::discard_custom_sections).
     /// ",
-    ///      "type": "boolean"
-    ///    },
-    ///    "ed25519_verify": {
-    ///      "description": "See
-    /// [VMConfig::ed25519_verify](crate::vm::Config::ed25519_verify).",
     ///      "type": "boolean"
     ///    },
     ///    "eth_implicit_accounts": {
@@ -24752,12 +24908,6 @@ pub mod types {
     ///    "fix_contract_loading_cost": {
     ///      "description": "See
     /// [VMConfig::fix_contract_loading_cost](crate::vm::Config::fix_contract_loading_cost).
-    /// ",
-    ///      "type": "boolean"
-    ///    },
-    ///    "function_call_weight": {
-    ///      "description": "See
-    /// [VMConfig::function_call_weight](crate::vm::Config::function_call_weight).
     /// ",
     ///      "type": "boolean"
     ///    },
@@ -24783,11 +24933,6 @@ pub mod types {
     ///        }
     ///      ]
     ///    },
-    ///    "math_extension": {
-    ///      "description": "See
-    /// [VMConfig::math_extension](crate::vm::Config::math_extension).",
-    ///      "type": "boolean"
-    ///    },
     ///    "regular_op_cost": {
     ///      "description": "Gas cost of a regular operation.",
     ///      "type": "integer",
@@ -24811,12 +24956,6 @@ pub mod types {
     ///          "$ref": "#/components/schemas/VMKind"
     ///        }
     ///      ]
-    ///    },
-    ///    "yield_resume_host_functions": {
-    ///      "description": "See
-    /// [VMConfig::yield_resume_host_functions](`crate::vm::Config::yield_resume_host_functions).
-    /// ",
-    ///      "type": "boolean"
     ///    }
     ///  }
     ///}
@@ -24824,22 +24963,14 @@ pub mod types {
     /// </details>
     #[derive(:: serde :: Deserialize, :: serde :: Serialize, Clone, Debug)]
     pub struct VmConfigView {
-        ///See [VMConfig::alt_bn128](crate::vm::Config::alt_bn128).
-        pub alt_bn128: bool,
-        ///See [VMConfig::disable_9393_fix](crate::vm::Config::disable_9393_fix).
-        pub disable_9393_fix: bool,
         ///See [VMConfig::discard_custom_sections](crate::vm::Config::discard_custom_sections).
         pub discard_custom_sections: bool,
-        ///See [VMConfig::ed25519_verify](crate::vm::Config::ed25519_verify).
-        pub ed25519_verify: bool,
         ///See [VMConfig::eth_implicit_accounts](crate::vm::Config::eth_implicit_accounts).
         pub eth_implicit_accounts: bool,
         ///Costs for runtime externals
         pub ext_costs: ExtCostsConfigView,
         ///See [VMConfig::fix_contract_loading_cost](crate::vm::Config::fix_contract_loading_cost).
         pub fix_contract_loading_cost: bool,
-        ///See [VMConfig::function_call_weight](crate::vm::Config::function_call_weight).
-        pub function_call_weight: bool,
         ///Gas cost of a growing memory by single page.
         pub grow_mem_cost: u32,
         ///See [VMConfig::implicit_account_creation](crate::vm::Config::implicit_account_creation).
@@ -24849,16 +24980,12 @@ pub mod types {
         /// TODO: Consider changing this to `VMLimitConfigView` to avoid
         /// dependency on runtime.
         pub limit_config: LimitConfig,
-        ///See [VMConfig::math_extension](crate::vm::Config::math_extension).
-        pub math_extension: bool,
         ///Gas cost of a regular operation.
         pub regular_op_cost: u32,
         ///See [VMConfig::storage_get_mode](crate::vm::Config::storage_get_mode).
         pub storage_get_mode: StorageGetMode,
         ///See [VMConfig::vm_kind](crate::vm::Config::vm_kind).
         pub vm_kind: VmKind,
-        ///See [VMConfig::yield_resume_host_functions](`crate::vm::Config::yield_resume_host_functions).
-        pub yield_resume_host_functions: bool,
     }
 
     impl ::std::convert::From<&VmConfigView> for VmConfigView {
@@ -24875,7 +25002,7 @@ pub mod types {
     ///{
     ///  "oneOf": [
     ///    {
-    ///      "description": "Wasmer 0.17.x VM.",
+    ///      "description": "Wasmer 0.17.x VM. Gone now.",
     ///      "type": "string",
     ///      "enum": [
     ///        "Wasmer0"
@@ -24919,7 +25046,7 @@ pub mod types {
         PartialOrd,
     )]
     pub enum VmKind {
-        ///Wasmer 0.17.x VM.
+        ///Wasmer 0.17.x VM. Gone now.
         Wasmer0,
         ///Wasmtime VM.
         Wasmtime,
@@ -25238,8 +25365,8 @@ pub mod types {
             }
         }
 
-        pub(super) fn gc_config_gc_step_period() -> super::DurationSchemeProvider {
-            super::DurationSchemeProvider {
+        pub(super) fn gc_config_gc_step_period() -> super::DurationAsStdSchemaProvider {
+            super::DurationAsStdSchemaProvider {
                 nanos: 0_i32,
                 secs: 1_i64,
             }
@@ -25275,19 +25402,23 @@ pub mod types {
             })
         }
 
+        pub(super) fn limit_config_account_id_validity_rules_version(
+        ) -> super::AccountIdValidityRulesVersion {
+            super::AccountIdValidityRulesVersion(0_u8)
+        }
+
         pub(super) fn rpc_send_transaction_request_wait_until() -> super::TxExecutionStatus {
             super::TxExecutionStatus::ExecutedOptimistic
         }
 
-        pub(super) fn rpc_transaction_status_request_variant1_wait_until(
-        ) -> super::TxExecutionStatus {
+        pub(super) fn rpc_transaction_status_request_wait_until() -> super::TxExecutionStatus {
             super::TxExecutionStatus::ExecutedOptimistic
         }
     }
 }
 
 #[derive(Clone, Debug)]
-///Client for My API
+///Client for NEAR Protocol JSON RPC API
 ///
 ///Version: 1.0.0
 pub struct Client {
@@ -25512,10 +25643,8 @@ impl Client {
     pub async fn experimental_maintenance_windows<'a>(
         &'a self,
         body: &'a types::JsonRpcRequestForExperimentalMaintenanceWindows,
-    ) -> Result<
-        ResponseValue<types::JsonRpcResponseForArrayOfMaintenanceWindowAndRpcError>,
-        Error<()>,
-    > {
+    ) -> Result<ResponseValue<types::JsonRpcResponseForArrayOfRangeOfUint64AndRpcError>, Error<()>>
+    {
         let url = format!("{}/", self.baseurl,);
         #[allow(unused_mut)]
         let mut request = self

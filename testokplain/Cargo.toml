@@ -6,15 +6,10 @@ edition = "2021"
 [dependencies]
 schemars = { version = "1.0.0-alpha.17" }
 serde_json = "1.0.139"
-okapi = { path = "../okapi/okapi", features = ["schemars-alpha"] } # OpenAPI generation
+okapi = { git = "https://github.com/near/near-okapi-fork.git", features = ["schemars-alpha"] } # OpenAPI generation
 serde = { version = "1", features = ["derive"] }
 serde_yaml = "0.9"
-near-jsonrpc-primitives = { path = "../../nearcore/chain/jsonrpc-primitives", features = ["full"] }
-near-primitives = { path = "../../nearcore/core/primitives" }
-near-time = { path = "../../nearcore/core/time", features = ["clock"] }
-near-chain-configs = { path = "../../nearcore/core/chain-configs" }
 serde_with = { version = "3.0", features = ["base64"] }
-near-crypto = "0.29.2"
 
 [features]
 progenitor = []
